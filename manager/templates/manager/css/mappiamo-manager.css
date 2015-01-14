@@ -1,0 +1,191 @@
+html,
+body {
+		background-color: #211E1F;
+		height: 100%;
+		width: 100%;
+}
+
+
+body {
+		font-size: 12px;
+}
+
+
+.row{
+		min-width: 500px;
+		height: 100%;
+}
+
+
+a.btn {
+		background-color: #D41C1F;
+}
+.btn-action {
+		margin-left: 6px;
+}
+
+
+code.green {
+		color: green;
+}
+
+
+.m-page {
+		padding: 0px;
+		margin: 0px;
+		height: 100%;
+		width: 100%;
+}
+.m-page-nav,
+.m-page-nav-mobile {
+		
+}
+.m-page-nav-mobile ul li a {
+		font-size: 20px;
+}
+.m-page-nav ul li a,
+.m-page-nav ul li a:visited,
+.m-page-nav-mobile ul li a,
+.m-page-nav-mobile ul li a:visited {
+		border-radius: 0px;
+		color: #C7CED1;
+		text-align: right;
+}
+.m-page-nav ul li a:hover,
+.m-page-nav-mobile ul li a:hover {
+		background-color: #000000;
+		color: #FEFEFE;
+}
+.m-page-nav ul li.active a,
+.m-page-nav ul li.active a:visited,
+.m-page-nav ul li.active a:hover,
+.m-page-nav-mobile ul li.active a,
+.m-page-nav-mobile ul li.active a:visited,
+.m-page-nav-mobile ul li.active a:hover {
+		background-color: #FEFEFE;
+		color: #211E1F;
+}
+.m-page-nav ul li.open a,
+.m-page-nav ul li.open a:visited,
+.m-page-nav ul li.open a:hover,
+.m-page-nav-mobile ul li.open a,
+.m-page-nav-mobile ul li.open a:visited,
+.m-page-nav-mobile ul li.open a:hover {
+		color: #211E1F !important;
+}
+.m-page-nav .divider{
+		border-top: thin solid #411E1F;
+		height: 12px;
+		margin-top: 12px;
+}
+
+.m-page-content {
+		background-color: #FEFEFE;
+		padding-bottom: 40px;
+		min-height: 120%;
+}
+
+
+.m-logo {
+		text-align: right;
+		padding-right: 4px;
+		margin-bottom: 22px;
+		margin-top: 12px;
+}
+.m-logo img {
+		width: 140px;
+}
+
+
+.m-nav {
+		width: 220px;
+		float: right;
+}
+.m-nav .dropdown-menu {
+		min-width: 220px;
+}
+.m-nav .dropdown-menu a {
+		color: #211E1F !important;
+		font-size: 12px;
+}
+
+
+.m-content {
+		padding-left: 22px;
+		padding-right: 32px;
+}
+.m-content-breadcrumb .breadcrumb {
+		padding: 0px;
+		font-size: 11px;
+}
+.m-content-list {
+		font-size: 14px;
+}
+.m-content-list .pagination {
+		padding: 0px;
+		margin: 0px;
+		margin-top: 4px;
+		font-size: 12px;
+}
+
+
+.mapi-item-enabled {
+		color: green;
+}
+.mapi-item-disabled {
+		color: red;
+}
+
+.form-signin {
+	  	max-width: 348px;
+	  	padding: 15px;
+	  	margin: 0 auto;
+	  	color: #FEFEFE;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  		margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  		font-weight: normal;
+}
+.form-signin .form-control {
+		position: relative;
+		font-size: 12px;
+		height: auto;
+		padding: 8px;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  		z-index: 2;
+}
+.form-signin input[type="text"] {
+  		margin-bottom: -1px;
+  		border-bottom-left-radius: 0;
+  		border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+  		margin-bottom: 10px;
+  		border-top-left-radius: 0;
+  		border-top-right-radius: 0;
+}
+.message-signin .alert{
+		margin-bottom: 0px;
+		margin-top: 22px;
+		padding: 8px;
+}
+
+.registration input {
+		border-radius: 0px;
+}
+.registration input[name="user"] {
+		border-top-left-radius: 4px;
+  		border-top-right-radius: 4px;
+}
+.registration input[name="pass_repeat"] {
+		border-bottom-left-radius: 4px;
+  		border-bottom-right-radius: 4px;
+  		margin-top: -11px;
+}

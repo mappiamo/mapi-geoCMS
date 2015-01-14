@@ -1,0 +1,479 @@
+[01-Feb-2014 14:01:14 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:01:14 Europe/Berlin] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php:254
+Stack trace:
+#0 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(254): PDO->__construct('mysql:host=loca...', 'root', 'root', NULL)
+#1 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(236): ORM::_setup_db('default')
+#2 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(53): ORM::for_table('preferences')
+#3 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(23): MLIB->idiorm('idiorm:idiorm')
+#4 /home/virtual/mappiamo/mappiamo.org/006/load.php(24): MLIB->__construct()
+#5 /home/virtual/mappiamo/mappiamo.org/006/manager/index.php(23): include('/home/virtual/m...')
+#6 {main}
+  thrown in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php on line 254
+[01-Feb-2014 14:01:33 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:01:33 Europe/Berlin] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php:254
+Stack trace:
+#0 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(254): PDO->__construct('mysql:host=loca...', 'root', 'root', NULL)
+#1 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(236): ORM::_setup_db('default')
+#2 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(53): ORM::for_table('preferences')
+#3 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(23): MLIB->idiorm('idiorm:idiorm')
+#4 /home/virtual/mappiamo/mappiamo.org/006/load.php(24): MLIB->__construct()
+#5 /home/virtual/mappiamo/mappiamo.org/006/manager/index.php(23): include('/home/virtual/m...')
+#6 {main}
+  thrown in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php on line 254
+[01-Feb-2014 14:01:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:01:34 Europe/Berlin] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php:254
+Stack trace:
+#0 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(254): PDO->__construct('mysql:host=loca...', 'root', 'root', NULL)
+#1 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(236): ORM::_setup_db('default')
+#2 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(53): ORM::for_table('preferences')
+#3 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(23): MLIB->idiorm('idiorm:idiorm')
+#4 /home/virtual/mappiamo/mappiamo.org/006/load.php(24): MLIB->__construct()
+#5 /home/virtual/mappiamo/mappiamo.org/006/manager/index.php(23): include('/home/virtual/m...')
+#6 {main}
+  thrown in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php on line 254
+[01-Feb-2014 14:01:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:01:34 Europe/Berlin] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php:254
+Stack trace:
+#0 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(254): PDO->__construct('mysql:host=loca...', 'root', 'root', NULL)
+#1 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(236): ORM::_setup_db('default')
+#2 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(53): ORM::for_table('preferences')
+#3 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(23): MLIB->idiorm('idiorm:idiorm')
+#4 /home/virtual/mappiamo/mappiamo.org/006/load.php(24): MLIB->__construct()
+#5 /home/virtual/mappiamo/mappiamo.org/006/manager/index.php(23): include('/home/virtual/m...')
+#6 {main}
+  thrown in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php on line 254
+[01-Feb-2014 14:01:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:01:34 Europe/Berlin] PHP Fatal error:  Uncaught exception 'PDOException' with message 'SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php:254
+Stack trace:
+#0 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(254): PDO->__construct('mysql:host=loca...', 'root', 'root', NULL)
+#1 /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php(236): ORM::_setup_db('default')
+#2 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(53): ORM::for_table('preferences')
+#3 /home/virtual/mappiamo/mappiamo.org/006/libraries.php(23): MLIB->idiorm('idiorm:idiorm')
+#4 /home/virtual/mappiamo/mappiamo.org/006/load.php(24): MLIB->__construct()
+#5 /home/virtual/mappiamo/mappiamo.org/006/manager/index.php(23): include('/home/virtual/m...')
+#6 {main}
+  thrown in /home/virtual/mappiamo/mappiamo.org/006/lib/idiorm/idiorm.php on line 254
+[01-Feb-2014 14:04:02 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:04:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:04:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:04:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:04:23 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:04 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:04 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:07 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:41 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:41 Europe/Berlin] PHP Fatal error:  Class 'finfo' not found in /home/virtual/mappiamo/mappiamo.org/006/lib/mlib.validate.php on line 222
+[01-Feb-2014 14:05:42 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:49 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:51 Europe/Berlin] PHP Fatal error:  Class 'finfo' not found in /home/virtual/mappiamo/mappiamo.org/006/lib/mlib.validate.php on line 222
+[01-Feb-2014 14:05:51 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:05:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:06:01 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:12:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:14:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:14:27 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:14:27 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:14:28 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:17:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:17:25 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:17:25 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:17:25 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:19:27 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:19:58 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:03 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:05 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:11 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:11 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:25 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:20:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:37:07 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:37:18 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:37:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:37:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:37:45 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:41:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:41:26 Europe/Berlin] PHP Notice:  Use of undefined constant self - assumed 'self' in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/models/mcontent_import.php on line 17
+[01-Feb-2014 14:41:57 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:46:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:48:54 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:48:57 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:48:57 Europe/Berlin] PHP Fatal error:  Access to undeclared static property: MSettings::$facebook_appid in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/models/mcontent_import.php on line 31
+[01-Feb-2014 14:54:35 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 14:59:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:00:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:01:38 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:07:02 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:07:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:07:09 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:08:42 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:09:01 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:09:02 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:12:52 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:13:12 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:13:12 Europe/Berlin] PHP Parse error:  syntax error, unexpected '}' in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/models/mcontent_import.php on line 41
+[01-Feb-2014 15:13:37 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:13:40 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:13:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:14:05 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:14:13 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:15:14 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:15:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:15:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:17:37 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:17:37 Europe/Berlin] PHP Fatal error:  Using $this when not in object context in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/models/mcontent_import.php on line 26
+[01-Feb-2014 15:19:47 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:19:47 Europe/Berlin] CSRF state token does not match one provided.
+[01-Feb-2014 15:19:49 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:19:49 Europe/Berlin] CSRF state token does not match one provided.
+[01-Feb-2014 15:19:51 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:19:51 Europe/Berlin] PHP Fatal error:  Using $this when not in object context in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/models/mcontent_import.php on line 26
+[01-Feb-2014 15:22:04 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:22:04 Europe/Berlin] CSRF state token does not match one provided.
+[01-Feb-2014 15:31:10 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:31:10 Europe/Berlin] CSRF state token does not match one provided.
+[01-Feb-2014 15:32:03 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:32:03 Europe/Berlin] CSRF state token does not match one provided.
+[01-Feb-2014 15:34:30 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:34:30 Europe/Berlin] CSRF state token does not match one provided.
+[01-Feb-2014 15:35:36 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:37:52 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:37:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:40:47 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:43:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:44:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:47:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:48:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:49:22 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:49:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:52:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:55:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:57:51 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 15:59:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:01:03 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:04:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:05:02 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:06:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:06:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:08:15 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:16:32 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:17:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:17:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:18:50 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:18:55 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:21:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:21:38 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:22:07 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:22:42 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:23:15 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:24:23 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:26:36 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:26:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:26:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:28:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 16:29:03 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:02:50 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:02:52 Europe/Berlin] PHP Notice:  Undefined variable: address in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/models/mcontent_import.php on line 67
+[01-Feb-2014 17:04:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:04:08 Europe/Berlin] PHP Notice:  Undefined variable: address in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/models/mcontent_import.php on line 68
+[01-Feb-2014 17:04:33 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:05:02 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:28:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:29:29 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:29:32 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:30:44 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:30:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:30:47 Europe/Berlin] PHP Parse error:  syntax error, unexpected ';' in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/views/import_results.php on line 64
+[01-Feb-2014 17:31:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:31:17 Europe/Berlin] PHP Warning:  date_format() expects exactly 2 parameters, 1 given in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/views/import_results.php on line 64
+[01-Feb-2014 17:31:17 Europe/Berlin] PHP Warning:  date_format() expects exactly 2 parameters, 1 given in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/mcontent/views/import_results.php on line 70
+[01-Feb-2014 17:31:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:32:10 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:32:13 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:32:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:32:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:32:45 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:32:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:33:37 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:33:58 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:34:01 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:37:11 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:37:13 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:37:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:44:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:44:54 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:46:11 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:46:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:46:39 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:46:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:46:55 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:47:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:47:20 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:47:23 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:47:25 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:47:28 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:54:50 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:55:35 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:55:38 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:55:41 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:57:10 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:57:15 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:57:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:57:20 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:57:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:57:41 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:59:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 17:59:45 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:22 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:32 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:37 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:01:44 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:04:36 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:07:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:07:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:11:13 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:11:18 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:11:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:11:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:11:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:12:00 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:13:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:13:11 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:13:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:14:04 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:14:07 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:10 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:11 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:12 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:14 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:22 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:28 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:41 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:41 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:15:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:19:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:19:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:20:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:20:10 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:20:11 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:20:13 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:20:15 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:20:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:20:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:20:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:24:57 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:30:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:30:28 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 18:34:13 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 19:01:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:15:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:15:30 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:15:55 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:15:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:16:07 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:16:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:16:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:16:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:17:01 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:17:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:17:09 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:17:45 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:17:45 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:00 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:10 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:30 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:30 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:35 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:35 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:37 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:38 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:51 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[01-Feb-2014 21:18:58 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:08:37 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:08:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:08:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:09:11 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:09:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:09:33 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:11:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:11:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:11:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:11:30 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:11:33 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:11:39 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:11:39 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:12:04 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:12:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:12:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:12:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:12:35 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:12:39 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:12:47 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:13:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:13:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:13:20 Europe/Berlin] PHP Notice:  Undefined variable: result in /home/virtual/mappiamo/mappiamo.org/006/manager/modules/majax/majax.php on line 15
+[02-Feb-2014 12:13:23 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:13:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:13:39 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:13:40 Europe/Berlin] PHP Fatal error:  Class 'finfo' not found in /home/virtual/mappiamo/mappiamo.org/006/lib/mlib.validate.php on line 222
+[02-Feb-2014 12:13:42 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:13:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:13:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:14:07 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:14:10 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:14:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:14:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:14:39 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:14:44 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:16:29 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:16:33 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:16:40 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:16:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:16:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:16:55 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:17:35 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:17:40 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:17:40 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:20:50 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:20:54 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:21:03 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:21:32 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:24:10 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:24:20 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:24:50 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:25:09 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:26:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:26:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:26:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:26:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:30:27 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:30:29 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:30:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:30:37 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:35:51 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[02-Feb-2014 12:35:52 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:52:14 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:52:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:52:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:52:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:52:31 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:52:38 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:52:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:52:51 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:55:27 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:56:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:57:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 11:58:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:00:41 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:01:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:05:51 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:05:56 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:06:07 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:09:33 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:09:36 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:12:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:12:54 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:12:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:13:01 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:13:13 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:13:14 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:13:25 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:14:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:14:23 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:52:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:52:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:52:50 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:52:54 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:53:00 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 12:53:06 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:04:45 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:04:55 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:04:58 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:05:09 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:05:15 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:05:50 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:05:55 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:06:01 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:06:02 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:06:26 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:06:30 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:06:34 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:06:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:08:09 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:08:23 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:08:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:10:27 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:10:38 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:10:44 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:10:45 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:10:49 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:11:00 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:11:05 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:11:20 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:11:23 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:13:08 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:13:09 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:13:16 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:13:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:13:47 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:13:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:13:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:14:28 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:14:29 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:14:45 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:14:46 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:15:00 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:15:01 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:15:21 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:15:22 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:15:55 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:16:20 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:16:25 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:16:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:17:32 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:22:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:23:42 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:23:44 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:23:50 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:23:51 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:24:22 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:24:35 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:24:43 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:24:44 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:24:48 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:24:53 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:24:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:25:01 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:25:05 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:25:17 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:25:19 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:25:24 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:28:49 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:28:54 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:29:44 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:29:55 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:29:59 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 13:30:14 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0
+[24-Mar-2014 14:45:39 Europe/Berlin] PHP Warning:  Cannot open 'extra/browscap.ini' for reading in Unknown on line 0

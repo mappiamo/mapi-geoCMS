@@ -1,0 +1,125 @@
+body {
+        padding-bottom: 40px;
+        color: #5a5a5a;
+}
+
+.navbar-wrapper {
+        position: absolute;
+        z-index: 6;
+        right: 0;
+        left: 0;
+        top: 0;
+}
+.navbar-wrapper .container {
+        padding-right: 0;
+        padding-left: 0;
+}
+.navbar-wrapper .navbar {
+        padding-right: 15px;
+        padding-left: 15px;
+}
+.navbar-brand {
+        padding: 10px 6px 0px 6px;
+}
+.navbar-brand img {
+        height: 32px;
+}
+.navbar .container {
+        border-radius: 0px;
+}
+
+#mapbanner {
+        margin-top: 51px;
+}
+#mapcontent {
+        height: 320px;
+        margin-bottom: 42px;
+}
+
+.marketing {
+        padding: 82px 15px 0px 15px;
+}
+.marketing .col-lg-4 {
+        text-align: center;
+        margin-bottom: 20px;
+}
+.marketing h2 {
+        font-weight: normal;
+}
+.marketing .col-lg-4 p {
+        margin-left: 10px;
+        margin-right: 10px;
+}
+
+.featurette-divider {
+        margin: 80px 0;
+}
+.featurette-heading {
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -1px;
+}
+
+article {
+        margin-top: 51px;
+}
+
+.content {
+        margin: 48px 0px 22px 0px;
+}
+.content-title {
+        padding: 22px 0px 12px 0px;
+}
+.content-props {
+        font-style: italic;
+        font-size: 11px;
+}
+.content-location {
+        margin-bottom: 22px;
+}
+.content-image {
+        margin-bottom: 22px;
+}
+.content-image img {
+        max-height: 420px;
+        margin-bottom: 22px;
+}
+
+@media (min-width: 768px) {
+        .marketing {
+                padding-left: 0;
+                padding-right: 0;
+        }
+
+        .navbar-wrapper {
+                margin-top: 20px;
+        }
+        .navbar-wrapper .container {
+                padding-left:  15px;
+                padding-right: 15px;
+        }
+        .navbar-wrapper .navbar {
+                padding-left:  0;
+                padding-right: 0;
+        }
+
+        .navbar-wrapper .navbar {
+                border-radius: 4px;
+        }
+
+        .carousel-caption p {
+                margin-bottom: 20px;
+                font-size: 21px;
+                line-height: 1.4;
+        }
+
+        .featurette-heading {
+                font-size: 50px;
+        }
+}
+
+@media (min-width: 992px) {
+        .featurette-heading {
+                margin-top: 120px;
+        }
+}

@@ -1,0 +1,119 @@
+@media all and (max-width: 1200px) { /* screen size until 1200px */
+    .menu-logo-guzzi div {
+        top: -70px;
+    }
+    .carousel-image {
+        height: 650px !important;
+    }
+    .carousel .left {
+        margin-left: -52px;
+    }
+    .carousel .right {
+        margin-right: -46px;
+    }
+    .leather-container-head {
+        max-width: 944px;
+    }
+    .introimage img,
+    .map-menu,
+    #map-canvas {
+        max-width: 940px;
+    }
+    #box-images {
+        max-width: 968px;
+    }
+    .footer-container {
+        max-width: 942px;
+    }
+}
+@media all and (max-width: 992px) { /* screen size until 992px */
+    .social-menu, .newsletter-menu {
+        text-align: center;
+        margin: 12px 0;
+    }
+    .menu-logo-guzzi div {
+        top: -60px;
+    }
+    .leather-container-head {
+        max-width: 724px;
+    }
+    .carousel-image {
+        height: 450px !important;
+    }
+    .carousel .left {
+        margin-left: -32px;
+    }
+    .carousel .right {
+        margin-right: -26px;
+    }
+    #content {
+        margin-left: 30px;
+        max-width: 690px;
+    }
+    .introimage img,
+    .map-menu,
+    #map-canvas {
+        max-width: 720px;
+    }
+    #box-images {
+        max-width: 748px;
+    }
+    .footer-container {
+        max-width: 722px;
+    }
+}
+@media all and (max-width: 768px) { /* screen size until 768px */
+    .img-caption {
+        display: block;
+    }
+    .movemenudown {
+        top: 62px;
+    }
+    .carousel-image {
+        height: 320px !important;
+    }
+    .carousel .left {
+        margin-left: -22px;
+    }
+    .carousel .right {
+        margin-right: -16px;
+    }
+    .navbar-fixed-top {
+        max-height: 63px;
+    }
+    .navbar-fixed-top .col-xs-12 a {
+        border-top: thin solid #333333;
+        display: block;
+        padding-top: 12px;
+        text-decoration: none;
+        font-size: 16px;
+        height: 48px;
+    }
+    #content {
+        max-width: 648px;
+        top: -20px;
+    }
+    .introimage img,
+    .map-menu,
+    #map-canvas {
+        max-width: 678px;
+    }
+    .map-menu {
+	padding-top: 12px;
+	padding-bottom: 22px;
+    }
+    #box-images {
+        max-width: 728px;
+        padding-right: 14px;
+    }
+    .footer-container {
+        max-width: 728px;
+    }
+    .footer-container .email {
+        max-width: 698px;
+        margin-bottom: 12px;
+    }
+    #exit-button {
+        margin-top: -16px;
+    }
+}
