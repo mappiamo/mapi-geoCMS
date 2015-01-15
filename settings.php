@@ -5,18 +5,18 @@ defined( 'DACCESS' ) or die;
 
 class MSettings{
     
-	    static $sitename = 'Moto Guzzi World Club';
-	    static $domain = 'motoguzziworldclub.it';
-	    static $location = 'Via E. Parodi 57, 23826 Mandello del Lario';
+	    static $sitename = 'Your Site Name';
+	    static $domain = 'mappiamo.com';
+	    static $location = 'address, zip, city';
 
-	    static $c_key = 'kHi2DH0m69UB';
+	    static $c_key = 'sadqasdgfasdgaf';
 	    
-	    static $db = 'motoguzz_mapi';
+	    static $db = 'account_mapi';
 	    static $db_type = 'mysql';
 	    static $db_host = 'localhost';
 	    static $db_prefix = 'mapi';
-	    static $db_user = 'mgwcuser';
-	    static $db_pass = 'valami';
+	    static $db_user = 'accountuser';
+	    static $db_pass = 'sdfasdf';
 
 	    static $reg_email = '';
 	    static $reg_email_user = '';
