@@ -2,7 +2,7 @@
 ======
 
 ### What is #mappiamo?
- #mappiamo, is a suitable tool to build websites and combine the contents ensuring ownership and originality for each of the data providers. It is suitable to marketing 3.0 where it is important to the credibility of the sharing of experiential baggage of both operators and consumers.
+ #mappiamo, demo http://www.mappiamo.org/, is a suitable tool to build websites and combine the contents ensuring ownership and originality for each of the data providers. It is suitable to marketing 3.0 where it is important to the credibility of the sharing of experiential baggage of both operators and consumers.
  #mappiamo is a CMS that allows you to create and leverage content through the use of OpenData, the geo-location and microformats. It can be used for processing the data produced by public administrations, collect content (crowdsourcing), civic hacking and provide a basis for the portal of a smart city.
 
  #mappiamo is a CMS that allows you to create and leverage content through the use of OpenData, the geo-location and microformats. It can be used for processing the data produced by public administrations, collect content (crowdsourcing), civic hacking and provide a basis for the portal of a smart city.
