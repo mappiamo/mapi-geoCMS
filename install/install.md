@@ -3,5 +3,6 @@
 2) In the settings.php file change the db setting
 
 3) Go to /manager and login with 
-    User: demo
+
+    User: demo 
     Pass: DEmo1234
