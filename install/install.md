@@ -6,3 +6,5 @@
 
     User: demo 
     Pass: DEmo1234
+
+4) Default languate "it" 
