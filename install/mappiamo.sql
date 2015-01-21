@@ -112,8 +112,8 @@ CREATE TABLE IF NOT EXISTS `content_media` (
 --
 
 INSERT INTO `content_media` (`id`, `external_id`, `title`, `url`, `default_media`) VALUES
-(1, 933, 'Budai_palota_1930', 'http://test.mappiamo.com/mapi/media/contents/bc13e631623c285ec2db00596a2a6fd2e5231927_Budai_palota_1930.jpg', 1),
-(2, 934, 'Budai_palota_1930', 'http://test.mappiamo.com/mapi/media/contents/bc13e631623c285ec2db00596a2a6fd2e5231927_Budai_palota_1930.jpg', 1);
+(1, 933, 'Budai_palota_1930', '/media/contents/bc13e631623c285ec2db00596a2a6fd2e5231927_Budai_palota_1930.jpg', 1),
+(2, 934, 'Budai_palota_1930', '/media/contents/bc13e631623c285ec2db00596a2a6fd2e5231927_Budai_palota_1930.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -164,7 +164,7 @@ INSERT INTO `licenses` (`id`, `title`, `description`, `url`, `enabled`) VALUES
 (2, 'ODbL', '', 'http://opendatacommons.org/licenses/odbl/', 1),
 (3, 'CC0', '', 'https://creativecommons.org/publicdomain/zero/1.0/', 1),
 (4, 'CC-BY-SA', '', 'https://creativecommons.org/licenses/by-sa/2.0/', 1),
-(5, ' IODL v2.0', '', 'http://www.dati.gov.it/iodl/2.0/', 1);
+(5, 'IODL v2.0', '', 'http://www.dati.gov.it/iodl/2.0/', 1);
 
 -- --------------------------------------------------------
 
@@ -296,7 +296,7 @@ INSERT INTO `preferences` (`id`, `name`, `value`) VALUES
 (9, 'facebook_app_id', '488785261198856'),
 (10, 'facebook_secret', '2f8e52496f1efdce948de72383814d4c'),
 (11, 'registration', 'yes'),
-(12, 'default_language', 'en');
+(12, 'default_language', 'it');
 
 -- --------------------------------------------------------
 
