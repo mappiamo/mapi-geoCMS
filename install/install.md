@@ -7,4 +7,4 @@
     User: demo 
     Pass: DEmo1234
 
-4) Default languate "it" 
+4) Default language "it" 
