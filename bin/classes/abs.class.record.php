@@ -301,8 +301,17 @@ abstract class M_Record {
 						if ( ! mapi_check_double( 'contents', 'name', $this->name ) ) return mapi_report_message( 'Content with that name already exists.' );
 				}
 
-				if ( $this->address && MValidate::address( $this->address ) ) $record->address = $this->address;
-				else return mapi_report_message( 'Not a valid content address.' );
+
+				if (isset($this->meta_name)) {
+					if ( $this->meta_name && MValidate::meta_name( $this->meta_name ) ) $record->meta_name = $this->meta_name;
+					else return mapi_report_message( 'Not a valid meta name.' );
+				}
+
+				if (isset($this->meta_value)) {
+					if ( $this->meta_value && MValidate::meta_value( $this->meta_value ) ) $record->meta_value = $this->meta_value;
+					else return mapi_report_message( 'Not a valid meta value.' );
+				}
+
 
 				if ( $this->lat && MValidate::coord( $this->lat ) ) $record->lat = $this->lat;
 				else return mapi_report_message( 'Not a valid latitude.' );

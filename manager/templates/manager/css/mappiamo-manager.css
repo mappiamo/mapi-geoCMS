@@ -189,3 +189,17 @@ code.green {
   		border-bottom-right-radius: 4px;
   		margin-top: -11px;
 }
+.FinalError {
+    /* background-color: #D54A4D; */
+    color: #FFFFFF;
+    display: block;
+    width: 97%;
+    font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-style: normal;
+    font-variant: normal;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    font-size: 12px;
+}

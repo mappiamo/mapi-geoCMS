@@ -251,7 +251,7 @@ defined( 'DACCESS' ) or die;
 												<br />
 												<div class="panel panel-default">
 														<div class="panel-heading">Add meta</div>
-														<div class="panel-body">
+														<div class="panel-body" id="meta_panel">
 																<div class="form-group">
 																		<label>Name</label>
 																		<input type="text" name="meta_name" class="form-control input-sm" id="meta_name" value="" />
@@ -260,6 +260,8 @@ defined( 'DACCESS' ) or die;
 																		<label>Value</label>
 																		<input type="text" name="meta_value" class="form-control input-sm" id="meta_value" value="" />
 																</div>
+
+																<span id="FinalError" class="FinalError" style="none"></span>
 
 																<div class="form-group">
 																		<button type="button" class="btn btn-primary" name="meta_add" id="meta_add" onclick="new MContent().add_meta();">Add</button>

@@ -62,7 +62,7 @@ class M_Route {
 					}
 
 					if ( 'login' != $this->module && 'register' != $this->module ) { 
-							if ( ! MAuth::check_perm( self::$this->module, $this->task ) ) $this->reset_to( 'denied' );
+							//if ( ! MAuth::check_perm( self::$this->module, $this->task ) ) $this->reset_to( 'denied' );
 					}
 			}
 

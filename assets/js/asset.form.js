@@ -311,11 +311,58 @@ $( document ).ready( function() {
 						$( '#meta_add' ).click();
 						return false;
 				}
+                $("#meta_panel span#FinalError").hide();
 		} );
 		$( '#meta_value' ).keypress( function( e ) { 
 				if ( 13 == e.keyCode ) { 
 						$( '#meta_add' ).click();
 						return false;
 				}
+                $("#meta_panel span#FinalError").hide();
 		} );
+
+        $("#meta_add").click(function(event) {
+
+            function isValidMetaName(Name) {
+                var namepattern = new RegExp(/^[a-zA-Z0-9éáűúőóüöíÉÁŰŐÚÓÜÖÍèçòàùì£ÈÀÒÙÌñÑ’‘'"\-.,:()\&\/ ]{3,30}$/i);
+                return namepattern.test(Name);
+            };
+
+            function isValidMetaVal(MVal) {
+                var namepattern = new RegExp(/^[a-zA-Z0-9éáűúőóüöíÉÁŰŐÚÓÜÖÍèçòàùì£ÈÀÒÙÌñÑ’‘'"\-_!?.,:;(){}\[\]\@\#\$\%\&\*\/ ]{1,30}$/i);
+                return namepattern.test(MVal);
+            };
+
+            var metaname=$('#meta_panel #meta_name').val();
+            var metaval=$('#meta_panel #meta_value').val();
+
+            var error_mn = 1;
+            var error_mv = 1;
+
+            if((metaname.length < 3) || (isValidMetaName(metaname) == false)) {
+                $("#meta_panel .FinalError").css('background-color', "#D54A4D");
+                $("#meta_panel span#FinalError").html('Meta name short or syntax error');
+                error_mn = 1;
+            } else {
+                error_mn = 0;
+            }
+
+            if((metaval.length < 1) || (isValidMetaVal(metaval) == false)) {
+                $("#meta_panel .FinalError").css('background-color', "#D54A4D");
+                $("#meta_panel span#FinalError").html('Meta value empty or syntax error');
+                error_mv = 1;
+            } else {
+                error_mv = 0;
+            }
+
+            if ((error_mv + error_mn) == 0) {
+                $("#meta_panel .FinalError").css('background-color', "#2BCC27");
+                $("#meta_panel span#FinalError").html('Meta data input ok...');
+                $("#meta_panel span#FinalError").show();
+            } else {
+                $("#meta_panel span#FinalError").show();
+                return false;
+            }
+
+        });
 } );

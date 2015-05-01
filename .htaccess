@@ -1,0 +1,31 @@
+
+
+IndexIgnore *
+
+Options +FollowSymLinks
+
+RewriteEngine On
+
+RewriteRule ^(manager)($|/) - [L]
+
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^.]*)/(.*)/(.*)$ index.php?module=$1&object=$2&task=$3 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^.]*)/(.*)$ index.php?module=$1&object=$2 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([^.]*)$ index.php?module=$1 [L]
+
+
+
+
+
+# Provide Specific Index Page (Set the default handler)
+DirectoryIndex index.php
+
+
+
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
