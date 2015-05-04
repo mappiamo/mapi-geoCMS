@@ -79,11 +79,11 @@ defined( 'DACCESS' ) or die;
 																<div class="panel-body">
 																		<div class="form-group">
 																				<label>Starting at</label>
-																				<input type="text" name="content_start" class="form-control input-sm" id="content_start" value="<?php MPut::_html_attr( $data->start ); ?>">
+																				<input type="text" name="content_start" readonly class="form-control input-sm" id="content_start" value="<?php MPut::_html_attr( $data->start ); ?>">
 																		</div>
 																		<div class="form-group">
 																				<label>Ending at</label>
-																				<input type="text" name="content_end" class="form-control input-sm" id="content_end" value="<?php MPut::_html_attr( $data->end ); ?>">
+																				<input type="text" name="content_end" readonly class="form-control input-sm" id="content_end" value="<?php MPut::_html_attr( $data->end ); ?>">
 																		</div>
 																</div>
 														</div>
