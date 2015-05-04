@@ -31,7 +31,7 @@ class MValidate {
 				return true;
 		}
 
-		static function date( $value, $format = 'Y-m-d H:i:s' ) {
+		static function date( $value, $format = 'Y-m-d' ) {
 				if ( ! MValidate::string( $value ) ) return false;
 
 				$date = DateTime::createFromFormat( $format, $value );

@@ -34,7 +34,9 @@ class M_Assets {
 						'css'	=> array(
 								'bootstrap/bootstrap.min', 
 								'bootstrap/bootstrap-theme.min',
-								'leaflet/leaflet'
+								'leaflet/leaflet',
+								'pikaday/pikaday',
+								'pikaday/theme'
 						),
 						'js' 	=> array(
 								'jquery/jquery-1.10.2.min',
@@ -43,7 +45,10 @@ class M_Assets {
 								'bootstrap/bootstrap.tabs',
 								'leaflet/leaflet',
 								'asset.form',
-								'asset.map'
+								'asset.map',
+								'pikaday/moment',
+								'pikaday/pikaday',
+								'pikaday/pikaday.jquery'
 						)
 				);
 		}

@@ -178,7 +178,7 @@ defined( 'DACCESS' ) or die;
 									</div>
 
 									<div class="btn-group">
-											<button type="submit" class="btn btn-primary" name="content_add" onclick="new MContent().type_select();">Add</button>
+											<button type="submit" id="btn_add" class="btn btn-primary" name="content_add" onclick="new MContent().type_select();">Add</button>
 									</div>
 
 							</div>

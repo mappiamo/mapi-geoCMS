@@ -306,13 +306,41 @@ MWidget.prototype = new MFrm();
 MPage.prototype = new MFrm();
 
 $( document ).ready( function() {
-		$( '#meta_name' ).keypress( function( e ) { 
-				if ( 13 == e.keyCode ) { 
-						$( '#meta_add' ).click();
-						return false;
-				}
-                $("#meta_panel span#FinalError").hide();
-		} );
+
+        var picker_start = new Pikaday({
+            field: document.getElementById('content_start'),
+            showWeekNumber: true,
+            firstDay: 1,
+            format: 'YYYY-MM-DD',
+            showMonthAfterYear: true,
+            yearRange: [1900,2030]
+        });
+
+        var picker_end = new Pikaday({
+            field: document.getElementById('content_end'),
+            showWeekNumber: true,
+            firstDay: 1,
+            format: 'YYYY-MM-DD',
+            showMonthAfterYear: true,
+            yearRange: [1900,2030]
+        });
+
+        $('#content_address').bind("keyup keypress", function(e) {
+            var code = e.keyCode || e.which;
+            if (code  == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        $( '#meta_name' ).keypress( function( e ) {
+            if ( 13 == e.keyCode ) {
+                $( '#meta_add' ).click();
+                return false;
+            }
+            $("#meta_panel span#FinalError").hide();
+        } );
+
 		$( '#meta_value' ).keypress( function( e ) { 
 				if ( 13 == e.keyCode ) { 
 						$( '#meta_add' ).click();
