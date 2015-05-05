@@ -307,7 +307,7 @@ MPage.prototype = new MFrm();
 
 $( document ).ready( function() {
 
-        var picker_start = new Pikaday({
+        /* var picker_start = new Pikaday({
             field: document.getElementById('content_start'),
             showWeekNumber: true,
             firstDay: 1,
@@ -323,6 +323,35 @@ $( document ).ready( function() {
             format: 'YYYY-MM-DD',
             showMonthAfterYear: true,
             yearRange: [1900,2030]
+        }); */
+
+        $('#content_start').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: 'en',
+            dayViewHeaderFormat: 'YYYY MMMM',
+            minDate: '2010',
+            calendarWeeks: true,
+            showTodayButton: true,
+            showClear: true,
+            showClose: true
+        });
+
+        $('#content_end').datetimepicker({
+            format: 'YYYY-MM-DD HH:mm',
+            locale: 'en',
+            dayViewHeaderFormat: 'YYYY MMMM',
+            minDate: '2010',
+            calendarWeeks: true,
+            showTodayButton: true,
+            showClear: true,
+            showClose: true
+        });
+
+        $("#content_start").on("dp.change", function (e) {
+            $('#content_end').data("DateTimePicker").minDate(e.date);
+        });
+        $("#content_end").on("dp.change", function (e) {
+            $('#content_start').data("DateTimePicker").maxDate(e.date);
         });
 
         $('#content_address').bind("keyup keypress", function(e) {

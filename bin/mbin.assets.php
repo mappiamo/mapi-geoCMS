@@ -35,8 +35,7 @@ class M_Assets {
 								'bootstrap/bootstrap.min', 
 								'bootstrap/bootstrap-theme.min',
 								'leaflet/leaflet',
-								'pikaday/pikaday',
-								'pikaday/theme'
+								'datetimepicker/bootstrap-datetimepicker.min'
 						),
 						'js' 	=> array(
 								'jquery/jquery-1.10.2.min',
@@ -47,8 +46,8 @@ class M_Assets {
 								'asset.form',
 								'asset.map',
 								'pikaday/moment',
-								'pikaday/pikaday',
-								'pikaday/pikaday.jquery'
+								'moment-with-locales',
+								'datetimepicker/bootstrap-datetimepicker'
 						)
 				);
 		}
