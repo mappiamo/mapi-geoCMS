@@ -7,7 +7,7 @@ function mwidget_breadcrumbs() {
 		
 		?>
 		<ol class="breadcrumb">
-				<li><a href="index.php">motoguzziworldclub.it</a></li>
+				<li><a href="index.php">Home</a></li>
 		<?php
 		if ( 'category' == $_GET['module'] ) {
 				//category oldal
@@ -17,8 +17,8 @@ function mwidget_breadcrumbs() {
 						<li><a href="index.php?module=category&object=<?php MPut::_html( $category->get_id() ); ?>"><?php MPut::_html( $category->get_title() ); ?></a></li>
 						<?php
 				}
-				
 		}
+
 		else if ( 'content' == $_GET['module'] ) {
 				//content oldal
 				if ( ! empty( $_GET['object'] ) || ! is_numeric( $_GET['object'] )) {
@@ -44,8 +44,8 @@ function mwidget_breadcrumbs() {
 								<?php
 						}
 				}
-
 		}
+
 		?>
 		</ol>
 		<?php
