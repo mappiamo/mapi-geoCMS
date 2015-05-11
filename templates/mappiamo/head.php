@@ -11,8 +11,10 @@ defined( 'DACCESS' ) or die;
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+				<base href="<?php echo rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\'); ?>/">
+
         <?php $this->meta(); ?>
-        
+
         <link rel="shortcut icon" href="favicon.png">
 
         <title><?php MPut::_html($this->page_title ); ?></title>
