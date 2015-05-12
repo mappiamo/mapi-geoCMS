@@ -289,29 +289,31 @@ abstract class M_Record {
 		private function setup_object( $record, $new = false ) {
 				if ( ! $record || ! is_object( $record ) ) return null;
 
+			//print_r($record->title); die();
+
 				if ( $this->title && MValidate::title( $this->title ) ) $record->title = $this->title;
-				else return mapi_report_message( 'Not a valid content title.' );
+				else return mapi_report_message( 'Not a valid content title: ' . $this->title );
 
 				if ( $this->license && MValidate::id( $this->license ) && in_array( $this->license , mapi_available_ids( 'licenses' ) ) ) $record->license = $this->license;
-				else return mapi_report_message( 'Not a valid content license.' );
+				else return mapi_report_message( 'Not a valid content license: ' . $this->license );
 
 				$record->name = $this->name;
 
 				if ( $new ) {
-						if ( ! mapi_check_double( 'contents', 'name', $this->name ) ) return mapi_report_message( 'Content with that name already exists.' );
+						if ( ! mapi_check_double( 'contents', 'name', $this->name ) ) return mapi_report_message( 'Content with that name already exists: ' . $this->name);
 				}
 
 				if ( $this->address && MValidate::address( $this->address ) ) $record->address = $this->address;
-				else return mapi_report_message( 'Not a valid content address.' );
+				else return mapi_report_message( 'Not a valid content address: ' . $this->address);
 
 				if (isset($this->meta_name)) {
 					if ( $this->meta_name && MValidate::meta_name( $this->meta_name ) ) $record->meta_name = $this->meta_name;
-					else return mapi_report_message( 'Not a valid meta name.' );
+					else return mapi_report_message( 'Not a valid meta name: ' . $this->meta_name );
 				}
 
 				if (isset($this->meta_value)) {
 					if ( $this->meta_value && MValidate::meta_value( $this->meta_value ) ) $record->meta_value = $this->meta_value;
-					else return mapi_report_message( 'Not a valid meta value.' );
+					else return mapi_report_message( 'Not a valid meta value: ' . $this->meta_value );
 				}
 
 

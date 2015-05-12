@@ -7,15 +7,24 @@ class MModel_Mxmlimport {
 
 		static function parse_xml() {
 				$xml = $_FILES["xml_file"];
-				
+
 				$xml = simplexml_load_file($_FILES["xml_file"]["tmp_name"]);
-				
+
+				$XML_objects = array();
+				foreach ($xml->children() as $child) {
+					$XML_objects[] = $child->getName();
+				}
+
+				$XML_objects = array_unique($XML_objects);
+
 				$elements = array();
-				foreach ( $xml->dealer as $element ) {
-						$geo = self::geocode($element->address . ", " . $element->zip . ", " . $element->city);
-						$element->lat = $geo["lat"];
-						$element->lng = $geo["lng"];
-						$elements[] = $element;
+				$x = 0;
+				foreach ( $xml->$XML_objects[0] as $element ) {
+					//$geo = self::geocode($element[$x++]->Address . ", " . $element[$x]->ZIP . ", " . $element[$x]->City);
+					$geo = self::geocode($element->Address . ", " . $element->ZIP . ", " . $element->City);
+					$element->lat = $geo["lat"];
+					$element->lng = $geo["lng"];
+					$elements[] = $element;
 				}
 				
 				return $elements;
@@ -24,7 +33,6 @@ class MModel_Mxmlimport {
 		static function parse_ini() {
 				
 				$ini = parse_ini_file($_FILES["ini_file"]["tmp_name"]);
-				
 				return $ini;
 		}
 
@@ -57,36 +65,52 @@ class MModel_Mxmlimport {
 				$cat = $config->category;
 
 				$category = new M_Category( $cat );
-				//$category->set_title( $cat );
-				//$category->add();
+				$category->set_title( $cat );
+				$category->add();
 				
 				
 				$desc_data = explode( ",", $config->description );
+
+				//print_r($desc_data);
+
+				//print_r($encdata->xml[2]->{'@attributes'}->nomeufficio);
+				//$TitleName = 'legalName';
+				//$TitleName = {'@attributes'}->nomeufficio;
 				
 				foreach( $encdata->xml as $place ) {
+						//echo $place->{'@attributes'}->nomeufficio; die();
+						//print_r($place);
 						$content = MObject::create( 'place' );
-						$content->set_title( $place->companyname );
-						$content->set_address( $place->address . ", " . $place->cap . ", " . $place->city );
+						$content->set_title( $place->{'@attributes'}->nomeufficio );
+						$content->set_address( $place->Address . ", " . $place->ZIP . ", " . $place->City );
 						$content->set_lat( $place->lat );
 						$content->set_lng( $place->lng );
 						$content->set_license( 2 );
 						$text = "";
+						//print_r($desc_data);
+						//print_r($place);
 						foreach ( $desc_data as $desc ) {
+							//echo $desc . ' - ';
 								if ( "NL" == substr( $desc, -2 ) ) {
 										$newline = "<br />";
-								}
-								else {
+								} else {
 										$newline = ", ";
 								}
-								$attr = array_search( trim($desc,"NL"), (array)$config );
-								$pre_text = $place->$attr;
-								if ( is_string( $pre_text ) ) {
-									$text .= trim($desc,"NL") . ": " . $pre_text . $newline;
+
+								$attr = array_search( strtolower(trim($desc,"NL")), array_map('strtolower',(array)$config ));
+								if (!empty($attr)) {
+									$pre_text = $place->$attr;
+									//echo $pre_text . '->' . PHP_EOL;
+									if ( is_string( $pre_text ) ) {
+										$text .= trim($desc,"NL") . ": " . $pre_text . $newline;
+									}
+								} else {
+									$text .= $desc . ': ';
 								}
+								//echo $text . '<br>';
 						}
-						
+
 						$content->set_text( $text );
-						
 						$content->add();
 						
 						foreach( (array)$place as $key => $value ) {

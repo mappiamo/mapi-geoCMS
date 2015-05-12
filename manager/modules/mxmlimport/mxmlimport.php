@@ -6,7 +6,7 @@ defined( 'DACCESS' ) or die;
 class MModule_MXmlimport extends M_Module {
 
 		public function mxmlimport() {
-				error_reporting(0);
+				error_reporting(1);
 		
 		}
 		
@@ -26,6 +26,7 @@ class MModule_MXmlimport extends M_Module {
 
 						$data = array( "xml" => $xml, "ini" => $ini );
 						$this->view( 'preview', $data );
+
 				}
 		}
 		
