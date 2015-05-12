@@ -301,6 +301,8 @@ abstract class M_Record {
 						if ( ! mapi_check_double( 'contents', 'name', $this->name ) ) return mapi_report_message( 'Content with that name already exists.' );
 				}
 
+				if ( $this->address && MValidate::address( $this->address ) ) $record->address = $this->address;
+				else return mapi_report_message( 'Not a valid content address.' );
 
 				if (isset($this->meta_name)) {
 					if ( $this->meta_name && MValidate::meta_name( $this->meta_name ) ) $record->meta_name = $this->meta_name;
