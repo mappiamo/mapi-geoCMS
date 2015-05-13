@@ -121,14 +121,16 @@ class MModel_Mxmlimport {
 						//print_r($MetaArray); die();
 						
 						foreach( $MetaArray as $key => $value ) {
+								$key = trim($key); $value = trim($value);
 								if ((!empty($key)) && (!empty($value))) {
 									if ( is_string($key) && ( is_string($value) || is_numeric($value)) ) {
-											$transformedkey = $config->$key;
-											$content->add_meta( $transformedkey, $value );
+											$transformedkey = trim($config->$key);
+											if (!empty($transformedkey)) {
+												$content->add_meta( $transformedkey, $value );
+											}
 									}
 								}
 						}
-						
 
 						$category->add_content( $content->get_id() );
 //echo $content->get_id();
