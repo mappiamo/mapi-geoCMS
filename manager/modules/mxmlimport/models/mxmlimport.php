@@ -81,7 +81,9 @@ class MModel_Mxmlimport {
 						//echo $place->{'@attributes'}->nomeufficio; die();
 						//print_r($place);
 						$content = MObject::create( 'place' );
-						$content->set_title( $place->{'@attributes'}->nomeufficio );
+						//$content->set_title( $place->{'@attributes'}->nomeufficio );
+						$content->set_title( $place->Title );
+						//$content->set_title( $place->legalName );
 						$content->set_address( $place->Address . ", " . $place->ZIP . ", " . $place->City );
 						$content->set_lat( $place->lat );
 						$content->set_lng( $place->lng );
@@ -105,18 +107,25 @@ class MModel_Mxmlimport {
 										$text .= trim($desc,"NL") . ": " . $pre_text . $newline;
 									}
 								} else {
-									$text .= $desc . ': ';
+									//$text .= $desc . ': ';
 								}
 								//echo $text . '<br>';
 						}
 
 						$content->set_text( $text );
 						$content->add();
+
+						$MetaArray = (array)$place;
+						$MetaArray = array_filter($MetaArray);
+
+						//print_r($MetaArray); die();
 						
-						foreach( (array)$place as $key => $value ) {
-								if ( is_string($key) && ( is_string($value) || is_numeric($value)) ) {
-										$transformedkey = $config->$key;
-										$content->add_meta( $transformedkey, $value );
+						foreach( $MetaArray as $key => $value ) {
+								if ((!empty($key)) && (!empty($value))) {
+									if ( is_string($key) && ( is_string($value) || is_numeric($value)) ) {
+											$transformedkey = $config->$key;
+											$content->add_meta( $transformedkey, $value );
+									}
 								}
 						}
 						
