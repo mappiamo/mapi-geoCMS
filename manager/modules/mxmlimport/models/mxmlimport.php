@@ -61,7 +61,8 @@ class MModel_Mxmlimport {
 				$encdata = json_decode( base64_decode( $data ) );
 				
 				$config = $encdata->ini;
-				
+				//print_r($config);
+
 				$cat = $config->category;
 
 				$category = new M_Category( $cat );
@@ -70,27 +71,26 @@ class MModel_Mxmlimport {
 				
 				
 				$desc_data = explode( ",", $config->description );
-
 				//print_r($desc_data);
 
-				//print_r($encdata->xml[2]->{'@attributes'}->nomeufficio);
-				//$TitleName = 'legalName';
-				//$TitleName = {'@attributes'}->nomeufficio;
-				
+				$t = 0;
 				foreach( $encdata->xml as $place ) {
 						//echo $place->{'@attributes'}->nomeufficio; die();
-						//print_r($place);
 						$content = MObject::create( 'place' );
-						//$content->set_title( $place->{'@attributes'}->nomeufficio );
-						$content->set_title( $place->Title );
-						//$content->set_title( $place->legalName );
+						//$TheTitle =  $place->{'@attributes'}->nomeufficio;
+						//$TheTitle =  $place->Title;
+						//$TheTitle =  $place->legalName;
+						$TheTitle = $place->Ragione_Sociale;
+						if (empty($TheTitle)) { $TheTitle = 'Empty title ' . ++$t; }
+						$content->set_title( $TheTitle );
 						$content->set_address( $place->Address . ", " . $place->ZIP . ", " . $place->City );
 						$content->set_lat( $place->lat );
 						$content->set_lng( $place->lng );
 						$content->set_license( 2 );
 						$text = "";
-						//print_r($desc_data);
+						//print_r($desc_data); die();
 						//print_r($place);
+						//print_r((array)$config);
 						foreach ( $desc_data as $desc ) {
 							//echo $desc . ' - ';
 								if ( "NL" == substr( $desc, -2 ) ) {
@@ -99,18 +99,23 @@ class MModel_Mxmlimport {
 										$newline = ", ";
 								}
 
-								$attr = array_search( strtolower(trim($desc,"NL")), array_map('strtolower',(array)$config ));
+								$attr = array_search( strtolower(rtrim($desc, 'NL')), array_map('strtolower',(array)$config ));
+								//print_r(strtolower(rtrim($desc, 'NL'))); echo ' -> ';
+								//print_r($attr); echo ' -> ';
+								//print_r($place->$attr); echo PHP_EOL;
 								if (!empty($attr)) {
 									$pre_text = $place->$attr;
 									//echo $pre_text . '->' . PHP_EOL;
 									if ( is_string( $pre_text ) ) {
-										$text .= trim($desc,"NL") . ": " . $pre_text . $newline;
+										$text .= rtrim($desc, 'NL') . ": " . $pre_text . $newline;
 									}
 								} else {
 									//$text .= $desc . ': ';
 								}
 								//echo $text . '<br>';
 						}
+
+						//echo $text; die();
 
 						$content->set_text( $text );
 						$content->add();
