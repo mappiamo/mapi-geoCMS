@@ -72,6 +72,7 @@ class MModel_Mxmlimport {
 				
 				$desc_data = explode( ",", $config->description );
 				//print_r($desc_data);
+				//print_r($encdata->xml); die();
 
 				$t = 0;
 				foreach( $encdata->xml as $place ) {
@@ -80,7 +81,8 @@ class MModel_Mxmlimport {
 						//$TheTitle =  $place->{'@attributes'}->nomeufficio;
 						//$TheTitle =  $place->Title;
 						//$TheTitle =  $place->legalName;
-						$TheTitle = $place->Ragione_Sociale;
+						//$TheTitle = $place->Ragione_Sociale;
+						$TheTitle =  $place->legalname;
 						if (empty($TheTitle)) { $TheTitle = 'Empty title ' . ++$t; }
 						$content->set_title( $TheTitle );
 						$content->set_address( $place->Address . ", " . $place->ZIP . ", " . $place->City );
@@ -92,7 +94,7 @@ class MModel_Mxmlimport {
 						//print_r($place);
 						//print_r((array)$config);
 						foreach ( $desc_data as $desc ) {
-							//echo $desc . ' - ';
+								//echo $desc . ' -> ';
 								if ( "NL" == substr( $desc, -2 ) ) {
 										$newline = "<br />";
 								} else {
@@ -108,9 +110,13 @@ class MModel_Mxmlimport {
 									//echo $pre_text . '->' . PHP_EOL;
 									if ( is_string( $pre_text ) ) {
 										$text .= rtrim($desc, 'NL') . ": " . $pre_text . $newline;
+									} else {
+										if (strtolower($desc) == 'desc_only') {
+											$text .= $place->desc_only;
+										}
 									}
 								} else {
-									//$text .= $desc . ': ';
+
 								}
 								//echo $text . '<br>';
 						}
@@ -123,11 +129,24 @@ class MModel_Mxmlimport {
 						$MetaArray = (array)$place;
 						$MetaArray = array_filter($MetaArray);
 
-						//print_r($MetaArray); die();
-						
-						foreach( $MetaArray as $key => $value ) {
+						//print_r($config);
+						//print_r($MetaArray);
+
+						foreach( $config as $key => $value ) {
 								$key = trim($key); $value = trim($value);
-								if ((!empty($key)) && (!empty($value))) {
+								if ((isset($MetaArray[$value])) && ($value != 'desc_only')) {
+										$DescVal = trim($MetaArray[$value]);
+										if ((!empty($DescVal)) && (!empty($key))) {
+												$content->add_meta( $key, $DescVal );
+										}
+								}
+						}
+
+						//die();
+						
+						/* foreach( $MetaArray as $key => $value ) {
+								$key = trim($key); $value = trim($value);
+								if ((!empty($key)) && (!empty($value)) && (strtolower($key) != 'desc_only')) {
 									if ( is_string($key) && ( is_string($value) || is_numeric($value)) ) {
 											$transformedkey = trim($config->$key);
 											if (!empty($transformedkey)) {
@@ -135,7 +154,7 @@ class MModel_Mxmlimport {
 											}
 									}
 								}
-						}
+						} */
 
 						$category->add_content( $content->get_id() );
 //echo $content->get_id();

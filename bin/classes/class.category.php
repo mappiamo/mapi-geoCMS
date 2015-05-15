@@ -207,12 +207,12 @@ class M_Category {
 				if ( ! $category || ! is_object( $category ) ) return null;
 
 				if ( $this->title && MValidate::title( $this->title ) ) $category->title = $this->title;
-				else return mapi_report_message( 'Not a valid category title.' );
+				else return mapi_report_message( 'Not a valid category title: ' . $this->title );
 
 				$category->name = $this->name;
 
 				if ( $new ) {
-						if ( ! mapi_check_double( 'categories', 'name', $this->name ) ) return mapi_report_message( 'Category with that name already exists.' );
+						if ( ! mapi_check_double( 'categories', 'name', $this->name ) ) return mapi_report_message( 'Category with that name already exists: ' . $this->name );
 				}
 
 				$category->contents = $this->save_contents();

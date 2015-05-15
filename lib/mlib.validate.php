@@ -12,14 +12,14 @@ class MValidate {
 
 		static function title( $value ) {
 				if ( ! MValidate::string( $value ) ) return false;
-				if ( preg_match( '/[^a-zA-Z0-9+_éáűúőóüöíÉÁŰŐÚÓÜÖÍèçòàùì£ÈÀÒÙÌñÑ’‘\'\"\-_!?.,:;(){}\[\]\@\#\$\%\&\*\/ ]/s', $value ) ) return false;
+				if ( preg_match( '/[^a-zA-Z0-9+_éáűúőóüöíÉÁŰŐÚÓÜÖÍèçòàùì£ÈÀÒÙÌñÑ’‘\'\"“∞\-_!?.,:;(){}\[\]\@\#\$\%\&\*\/ ]/s', $value ) ) return false;
 
 				return true;
 		}
 
 		static function address( $value ) {
 				if ( ! MValidate::string( $value ) ) return false;
-				if ( preg_match( '/[^a-zA-Z0-9+_éáűúőóüöíÉÁŰŐÚÓÜÖÍèçòàùì£ÈÀÒÙÌñÑ’‘\'\"\-.,:()\&\/ ]/s', $value ) ) return false;
+				if ( preg_match( '/[^a-zA-Z0-9+_éáűúőóüöíÉÁŰŐÚÓÜÖÍèçòàùì£ÈÀÒÙÌñÑ’‘\'\"“∞\-.,:()\&\/ ]/s', $value ) ) return false;
 
 				return true;
 		}
@@ -70,7 +70,7 @@ class MValidate {
 
 		static function meta_value( $value ) {
 				if ( ! MValidate::string( $value ) ) return false;
-				if ( preg_match( '/[^a-zA-Z0-9_+<>éáűúőóüöíÉÁŰŐÚÓÜÖÍèçòàùì£ÈÀÒÙÌñÑ’‘\'\"\-_!?.,:;(){}\[\]\@\#\$\%\&\*\/ ]/s', $value ) ) return false;
+				if ( preg_match( '/[^a-zA-Z0-9_+<>éáűúőóüöíÉÁŰŐÚÓÜÖÍèçòàùì£ÈÀÒÙÌñÑ’‘\'\"“∞\-_!?.,:;(){}\[\]\@\#\$\%\&\*\/ ]/s', $value ) ) return false;
 
 				return true;
 		}
