@@ -5,10 +5,11 @@ defined( 'DACCESS' ) or die;
 
 class MModel_Mxmlimport {
 
-		static function parse_xml() {
+		static function parse_xml($data) {
 				$xml = $_FILES["xml_file"];
 
 				$xml = simplexml_load_file($_FILES["xml_file"]["tmp_name"]);
+				$ini = parse_ini_file($_FILES["ini_file"]["tmp_name"]);
 
 				$XML_objects = array();
 				foreach ($xml->children() as $child) {
@@ -17,11 +18,14 @@ class MModel_Mxmlimport {
 
 				$XML_objects = array_unique($XML_objects);
 
+				//print_r($ini);
+				//print_r( $xml->$XML_objects[0]); die();
+
 				$elements = array();
 				$x = 0;
 				foreach ( $xml->$XML_objects[0] as $element ) {
 					//$geo = self::geocode($element[$x++]->Address . ", " . $element[$x]->ZIP . ", " . $element[$x]->City);
-					$geo = self::geocode($element->Address . ", " . $element->ZIP . ", " . $element->City);
+					$geo = self::geocode($element->$ini['Address'] . ", " . $element->$ini['ZIP'] . ", " . $element->$ini['City']);
 					$element->lat = $geo["lat"];
 					$element->lng = $geo["lng"];
 					$elements[] = $element;
@@ -30,7 +34,7 @@ class MModel_Mxmlimport {
 				return $elements;
 		}
 
-		static function parse_ini() {
+		public function parse_ini() {
 				
 				$ini = parse_ini_file($_FILES["ini_file"]["tmp_name"]);
 				return $ini;
@@ -62,8 +66,13 @@ class MModel_Mxmlimport {
 				
 				$config = $encdata->ini;
 				//print_r($config);
+				//echo $config->legalName; die();
 
 				$cat = $config->category;
+				$TitleName = $config->legalName;
+				$AddressName = $config->Address;
+				$ZipName = $config->ZIP;
+				$CityName = $config->City;
 
 				$category = new M_Category( $cat );
 				$category->set_title( $cat );
@@ -72,20 +81,21 @@ class MModel_Mxmlimport {
 				
 				$desc_data = explode( ",", $config->description );
 				//print_r($desc_data);
+
 				//print_r($encdata->xml); die();
 
 				$t = 0;
 				foreach( $encdata->xml as $place ) {
-						//echo $place->{'@attributes'}->nomeufficio; die();
+						//echo $place->$TitleName; die();
 						$content = MObject::create( 'place' );
 						//$TheTitle =  $place->{'@attributes'}->nomeufficio;
 						//$TheTitle =  $place->Title;
 						//$TheTitle =  $place->legalName;
 						//$TheTitle = $place->Ragione_Sociale;
-						$TheTitle =  $place->legalname;
+						$TheTitle =  $place->$TitleName;
 						if (empty($TheTitle)) { $TheTitle = 'Empty title ' . ++$t; }
 						$content->set_title( $TheTitle );
-						$content->set_address( $place->Address . ", " . $place->ZIP . ", " . $place->City );
+						$content->set_address( $place->$AddressName . ", " . $place->$ZipName . ", " . $place->$CityName );
 						$content->set_lat( $place->lat );
 						$content->set_lng( $place->lng );
 						$content->set_license( 2 );
