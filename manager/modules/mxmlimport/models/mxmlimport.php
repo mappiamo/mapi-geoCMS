@@ -18,9 +18,6 @@ class MModel_Mxmlimport {
 
 				$XML_objects = array_unique($XML_objects);
 
-				//print_r($ini);
-				//print_r( $xml->$XML_objects[0]); die();
-
 				$elements = array();
 				$x = 0;
 				foreach ( $xml->$XML_objects[0] as $element ) {
@@ -65,11 +62,9 @@ class MModel_Mxmlimport {
 				$encdata = json_decode( base64_decode( $data ) );
 				
 				$config = $encdata->ini;
-				//print_r($config);
-				//echo $config->legalName; die();
 
 				$cat = $config->category;
-				$TitleName = $config->legalName;
+				$TitleName = $config->Title;
 				$AddressName = $config->Address;
 				$ZipName = $config->ZIP;
 				$CityName = $config->City;
@@ -77,22 +72,14 @@ class MModel_Mxmlimport {
 				$category = new M_Category( $cat );
 				$category->set_title( $cat );
 				$category->add();
-				
-				
-				$desc_data = explode( ",", $config->description );
-				//print_r($desc_data);
 
-				//print_r($encdata->xml); die();
+				$desc_data = explode( ",", $config->description );
 
 				$t = 0;
 				foreach( $encdata->xml as $place ) {
-						//echo $place->$TitleName; die();
 						$content = MObject::create( 'place' );
-						//$TheTitle =  $place->{'@attributes'}->nomeufficio;
-						//$TheTitle =  $place->Title;
-						//$TheTitle =  $place->legalName;
-						//$TheTitle = $place->Ragione_Sociale;
 						$TheTitle =  $place->$TitleName;
+						if (empty($TheTitle)) { $TheTitle =  $place->{'@attributes'}->$TitleName; }
 						if (empty($TheTitle)) { $TheTitle = 'Empty title ' . ++$t; }
 						$content->set_title( $TheTitle );
 						$content->set_address( $place->$AddressName . ", " . $place->$ZipName . ", " . $place->$CityName );
@@ -100,11 +87,7 @@ class MModel_Mxmlimport {
 						$content->set_lng( $place->lng );
 						$content->set_license( 2 );
 						$text = "";
-						//print_r($desc_data); die();
-						//print_r($place);
-						//print_r((array)$config);
 						foreach ( $desc_data as $desc ) {
-								//echo $desc . ' -> ';
 								if ( "NL" == substr( $desc, -2 ) ) {
 										$newline = "<br />";
 								} else {
@@ -112,12 +95,8 @@ class MModel_Mxmlimport {
 								}
 
 								$attr = array_search( strtolower(rtrim($desc, 'NL')), array_map('strtolower',(array)$config ));
-								//print_r(strtolower(rtrim($desc, 'NL'))); echo ' -> ';
-								//print_r($attr); echo ' -> ';
-								//print_r($place->$attr); echo PHP_EOL;
 								if (!empty($attr)) {
 									$pre_text = $place->$attr;
-									//echo $pre_text . '->' . PHP_EOL;
 									if ( is_string( $pre_text ) ) {
 										$text .= rtrim($desc, 'NL') . ": " . $pre_text . $newline;
 									} else {
@@ -128,19 +107,13 @@ class MModel_Mxmlimport {
 								} else {
 
 								}
-								//echo $text . '<br>';
 						}
-
-						//echo $text; die();
 
 						$content->set_text( $text );
 						$content->add();
 
 						$MetaArray = (array)$place;
 						$MetaArray = array_filter($MetaArray);
-
-						//print_r($config);
-						//print_r($MetaArray);
 
 						foreach( $config as $key => $value ) {
 								$key = trim($key); $value = trim($value);
@@ -152,34 +125,10 @@ class MModel_Mxmlimport {
 								}
 						}
 
-						//die();
-						
-						/* foreach( $MetaArray as $key => $value ) {
-								$key = trim($key); $value = trim($value);
-								if ((!empty($key)) && (!empty($value)) && (strtolower($key) != 'desc_only')) {
-									if ( is_string($key) && ( is_string($value) || is_numeric($value)) ) {
-											$transformedkey = trim($config->$key);
-											if (!empty($transformedkey)) {
-												$content->add_meta( $transformedkey, $value );
-											}
-									}
-								}
-						} */
-
 						$category->add_content( $content->get_id() );
-//echo $content->get_id();
-//var_dump( $category );
-						
 				}
 				
 				$category->update();
-//var_dump($category);
-				//echo "<pre>";
-				//print_r( (array)$config );
-				//echo "</pre>";
-
-				
-				
 				return true;
 		}
 
