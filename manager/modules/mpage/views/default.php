@@ -19,7 +19,7 @@ defined( 'DACCESS' ) or die;
 
 <?php MMessaging::show(); ?>
 
-<?php	
+<?php
 
 		MTable::init( $data, 'pages_list' );
 		MTable::columns( array( 'id', 'title', 'type', 'modified', 'enabled' ) );

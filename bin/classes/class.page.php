@@ -149,11 +149,11 @@ class M_Page {
 
 		private function read( $id ) {
 				if ( ! $id ) return null;
-				
+
 				$page = ORM::for_table( 'pages' )->where( 'id', intval( $id ) )->find_one();
 
 				if ( ! $page ) return null;
-				
+
 				if ( $page->id ) $this->set_id( $page->id );
 				if ( $page->name ) $this->set_name( $page->name );		
 				if ( $page->title ) $this->set_title( $page->title );
@@ -162,8 +162,8 @@ class M_Page {
 				if ( $page->createdby ) $this->createdby = $page->createdby;
 				if ( $page->modified ) $this->modified = $page->modified;
 				if ( $page->modifiedby ) $this->modifiedby = $page->modifiedby;
-				if ( $page->enabled && 1 == $page->enabled ) $this->enabled = 1;
-				else $this->enabled = 0;
+				if ( $page->enabled && 1 == $page->enabled ) $this->enabled = 1; else $this->enabled = 0;
+				if ( $page->blank && 1 == $page->blank ) $this->blank = 1; else $this->blank = 0;
 		}
 
 		private function setup_object( $page, $newpage = false ) {

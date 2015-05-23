@@ -255,7 +255,7 @@ abstract class M_Record {
 		protected function read_record( $id = null, $type = null ) {
 				if ( ! $id ) return null;
 				if ( ! $type ) return null;
-				
+
 				$record = ORM::for_table( 'contents' )->where( 'id', intval( $id ) )->where( 'type', strval( $type ) )->find_one();
 				
 				if ( ! $record ) return null;
@@ -288,8 +288,6 @@ abstract class M_Record {
 
 		private function setup_object( $record, $new = false ) {
 				if ( ! $record || ! is_object( $record ) ) return null;
-
-			//print_r($record->title); die();
 
 				if ( $this->title && MValidate::title( $this->title ) ) $record->title = $this->title;
 				else return mapi_report_message( 'Not a valid content title: ' . $this->title );

@@ -12,7 +12,7 @@ class MObject {
 
 				if ( 'content' != $object ) $class = 'M_' . ucfirst( $object );
 				else $class = 'M_' . ucfirst( self::find_type( $id ) );
-				
+
 				if ( class_exists( $class ) ) return new $class( $id );
 				else return null;
 		}

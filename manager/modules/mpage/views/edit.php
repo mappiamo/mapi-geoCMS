@@ -113,7 +113,7 @@ defined( 'DACCESS' ) or die;
 										<div class="panel panel-default">
 												<div class="panel-heading">Open</div>
 												<div class="panel-body">
-														<input type="checkbox" name="page_on_blank" id="page_on_blank" <?php if ( $data->blank ) echo 'checked="checked"'; ?> value="1" />
+														<input type="checkbox" name="page_on_blank" id="page_on_blank" <?php if ( 1 == $data->blank ) echo 'checked="checked"'; ?> value="1" />
 														<label>open in a blank page</label>
 												</div>
 										</div>

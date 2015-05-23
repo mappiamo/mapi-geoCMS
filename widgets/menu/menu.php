@@ -19,11 +19,13 @@ function mwidget_menu( $menu_id, $class = null, $id = null ) {
 						?>
 								<ul<?php echo $class; ?><?php echo $id; ?>>
 										<?php foreach ( $pages as $page ): ?>
-												<li>
-														<a href="<?php MPut::_link( $page->get_url() ); ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
-																<?php MPut::_html( $page->get_title() ); ?>
-														</a>
-												</li>
+												<?PHP if (($page->is_enabled()) == 1) { ?>
+														<li>
+																<a href="<?php MPut::_link( $page->get_url() ); ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
+																		<?php MPut::_html( $page->get_title() ); ?>
+																</a>
+														</li>
+												<?PHP } ?>
 										<?php endforeach; ?>
 								</ul>
 						<?php

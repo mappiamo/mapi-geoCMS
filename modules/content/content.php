@@ -10,13 +10,14 @@ class MModule_Content extends M_Module {
 		
 		public function content() {
 				$task = $this->get_task();
-				
+
 				if ( ! $task ) {
 						//getting language
 						$language = new M_Language;
 						$lang = $language->getLanguage();
 
 						$this->content = MObject::get( 'content', $this->get_object() );
+						//print_r($this->content); die();
 						
 						if( $lang == $this->content->get_language() ) {
 								//var_dump($lang); die();//megfelel a nyelv, kiolvassuk.
@@ -29,9 +30,15 @@ class MModule_Content extends M_Module {
 						}
 						
 						
+
 						if ( $this->content ) {
 								global $content;
 								$content = $this->content;
+
+								if ($this->content->is_enabled() == FALSE) {
+									header( 'Location: index.php?module=page404' );
+									exit( 0 );
+								}
 
 								global $coords;
 								$coords['lat'] = $this->content->get_lat();
