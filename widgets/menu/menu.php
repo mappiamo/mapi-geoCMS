@@ -14,25 +14,26 @@ function mwidget_menu( $menu_id, $class = null, $id = null ) {
 
 		if ( $menu ) {
 				$pages = $menu->get_pages();
-			//print_r(MObject::get( 'content', intval( 245 ) )); die();
+				//print_r($pages); die();
 
 				if ( sizeof( $pages ) > 0 ) {
 						$ContentEnabled = NULL;
 						?>
 								<ul<?php echo $class; ?><?php echo $id; ?>>
 										<?php foreach ( $pages as $page ): ?>
-											<?PHP $TheLink = $page->get_url();
-												$ContentID = substr(strrchr($TheLink, '='), 1);
-												if (($ContentID) > 0) {
-													$content = MObject::get( 'content', intval( $ContentID ));
-													$ContentEnabled = ($content->is_enabled());
-												} else {
-													$ContentEnabled = 1;
-												}
-											?>
+												<?PHP $TheLink = $page->get_url();
+														$ContentID = substr(strrchr($TheLink, '='), 1);
+														if (($ContentID) > 0) {
+																$content = MObject::get( 'content', intval( $ContentID ));
+																$ContentEnabled = ($content->is_enabled());
+														} else {
+																$ContentEnabled = 1;
+														}
+												?>
 												<?PHP if ((($page->is_enabled()) == 1) && ($ContentEnabled == 1)) { ?>
+												<?PHP if ($page->page_on_blank() == TRUE) { $TargetString = '_blank'; } else { $TargetString = '_self'; } ?>
 														<li>
-																<a href="<?php MPut::_link( $page->get_url() ); ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
+																<a href="<?php MPut::_link( $page->get_url() ); ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
 																		<?php MPut::_html( $page->get_title() ); ?>
 																</a>
 														</li>
