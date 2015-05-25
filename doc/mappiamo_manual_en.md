@@ -66,13 +66,13 @@ Reading content from database
 The framework read the content with this method:
 ```http://www.mappiamo.org//index.php?module=[module name]&object=[content id]```
 so:
-```http://www.mappiamo.org//index.php?module=content&object=252```
+http://www.mappiamo.org//index.php?module=content&object=252
 where the value of module called ```content``` is on the path ```/modules/content/```, reads row from the database where the id value is 252. The database table called 'Content' contains 21 columns, the content stored on column called 'text'.
 The default content display by a module called 'home', which refer to a database table called 'content' ’s default row. The default module (called home) is selected from the database table called 'modules'. It should be set to 1 the line containing the name of the module ('name' column) 'default_module' column.
 So:
-```http://mappiamo.org/index.php?module=home```
+http://mappiamo.org/index.php?module=home
 is equivalent to:
-```http://mappiamo.org/```
+http://mappiamo.org/
 because the default setting in the table ‘module’ is the row where the module name is ‘home’.
 
 SEO link by .htaccess URL rewrite method
@@ -80,11 +80,11 @@ SEO link by .htaccess URL rewrite method
 If .htaccess rewite used on the server root, the link to access content can be possible with SEO friendly URL. The URL syntax is:
 ```http://www.mappiamo.org/[controller name]/[content ID]/[parameters]```
 For example:
-If the original URL is: ```http://www.mappiamo.org/index.php?module=content&object=931```
+If the original URL is: http://www.mappiamo.org/index.php?module=content&object=931
 The rewritten SEO friendly url is: ```http://www.mappiamo.org/content/931```
 where ```content``` is the module (controller) name, ```931``` is the ID of the content in the database table ```contents``` (column name ```id```).
 Same method can be user to read category:
-```http://www.mappiamo.org/category/1```
+http://www.mappiamo.org/category/1
 where the number ```1``` after ```category``` is the category ID in the database table ```category```.
 The rewritten and the regular URL can be used both to access content. If SEO friendly URL required within full site, this method have to be used on the MVC View (HTML) code.
 
@@ -93,21 +93,26 @@ Creating cutom modules
 The custom modules displays a kind content that allow different displays as the default. These include for example different information, contact us. If you want to do this, you will need to create custom modules.
 The path for these custom modules is the subdirectories of ```modules``` directory. For example the path for the custom content is ```modules/custom_content```.
 Modules may be a bit more complicated than the widget, but greater benefits than the widget.
+
 The developed module has to be made in the MVC system. Subdirectories under the MVC system should be set up accordingly:
-```modules/content/models```
-```modules/content/view```
+modules/content/models
+modules/content/view
+
 The Controller of the MVC modules in the root directory of the module, the module has the same name as the controller:
-```modules/content/content.php```
+modules/content/content.php
 The models are in the folder ‘models’, the folder ‘view’ contains the MVC view, which defines the module display.
 The MVC controller, which has the same name as the root directory of the module, the MVC controller file calls the view and the model functions as follows:
 ```$This-> model("name_model", $parameters) ``` call model from the controller
 ```$This-> view("name_view", $data) ``` call view from the controller
+
 The functional modules available later via URL links. For example, if the name of the module 'accessibility', the following links to be called:
-```http://www.mappiamo.org/?Module=accessbility&parameter=value```
+http://www.mappiamo.org/?Module=accessbility&parameter=value
+
 The module content can be accessed by friendly URL if required:
-```http://www.mappiamo.org/[module_name]/[parameter_value]```
-```http://www.mappiamo.org/accessbility/parametervalue```
+http://www.mappiamo.org/[module_name]/[parameter_value]
+Eg: http://www.mappiamo.org/accessbility/parametervalue
 The other possibility is that the module will decide what will appear on the site.
+
 If required an administrative interface for the module, then it must be created as a special module of the admin interface:
 Example: ```manager/modules/mcontent```
 The HTML input fields can be inserted to the Mappiamo content.
