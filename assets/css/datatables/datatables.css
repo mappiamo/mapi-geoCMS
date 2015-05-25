@@ -15,7 +15,7 @@ div.dataTables_filter {
 	position: absolute;
 	margin-top: -31px;
 	margin-left: -254px;
-	width: 220px;
+	/* width: 220px; */
 }
 div.dataTables_filter label {
 	float: right;
