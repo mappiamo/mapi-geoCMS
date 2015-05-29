@@ -20,16 +20,42 @@ defined( 'DACCESS' ) or die;
 class Mappiamo {
 
 		public function __construct() {
-				if ( MValidate::address( MSettings::$location ) ) {
-						global $geocoder;
+
+			$SysConf = new MSettings();
+
+				if (is_array($SysConf::$coords)) {
 						global $coords;
 
-						try {
-								$geocode = $geocoder->geocode( MSettings::$location );
+						$coords['lat'] = $SysConf::$coords['lat'];
+						$coords['lng'] = $SysConf::$coords['lng'];
+
+				} elseif (isset($SysConf::$location)) {
+						if ( MValidate::address( $SysConf::$location ) ) {
+							global $geocoder;
+							global $coords;
+
+							try {
+								$geocode = $geocoder->geocode( $SysConf::$location );
 								$coords['lat'] = $geocode->getLatitude();
 								$coords['lng'] = $geocode->getLongitude();
-						} catch( Exception $e ) {
+							} catch( Exception $e ) {
 
+							}
+						}
+
+				} else {
+
+						if ( MValidate::address( MSettings::$location ) ) {
+								global $geocoder;
+								global $coords;
+
+								try {
+										$geocode = $geocoder->geocode( MSettings::$location );
+										$coords['lat'] = $geocode->getLatitude();
+										$coords['lng'] = $geocode->getLongitude();
+								} catch( Exception $e ) {
+
+								}
 						}
 				}
 

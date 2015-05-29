@@ -16,6 +16,12 @@ defined( 'DACCESS' ) or die;
 		);
 
 		$licenses = mapi_list( 'licenses', array( 'status' => 'enabled' ) );
+		$SysConf = new MSettings();
+		if (isset($SysConf::$location)) {
+			$DefaultLoc = $SysConf::$location;
+		} else {
+			$DefaultLoc = $data->address;
+		}
 ?>
 
 <?php MHTML::breadcrumb( $crumbs ); ?>
@@ -36,7 +42,7 @@ defined( 'DACCESS' ) or die;
 									<br />
 									<div class="input-group">
 											<span class="input-group-addon">Address</span>
-											<input type="text" name="content_address" class="form-control" id="content_address" placeholder="Search for and address first" value="<?php MPut::_html_attr( $data->address ); ?>" />
+											<input type="text" name="content_address" class="form-control" id="content_address" placeholder="Search for and address first" value="<?php MPut::_html_attr( $DefaultLoc ); ?>" />
 									</div>
 
 									<br />
@@ -49,7 +55,7 @@ defined( 'DACCESS' ) or die;
 
 											var mmap = new MMap();
 											mmap.set_lat( <?php MPut::_numeric( $coords['lat'] ) ?> );
-	                        				mmap.set_lng( <?php MPut::_numeric( $coords['lng'] ) ?> );
+	                    mmap.set_lng( <?php MPut::_numeric( $coords['lng'] ) ?> );
 											mmap.create_map( 'mmap' );
 											mmap.create_marker( true );
 
@@ -168,11 +174,11 @@ defined( 'DACCESS' ) or die;
 											<div class="panel-body">
 													<div class="form-group">
 															<label>Latitude</label>
-															<input type="text" name="content_lat" class="form-control input-sm" id="content_lat" value="<?php MPut::_html_attr( $data->lat ); ?>" />
+															<input type="text" name="content_lat" class="form-control input-sm" id="content_lat" value="<?php MPut::_html_attr( $coords['lat'] ); ?>" />
 													</div>
 													<div class="form-group">
 															<label>Longitude</label>
-															<input type="text" name="content_lng" class="form-control input-sm" id="content_lng" value="<?php MPut::_html_attr( $data->lng ); ?>" />
+															<input type="text" name="content_lng" class="form-control input-sm" id="content_lng" value="<?php MPut::_html_attr( $coords['lng'] ); ?>" />
 													</div>
 											</div>
 									</div>

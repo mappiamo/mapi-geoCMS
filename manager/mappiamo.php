@@ -8,18 +8,43 @@ class Mappiamo {
 	public function __construct() {
 			MMessaging::init();
 
-			if ( MValidate::address( MSettings::$location ) ) {
-					global $geocoder;
-					global $coords;
+			$SysConf = new MSettings();
 
-					try {
-							$geocode = $geocoder->geocode( MSettings::$location );
-							$coords['lat'] = $geocode->getLatitude();
-							$coords['lng'] = $geocode->getLongitude();
-					} catch( Exception $e ) {
-					
-					}
+		if (is_array($SysConf::$coords)) {
+			global $coords;
+
+			$coords['lat'] = $SysConf::$coords['lat'];
+			$coords['lng'] = $SysConf::$coords['lng'];
+
+		} elseif (isset($SysConf::$location)) {
+			if ( MValidate::address( $SysConf::$location ) ) {
+				global $geocoder;
+				global $coords;
+
+				try {
+					$geocode = $geocoder->geocode( $SysConf::$location );
+					$coords['lat'] = $geocode->getLatitude();
+					$coords['lng'] = $geocode->getLongitude();
+				} catch( Exception $e ) {
+
+				}
 			}
+
+		} else {
+
+			if ( MValidate::address( MSettings::$location ) ) {
+				global $geocoder;
+				global $coords;
+
+				try {
+					$geocode = $geocoder->geocode( MSettings::$location );
+					$coords['lat'] = $geocode->getLatitude();
+					$coords['lng'] = $geocode->getLongitude();
+				} catch( Exception $e ) {
+
+				}
+			}
+		}
 
 			$routing = new M_Route();
 

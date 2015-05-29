@@ -51,13 +51,57 @@ defined( 'DACCESS' ) or die;
 														    	</div>
 														</div>
 														<div class="form-group">
-														    	<label for="website_email" class="control-label">Notification emails to <small>(for exmaple when someone registers)</small></label>
+														    	<label for="website_email" class="control-label">Notification emails to <small>(for example when someone registers)</small></label>
 														    	<div>
 														      			<input type="text" name="website_email" class="form-control" id="website_email" value="<?php MPut::_html_attr( $data['website_email'] ); ?>" />
 														    	</div>
 														</div>
 
-														<br />
+														<hr>
+
+														<div class="form-group">
+															<label for="website_name" class="control-label">Website name</label>
+															<div>
+																<input type="text" name="website_name" class="form-control" id="website_name" value="<?php if (isset($data['website_name'])) { MPut::_html_attr( $data['website_name'] ); } ?>" />
+															</div>
+														</div>
+
+													<div class="form-group">
+														<label for="website_name" class="control-label">Domain</label>
+														<div>
+															<input type="text" name="domain" class="form-control" id="domain" value="<?php if (isset($data['domain'])) { MPut::_html_attr( $data['domain'] ); } ?>" />
+														</div>
+													</div>
+
+													<hr>
+
+													<div class="form-group">
+														<label for="website_name" class="control-label">Default location (Address, City, Country…)</label>
+														<div>
+															<input type="text" name="location" class="form-control" id="location" value="<?php if (isset($data['location'])) { MPut::_html_attr( $data['location'] ); } ?>" />
+														</div>
+
+														<script type="text/javascript">
+															var mmap1 = new MMap();
+															mmap1.address_search();
+														</script>
+													</div>
+
+													<div class="form-group">
+														<label for="website_name" class="control-label">Default Latitude</label>
+														<div>
+															<input type="text" name="DefaultLatitude" class="form-control" id="DefaultLatitude" value="<?php if (isset($data['DefaultLatitude'])) { MPut::_html_attr( $data['DefaultLatitude'] ); } ?>" />
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="website_name" class="control-label">Default Longitude</label>
+														<div>
+															<input type="text" name="DefaultLongitude" class="form-control" id="DefaultLongitude" value="<?php if (isset($data['DefaultLongitude'])) { MPut::_html_attr( $data['DefaultLongitude'] ); } ?>" />
+														</div>
+													</div>
+
+													<br />
 
 														<h4>Registration</h4>
 														<div class="radio">

@@ -54,7 +54,12 @@ class MModel_Preferences {
 						'registration',
 						'new_user_default_group',
 						'facebook_app_id',
-						'facebook_secret'
+						'facebook_secret',
+						'website_name',
+						'domain',
+						'location',
+						'DefaultLatitude',
+						'DefaultLongitude'
 				);
 
 				foreach ( $preference_keys as $key ) {

@@ -129,6 +129,26 @@ function MMap() {
                 map = this.map;
                 marker = this.marker;
 
+                $( '#location' ).focusout( function(){
+                        if ( ! $( '#location' ).val() ) return null;
+
+                        var module = 'majax';
+
+                        var url = 'index.php?module=' + module + '&task=geocode';
+                        url += '&address=' + $( '#location' ).val();
+                        url += '&mapi_csrf=' + encodeURIComponent( $( '#mapi_csrf' ).val() );
+
+                        $.ajax( { url: url, dataType: "json" } ).done( function( result ) {
+                                if ( result.status === 'OK' ) {
+                                        if ( $( '#DefaultLatitude' ) ) $( '#DefaultLatitude' ).val( result.lat );
+                                        if ( $( '#DefaultLongitude' ) ) $( '#DefaultLongitude' ).val( result.lng );
+                                } else {
+                                        alert( 'Address not found!' );
+                                }
+                        });
+
+                });
+
                 $( '#content_address' ).focusout( function(){
                         if ( ! $( '#content_address' ).val() ) return null;
 
@@ -139,20 +159,20 @@ function MMap() {
                         url += '&address=' + $( '#content_address' ).val();
                         url += '&mapi_csrf=' + encodeURIComponent( $( '#mapi_csrf' ).val() );
 
-			if ( '#address_button' ) $( '#address_button' ).html( 'Searching ...' );
+                        if ( '#address_button' ) $( '#address_button' ).html( 'Searching ...' );
 
-                        $.ajax( { url: url, dataType: "json" } ).done( function( result ) {
-                                if ( result.status === 'OK' ) {
-                                        if ( $( '#content_lat' ) ) $( '#content_lat' ).val( result.lat );
-                                        if ( $( '#content_lat' ) ) $( '#content_lng' ).val( result.lng );
-                                        map.panTo( [result.lat, result.lng] );
-                                        marker.setLatLng( [result.lat, result.lng] );
-                                } else {
-                                        alert( 'Address not found!' );
-                                }
-                        } ).done( function() {
-				if ( '#address_button' ) $( '#address_button' ).html( 'Go!' );
-			} );
+                                $.ajax( { url: url, dataType: "json" } ).done( function( result ) {
+                                        if ( result.status === 'OK' ) {
+                                                if ( $( '#content_lat' ) ) $( '#content_lat' ).val( result.lat );
+                                                if ( $( '#content_lat' ) ) $( '#content_lng' ).val( result.lng );
+                                                map.panTo( [result.lat, result.lng] );
+                                                marker.setLatLng( [result.lat, result.lng] );
+                                        } else {
+                                                alert( 'Address not found!' );
+                                        }
+                                } ).done( function() {
+                                    if ( '#address_button' ) $( '#address_button' ).html( 'Go!' );
+                                } );
                 } );
         }
 
