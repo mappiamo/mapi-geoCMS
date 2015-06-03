@@ -25,14 +25,16 @@ function mapi_url_current() {
 function mapi_install_url() {
 		$mapi_install_url = '';
 
-		$rpath = preg_replace( '/\/manager/', '', RPATH );
+		/* $rpath = preg_replace( '/\/manager/', '', RPATH );
 
 		$url = mapi_url_current();
 
 		$mapi_install_url .= $url['protocol'] . '://';
 		$mapi_install_url .= $url['host'] . '';
 		if ( '80' != $url['port'] ) $mapi_install_url .= ':' . $url['port'];
-		if ( strlen( $rpath ) > 0 ) $mapi_install_url .= $rpath;
+		if ( strlen( $rpath ) > 0 ) $mapi_install_url .= $rpath; */
+
+		$mapi_install_url = str_replace("/manager", "", rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\'));
 
 		return $mapi_install_url . '/';
 }
