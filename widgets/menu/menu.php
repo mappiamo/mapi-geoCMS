@@ -29,11 +29,22 @@ function mwidget_menu( $menu_id, $class = null, $id = null ) {
 														} else {
 																$ContentEnabled = 1;
 														}
+
+													//	echo substr(strrchr($TheLink, '/'), 0);
+														if (strrpos($TheLink, '/', 8)) {
+															$TheLinkRoot = substr($TheLink, 0, strrpos($TheLink, '/', 8));
+														} else {
+															$TheLinkRoot = $TheLink;
+														}
+											//echo strrpos($TheLink, '/', 7);
+														$TheServerRoot = str_replace("/manager", "", rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\'));
+														$TheRealLink = str_replace($TheLinkRoot, $TheServerRoot, $TheLink);
 												?>
 												<?PHP if ((($page->is_enabled()) == 1) && ($ContentEnabled == 1)) { ?>
 												<?PHP if ($page->page_on_blank() == TRUE) { $TargetString = '_blank'; } else { $TargetString = '_self'; } ?>
 														<li>
-																<a href="<?php MPut::_link( $page->get_url() ); ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
+
+																<a href="<?php echo $TheRealLink; //MPut::_link( $page->get_url() ); ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
 																		<?php MPut::_html( $page->get_title() ); ?>
 																</a>
 														</li>
