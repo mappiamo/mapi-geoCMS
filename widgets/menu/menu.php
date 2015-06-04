@@ -25,18 +25,21 @@ function mwidget_menu( $menu_id, $class = null, $id = null ) {
 														$ContentID = substr(strrchr($TheLink, '='), 1);
 														if (($ContentID) > 0) {
 																$content = MObject::get( 'content', intval( $ContentID ));
-																$ContentEnabled = ($content->is_enabled());
+																if (is_object($content)) {
+																	$ContentEnabled = ($content->is_enabled());
+																} else {
+																	$content = MObject::get( 'category', intval( $ContentID ));
+																	$ContentEnabled = ($content->is_enabled());
+																}
 														} else {
 																$ContentEnabled = 1;
 														}
 
-													//	echo substr(strrchr($TheLink, '/'), 0);
 														if (strrpos($TheLink, '/', 8)) {
 															$TheLinkRoot = substr($TheLink, 0, strrpos($TheLink, '/', 8));
 														} else {
 															$TheLinkRoot = $TheLink;
 														}
-											//echo strrpos($TheLink, '/', 7);
 														$TheServerRoot = str_replace("/manager", "", rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\'));
 														$TheRealLink = str_replace($TheLinkRoot, $TheServerRoot, $TheLink);
 												?>
