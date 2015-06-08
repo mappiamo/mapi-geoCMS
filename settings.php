@@ -8,6 +8,7 @@ class MSettings{
 	    static $sitename = 'Your Site Name';
 	    static $domain = 'mappiamo.com';
 	    static $location = 'address, zip, city';
+	    	static $coords = array();
 
 	    static $c_key = 'sadqasdgfasdgaf';
 	    
