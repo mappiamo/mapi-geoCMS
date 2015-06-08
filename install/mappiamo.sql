@@ -297,6 +297,11 @@ INSERT INTO `preferences` (`id`, `name`, `value`) VALUES
 (10, 'facebook_secret', '2f8e52496f1efdce948de72383814d4c'),
 (11, 'registration', 'yes'),
 (12, 'default_language', 'it');
+(13, 'domain', 'mappiamo');
+(14, 'website_name', '#mappiamo');
+(15, 'location', 'Lecce');
+(16, 'DefaultLatitude', '40.3570373');
+(17, 'DefaultLongitude', '18.1718482');
 
 -- --------------------------------------------------------
 
