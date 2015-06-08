@@ -14,7 +14,6 @@ function mwidget_menu( $menu_id, $class = null, $id = null ) {
 
 		if ( $menu ) {
 				$pages = $menu->get_pages();
-				//print_r($pages); die();
 
 				if ( sizeof( $pages ) > 0 ) {
 						$ContentEnabled = NULL;
