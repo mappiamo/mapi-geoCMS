@@ -24,12 +24,14 @@ function mwidget_menu( $menu_id, $class = null, $id = null ) {
 														$ContentID = substr(strrchr($TheLink, '='), 1);
 														if (($ContentID) > 0) {
 																$content = MObject::get( 'content', intval( $ContentID ));
+
 																if (is_object($content)) {
 																	$ContentEnabled = ($content->is_enabled());
 																} else {
 																	$content = MObject::get( 'category', intval( $ContentID ));
 																	$ContentEnabled = ($content->is_enabled());
 																}
+
 														} else {
 																$ContentEnabled = 1;
 														}
