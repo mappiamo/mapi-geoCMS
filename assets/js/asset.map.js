@@ -95,23 +95,23 @@ function MMap() {
 
                                         if ( marker === null ) continue;
 
-                                        var mcontent = "";
-                                        mcontent += "</h3>" + data[i].title + "</h3>";
-                                        mcontent += "<p>" + data[i].text + "</p>";
+                                        // var mcontent = "";
+                                        // mcontent += "</h3>" + data[i].title + "</h3>";
+                                        // mcontent += "<p>" + data[i].text + "</p>";
 
-                                        marker.bindPopup( mcontent );
+                                        // marker.bindPopup( mcontent );
 
                                         this.markers.push( marker );
 
-                                        //marker.content = new Object();
-                                        //if ( data[i].title !== undefined ) marker.content.title = data[i].title;
-                                        //if ( data[i].text !== undefined ) marker.content.text = data[i].text;
+                                        marker.content = new Object();
+                                        if ( data[i].title !== undefined ) marker.content.title = data[i].title;
+                                        if ( data[i].text !== undefined ) marker.content.text = data[i].text;
 
-                                        //marker.on( 'click', function( e ) {
-                                        //        $( '#mmap_modal_title' ).html( this.content.title );
-                                        //        $( '#mmap_modal_body' ).html( this.content.text );
-                                        //        $( '#mmap_modal' ).modal( 'show' );
-                                        //} );
+                                        marker.on( 'click', function( e ) {
+                                                $( '#mmap_modal_title' ).html( this.content.title );
+                                                $( '#mmap_modal_body' ).html( this.content.text );
+                                                $( '#mmap_modal' ).modal( 'show' );
+                                        } );
                                 }
                         }
                 } );
