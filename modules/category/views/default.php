@@ -9,7 +9,7 @@ $page_title = $data[1];
 <div class="col-md-12">
 		<div class="row main-title">
 				<div class="col-xs-12">
-						<h1 class="content-title"><span itemprop="name"><?php MPut::_html( $page_title ); ?></span></h1>
+						<!-- <h1 class="content-title"><span itemprop="name"><?php //MPut::_html( $page_title ); ?></span></h1> -->
 				</div>
 		</div>
 
@@ -26,7 +26,7 @@ $page_title = $data[1];
 										<div class="row main-header">
 												<div class="row content-title">
 														<div class="col-md-12">
-																<h3><?php MPut::_html( $content->get_title() ); ?></h3>
+																<h3><a href="index.php?module=content&object=<?php echo intval( $content->get_id() ); ?>"><?php MPut::_html( $content->get_title() ); ?></a></h3>
 														</div>
 												</div>
 												<div class="row content-text">
@@ -34,11 +34,11 @@ $page_title = $data[1];
 																<p><?php echo $text_array[0]; ?> ... </p>
 														</div>
 												</div>
-												<div class="row content-text">
+												<!-- <div class="row content-text">
 														<div class="col-md-12">
-																<a href="index.php?module=content&object=<?php echo intval( $content->get_id() ); ?>"><?php __('Leggi tutto'); ?>&nbsp;&gt;</a>
+																<a href="index.php?module=content&object=<?php //echo intval( $content->get_id() ); ?>"><?php //__('Leggi tutto'); ?>&nbsp;&gt;</a>
 														</div>
-												</div>
+												</div> -->
 										</div>
         						<?php
         				}

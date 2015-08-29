@@ -26,7 +26,7 @@ class MModel_Content {
 		static function display_place( $place ) {
 				?>
 						<div itemscope itemtype="http://schema.org/Place">
-								<h1 class="content-title"><span itemprop="name"><?php MPut::_html( $place->get_title() ); ?></span></h1>
+								<h1 class="content-title"><span itemprop="name"><?php //MPut::_html( $place->get_title() ); ?></span></h1>
 
 								<?php self::content_props( $place ); ?>
 								
@@ -44,7 +44,7 @@ class MModel_Content {
 		static function display_event( $event ) {
 				?>
 						<div itemscope itemtype="http://schema.org/Event">
-								<h1 class="content-title"><span itemprop="name"><?php MPut::_html( $event->get_title() ); ?></span></h1>
+								<h1 class="content-title"><span itemprop="name"><?php //MPut::_html( $event->get_title() ); ?></span></h1>
 
 								<?php self::content_props( $event ); ?>
 								
@@ -52,10 +52,10 @@ class MModel_Content {
 										<div class="content-dates">
 												<meta itemprop="startDate" content="<?php MPut::_html_attr( date_format( new Datetime( $event->get_start() ), 'Y-m-dTH:i' ) ); ?>">
 												<meta itemprop="endDate" content="<?php MPut::_html_attr( date_format( new Datetime( $event->get_end() ), 'Y-m-dTH:i' ) ); ?>">
-												<h5>
+												<!-- <h5>
 														<span class="glyphicon glyphicon-circle-arrow-right"></span> <?php MPut::_html_attr( date_format( new Datetime( $event->get_start() ), 'Y-m-d H:i' ) ); ?>&nbsp;
 														<span class="glyphicon glyphicon-circle-arrow-left"></span> <?php MPut::_html_attr( date_format( new Datetime( $event->get_end() ), 'Y-m-d H:i' ) ); ?>
-												</h5>
+												</h5> -->
 										</div>
 										<?php MPut::_text( $event->get_text() ); ?>
 								</div>

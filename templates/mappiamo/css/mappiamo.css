@@ -3,6 +3,11 @@ body {
         color: #5a5a5a;
 }
 
+#mmap {
+    width: 100%;
+    height: 100%;
+}
+
 .navbar-wrapper {
         position: absolute;
         z-index: 6;

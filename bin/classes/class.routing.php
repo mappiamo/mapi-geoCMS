@@ -3,7 +3,7 @@
 // no direct access to this file
 defined( 'DACCESS' ) or die;
 
-class M_Route {
+class M_URLRouter {
 
 	private $router;
 	private $module = null;

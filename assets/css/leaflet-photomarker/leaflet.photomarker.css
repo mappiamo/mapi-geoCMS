@@ -1,0 +1,8 @@
+.leaflet-photomarker-container .leaflet-photomarker-img {
+  border: solid white 2px;
+  background-color: white;
+  -webkit-transition:width 0.25s ease, height 0.25s ease;
+  -moz-transition:width 0.25s ease, height 0.25s ease;
+  -o-transition:width 0.25s ease, height 0.25s ease;
+  transition:width 0.25s ease, height 0.25s ease;
+}

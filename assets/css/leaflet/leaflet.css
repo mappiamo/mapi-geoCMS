@@ -80,17 +80,17 @@
 
 .leaflet-control {
 	position: relative;
-	z-index: 7;
+	z-index: 10000;
 	pointer-events: auto;
 	}
 .leaflet-top,
 .leaflet-bottom {
 	position: absolute;
-	z-index: 1000;
+	z-index: 0;
 	pointer-events: none;
 	}
 .leaflet-top {
-	top: 0;
+	top: 70px;
 	}
 .leaflet-right {
 	right: 0;
@@ -276,6 +276,7 @@
 	box-shadow: 0 1px 5px rgba(0,0,0,0.4);
 	background: #fff;
 	border-radius: 5px;
+	overflow: auto; !important
 	}
 .leaflet-control-layers-toggle {
 	background-image: url(images/layers.png);
@@ -293,10 +294,13 @@
 .leaflet-control-layers .leaflet-control-layers-list,
 .leaflet-control-layers-expanded .leaflet-control-layers-toggle {
 	display: none;
+	overflow: auto; !important
 	}
 .leaflet-control-layers-expanded .leaflet-control-layers-list {
 	display: block;
 	position: relative;
+	max-height: 600px;
+	overflow: auto; !important
 	}
 .leaflet-control-layers-expanded {
 	padding: 6px 10px 6px 6px;

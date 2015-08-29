@@ -59,7 +59,7 @@ class Mappiamo {
 						}
 				}
 
-				$routing = new M_Route();
+				$routing = new M_URLRouter();
 
 				$module = new M_Module();
 				$module_instance = $module->instance( $routing->get_module(), $routing->get_task(), $routing->get_object() );

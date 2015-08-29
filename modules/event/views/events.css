@@ -1,0 +1,91 @@
+.filterbox {
+	color: #686868;
+	font-family: Gotham, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	font-size: 12px;
+	text-align: center;
+	text-decoration: none;
+	width: auto;
+	display: block;
+	margin-bottom: 5px;
+	padding-bottom: 0px;
+	border-bottom-width: thin;
+	border-bottom-style: solid;
+	border-bottom-color: #B3B3B3;
+	margin-left: -15px;
+	padding-top: 10px;
+	border-top-width: thin;
+	border-top-style: solid;
+	border-top-color: #B3B3B3;
+}
+.filterbox input[type=text] {
+	width: 200px;
+	height: 30px;
+	background-color: #FCFBEE;
+}
+.filterbox input[type=submit] {
+	height: 30px;
+	text-align: center;
+	width: auto;
+	font-weight: bold;
+}
+
+
+.filterbox .selected {
+	display: inline-block;
+	border-bottom-width: medium;
+	border-bottom-style: solid;
+	border-bottom-color: #B0B0B0;
+}
+
+.filterbox .func_label {
+	display: inline-block;
+	width: 65px;
+	text-align: left;
+	padding-right: 10px;
+	font-size: 12px;
+	margin-top: 5px;
+}
+
+.sort_and_filters {
+
+}
+.filterbox .rows_on_filterbox {
+	margin-bottom: 5px;
+}
+.filterbox .rows_on_filterbox .switch {
+	width: auto;
+	height: 30px;
+	margin-top: -10px;
+	margin-right: -5px;
+	margin-bottom: -5px;
+	margin-left: -5px;
+}
+
+.filterbox .sort   {
+	text-align: left;
+
+}
+.filterbox .sort img {
+	width: auto;
+	height: 28px;
+	margin-right: 7px;
+	margin-bottom: 2px;
+}
+
+
+.col-md-12 hr {
+	border-top-width: thin;
+	border-top-style: dashed;
+	border-top-color: #C4C4C4;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+
+}
+body {
+	margin-top: 40px;
+}

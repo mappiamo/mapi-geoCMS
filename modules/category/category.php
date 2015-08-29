@@ -9,7 +9,8 @@ class MModule_Category extends M_Module {
 
 		public function category() {
 				$this->category = MObject::get( 'category', $this->get_object() );
-				
+				$a = 0;
+
 				if ( $this->category && $this->category->get_id() ) {
 						$this->set_page_title( $this->category->get_title() );
 						$contents = $this->category->get_contents();
@@ -21,12 +22,12 @@ class MModule_Category extends M_Module {
 								if ( $lang == $content->get_language() ) {
 										$mod = $content->modified();
 										$time = strtotime($mod['when']);
+										if ((!$time) || array_key_exists($time, $filtered_contents)) { $time = ++$a; }
 										$filtered_contents[$time] = $content;
 								}
 						}
 						ksort( $filtered_contents );
 						$descending = array_reverse( $filtered_contents );
-						
 						$this->view( 'default', array($descending, $this->category->get_title() ) );
 
 				} else {

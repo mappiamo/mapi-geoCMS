@@ -26,7 +26,6 @@ function mwidget_share( $site_id ) {
 						</script>
 
 						<div class="share">
-								<h4 style="position: absolute; margin-top: 4px;">Condividi su:</h4>
 								<div class='shareaholic-canvas' data-app='share_buttons' data-app-id='593701'></div>
 						</div>
 				<?php
