@@ -164,6 +164,7 @@ class MModel_MContent {
 
 						if ( 1 == MGet::int( 'content_enabled' ) ) $content->set_enabled( 1 );
 						else $content->set_enabled( 0 );
+
 						$content->update();
 				}
 		}

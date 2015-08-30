@@ -201,7 +201,74 @@ defined( 'DACCESS' ) or die;
 
 														mmap.update_inputs();
 														mmap.address_search();
+
 												</script>
+
+												<script type="text/javascript" src="../assets/js/leaflet.draw.setting.js"></script>
+
+												<?PHP
+
+													$record = ORM::for_table('contents')->find_one($data->id);
+
+													//print_r($record); die();
+
+													if ($record['route']) {
+
+													?>
+														<script type="text/javascript">
+														var x_Geoms = {};
+														var GeomData = null;
+														var geoj = {};
+														var JSONdata = null;
+														<?PHP
+
+														$TheGEOMData = $record['route'];
+														$Geomtype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$TheGEOMData')) AS GEOMType";
+														$Geomtype = ORM::for_table('contents')->raw_query($Geomtype_SQL)->find_one();
+
+														if (strtoupper($Geomtype['GEOMType']) == 'GEOMETRYCOLLECTION') {
+															$Geomnum_SQL = "SELECT ST_NumGeometries(ST_GeomFromText('$TheGEOMData')) AS GEOMNum";
+															$Geomnum = ORM::for_table('contents')->raw_query($Geomnum_SQL)->find_one();
+															$NumberOFGeoms = $Geomnum['GEOMNum'];
+
+															for ($x = 1; $x <= $NumberOFGeoms; $x++) {
+																$Subcollection_SQL = "SELECT ST_AsText(ST_GeometryN(p_geom, $x)) As Sub_Geom FROM (SELECT ST_GeomFromText('$TheGEOMData')  AS p_geom )  AS a";
+																$Geomsub = ORM::for_table('contents')->raw_query($Subcollection_SQL)->find_one();
+
+																?>
+																		//alert('aaa');
+																		//var draw_layer = new L.geoJson().addTo(map);
+																		GeomData = '<?PHP echo $Geomsub['Sub_Geom']; ?>';
+																		geoj = $.geo.WKT.parse(GeomData);
+																		//JSONdata = JSON.stringify(geoj);
+
+																			/* var geoj = [
+																		 [-41.31825,174.80768],
+																		 [-41.31606,174.80774],
+																		 [-41.31581,174.80777],
+																		 [-41.31115,174.80827],
+																		 [-41.30928,174.80835],
+																		 [-41.29127,174.83841],
+																		 [-41.33571,174.84846],
+																		 [-41.34268,174.82877]]; */
+
+																		x_Geoms = L.geoJson(geoj);
+																		x_Geoms.addTo(draw_layer);
+																		//alert(JSONdata);
+																		//JSONdata.addTo(draw_layer);
+
+																		//L.polyline(JSONdata).addTo(draw_layer);
+
+																<?PHP
+															}
+														} else {
+
+														}
+														?>
+														</script>
+														<?PHP
+													}
+												?>
 
 										</div>
 										<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
@@ -329,6 +396,10 @@ defined( 'DACCESS' ) or die;
 
 						</div>
 
+				</div>
+
+				<div class="form-group">
+					<input type="hidden" name="content_route" class="form-control input-sm" id="content_route" value="" />
 				</div>
 
 				<div class="btn-group" style="position: absolute;">

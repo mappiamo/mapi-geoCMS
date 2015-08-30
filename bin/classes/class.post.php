@@ -35,6 +35,7 @@ class M_Post extends M_Record {
 		}
 
 		public function update() {
+
 				$post = $this->update_record();
 
 				if ( $post ) {

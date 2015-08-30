@@ -54,10 +54,12 @@ class MModule_MContent extends M_Module {
 				$this->add_page_asset( 'js', 'tinymce/tinymce.min' );
 				$this->add_page_asset( 'js', 'tinymce/tinymce.init' );
 
-				if ( isset( $_POST['content_save'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) $this->model( 'update_content', $this->get_object() );
+				if ( isset( $_POST['content_save'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) {
+					$this->model( 'update_content', $this->get_object() );
+				}
 
 				$content = $this->model( 'get_content', $this->get_object() );
-				
+
 				if ( $content ) {
 						$data = $this->model( 'data_object', array( 'content_edit', $content ) );
 

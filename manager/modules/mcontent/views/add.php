@@ -61,164 +61,9 @@ defined( 'DACCESS' ) or die;
 
  										  mmap.update_inputs();
 										 	mmap.address_search();
-
-											var draw_layer = L.featureGroup().addTo(map);
-											map.addControl(new L.Control.Draw({
-												draw: {
-													polygon: {
-														shapeOptions: {
-															color: 'purple'
-														},
-														allowIntersection: false,
-														drawError: {
-															color: 'orange',
-															timeout: 1000
-														},
-														showArea: true,
-														metric: false,
-														repeatMode: true
-													},
-													polyline: {
-														shapeOptions: {
-															color: 'red'
-														},
-														showArea: true,
-														metric: false,
-														repeatMode: true
-													},
-													rect: {
-														shapeOptions: {
-															color: 'green'
-														},
-														showArea: true,
-														metric: false,
-														repeatMode: true
-													},
-													/* circle: {
-														shapeOptions: {
-															color: 'steelblue'
-														},
-														showArea: true,
-														metric: false,
-														repeatMode: true
-													}, */
-													circle : false
-												},
-												edit: {
-													featureGroup: draw_layer
-												}
-											}));
-
-											var geojson_ed = null;
-											var wkt_ed = null;
-											var circle_radius = null;
-											var shapes = {};
-											var AddedID = null;
-											var GeomDATA = null;
-											var SubCollection = null;
-											var ObjectCount = 0;
-
-											map.on('draw:created', function(event) {
-												var layer = event.layer;
-												draw_layer.addLayer(layer);
-
-												var geojson = event.layer.toGeoJSON();
-												var wkt = Terraformer.WKT.convert(geojson.geometry);
-
-												if (layer instanceof L.Circle) {
-													circle_radius = layer.getRadius();
-													wkt = wkt + ' | radius: ' + circle_radius;
-												}
-
-												AddedID = layer._leaflet_id;
-												shapes[AddedID] = wkt;
-												SubCollection = '';
-												ObjectCount = 0;
-												$.each (shapes, function(shindex, shname) {
-													ObjectCount++;
-													SubCollection = SubCollection + shname + ',';
-													//alert(shindex + '->' + shname);
-												});
-												if (ObjectCount > 1) {
-													GeomDATA = 'GeometryCollection(' + SubCollection.slice(0, -1) + ')';
-												} else {
-													GeomDATA = SubCollection.slice(0, -1);
-												}
-												//alert(GeomDATA);
-												document.getElementById("content_route").value = GeomDATA;
-											});
-
-											map.on('draw:edited', function (event) {
-
-												var layers = event.layers;
-
-												layers.eachLayer(function (layer) {
-													if (layer instanceof L.Circle) {
-														geojson_ed = layer.toGeoJSON();
-														circle_radius = layer.getRadius();
-														wkt_ed = Terraformer.WKT.convert(geojson_ed.geometry) + ' | radius: ' + circle_radius;
-														AddedID = layer._leaflet_id;
-														shapes[AddedID] = wkt_ed;
-														//alert(wkt_ed);
-													}
-
-													if (layer instanceof L.Polyline) {
-														//shapes.push(layer.getLatLngs());
-														geojson_ed = layer.toGeoJSON();
-														wkt_ed = Terraformer.WKT.convert(geojson_ed.geometry);
-														AddedID = layer._leaflet_id;
-														shapes[AddedID] = wkt_ed;
-														//alert(wkt_ed);
-													}
-
-													if (layer instanceof L.Marker) {
-														geojson_ed = layer.toGeoJSON();
-														wkt_ed = Terraformer.WKT.convert(geojson_ed.geometry);
-														AddedID = layer._leaflet_id;
-														shapes[AddedID] = wkt_ed;
-														//alert(wkt_ed);
-													}
-												});
-												SubCollection = '';
-												ObjectCount = 0;
-												$.each (shapes, function(shindex, shname) {
-													ObjectCount++;
-													SubCollection = SubCollection + shname + ',';
-													//alert(shindex + '->' + shname);
-												});
-												if (ObjectCount > 1) {
-													GeomDATA = 'GeometryCollection(' + SubCollection.slice(0, -1) + ')';
-												} else {
-													GeomDATA = SubCollection.slice(0, -1);
-												}
-												//alert(GeomDATA);
-												document.getElementById("content_route").value = GeomDATA;
-											});
-
-											map.on('draw:deleted', function (event) {
-												var layers = event.layers;
-												layers.eachLayer(function (layer) {
-													var AddedID = layer._leaflet_id;
-													delete shapes[AddedID];
-													//alert(AddedID);
-												});
-												SubCollection = '';
-												ObjectCount = 0;
-												$.each (shapes, function(shindex, shname) {
-													ObjectCount++;
-													SubCollection = SubCollection + shname + ',';
-													//alert(shindex + '->' + shname);
-												});
-												if (ObjectCount > 1) {
-													GeomDATA = 'GeometryCollection(' + SubCollection.slice(0, -1) + ')';
-												} else {
-													GeomDATA = SubCollection.slice(0, -1);
-												}
-												//alert(GeomDATA);
-												document.getElementById("content_route").value = GeomDATA;
-											});
-
 									</script>
+
+									<script type="text/javascript" src="../assets/js/leaflet.draw.setting.js"></script>
 
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
@@ -228,10 +73,20 @@ defined( 'DACCESS' ) or die;
 											<li><a href="#post" data-toggle="tab">Post</a></li>
 											<li><a href="#place" data-toggle="tab">Place</a></li>
 											<li><a href="#event" data-toggle="tab">Event</a></li>
+											<li><a href="#route" data-toggle="tab">Route</a></li>
 									</ul>
 									<br />
 
 									<div class="tab-content">
+
+											<div class="tab-pane" id="route">
+													<div class="panel panel-default">
+															<div class="panel-heading">New route</div>
+															<div class="panel-body">
+																	Itt mi legyen?
+															</div>
+													</div>
+											</div>
 
 											<div class="tab-pane" id="post">
 													<div class="panel panel-default">

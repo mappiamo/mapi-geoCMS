@@ -42,6 +42,7 @@ class M_Assets {
 						'js' 	=> array(
 							//'jquery/jquery-1.10.2.min',
 							'jquery/jquery-1.8.0',
+							'jquery-geo/jquery.geo.core',
 							'jquery-cookie/jquery.cookie',
 							'bootstrap/bootstrap.min',
 							'bootstrap/bootstrap.tabs',

@@ -49,6 +49,7 @@
 		public function get_route() {
 			return $this->route;
 		}
+
 		public function get_importid() {
 			return $this->import_id;
 		}
@@ -305,6 +306,7 @@
 
 			$record->modified = date_format(new DateTime('now'), 'Y-m-d H:i:s');
 			$record->modifiedby = MAuth::user_id();
+			$record->route = MGet::string( 'content_route' );
 
 			return $record;
 		}
