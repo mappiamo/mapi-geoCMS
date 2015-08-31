@@ -1,4 +1,5 @@
 var draw_layer = L.featureGroup().addTo(map);
+
 map.addControl(new L.Control.Draw({
     draw: {
         polygon: {
@@ -46,7 +47,9 @@ map.addControl(new L.Control.Draw({
 }));
 
 var geojson_ed = null;
+var geojson_imp = null;
 var wkt_ed = null;
+var wkt_import = null;
 var circle_radius = null;
 var shapes = {};
 var AddedID = null;
@@ -153,3 +156,19 @@ map.on('draw:deleted', function (event) {
     //alert(GeomDATA);
     document.getElementById("content_route").value = GeomDATA;
 });
+
+function DrawSavedData(TheGEOM) {
+    var geoj = $.geo.WKT.parse(TheGEOM);
+    L.geoJson(geoj, {onEachFeature: moveToFeatureGroup});
+}
+
+function moveToFeatureGroup(feature, layer) {
+    layer.addTo(draw_layer);
+    ObjectCount++;
+
+    AddedID = layer._leaflet_id;
+    geojson_imp = layer.toGeoJSON();
+    wkt_import = Terraformer.WKT.convert(geojson_imp.geometry);
+    shapes[AddedID] = wkt_import;
+    SubCollection = SubCollection + wkt_import + ',';
+}
