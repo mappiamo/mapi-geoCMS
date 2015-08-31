@@ -216,10 +216,11 @@ defined( 'DACCESS' ) or die;
 
 													?>
 														<script type="text/javascript">
-														var x_Geoms = {};
-														var GeomData = null;
-														var geoj = {};
+														var x_Geoms = '';
+														var GeomData = '';
+														var geoj = '';
 														var JSONdata = null;
+														var MapData = null;
 														<?PHP
 
 														$TheGEOMData = $record['route'];
@@ -240,9 +241,15 @@ defined( 'DACCESS' ) or die;
 																		//var draw_layer = new L.geoJson().addTo(map);
 																		GeomData = '<?PHP echo $Geomsub['Sub_Geom']; ?>';
 																		geoj = $.geo.WKT.parse(GeomData);
-																		//JSONdata = JSON.stringify(geoj);
+																		//JSONdata = JSON.stringify(geoj['coordinates']);
+																		//MapData = $.parseJSON(JSONdata);
+																		//x_Geoms = L.geoJson(geoj['coordinates']);
+																		//alert(JSON.stringify(geoj['coordinates']));
 
-																			/* var geoj = [
+																		//GeomData = JSON.stringify(geoj['coordinates']);
+																		//alert(GeomData);
+
+																		/* x_Geoms = [
 																		 [-41.31825,174.80768],
 																		 [-41.31606,174.80774],
 																		 [-41.31581,174.80777],
@@ -252,12 +259,17 @@ defined( 'DACCESS' ) or die;
 																		 [-41.33571,174.84846],
 																		 [-41.34268,174.82877]]; */
 
+																		/* x_Geoms = [
+																			[-41.262925973100316,174.70169448817614],
+																			[-41.28047255445279,174.7435798641527],
+																			[-41.25105355275642,174.77482223475818],
+																			[-41.28047255445279,174.8091545101488],
+																			[-41.26008711238305,174.8592796322191]]; */
+
 																		x_Geoms = L.geoJson(geoj);
 																		x_Geoms.addTo(draw_layer);
-																		//alert(JSONdata);
-																		//JSONdata.addTo(draw_layer);
 
-																		//L.polyline(JSONdata).addTo(draw_layer);
+																		//L.polyline(x_Geoms).addTo(draw_layer);
 
 																<?PHP
 															}
