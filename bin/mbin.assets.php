@@ -36,6 +36,7 @@ class M_Assets {
 							'bootstrap/bootstrap-theme.min',
 							'leaflet/leaflet',
 							'leaflet-draw/leaflet.draw',
+							'leaflet-rm/leaflet-routing-machine',
 							'datetimepicker/bootstrap-datetimepicker.min',
 							'autocomplete/jquery.autocomplete'
 						),
@@ -80,6 +81,9 @@ class M_Assets {
 							'leaflet-draw/edit/handler/Edit.Circle',
 							'leaflet-draw/edit/handler/Edit.Rectangle',
 							'leaflet-draw/edit/handler/Edit.Marker',
+
+							'leaflet-rm/leaflet-routing-machine',
+							'leaflet-rm/Control.Geocoder',
 
 							'asset.form',
 							'asset.map',

@@ -361,6 +361,7 @@ MWidget.prototype = new MFrm();
 MPage.prototype = new MFrm();
 
 $( document ).ready( function() {
+    $(".leaflet-routing-container").hide();
 
         /* var picker_start = new Pikaday({
             field: document.getElementById('content_start'),
@@ -494,6 +495,14 @@ $( document ).ready( function() {
             }
         });
 
+        $('.leaflet-routing-geocoder input').bind("keyup keypress", function(e) {
+            var code = e.keyCode || e.which;
+            if (code  == 13) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
         $( '#meta_name' ).keypress( function( e ) {
             if ( 13 == e.keyCode ) {
                 $( '#meta_add' ).click();
@@ -554,8 +563,20 @@ $( document ).ready( function() {
             }
         });
 
-    $('#RouteTab').click(function(e) { $(".leaflet-draw").hide(); });
-    $('#PostTab').click(function(e) { $(".leaflet-draw").show(); });
-    $('#PlaceTab').click(function(e) { $(".leaflet-draw").show(); });
-    $('#EventTab').click(function(e) { $(".leaflet-draw").show(); });
+        $('#RouteTab').click(function(e) {
+            $(".leaflet-draw").hide();
+            $(".leaflet-routing-container").show();
+        });
+        $('#PostTab').click(function(e) {
+            $(".leaflet-draw").show();
+            $(".leaflet-routing-container").hide();
+        });
+        $('#PlaceTab').click(function(e) {
+            $(".leaflet-draw").show();
+            $(".leaflet-routing-container").hide();
+        });
+        $('#EventTab').click(function(e) {
+            $(".leaflet-draw").show();
+            $(".leaflet-routing-container").hide();
+        });
 } );

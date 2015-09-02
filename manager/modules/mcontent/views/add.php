@@ -64,6 +64,8 @@ defined( 'DACCESS' ) or die;
 									</script>
 
 									<script type="text/javascript" src="../assets/js/leaflet.draw.setting.js"></script>
+									<script type="text/javascript" src="../assets/js/leaflet.rm.setting.js"></script>
+
 
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
