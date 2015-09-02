@@ -105,8 +105,8 @@ class M_Assets {
 								'box/box'
 						),
 						'js' 	=> array(
-								'jquery/jquery-1.10.2.min',
-								//'jquery/jquery-1.8.0',
+								//'jquery/jquery-1.10.2.min',
+								'jquery/jquery-1.8.0',
 								'jquery-geo/jquery.geo.core',
 								'bootstrap/bootstrap.min',
 								'leaflet/leaflet',

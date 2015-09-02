@@ -144,7 +144,7 @@ function MContent() {
 
         		if ( $( '#content_type' ) ) $( '#content_type' ).val( c_type );
 		}
-		
+
 }
 
 function MModule() {
@@ -433,15 +433,22 @@ $( document ).ready( function() {
                 event.stopPropagation();
         });
 
-        $('#filter_end').data("DateTimePicker").minDate(startdate);
-        $('#filter_start').data("DateTimePicker").maxDate(enddate);
-
+        if (startdate) {
+            $('#filter_end').data("DateTimePicker").minDate(startdate);
+        }
         $("#filter_start").on("dp.change", function (e) {
             $('#filter_end').data("DateTimePicker").minDate(e.date);
         });
+
+        if (enddate) {
+            $('#filter_start').data("DateTimePicker").maxDate(enddate);
+        }
         $("#filter_end").on("dp.change", function (e) {
             $('#filter_start').data("DateTimePicker").maxDate(e.date);
         });
+
+        var event_enddate = $('#content_end').val();
+        var event_startdate = $('#content_start').val();
 
         $('#content_start').datetimepicker({
             format: 'YYYY-MM-DD HH:mm',
@@ -465,12 +472,20 @@ $( document ).ready( function() {
             showClose: true
         });
 
+        if (event_startdate) {
+            $('#content_end').data("DateTimePicker").minDate(event_startdate);
+        }
         $("#content_start").on("dp.change", function (e) {
             $('#content_end').data("DateTimePicker").minDate(e.date);
         });
+
+        if (event_enddate) {
+            $('#content_start').data("DateTimePicker").minDate(event_enddate);
+        }
         $("#content_end").on("dp.change", function (e) {
             $('#content_start').data("DateTimePicker").maxDate(e.date);
         });
+
 
         $('#content_address').bind("keyup keypress", function(e) {
             var code = e.keyCode || e.which;
