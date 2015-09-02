@@ -70,10 +70,10 @@ defined( 'DACCESS' ) or die;
 
 									<br />
 									<ul class="nav nav-pills">
-											<li><a href="#post" data-toggle="tab">Post</a></li>
-											<li><a href="#place" data-toggle="tab">Place</a></li>
-											<li><a href="#event" data-toggle="tab">Event</a></li>
-											<li><a href="#route" data-toggle="tab">Route</a></li>
+											<li><a href="#post" data-toggle="tab" id="PostTab">Post</a></li>
+											<li><a href="#place" data-toggle="tab" id="PlaceTab">Place</a></li>
+											<li><a href="#event" data-toggle="tab" id="EventTab">Event</a></li>
+											<li><a href="#route" data-toggle="tab" id="RouteTab">Route</a></li>
 									</ul>
 									<br />
 

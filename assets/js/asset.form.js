@@ -486,7 +486,6 @@ $( document ).ready( function() {
             $('#content_start').data("DateTimePicker").maxDate(e.date);
         });
 
-
         $('#content_address').bind("keyup keypress", function(e) {
             var code = e.keyCode || e.which;
             if (code  == 13) {
@@ -553,6 +552,10 @@ $( document ).ready( function() {
                 $("#meta_panel span#FinalError").show();
                 return false;
             }
-
         });
+
+    $('#RouteTab').click(function(e) { $(".leaflet-draw").hide(); });
+    $('#PostTab').click(function(e) { $(".leaflet-draw").show(); });
+    $('#PlaceTab').click(function(e) { $(".leaflet-draw").show(); });
+    $('#EventTab').click(function(e) { $(".leaflet-draw").show(); });
 } );
