@@ -124,7 +124,7 @@ class M_Assets {
 								'lightbox/lightbox.min',
 								'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol',
 								'leaflet-rm/leaflet-routing-machine',
-								'leaflet-rm/Control.Geocoder',
+								//'leaflet-rm/Control.Geocoder',
 								'asset.map',
 								'asset.map.control',
 								'custom_menu'

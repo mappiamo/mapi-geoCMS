@@ -99,7 +99,8 @@
 							<script type="text/javascript" src="./assets/js/leaflet.rm.setting.js"></script>
 							<script>
 								$( document ).ready( function() {
-									$(".leaflet-routing-container").hide();
+									$(".leaflet-routing-container").show();
+									$(".leaflet-routing-geocoders").hide();
 								});
 							</script>
 						<?PHP } ?>
@@ -129,7 +130,12 @@
 								}
 
 								?>
-									routeControl.setWaypoints(Routearray);
+									//routeControl.setWaypoints(Routearray);
+									L.Routing.control({
+										waypoints: Routearray,
+										draggableWaypoints: false,
+										addWaypoints: false
+									}).addTo(map);
 								<?PHP
 							}
 						?>
