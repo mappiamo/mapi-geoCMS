@@ -103,6 +103,7 @@ class M_Assets {
 								'lightbox/lightbox',
 								'slide/slide',
 								'leaflet/leaflet',
+								'leaflet-rm/leaflet-routing-machine',
 								'jssor/jssor.slider',
 								'leaflet-photomarker/leaflet.photomarker',
 								'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol',
@@ -122,6 +123,8 @@ class M_Assets {
 								'jssor/jssor.slider',
 								'lightbox/lightbox.min',
 								'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol',
+								'leaflet-rm/leaflet-routing-machine',
+								'leaflet-rm/Control.Geocoder',
 								'asset.map',
 								'asset.map.control',
 								'custom_menu'

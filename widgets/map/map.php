@@ -16,6 +16,7 @@
 				$ContentID = $_GET['object'];
 				$content = MObject::get('content', $ContentID);
 				$GeomData = $content->get_route();
+				$ContentType = $content->get_type();
 			}
 
 			if ((($coords['lat'] != 0) && ($coords['lng'] != 0)) && ($GeomData == NULL)) {
@@ -82,46 +83,86 @@
 					$ContentID = $_GET['object'];
 					$content = MObject::get('content', $ContentID);
 					$GeomData = $content->get_route();
-					//echo $GeomData;
-					//die();
 					?>
 					<div id="mmap"></div>
 
-					<script>
-						var mmap = new MMap();
-						mmap.set_zoom(<?php MPut::_numeric( $zoom ); ?>);
-						mmap.create_map('mmap');
+						<script>
+							var mmap = new MMap();
+							mmap.set_zoom(<?php MPut::_numeric( $zoom ); ?>);
+							mmap.create_map('mmap');
 
-						mmap.address_search();
-						var mmap_control = new MMapControl(mmap);
+							mmap.address_search();
+							var mmap_control = new MMapControl(mmap);
+						</script>
 
-						var Inherited_Layer = new L.geoJson().addTo(map);
-						var GeomData = '<?PHP echo $GeomData; ?>';
-						var geoj = $.geo.WKT.parse(GeomData);
-
-						var routecolor = "#0000ff";
-						var RouteStyle = {
-							"color": routecolor,
-							"weight": 3,
-							"opacity": 1
-						};
-
-						<?PHP if ($language == 'en') { ?>
-							var ReadAll = 'Read full content';
-						<?PHP } else { ?>
-							var ReadAll = 'Leggi tutto';
+						<?PHP if ($ContentType == 'route') { ?>
+							<script type="text/javascript" src="./assets/js/leaflet.rm.setting.js"></script>
+							<script>
+								$( document ).ready( function() {
+									$(".leaflet-routing-container").hide();
+								});
+							</script>
 						<?PHP } ?>
 
-						var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);">' + ReadAll + '</div>';
+						<script>
 
-						var Geoms = L.geoJson(geoj, { style: RouteStyle }).bindPopup(GeomPoupString);
-						Geoms.addTo(Inherited_Layer);
-						map.fitBounds(Geoms.getBounds(), { padding: [0,0], maxZoom: 13 });
+						<?PHP if ($ContentType == 'route') {
+							$Geomtype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$GeomData')) AS GEOMType";
+							$Geomtype = ORM::for_table('contents')->raw_query($Geomtype_SQL)->find_one();
+
+							if (strtoupper($Geomtype['GEOMType']) == 'GEOMETRYCOLLECTION') {
+								$Geomnum_SQL = "SELECT ST_NumGeometries(ST_GeomFromText('$GeomData')) AS GEOMNum";
+								$Geomnum = ORM::for_table('contents')->raw_query($Geomnum_SQL)->find_one();
+								$NumberOFGeoms = $Geomnum['GEOMNum'];
+
+								for ($x = 1; $x <= $NumberOFGeoms; $x++) {
+									$Subcollection_SQL = "SELECT ST_AsText(ST_GeometryN(p_geom, $x)) As Sub_Geom FROM (SELECT ST_GeomFromText('$GeomData')  AS p_geom )  AS a";
+									$Geomsub = ORM::for_table('contents')->raw_query($Subcollection_SQL)->find_one();
+									$PointGeom = $Geomsub['Sub_Geom'];
+									preg_match('/^([^\(]*)([\(]*)([^A-Za-z]*[^\)$])([\)]*[^,])$/', $PointGeom, $Match);
+									$LanLotCoords = explode(' ', $Match[3]);
+
+									?>
+										Routearray.push(new L.LatLng('<?PHP echo $LanLotCoords[1]; ?>', '<?PHP echo $LanLotCoords[0]; ?>'));
+									<?PHP
+
+								}
+
+								?>
+									routeControl.setWaypoints(Routearray);
+								<?PHP
+							}
+						?>
+
+						<?PHP } else { ?>
+							var Inherited_Layer = new L.geoJson().addTo(map);
+							var GeomData = '<?PHP echo $GeomData; ?>';
+							var geoj = $.geo.WKT.parse(GeomData);
+
+							var routecolor = "#0000ff";
+							var RouteStyle = {
+								"color": routecolor,
+								"weight": 3,
+								"opacity": 1
+							};
+
+							<?PHP if ($language == 'en') { ?>
+								var ReadAll = 'Read full content';
+							<?PHP } else { ?>
+								var ReadAll = 'Leggi tutto';
+							<?PHP } ?>
+
+							var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);">' + ReadAll + '</div>';
+
+							var Geoms = L.geoJson(geoj, { style: RouteStyle }).bindPopup(GeomPoupString);
+							Geoms.addTo(Inherited_Layer);
+							map.fitBounds(Geoms.getBounds(), { padding: [0,0], maxZoom: 13 });
+
+						<?PHP } ?>
 
 						<?php //if ( $cat_id ) {echo 'mmap_control.auto_on( ' . intval( $cat_id ) . ' );'; } ?>
 
 					</script>
-
 		<?PHP	}
 			}
 		}

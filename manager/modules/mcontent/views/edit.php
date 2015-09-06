@@ -259,11 +259,21 @@
 
 			</script>
 
-			<script type="text/javascript" src="../assets/js/leaflet.draw.setting.js"></script>
+			<?PHP $record = ORM::for_table('contents')->find_one($data->id); ?>
+
+			<?PHP if ($record['type'] == 'route') { ?>
+				<script type="text/javascript" src="../assets/js/leaflet.rm.setting.js"></script>
+				<script>
+					$( document ).ready( function() {
+						$(".leaflet-routing-container").show();
+					});
+				</script>
+
+			<?PHP } else { ?>
+				<script type="text/javascript" src="../assets/js/leaflet.draw.setting.js"></script>
+			<?PHP } ?>
 
 			<?PHP
-
-				$record = ORM::for_table('contents')->find_one($data->id);
 
 				//print_r($record); die();
 
@@ -274,7 +284,6 @@
 						SubCollection = '';
 
 						<?PHP
-
 						$TheGEOMData = $record['route'];
 						$Geomtype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$TheGEOMData')) AS GEOMType";
 						$Geomtype = ORM::for_table('contents')->raw_query($Geomtype_SQL)->find_one();
@@ -291,7 +300,18 @@
 								?>
 
 								GeomData = '<?PHP echo $Geomsub['Sub_Geom']; ?>';
-								DrawSavedData(GeomData);
+
+								<?PHP if ($record['type'] == 'route') {
+									$PointGeom = $Geomsub['Sub_Geom'];
+									preg_match('/^([^\(]*)([\(]*)([^A-Za-z]*[^\)$])([\)]*[^,])$/', $PointGeom, $Match);
+									$LanLotCoords = explode(' ', $Match[3]);
+								?>
+
+								Routearray.push(new L.LatLng('<?PHP echo $LanLotCoords[1]; ?>', '<?PHP echo $LanLotCoords[0]; ?>'));
+
+								<?PHP } else { ?>
+						 			DrawSavedData(GeomData);
+								<?PHP } ?>
 
 						<?PHP
 					}
@@ -299,24 +319,37 @@
 					?>
 
 						GeomData = '<?PHP echo $TheGEOMData; ?>';
-						DrawSavedData(GeomData);
 
-						<?PHP
+						<?PHP if ($record['type'] == 'route') { ?>
+
+						<?PHP } else { ?>
+							DrawSavedData(GeomData);
+						<?PHP } ?>
+
+					<?PHP
 					}
 					?>
 
-						if (ObjectCount > 1) {
-							GeomDATA = 'GeometryCollection(' + SubCollection.slice(0, -1) + ')';
-						} else {
-							GeomDATA = SubCollection.slice(0, -1);
-						}
+						<?PHP if ($record['type'] == 'route') { ?>
+							routeControl.setWaypoints(Routearray);
 
-						$(window).load(function() {
-							document.getElementById("content_route").value = GeomDATA;
-						});
+							$(window).load(function() {
+								document.getElementById("content_route").value = '<?PHP echo $record['route']; ?>';;
+							});
+
+						<?PHP } else { ?>
+							if (ObjectCount > 1) {
+								GeomDATA = 'GeometryCollection(' + SubCollection.slice(0, -1) + ')';
+							} else {
+								GeomDATA = SubCollection.slice(0, -1);
+							}
+
+							$(window).load(function() {
+								document.getElementById("content_route").value = GeomDATA;
+							});
+						<?PHP } ?>
 
 					</script>
-
 				<?PHP
 				}
 			?>
@@ -470,7 +503,7 @@
 					onclick="location.href='index.php?module=mcontent&task=content_delete&object=<?php MPut::_numeric($data->id); ?>';">
 		Delete
 	</button>
-	<button type="submit" class="btn btn-primary" name="content_save">Save</button>
+	<button type="submit" class="btn btn-primary" name="content_save" id="MSaveButton">Save</button>
 </div>
 
 </div>

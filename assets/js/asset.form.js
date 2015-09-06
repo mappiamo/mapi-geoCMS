@@ -495,14 +495,6 @@ $( document ).ready( function() {
             }
         });
 
-        $('.leaflet-routing-geocoder input').bind("keyup keypress", function(e) {
-            var code = e.keyCode || e.which;
-            if (code  == 13) {
-                e.preventDefault();
-                return false;
-            }
-        });
-
         $( '#meta_name' ).keypress( function( e ) {
             if ( 13 == e.keyCode ) {
                 $( '#meta_add' ).click();
@@ -564,18 +556,25 @@ $( document ).ready( function() {
         });
 
         $('#RouteTab').click(function(e) {
+            if (map.hasLayer(draw_layer)) { draw_layer.clearLayers(); }
             $(".leaflet-draw").hide();
             $(".leaflet-routing-container").show();
         });
+
         $('#PostTab').click(function(e) {
+            routeControl.getPlan().setWaypoints({latLng: L.latLng(null)});
             $(".leaflet-draw").show();
             $(".leaflet-routing-container").hide();
         });
+
         $('#PlaceTab').click(function(e) {
+            routeControl.getPlan().setWaypoints({latLng: L.latLng(null)});
             $(".leaflet-draw").show();
             $(".leaflet-routing-container").hide();
         });
+
         $('#EventTab').click(function(e) {
+            routeControl.getPlan().setWaypoints({latLng: L.latLng(null)});
             $(".leaflet-draw").show();
             $(".leaflet-routing-container").hide();
         });

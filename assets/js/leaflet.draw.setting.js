@@ -42,6 +42,12 @@ map.addControl(new L.Control.Draw({
         circle : false
     },
     edit: {
+        edit: {
+            selectedPathOptions: {
+                color: '#0000FF',
+                fillColor: '#0000FF'
+            }
+        },
         featureGroup: draw_layer
     }
 }));

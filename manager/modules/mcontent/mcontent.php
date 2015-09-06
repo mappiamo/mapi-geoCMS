@@ -25,7 +25,7 @@ class MModule_MContent extends M_Module {
 		public function content_add() {
 				$this->set_page_title( '#mappiamo - Add content' );
 
-				if ( isset( $_POST['content_add'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) { 
+				if ( isset( $_POST['content_add'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) {
 						$content = $this->model( 'add_content' );
 
 						if ( $content && $content->get_id() ) { 

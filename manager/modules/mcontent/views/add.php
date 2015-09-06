@@ -85,9 +85,32 @@ defined( 'DACCESS' ) or die;
 													<div class="panel panel-default">
 															<div class="panel-heading">New route</div>
 															<div class="panel-body">
-																	Itt mi legyen?
+																<div class="form-group">
+																	<label>Title</label>
+																	<input type="text" name="route_title" class="form-control input-sm" id="route_title" value="<?php MPut::_html_attr( $data->title ); ?>">
+																</div>
+
+																<div class="form-group">
+																	<label>Lincense</label>
+																	<select name="route_license" class="form-control input-sm" id="route_license">
+																		<?php if ( sizeof( $licenses ) > 0 ): ?>
+																			<?php foreach ( $licenses as $license ): ?>
+																				<?php if ( $data->license == $license->id ): ?>
+																					<option value="<?php MPut::_id( $license->id ); ?>" selected="selected"><?php MPut::_html( $license->title ); ?></option>
+																				<?php else: ?>
+																					<option value="<?php MPut::_id( $license->id ); ?>"><?php MPut::_html( $license->title ); ?></option>
+																				<?php endif; ?>
+																			<?php endforeach; ?>
+																		<?php endif; ?>
+																	</select>
+																</div>
 															</div>
 													</div>
+
+													<!-- <div class="btn-group">
+															<button type="button" id="coordcheck" class="btn btn-primary" name="coordscheck">Check coords</button>
+													</div> -->
+
 											</div>
 
 											<div class="tab-pane" id="post">
