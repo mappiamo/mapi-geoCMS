@@ -9,9 +9,10 @@ var routeControl = L.Routing.control({
     //],
     geocoder: L.Control.Geocoder.nominatim(),
     routeWhileDragging: true,
+    useZoomParameter: false,
+    fitSelectedRoutes: false,
     reverseWaypoints: true
 }).addTo(map);
-
 
 $(document).ready(function() {
     var routeArray = new Array();
