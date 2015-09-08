@@ -275,7 +275,7 @@ function MPage() {
 				$( '#page_type' ).val( 'category' );
 		}
 
-        this.add_event_url = function() {
+        this.add_event_url = function(PID) {
                 var events = "";
 
                 var events = $("input[type='checkbox'][name='event_list']:checked").map(function() {
@@ -317,6 +317,8 @@ function MPage() {
                             url += '&' + key + '=' + value;
                         }
                 });
+
+                url += '&pid=' + PID;
 
                 $( '#page_url' ).val( url );
                 $( '#page_type' ).val( 'event' );

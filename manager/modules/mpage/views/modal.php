@@ -262,9 +262,24 @@ defined( 'DACCESS' ) or die;
 					</script>
 				<?php endif; ?>
 
+			<?PHP
+				$SavedURL = parse_url($data->url);
+				if (!isset($SavedURL['query'])) {
+					$NextPID = ORM::for_table('pages')->raw_query("SHOW TABLE STATUS LIKE 'pages'")->find_one();
+					$PID = $NextPID['Auto_increment'];
+				} else {
+					$ThePageQuery = $SavedURL['query'];
+					$URLAsArray = explode('&', $ThePageQuery);
+					foreach($URLAsArray as $DaraName) {
+						list($name, $value) = explode('=', $DaraName, 2);
+						if ($name == 'pid') { $PID = $value; }
+					}
+				}
+			?>
+
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="page = new MPage(); page.base_url = '<?php echo mapi_install_url(); ?>'; page.add_event_url();">Add</button>
+				<button type="button" class="btn btn-primary" data-dismiss="modal" onclick="page = new MPage(); page.base_url = '<?php echo mapi_install_url(); ?>'; page.add_event_url(<?PHP echo $PID; ?>);">Add</button>
 			</div>
 
 		</div>
