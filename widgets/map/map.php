@@ -7,7 +7,7 @@
 		global $coords;
 		$GeomData = NULL;
 
-		if (MValidate::coord($coords['lat']) && MValidate::coord($coords['lng'])) {
+		if (MValidate::coord($coords['lat']) && MValidate::coord($coords['lng']) && $_GET['module'] != 'event') {
 
 			$lang = new M_Language;
 			$language = $lang->getLanguage();
@@ -171,6 +171,8 @@
 					</script>
 		<?PHP	}
 			}
+		} else {
+
 		}
 
 	}

@@ -11,14 +11,14 @@
 	display: block;
 	margin-bottom: 5px;
 	padding-bottom: 0px;
-	border-bottom-width: thin;
+	/* border-bottom-width: thin;
 	border-bottom-style: solid;
-	border-bottom-color: #B3B3B3;
+	border-bottom-color: #B3B3B3; */
 	margin-left: -15px;
 	padding-top: 10px;
-	border-top-width: thin;
+	/* border-top-width: thin;
 	border-top-style: solid;
-	border-top-color: #B3B3B3;
+	border-top-color: #B3B3B3; */
 }
 .filterbox input[type=text] {
 	width: 200px;
@@ -49,8 +49,11 @@
 	margin-top: 5px;
 }
 
-.sort_and_filters {
-
+.sort_and_filters .sort {
+    border-bottom-width: thin;
+    border-bottom-style: solid;
+    border-bottom-color: #B3B3B3;
+    padding-bottom: 10px;
 }
 .filterbox .rows_on_filterbox {
 	margin-bottom: 5px;
