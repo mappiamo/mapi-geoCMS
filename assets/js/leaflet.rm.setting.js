@@ -21,7 +21,7 @@ $(document).ready(function() {
     var RouteLNG = null;
     var RoutesDATA = null;
 
-    $('.leaflet-routing-container input').bind("keyup keypress", function(e) {
+    $('form').bind("keyup keypress", function(e) {
         var code = e.keyCode || e.which;
         if (code  == 13) {
             e.preventDefault();
