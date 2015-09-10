@@ -45,7 +45,7 @@
 							var ReadAll = 'Leggi tutto';
 						<?PHP } ?>
 
-						var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);">' + ReadAll + '</div>';
+						var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);"><a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">' + ReadAll + '</a></div>';
 
 						var Geoms = L.geoJson(geoj).bindPopup(GeomPoupString);
 						Geoms.addTo(Inherited_Layer);
@@ -158,7 +158,7 @@
 								var ReadAll = 'Leggi tutto';
 							<?PHP } ?>
 
-							var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);">' + ReadAll + '</div>';
+							var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);"><a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">' + ReadAll + '</a></div>';
 
 							var Geoms = L.geoJson(geoj, { style: RouteStyle }).bindPopup(GeomPoupString);
 							Geoms.addTo(Inherited_Layer);
