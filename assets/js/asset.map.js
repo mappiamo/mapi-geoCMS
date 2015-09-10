@@ -95,11 +95,11 @@ function MMap() {
 
                                         if ( marker === null ) continue;
 
-                                        // var mcontent = "";
-                                        // mcontent += "</h3>" + data[i].title + "</h3>";
-                                        // mcontent += "<p>" + data[i].text + "</p>";
+                                        var mcontent = "";
+                                        mcontent += "</h3>" + data[i].title + "</h3>";
+                                        mcontent += "<p>" + data[i].text + "</p>";
 
-                                        // marker.bindPopup( mcontent );
+                                        marker.bindPopup( mcontent );
 
                                         this.markers.push( marker );
 
