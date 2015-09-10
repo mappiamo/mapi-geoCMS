@@ -154,19 +154,19 @@ defined( 'DACCESS' ) or die;
 										<div id="active_filters">
 											<br>Show by event period:
 											<select name="filter" id="filter" class="form-control">
-												<option value="all" selected>Show all</option>
+												<option value="all">Show all</option>
 												<option value="today">Today only</option>
 												<option value="week">This week only</option>
 												<option value="month">This month only</option>
 												<option value="quarter">This quarter only</option>
-												<option value="year">Full year</option>
+												<option value="year" selected>Full year</option>
 												<option value="inprogress">Event in progress</option>
 											</select>
 
 											<br>If events expired, show:
 											<select name="expired" id="expired" class="form-control">
-												<option value="blank" selected>Blank page</option>
-												<option value="all">All events</option>
+												<option value="blank">Blank page</option>
+												<option value="all" selected>All events</option>
 												<option value="remove">Remove menu</option>
 											</select>
 
@@ -188,9 +188,9 @@ defined( 'DACCESS' ) or die;
 
 										<br>Filter by date:
 										<select name="filterby" id="filterby" class="form-control">
-											<option value="modified" selected>Modified date</option>
+											<option value="modified">Modified date</option>
 											<option value="created">Creation date</option>
-											<option value="start">Start date</option>
+											<option value="start" selected>Start date</option>
 											<option value="end">End date</option>
 										</select>
 
@@ -207,9 +207,9 @@ defined( 'DACCESS' ) or die;
 									<div class="panel-heading">Sort order</div>
 									<div class="panel-body">
 										<select name="sort" id="sort" class="form-control">
-											<option value="modified" selected>Modified date</option>
+											<option value="modified">Modified date</option>
 											<option value="created">Creation date</option>
-											<option value="start">Start date</option>
+											<option value="start" selected>Start date</option>
 											<option value="end">End date</option>
 											<option value="title">Title</option>
 											<option value="address">Address</option>
