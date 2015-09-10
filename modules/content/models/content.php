@@ -26,7 +26,7 @@ class MModel_Content {
 		static function display_place( $place ) {
 				?>
 						<div itemscope itemtype="http://schema.org/Place">
-								<h1 class="content-title"><span itemprop="name"><?php //MPut::_html( $place->get_title() ); ?></span></h1>
+								<h1 class="content-title"><span itemprop="name"><?php MPut::_html( $place->get_title() ); ?></span></h1>
 
 								<?php self::content_props( $place ); ?>
 								
@@ -44,7 +44,7 @@ class MModel_Content {
 		static function display_event( $event ) {
 				?>
 						<div itemscope itemtype="http://schema.org/Event">
-								<h1 class="content-title"><span itemprop="name"><?php //MPut::_html( $event->get_title() ); ?></span></h1>
+								<h1 class="content-title"><span itemprop="name"><?php MPut::_html( $event->get_title() ); ?></span></h1>
 
 								<?php self::content_props( $event ); ?>
 								
