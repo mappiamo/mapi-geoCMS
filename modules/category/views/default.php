@@ -18,7 +18,7 @@ $page_title = $data[1];
 				//var_dump($contents); die();
         		if ( sizeof( $contents ) > 0 ) {
         				foreach ( $contents as $content ) {
-        						$text_wrap = wordwrap( strip_tags( $content->get_text() ), 800, "%|%" );
+        						$text_wrap = wordwrap( strip_tags( $content->get_text(), '<br>' ), 800, "%|%" );
         						$text_array = explode( '%|%', $text_wrap );
 								
         						?>

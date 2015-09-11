@@ -20,7 +20,7 @@ class MModel_Content_Map {
 
 								$contents[$i] = array(
 										'title'		=> $title,
-										'text'		=> substr( strip_tags( $content->get_text() ), 0, 100 ) .' ... <br /><br /><a href="index.php?module=content&object=' . intval( $content->get_id() ) . '"><small>read more &gt;&gt;</small></a>' ,
+										'text'		=> substr( strip_tags( $content->get_text(), '<br>' ), 0, 100 ) .' ... <br /><br /><a href="index.php?module=content&object=' . intval( $content->get_id() ) . '"><small>read more &gt;&gt;</small></a>' ,
 										'lat'		=> $content->get_lat(),
 										'lng'		=> $content->get_lng(),
 										//'route'		=> $content->get_route(),

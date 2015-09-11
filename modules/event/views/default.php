@@ -427,7 +427,7 @@
 
 								if (sizeof($data) > 0) {
 									foreach ($data[0] as $content) {
-										$text_wrap = wordwrap(strip_tags($content['text']), 800, "%|%");
+										$text_wrap = wordwrap(strip_tags($content['text'], '<br>'), 800, "%|%");
 										$text_array = explode('%|%', $text_wrap);
 										?>
 
