@@ -107,7 +107,8 @@ class M_Assets {
 								'jssor/jssor.slider',
 								'leaflet-photomarker/leaflet.photomarker',
 								'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol',
-								'box/box'
+								'box/box',
+								'jPlayer/css/jplayer.blue.monday.min'
 						),
 						'js' 	=> array(
 								//'jquery/jquery-1.10.2.min',
@@ -127,7 +128,8 @@ class M_Assets {
 								//'leaflet-rm/Control.Geocoder',
 								'asset.map',
 								'asset.map.control',
-								'custom_menu'
+								'custom_menu',
+								'jPlayer/jquery.jplayer.min'
 						)
 				);
 		}
