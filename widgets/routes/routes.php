@@ -266,7 +266,7 @@
 							//});
 
 							//if (Object.keys(data).length == 4 && CatMenuFUNCTIONAL.length > 0 && submenu != 'remove-route' && submenu != 'remove-area') {
-							if (data == 'null' && CatMenuFUNCTIONAL.length > 0 && submenu != 'remove-route' && submenu != 'remove-area') {
+							if (data == 'null' && CatMenuFUNCTIONAL.length > 0 && submenu != 'remove-route' && submenu != 'remove-area' && mainmenu != 'Informazioni') {
 								<?PHP if ($language == 'en') { ?>
 									alert('No data uploaded for this filter settings.');
 								<?PHP } else { ?>

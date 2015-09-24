@@ -99,6 +99,7 @@ class MModule_MContent extends M_Module {
 
 		public function content_media() {
 				$this->set_as_ajax();
+			//die('aaa');
 
 				if ( isset( $_GET['media_add'] ) && ! empty( $_FILES ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) $this->model( 'add_media', $this->get_object() );
 				if ( isset( $_GET['media_remove'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) $this->model( 'remove_media', $this->get_object() );

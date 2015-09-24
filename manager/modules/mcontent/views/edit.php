@@ -441,8 +441,7 @@
 				if (is_array($data->media) && sizeof($data->media) > 0) {
 					foreach ($data->media as $media) {
 						$media->text = '';
-						$media->text .=
-						'<div style="float: left; margin-top: 12px; margin-bottom: 12px;"><img class="media-object" style="width: 80px;" src="'.
+						$media->text .=	'<div style="float: left; margin-top: 12px; margin-bottom: 12px;"><img class="media-object" style="width: 80px;" src="'.
 						$media->url.'" alt="" /></div>';
 						$media->text .= '<div style="float: left; margin-top: 12px; margin-left: 12px;">';
 						$media->text .= '<a href="'.$media->url.'" target="_blank"><h4>'.$media->title.'</h4></a>';

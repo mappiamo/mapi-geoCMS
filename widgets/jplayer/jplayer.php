@@ -12,6 +12,22 @@
 
 		$lang = new M_Language;
 		$language = $lang->getLanguage();
+		$id = $_GET["object"];
+		$ContentLang = ORM::for_table('contents')->select_many('language', 'parent')->where('id', $id)->find_one();
+
+		if ($ContentLang['language'] != $language) {
+			if ($ContentLang['parent']) {
+				$id = $ContentLang['parent'];
+			} else {
+				$NewID = ORM::for_table('contents')->select_many('id')->where('parent', $id)->find_one();
+				if ($NewID['id']) {
+					$id = $NewID['id'];
+				}
+			}
+		}
+
+		$audurl = ORM::for_table('content_meta')->select('value')->where('external_id', $id)->where('name', 'audio')->find_one();
+		if ($audurl['value']) {
 
 		?>
 
@@ -23,8 +39,8 @@
 				$("#jquery_jplayer_1").jPlayer({
 					ready: function (event) {
 						$(this).jPlayer("setMedia", {
-							title: "Bubble",
-							m4a: "http://jplayer.org/audio/m4a/Miaow-07-Bubble.m4a"
+							title: "Audio content",
+							m4a: "<?PHP echo $audurl['value']; ?>"
 						});
 					},
 					swfPath: "../../dist/jplayer",
@@ -39,7 +55,7 @@
 				});
 			});
 			//]]>
-		</script>
+		</script><br><br>
 
 		<div id="jquery_jplayer_1" class="jp-jplayer"></div>
 
@@ -78,8 +94,9 @@
 					To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
 				</div>
 			</div>
-		</div>
+		</div><br>
 
 		<?PHP
+		}
 	}
 ?>

@@ -45,8 +45,8 @@ $(document).ready(function() {
             //alert(RoutesDATA);
             document.getElementById("content_route").value = RoutesDATA;
         } else {
-            alert('ERROR: Two or more markers required for this content type!');
-            return false;
+            //alert('ERROR: Two or more markers required for this content type!');
+            //return false;
         }
     });
 });

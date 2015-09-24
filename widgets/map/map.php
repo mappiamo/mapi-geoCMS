@@ -12,7 +12,7 @@
 			$lang = new M_Language;
 			$language = $lang->getLanguage();
 
-			if (isset($_GET['object'])) {
+			if ((isset($_GET['object'])) && ($_GET['module'] != 'category')) {
 				$ContentID = $_GET['object'];
 				$content = MObject::get('content', $ContentID);
 				$GeomData = $content->get_route();
