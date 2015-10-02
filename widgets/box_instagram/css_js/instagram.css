@@ -1,0 +1,36 @@
+#mapi_insta{
+}
+#mapi_insta .insta_page{
+    text-align: center;
+}
+#mapi_insta .container{
+    height: 157px;
+}
+#mapi_insta .insta_page_left{
+    border: 1px solid #C1C1C1;
+    border-radius: 22px;
+    cursor: pointer;
+    background-image: url('../../../media/images/gemicons/arrow-left.png');
+    background-size: 100%;
+    position: absolute;
+    margin-left: -2px;
+    margin-top: 64px;
+    height: 22px;
+    width: 22px;
+}
+#mapi_insta .insta_page_right{
+    border: 1px solid #C1C1C1;
+    border-radius: 22px;
+    cursor: pointer;
+    background-image: url('../../../media/images/gemicons/arrow-right.png');
+    background-size: 100%;
+    position: absolute;
+    margin-left: 240px;
+    margin-top: -92px;
+    height: 22px;
+    width: 22px;
+}
+#mapi_insta img{
+    height: 75px;
+    width: 75px;
+}
