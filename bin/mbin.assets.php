@@ -109,6 +109,9 @@ class M_Assets {
 								'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol',
 								'box/box',
 								'jPlayer/css/jplayer.blue.monday.min'
+								//'social/flickr',
+								//'social/instagram'
+								//'social/youtube'
 						),
 						'js' 	=> array(
 								//'jquery/jquery-1.10.2.min',
@@ -130,10 +133,12 @@ class M_Assets {
 								'asset.map.control',
 								'custom_menu',
 								'jPlayer/jquery.jplayer.min'
+								//'social/flickr',
+								//'social/instagram'
+								//'social/youtube'
 						)
 				);
 		}
-
 }
 
 ?>
