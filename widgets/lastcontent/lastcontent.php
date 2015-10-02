@@ -37,7 +37,7 @@
 							<div class="latest-content">
 								<?PHP
 									if ($c_type == 'event') {
-										echo $One_Content['start'] . ' - ' . $One_Content['end'];
+										echo date('d-m-Y H:i', strtotime($One_Content['start'])) . ' - ' . date('d-m-Y H:i', strtotime($One_Content['end']));
 									}
 								?>
 								<p>
