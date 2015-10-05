@@ -5,9 +5,9 @@ defined( 'DACCESS' ) or die;
 
 function mwidget_content( $id ) {
 		$content = MObject::get( 'content', $id );
-		$title_addon = $content->get_meta( 'title-addon' );
 
 		if ( $content ) {
+		$title_addon = $content->get_meta( 'title-addon' );
 				?>
 					<h2 class="featurette-heading"><?php MPut::_html( $content->get_title() ); ?>
 							<?php if( $title_addon ): ?> 

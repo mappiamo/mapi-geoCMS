@@ -1,4 +1,7 @@
 # Created by .ignore support plugin (hsz.mobi)
 settings.php
 .idea
-error.log
+media
+
+#HTMLPurifier
+library/HTMLPurifier/DefinitionCache/Serializer/*/
