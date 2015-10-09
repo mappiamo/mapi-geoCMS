@@ -39,11 +39,15 @@ $(document).ready(function() {
         if($('.accordion_main').is(':visible')) {
             $('.accordion_main').slideUp();
             $(this).html('<img src="templates/gal2/images/menuicons/open.png">');
-            $("html, body").animate({ scrollTop: 650 }, "slow");
+            if ($('article').is(':visible')) {
+                $("html, body").animate({ scrollTop: 650 }, "slow");
+            }
         } else {
             $('.accordion_main').slideDown();
             $(this).html('<img src="templates/gal2/images/menuicons/close.png">');
-            $("html, body").animate({ scrollTop: 0 }, "slow");
+            if ($('article').is(':visible')) {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+            }
         }
     });
 
@@ -64,6 +68,11 @@ $(document).ready(function() {
         //return true;
     });
 
+    if ($("#mobile_menu").is(':visible')) {
+        $(".topcontainer .mainmenu").css("display", 'inline-block');
+        $(".topcontainer .mainmenu_noevent").css("display", 'inline-block');
+    }
+
     $("#mobile_menu").click(function() {
         var current_width = $(document).width();
         if($('.topcontainer .mainmenu').is(':visible')) {
@@ -71,14 +80,14 @@ $(document).ready(function() {
             $(".topcontainer .mainmenu_noevent").css("display", 'none');
             $("#Submenu").hide();
             $(this).html('<img src="templates/gal2/images/menuicons/menu-alt-256.png">');
-            if (current_width < 620) {
+            if (current_width < 620 && $('article').is(':visible')) {
                 $("html, body").animate({ scrollTop: 750 }, "slow");
             }
         } else {
             $(".topcontainer .mainmenu").css("display", 'inline-block');
             $(".topcontainer .mainmenu_noevent").css("display", 'inline-block');
             $(this).html('<img src="templates/gal2/images/menuicons/menu-alt-256-off.png">');
-            if (current_width < 620) {
+            if (current_width < 620 && $('article').is(':visible')) {
                 $("html, body").animate({ scrollTop: 0 }, "slow");
             }
         }
