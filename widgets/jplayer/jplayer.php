@@ -43,7 +43,7 @@
 							m4a: "<?PHP echo $audurl['value']; ?>"
 						});
 					},
-					swfPath: "../../dist/jplayer",
+					swfPath: "dist/jplayer",
 					supplied: "m4a, oga",
 					wmode: "window",
 					useStateClassSkin: true,
