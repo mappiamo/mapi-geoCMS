@@ -55,7 +55,8 @@ class MHTML {
 										if ( isset( $object->text ) ) echo '</h4>';	
 
 										if ( isset( $object->text ) ) {
-												echo '<p class="list-group-item-text">' . MPut::text( $object->text ) . '</p>';
+												//echo '<p class="list-group-item-text">' . MPut::text( $object->text ) . '</p>';
+												echo '<p class="list-group-item-text">' . $object->text . '</p>';
 										}
 								echo '</li>';
 						}
