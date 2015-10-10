@@ -257,7 +257,7 @@
 							contentlang: '<?PHP echo $language; ?>'
 						},
 						success: function (data) {
-							//alert(data); return;
+							//alert(mainmenu); return;
 
 							//var x = 0;
 							//$.map(MapData['places'], function(value, key) {
@@ -271,6 +271,17 @@
 									alert('No data uploaded for this filter settings.');
 								<?PHP } else { ?>
 									alert('La scelta non contiene dati.');
+								<?PHP } ?>
+								if (map.hasLayer(Marker_layer)) { Marker_layer.clearLayers(); }
+								MarkersAdded = 0;
+								return;
+							}
+
+							if (data == 'null' && mainmenu == 'Search') {
+								<?PHP if ($language == 'en') { ?>
+								alert('No result for this keyword on database: ' + SearchRequest);
+								<?PHP } else { ?>
+								alert('La parola cercata non ha prodotto risultati: ' + SearchRequest);
 								<?PHP } ?>
 								if (map.hasLayer(Marker_layer)) { Marker_layer.clearLayers(); }
 								MarkersAdded = 0;
@@ -518,10 +529,10 @@
 
 										if (mainmenu == 'Itinerari') {
 											routes.addTo(Route_Layer); GeomsAdded++; routes.openPopup();
-											map.fitBounds(Route_Layer.getBounds(), { padding: [0,0], maxZoom: 13 });
+											map.fitBounds(Route_Layer.getBounds(), { padding: [5,5], maxZoom: 11 });
 										} else if (mainmenu == 'Comuni') {
 											routes.addTo(Area_Layer); GeomsAdded++; routes.openPopup();
-											map.fitBounds(Area_Layer.getBounds(), { padding: [0,0], maxZoom: 13 });
+											map.fitBounds(Area_Layer.getBounds(), { padding: [5,5], maxZoom: 11 });
 										}
 
 									} else {
@@ -562,7 +573,7 @@
 							}
 
 							if (GeomsAdded == 0 && MarkersAdded > 0) {
-								map.fitBounds(Marker_layer.getBounds(), { padding: [10,10], maxZoom: 13 });
+								map.fitBounds(Marker_layer.getBounds(), { padding: [10,10], maxZoom: 11 });
 							}
 
 							if ((PrevClicked != mainmenu) && (mainmenu == 'Punti' || mainmenu == 'Eventi' || mainmenu == 'Aziende' || mainmenu == 'Epoca' || mainmenu == 'Search')) {

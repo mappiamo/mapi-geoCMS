@@ -1,5 +1,5 @@
 <?php
-	header ('Content-Type: application/json; charset=utf-8');
+	//header ('Content-Type: application/json; charset=utf-8');
 	header ("access-control-allow-origin: *");
 
 	// no direct access to this file

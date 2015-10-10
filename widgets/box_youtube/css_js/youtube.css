@@ -2,6 +2,9 @@
 }
 #mapi_youtube .youtube_page{
     text-align: center;
+    width: 265px;
+    margin-left: auto;
+    margin-right: auto;
 }
 #mapi_youtube .container{
     height: 130px;
@@ -16,7 +19,7 @@
     background-image: url('../../../media/images/gemicons/arrow-left.png');
     background-size: 100%;
     position: absolute;
-    margin-left: 0px;
+    margin-left: -10px;
     margin-top: 54px;
     height: 22px;
     width: 22px;

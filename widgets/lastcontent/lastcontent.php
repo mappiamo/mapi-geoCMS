@@ -37,12 +37,12 @@
 							<div class="latest-content">
 								<?PHP
 									if ($c_type == 'event') {
-										echo date('d-m-Y H:i', strtotime($One_Content['start'])) . ' - ' . date('d-m-Y H:i', strtotime($One_Content['end']));
+										echo '<span class="glyphicon glyphicon-circle-arrow-right"></span> ' . date('d-m-Y H:i', strtotime($One_Content['start'])) . ' <span class="glyphicon glyphicon-circle-arrow-left"></span> ' . date('d-m-Y H:i', strtotime($One_Content['end']));
 									}
 								?>
 								<p>
 									<?PHP echo mb_substr(strip_tags($One_Content['text']), 0, 150, 'UTF-8'); ?>...<br />
-									<a href="index.php?module=content&object=<?PHP echo $One_Content['id']; ?>" title="<?PHP echo $One_Content['title']; ?>" class="readmore">mostra &gt;</a>
+									<a href="index.php?module=content&object=<?PHP echo $One_Content['id']; ?>" title="<?PHP echo $One_Content['title']; ?>" class="readmore">Leggi tutto &gt;</a>
 								</p>
 							</div>
 							<div style="clear: both;"></div>

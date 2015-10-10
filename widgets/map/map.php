@@ -7,10 +7,10 @@
 		global $coords;
 		$GeomData = NULL;
 
-		if (MValidate::coord($coords['lat']) && MValidate::coord($coords['lng']) && $_GET['module'] != 'event') {
+		$lang = new M_Language;
+		$language = $lang->getLanguage();
 
-			$lang = new M_Language;
-			$language = $lang->getLanguage();
+		if ((MValidate::coord($coords['lat']) && MValidate::coord($coords['lng'])) && (isset($_GET['module']) && $_GET['module'] != 'event')) {
 
 			if ((isset($_GET['object'])) && ($_GET['module'] != 'category')) {
 				$ContentID = $_GET['object'];
@@ -49,7 +49,7 @@
 
 						var Geoms = L.geoJson(geoj).bindPopup(GeomPoupString);
 						Geoms.addTo(Inherited_Layer);
-						map.fitBounds(Geoms.getBounds(), { padding: [0,0], maxZoom: 13 });
+						map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
 
 					<?php } else {
 						if ((count(array_filter($_GET)) == 0) || array_key_exists('lang', $_GET)) {
@@ -162,19 +162,43 @@
 
 							var Geoms = L.geoJson(geoj, { style: RouteStyle }).bindPopup(GeomPoupString);
 							Geoms.addTo(Inherited_Layer);
-							map.fitBounds(Geoms.getBounds(), { padding: [0,0], maxZoom: 13 });
+							map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
 
 						<?PHP } ?>
 
 						<?php //if ( $cat_id ) {echo 'mmap_control.auto_on( ' . intval( $cat_id ) . ' );'; } ?>
 
 					</script>
-		<?PHP	}
+		<?PHP }
 			}
-		} else {
+		} else { ?>
+			<div id="mmap"></div>
 
-		}
+			<script>
+				var mmap = new MMap();
+				mmap.set_zoom(<?php MPut::_numeric( $zoom ); ?>);
+				mmap.create_map('mmap');
 
+				mmap.address_search();
+				var mmap_control = new MMapControl(mmap);
+
+				var Circle_Layer = new L.geoJson().addTo(map);
+
+				<?PHP if ($language == 'en') { ?>
+				var FirstPopup = '<div class="FirstPopup">Please select one of <strong>Routes,</strong> or <strong>Areas,</strong> or <strong>Point of interest</strong> from the top menu.</div>';
+				<?PHP } else { ?>
+				var FirstPopup = '<div class="FirstPopup">Si prega di selezionare o uno degli <strong>Itinerari,</strong> o una area da <strong>Comuni,</strong> o dei luoghi dai <strong>Punti di interesse.</strong></div>';
+				<?PHP } ?>
+
+				var Circle = L.circle([<?PHP echo $coords['lat']; ?>, <?PHP echo $coords['lng']; ?>], 40000, {
+					color: 'red',
+					fillColor: '#f03',
+					fillOpacity: 0.3
+				}).addTo(Circle_Layer).bindPopup(FirstPopup, {offset: new L.Point(0, -70)}); //Circle_Layer.openPopup();
+
+			</script>
+
+		<?PHP }
 	}
 
 ?>
