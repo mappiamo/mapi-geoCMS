@@ -4,4 +4,4 @@ settings.php
 media
 
 #HTMLPurifier
-library/HTMLPurifier/DefinitionCache/Serializer/*/
+lib/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer/*/

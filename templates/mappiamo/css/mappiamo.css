@@ -33,6 +33,12 @@ body {
         border-radius: 0px;
 }
 
+.navbar-default .navbar-nav>li a {
+    color: #777;
+    padding: 15px 5px !important;
+    display:block;
+}
+
 #mapbanner {
         margin-top: 51px;
 }
