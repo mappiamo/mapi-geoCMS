@@ -165,7 +165,7 @@ class M_Template extends M_Extension {
 
 						ob_end_clean();
 				} else {
-						die( 'M_ERROR (00215): Cannot load template: Temaplate foot file is missing' );
+						die( 'M_ERROR (00215): Cannot load template: Template foot file is missing' );
 				}
 		}
 

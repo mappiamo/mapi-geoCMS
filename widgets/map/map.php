@@ -28,6 +28,8 @@
 				<script>
 					var mmap = new MMap();
 					mmap.set_zoom(<?php MPut::_numeric( $zoom ); ?>);
+                    mmap.set_lat(<?php echo $coords['lat'];?>);
+                    mmap.set_lng(<?php echo $coords['lng'];?>);
 					mmap.create_map('mmap');
 
 					mmap.address_search();
@@ -35,7 +37,6 @@
 
 					<?php if ( $content ) { ?>
 
-						var Inherited_Layer = new L.geoJson().addTo(map);
 						var GeomData = '<?PHP echo $GeomData; ?>';
 						var geoj = $.geo.WKT.parse(GeomData);
 
@@ -48,8 +49,10 @@
 						var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);"><a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">' + ReadAll + '</a></div>';
 
 						var Geoms = L.geoJson(geoj).bindPopup(GeomPoupString);
-						Geoms.addTo(Inherited_Layer);
-						map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
+						Geoms.addTo(map);
+                        console.log(Geoms);
+                        //map.panTo([<?php echo $coords['lat'].",".$coords['lng'];?>]);
+						//map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
 
 					<?php } else {
 						if ((count(array_filter($_GET)) == 0) || array_key_exists('lang', $_GET)) {
@@ -141,7 +144,6 @@
 						?>
 
 						<?PHP } else { ?>
-							var Inherited_Layer = new L.geoJson().addTo(map);
 							var GeomData = '<?PHP echo $GeomData; ?>';
 							var geoj = $.geo.WKT.parse(GeomData);
 
@@ -161,7 +163,7 @@
 							var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);"><a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">' + ReadAll + '</a></div>';
 
 							var Geoms = L.geoJson(geoj, { style: RouteStyle }).bindPopup(GeomPoupString);
-							Geoms.addTo(Inherited_Layer);
+							Geoms.addTo(map);
 							map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
 
 						<?PHP } ?>
@@ -177,6 +179,10 @@
 			<script>
 				var mmap = new MMap();
 				mmap.set_zoom(<?php MPut::_numeric( $zoom ); ?>);
+				mmap.set_lat(<?php MPut::_numeric( $coords['lat'] ); ?>);
+				mmap.set_lng(<?php MPut::_numeric( $coords['lng'] ); ?>);
+
+
 				mmap.create_map('mmap');
 
 				mmap.address_search();
