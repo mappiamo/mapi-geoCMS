@@ -91,7 +91,7 @@ defined( 'DACCESS' ) or die;
 																</div>
 
 																<div class="form-group">
-																	<label>Lincense</label>
+																	<label>License</label>
 																	<select name="route_license" class="form-control input-sm" id="route_license">
 																		<?php if ( sizeof( $licenses ) > 0 ): ?>
 																			<?php foreach ( $licenses as $license ): ?>

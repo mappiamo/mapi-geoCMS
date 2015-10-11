@@ -19,7 +19,7 @@ class MBIN {
                 'classes:class.post',
                 'classes:class.place',
                 'classes:class.event',
-								'classes:class.route',
+				'classes:class.route',
                 'classes:class.url',
                 'classes:class.category',
                 'classes:class.user',

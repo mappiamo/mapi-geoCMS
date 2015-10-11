@@ -204,6 +204,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
 --
 
 INSERT INTO `modules` (`id`, `name`, `title`, `version`, `description`, `default_module`, `manager`, `enabled`) VALUES
+(222, 'page404', 'Page 404', '0.0.1', 'Display a 404 page', 0, 0, 1),
 (202, 'content', 'Content', '0.0.6', 'Display content', 0, 0, 1),
 (203, 'blog', 'Blog', '0.0.6', 'Display content list', 0, 0, 1),
 (201, 'home', 'Home', '0.0.6', 'HomePage', 1, 0, 1),
