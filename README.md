@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/mappiamo/mapi-geoCMS.png?label=ready&title=Ready)](https://waffle.io/mappiamo/mapi-geoCMS)
 # #mappiamo - the geoCMS for rest of us
 ======
 
