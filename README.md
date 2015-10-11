@@ -1,7 +1,12 @@
 # #mappiamo - the geoCMS for rest of us
 ======
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mappiamo/mapi-geoCMS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mappiamo/mapi-geoCMS?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) 
+
+[![Documentation Status](https://readthedocs.org/projects/mappiamo/badge/?version=latest)](http://mappiamo.readthedocs.org/en/latest/?badge=latest) 
+
+[![Stories in Ready](https://badge.waffle.io/mappiamo/mapi-geoCMS.svg?label=ready&title=Ready)](http://waffle.io/mappiamo/mapi-geoCMS)
+
 
 
 ### What is #mappiamo?
