@@ -1,6 +1,7 @@
 body {
         padding-bottom: 40px;
         color: #5a5a5a;
+        padding-top: 50px;
 }
 
 #mmap {
@@ -33,9 +34,16 @@ body {
         border-radius: 0px;
 }
 
-#mapbanner {
-        margin-top: 51px;
+.navbar-default .navbar-nav>li a {
+    color: #777;
+    padding: 15px 5px !important;
+    display:block;
 }
+
+#mapbanner {
+
+}
+
 #mapcontent {
         height: 320px;
         margin-bottom: 42px;
@@ -66,7 +74,7 @@ body {
 }
 
 article {
-        margin-top: 51px;
+
 }
 
 .content {

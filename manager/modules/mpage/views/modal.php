@@ -236,6 +236,7 @@ defined( 'DACCESS' ) or die;
 					</div>
 				</div>
 
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 				<p class="text-info">Choose events:</p>
 
 				<?php
@@ -262,7 +263,7 @@ defined( 'DACCESS' ) or die;
 					</script>
 				<?php endif; ?>
 
-			<?PHP
+			<?php
 				$SavedURL = parse_url($data->url);
 				if (!isset($SavedURL['query'])) {
 					$NextPID = ORM::for_table('pages')->raw_query("SHOW TABLE STATUS LIKE 'pages'")->find_one();
@@ -274,8 +275,10 @@ defined( 'DACCESS' ) or die;
 						list($name, $value) = explode('=', $DaraName, 2);
 						if ($name == 'pid') { $PID = $value; }
 					}
+                    if(!isset($PID)) $PID = 0;
 				}
 			?>
+            </div>
 
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

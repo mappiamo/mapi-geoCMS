@@ -66,10 +66,10 @@ class MLIB {
                         $test = ORM::for_table( 'preferences' )->create();
                         
                         if ( $test ) return true;
-												else die( 'M_ERROR (00133): Cannot create a preferences instance, have you installed the database?' );
+                        else die( 'M_ERROR (00133): Cannot create a preferences instance, have you installed the database?' );
 
                 } catch( PDOException $e ) {
-										die( 'M_ERROR (00132): Cannot connect to MySQL, please check the configuration in settings.php!' );
+                        die( 'M_ERROR (00132): Cannot connect to MySQL, please check the configuration in settings.php!' );
                 }
         }
 

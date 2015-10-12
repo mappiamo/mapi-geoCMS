@@ -129,7 +129,6 @@
 				<div class="panel-heading">License</div>
 				<div class="panel-body">
 					<div class="form-group">
-						<label>Lincense</label>
 						<select name="content_license" class="form-control input-sm" id="content_license">
 							<?php if (sizeof($licenses) > 0): ?>
 								<?php foreach ($licenses as $license): ?>
