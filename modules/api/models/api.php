@@ -9,10 +9,54 @@
 			if (sizeof($options) < 1) {
 				return FALSE;
 			}
-			$records = ORM::for_table('contents')
-										->raw_query('SELECT id, ( 3959 * acos( cos( radians( :latitude ) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians( :longitude ) ) + sin( radians( :latitude ) )  * sin( radians( lat ) ) ) )  AS distance FROM contents HAVING distance < :radius',
-																array("latitude" => $options["lat"], "longitude" => $options["lng"],
-																			"radius" => $options["radius"]))->find_many();
+
+			if (((isset($options['field'])) && ($options['field'] == 'all')) && ((isset($options['data'])) && ($options['data'] == 'all'))) {
+				if (isset($options['auth'])) {
+					$ApiauthKey = ORM::for_table('preferences')->select('value')->where('name', 'api_auth')->find_one();
+					if (!$ApiauthKey) {	die('Authentication failed.'); }
+					if ($ApiauthKey['value'] != $options['auth']) {	die('Authentication failed.'); }
+
+					$records = ORM::for_table('contents')->raw_query('SELECT * FROM contents')->find_many();
+
+				} else {
+					die('Authentication required.');
+				}
+			} elseif (((isset($options['field'])) && ($options['field'] != 'all')) && ((isset($options['data'])) && ($options['data'] != 'all'))) {
+
+				$FiledName = $options['field'];
+				$DataValue = $options['data'];
+				$records_cnt = ORM::for_table('contents')->select('*')->where($FiledName, $DataValue)->count();
+
+				if ($records_cnt == 0) {
+					die('No result ot invalid search data.');
+				}
+				if ($records_cnt <= 10) {
+					$records = ORM::for_table('contents')->select('*')->where($FiledName, $DataValue)->find_many();
+				} else {
+					if (isset($options['auth'])) {
+						$ApiauthKey = ORM::for_table('preferences')->select('value')->where('name', 'api_auth')->find_one();
+						if (!$ApiauthKey) {	die('Authentication failed.'); }
+						if ($ApiauthKey['value'] != $options['auth']) {	die('Authentication failed.'); }
+						$records = ORM::for_table('contents')->select('*')->where($FiledName, $DataValue)->find_many();
+					} else {
+						$records = ORM::for_table('contents')->select('*')->where($FiledName, $DataValue)->limit(10)->find_many();
+					}
+				}
+
+			} else {
+
+				$records = ORM::for_table('contents')
+											->raw_query('SELECT id, ( 3959 * acos( cos( radians( :latitude ) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians( :longitude ) ) + sin( radians( :latitude ) )  * sin( radians( lat ) ) ) )  AS distance FROM contents HAVING distance < :radius',
+																	array("latitude" => $options["lat"], "longitude" => $options["lng"],
+																				"radius" => $options["radius"]))->find_many();
+			}
+
+			//print_r($records);
+			//die();
+			if (!isset($records)) {
+				return FALSE;
+			}
+
 			if (sizeof($records) < 1) {
 				return FALSE;
 			}

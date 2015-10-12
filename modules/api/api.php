@@ -17,26 +17,40 @@
 			switch ($task) {
 				case "search":
 
-					if (isset($_GET["lat"])) {
-						$options["lat"] = $_GET["lat"];
+					if (isset($_GET["field"])) {
+						$options["field"] = $_GET["field"];
+
+						if (isset($_GET["data"])) {
+							$options["data"] = $_GET["data"];
+						}
+
+						if (isset($_GET["auth"])) {
+							$options["auth"] = $_GET["auth"];
+						}
+
 					} else {
-						return FALSE;
-					} //mandatory
-					if (isset($_GET["lng"])) {
-						$options["lng"] = $_GET["lng"];
-					} else {
-						return FALSE;
-					} //mandatory
-					if (isset($_GET["radius"])) {
-						$options["radius"] = $_GET["radius"];
-					} else {
-						return FALSE;
-					} //mandatory
-					if (isset($_GET["cat"])) {
-						if (is_numeric($_GET["cat"])) {
-							$options["cat"] = intval($_GET["cat"]);
+
+						if (isset($_GET["lat"])) {
+							$options["lat"] = $_GET["lat"];
 						} else {
-							$options["cat"] = $_GET["cat"];
+							return FALSE;
+						} //mandatory
+						if (isset($_GET["lng"])) {
+							$options["lng"] = $_GET["lng"];
+						} else {
+							return FALSE;
+						} //mandatory
+						if (isset($_GET["radius"])) {
+							$options["radius"] = $_GET["radius"];
+						} else {
+							return FALSE;
+						} //mandatory
+						if (isset($_GET["cat"])) {
+							if (is_numeric($_GET["cat"])) {
+								$options["cat"] = intval($_GET["cat"]);
+							} else {
+								$options["cat"] = $_GET["cat"];
+							}
 						}
 					}
 					$contents = $this->model('search', array($options));
