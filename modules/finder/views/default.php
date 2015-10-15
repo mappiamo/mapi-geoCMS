@@ -11,6 +11,12 @@
 	//print_r($data); die();
 
 ?>
+<article>
+	<div class="row main-title">
+		<div class="col-xs-12">
+			<!-- <h1 class="content-title"><span itemprop="name"><?php //MPut::_html( $page_title ); ?></span></h1> -->
+		</div>
+	</div>
 
 <?PHP
 
@@ -20,28 +26,19 @@
 
 		foreach ($contents as $content) { ?>
 
-			<div class="row main-header">
-				<div class="row content-title">
-					<div class="col-md-12">
 						<h3><a href="index.php?module=content&object=<?php echo intval($content['id']); ?>"><?php echo($content['title']); ?></a></h3>
-					</div>
-				</div>
-				<div class="row content-text">
-					<div class="col-md-12">
 						<p><?php echo mb_substr(strip_tags($content['text']), 0, 300, 'UTF-8'); ?>... </p>
-					</div>
-				</div>
 				<!-- <div class="row content-text">
 														<div class="col-md-12">
 																<a href="index.php?module=content&object=<?php //echo intval( $content->get_id() ); ?>"><?php //__('Leggi tutto'); ?>&nbsp;&gt;</a>
 														</div>
 												</div> -->
-			</div><hr>
+			<hr>
 
 		<?PHP }
 
 	} else {
 		echo $contents;
 	}
-
 ?>
+	</article>
