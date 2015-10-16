@@ -1,3 +1,10 @@
+$( document ).ready( function() {
+
+    $('#AddressButton').click(function() {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+    });
+});
+
 function MMap() {
         this.map = null;
         this.marker = null;

@@ -18,7 +18,11 @@ class MModel_Content {
 
 								<div style="clear: both;"></div>
 
-								<?php self::content_location( $post ); ?>
+							<br><br>
+							<button type="button" class="btn btn-default btn-sm" id="AddressButton">
+								<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<?php self::content_location( $post ); ?>
+							</button>
+
 						</div>
 				<?php
 		}
@@ -36,7 +40,11 @@ class MModel_Content {
 
 								<div style="clear: both;"></div>
 
-								<?php self::content_location( $place ); ?>
+							<br><br>
+							<button type="button" class="btn btn-default btn-sm" id="AddressButton">
+								<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<?php self::content_location( $place ); ?>
+							</button>
+
 						</div>
 				<?php
 		}
@@ -62,7 +70,11 @@ class MModel_Content {
 
 								<div style="clear: both;"></div>
 
-								<?php self::content_location( $event ); ?>
+							<br><br>
+							<button type="button" class="btn btn-default btn-sm" id="AddressButton">
+								<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<?php self::content_location( $event ); ?>
+							</button>
+
 						</div>
 				<?php
 		}

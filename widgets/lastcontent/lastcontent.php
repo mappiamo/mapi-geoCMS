@@ -8,12 +8,21 @@
 
 	defined('DACCESS') or die;
 
-	function mwidget_lastcontent($c_num = 5, $c_type = 'place', $c_order = 'created') {
+	function mwidget_lastcontent($c_num = 5, $c_type = 'place', $c_order = 'created', $c_filter = NULL) {
 
 		$lang = new M_Language;
 		$language = $lang->getLanguage();
 
-		$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')->where('type', $c_type)->order_by_desc($c_order)->limit($c_num)->find_array();
+		if (!$c_filter) {
+			$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')->where('type', $c_type)->order_by_desc($c_order)->limit($c_num)->find_array();
+		} else {
+			if ($c_filter ==  'now') {
+				$DateFilter = "`end` >= now() AND `start` <= now()";
+				$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')->where('type', $c_type)->where_raw($DateFilter)->order_by_desc($c_order)->limit($c_num)->find_array();
+			}
+		}
+
+
 		if ($contents) {
 			if ((is_array($contents)) && (count($contents) > 0)) {
 				foreach ($contents as $One_Content) { ?>
@@ -37,7 +46,7 @@
 							<div class="latest-content">
 								<?PHP
 									if ($c_type == 'event') {
-										echo '<span class="glyphicon glyphicon-circle-arrow-right"></span> ' . date('d-m-Y H:i', strtotime($One_Content['start'])) . ' <span class="glyphicon glyphicon-circle-arrow-left"></span> ' . date('d-m-Y H:i', strtotime($One_Content['end']));
+										echo '<span class="glyphicon glyphicon-circle-arrow-right"></span> ' . date('d-m-Y H:i', strtotime($One_Content['start'])) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-circle-arrow-left"></span> ' . date('d-m-Y H:i', strtotime($One_Content['end']));
 									}
 								?>
 								<p>
@@ -52,5 +61,9 @@
 
 				<?PHP }
 			}
-		}
+		} else { ?>
+			<div class="latest">
+				No running events today.
+			</div>
+		<?PHP }
 	}

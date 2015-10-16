@@ -20,6 +20,7 @@ defined( 'DACCESS' ) or die;
 				switch ( $data->get_type() ) {
 						case 'event': $this->model( 'display_event', $data ); break;
 						case 'place': $this->model( 'display_place', $data ); break;
+						//case 'route': $this->model( 'display_route', $data ); break;
 						default: $this->model( 'display_post', $data ); break;
 				}
 		?>

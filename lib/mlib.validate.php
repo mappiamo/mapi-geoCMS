@@ -4,7 +4,7 @@
 defined( 'DACCESS' ) or die;
 
 class MValidate {
-	
+
 		static function id( $value ) {
 				if ( ! ctype_digit( strval( $value ) ) ) return false;
 				return MValidate::numeric( intval( $value ), 'POZITIVE_NOZERO' );

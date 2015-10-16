@@ -13,6 +13,7 @@ function mwidget_content_slideshow() {
 			
 				?>
 				<script src="assets/js/jssor/jssor.options.js"></script>
+				<hr>
 				<div class="jssor_slider" id="slider_container">
 					<div class="lupe_icon"><img src="assets/js/jssor/icon-lupe.png"></div>
 					<div u="slides" class="jssor_slides">
