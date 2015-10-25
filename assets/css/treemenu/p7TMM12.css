@@ -1,0 +1,85 @@
+/* 
+  -----------------------------------
+  Tree Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Style Theme: 12 - Neon Align Left
+  -----------------------------------
+*/
+
+.p7TMM12 {
+	font-size: inherit;
+	font-family: Arial, Helvetica, sans-serif;
+	zoom: 1;
+}
+.p7TMM12 div {
+	zoom: 1;
+}
+.p7TMM12 ul {
+	margin: 0;
+	padding: 0;
+}
+.p7TMM12 li {
+	list-style-type: none;
+	margin: 0;
+}
+.p7TMM12 ul ul li {
+	padding-right: 10%;
+}
+.p7TMM12 ul a {
+	color: #69A4FE;
+	display: block;
+	padding: 8px 8px 8px 20px;
+	text-decoration: none;
+	zoom: 1;
+	outline: 0;
+	border: 1px solid #69A4FE;
+	margin-bottom: 4px;
+	text-align: left;
+}
+.p7TMM12 ul a:hover, .p7TMM12 ul a:focus, .p7TMM12 ul a:active {
+	text-decoration: underline;
+}
+.p7TMM12 ul ul a {
+	font-size: 90%;
+	padding: 4px 8px 4px 20px;
+}
+.p7TMM12 a.trig_closed {
+	background-image: url(img/tmm_neon_plusBlue.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-transform: uppercase;
+}
+.p7TMM12 a.trig_open {
+	background-image: url(img/tmm_neon_minusBlue.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-transform: uppercase;
+	text-decoration: underline;
+	font-weight: bold;
+}
+.p7TMM12 ul ul a.trig_open {
+	text-transform: uppercase;
+}
+.p7TMM12 a.current_mark {
+	font-weight:bold;
+}
+.p7TMM12 ul ul a.current_mark {
+	font-weight:bold;
+	color: #A26BD3;
+	text-transform: uppercase;
+}
+.p7TMMtoggle {
+	display:none;
+}
+.p7TMM12_toggle_all {
+	margin: 0 0 12px 0;
+}
+.p7TMM12_toggle_all a {
+	outline: 0;
+	color: #69A4FE;
+}
+.p7TMM12_toggle_all a:hover, .p7TMM12_toggle_all a:focus, .p7TMM12_toggle_all a:active {
+	color: #69A4FE;
+	text-decoration: underline;
+}

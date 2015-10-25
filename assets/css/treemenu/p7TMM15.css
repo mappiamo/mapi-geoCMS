@@ -1,0 +1,118 @@
+/* 
+  -----------------------------------
+  Tree Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Style Theme: 15 - Adaptations
+  -----------------------------------
+*/
+
+.p7TMM15 {
+	padding: 0;
+	zoom: 1;
+	border-bottom: 1px solid #000;
+	background-color: #222;
+	background: rgba(51,51,51,.6);
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+.p7TMM15 div {
+	zoom: 1;
+}
+.p7TMM15 ul {
+	margin: 0;
+	padding: 0;
+}
+.p7TMM15 ul div {
+	background-color: #AAA;
+	background: rgba(188,188,188,0.65);
+	box-shadow: inset 0px 0px 20px #777;
+}
+.p7TMM15 ul ul div {
+	background-color: transparent;
+	background-image: none;
+	box-shadow: none;
+}
+.p7TMM15 ul li {
+	list-style-type: none;
+}
+.p7TMM15 ul ul li {
+	padding-left: 1em;
+}
+.p7TMM15 ul a {
+	color: #CCC;
+	display: block;
+	padding: 6px 8px 6px 18px;
+	text-decoration: none;
+	zoom: 1;
+	outline: 0;
+}
+.p7TMM15 a.tmmlast {
+	border-bottom: 0;
+}
+.p7TMM15 ul a:hover, .p7TMM15 ul a:focus, .p7TMM15 ul a:active {
+	color: #FFF;
+}
+.p7TMM15 ul ul a {
+	font-size: .9em;
+	border: 0;
+	padding: 3px 8px 3px 18px;
+	color: #000;
+	background-color: transparent;
+	background-image: none;
+}
+.p7TMM15 ul ul a:hover, .p7TMM15 ul ul a:focus, .p7TMM15 ul ul a:active {
+	color: #FFF;
+	text-decoration: underline;
+}
+.p7TMM15 a.p7tmm_page {
+	background-image: url(img/tmm_page_square_gray.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7TMM15 ul ul a.p7tmm_page {
+	background-image: url(img/tmm_page_squareopen_white.gif);
+}
+.p7TMM15 ul ul a.p7tmm_page:hover {
+	background-image: url(img/tmm_page_square.gif);
+}
+.p7TMM15 a.trig_closed {
+	background-image: url(img/tmm_east_gray.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7TMM15 ul ul a.trig_closed {
+	background-image: url(img/tmm_east_black.gif);
+}
+.p7TMM15 a.trig_open {
+	background-image: url(img/tmm_south_gray.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	text-transform: uppercase;
+}
+.p7TMM15 ul ul a.trig_open {
+	color: #000 !important;
+	background-image: url(img/tmm_south_black.gif);
+	text-decoration: underline;
+}
+.p7TMM15 a.current_mark {
+	font-weight:bold;
+	text-transform: uppercase;
+}
+.p7TMM15 ul ul a.current_mark {
+	color:#000;
+}
+.p7TMMtoggle {
+	display:none;
+}
+.p7TMM15_toggle_all {
+	margin: 0 0 12px 0;
+}
+.p7TMM15_toggle_all a {
+	color: #000;
+	font-variant: small-caps;
+	outline: 0;
+}
+.p7TMM15_toggle_all a:hover, .p7TMM15_toggle_all a:focus, .p7TMM15_toggle_all a:active {
+	color: #C30;
+	text-decoration: underline;
+}
