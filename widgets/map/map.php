@@ -58,7 +58,7 @@
 						if ((count(array_filter($_GET)) == 0) || array_key_exists('lang', $_GET)) {
 						?>
 
-						var Circle_Layer = new L.geoJson().addTo(map);
+						/* var Circle_Layer = new L.geoJson().addTo(map);
 
 						<?PHP if ($language == 'en') { ?>
 							var FirstPopup = '<div class="FirstPopup">Please select one of <strong>Routes,</strong> or <strong>Areas,</strong> or <strong>Point of interest</strong> from the top menu.</div>';
@@ -70,7 +70,7 @@
 							color: 'red',
 							fillColor: '#f03',
 							fillOpacity: 0.3
-						}).addTo(Circle_Layer).bindPopup(FirstPopup, {offset: new L.Point(0, -70)}); //Circle_Layer.openPopup();
+						}).addTo(Circle_Layer).bindPopup(FirstPopup, {offset: new L.Point(0, -70)}); //Circle_Layer.openPopup(); */
 
 					<?PHP }
 					} ?>
