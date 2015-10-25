@@ -1,0 +1,228 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Horizontal
+  Style Theme: 16 - Mirage
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMh16 {
+	width: auto;
+	margin: 0 auto;
+	font-size: 14px;
+	text-align: left;
+	line-height: normal;
+	padding: 0;
+}
+/*Hide Sub-Menu in Design View*/
+.p7PMMh16 ul div {
+	display: none;
+	padding: 8px 0;
+}
+.p7PMMh16 ul ul div {
+	padding: 0;
+}
+/*The following rule positions third-level menus (the second sub-menu level) vertically to the middle of its trigger for menus set to open upwards.*/
+.p7PMMh16 .trig_closed_up ul div, .p7PMMh16 .trig_open_up ul div {
+	/*margin-top: -2em !important;*/
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMh16 ul {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+.p7PMMh16 li {
+	list-style-type: none;
+	float: left;
+	width: 120px;
+	margin-right: 6px;
+	padding: 8px 0;
+}
+/* Hide from IE5 Mac \*/
+.p7PMMh16 li {
+	width: auto;
+}
+/*Top Level Links*/
+.p7PMMh16 a {
+	display: block;
+	text-decoration: none;
+	padding: 12px 18px 12px 12px;
+	color: #000;
+	text-align: left;
+	text-transform: uppercase;
+	background-color: #C30;
+	border-top: 1px solid #E83A00;
+	border-right: 1px solid #B92F00;
+	border-bottom: 1px solid #B92F00;
+	border-left: 1px solid #E83A00;
+}
+.p7PMMh16 a:hover, .p7PMMh16 ul a.trig_open, .p7PMMh16 ul a.trig_open_up {
+	color: #FFF;
+	background-color: transparent;
+	border-color: transparent;
+	text-decoration: underline;
+}
+/*
+Syntax for special classes programatically assigned to first and last links and also LIs
+See user guide for more information
+*/
+.p7PMMh16 ul ul a.pmmfirst {
+	padding-left: 12px;
+	border-radius: 2px 2px 0 0;
+	-moz-border-radius: 2px 2px 0 0;
+	-webkit-border-radius: 2px 2px 0 0;
+}
+.p7PMMh16 ul ul a.pmmlast {
+	border-radius: 0 0 2px 2px;
+	-moz-border-radius: 0 0 2px 2px;
+	-webkit-border-radius: 0 0 2px 2px;
+}
+/*First Sub Level*/
+.p7PMMh16 ul ul {
+	z-index: 10000;
+	width: 200px;
+	border: 2px solid #666;
+	border-top-width: 0;
+	background-image: url(img/mirage-menu.png);
+	border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-box-shadow: 5px 5px 20px #000;
+	-webkit-box-shadow: 5px 5px 20px #000;
+	box-shadow: 5px 5px 20px #000;
+}
+.p7PMMh16 .trig_closed_up ul, .p7PMMh16 .trig_open_up ul {
+	border-top-width: 2px;
+	border-bottom-width: 0;
+	border-radius: 5px 5px 0 0;
+	-moz-border-radius: 5px 5px 0 0;
+	-webkit-border-radius: 5px 5px 0 0;
+}
+.p7PMMh16 ul ul li {
+	float: none;
+	margin-right: 0;
+	padding: 0;
+}
+.p7PMMh16 ul ul a {
+	padding: 5px 12px;
+	color: #CCC;
+	text-align: left;
+	border: 0;
+	overflow: hidden;
+	text-transform: none;
+	text-decoration: none;
+	background-color: transparent;
+}
+.p7PMMh16 ul ul a:hover, .p7PMMh16 ul ul a.trig_open, .p7PMMh16 ul ul a.trig_open_up {
+	background-color: #666;
+	color: #FFF;
+	background-image: none;
+	text-decoration: none;
+}
+/*Third Level (Flyouts in horizontal menu)*/
+.p7PMMh16 ul ul ul {
+	border-bottom-width: 2px !important;
+	border-top-width: 2px !important;
+	border-radius: 5px !important;
+	-moz-border-radius: 5px !important;
+	-webkit-border-radius: 5px !important;
+}
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMh16 img {
+	border: 0;
+}
+.p7PMMh16 .p7PMM_img {
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+
+/*Sub Level*/
+.p7PMMh16 ul a.trig_closed, .p7PMMh16 ul a.trig_closed_left {
+	background-image: url(img/pmm_south_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh16 ul a.trig_closed_up {
+	background-image: url(img/pmm_north_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh16 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_medium.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh16 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+/*The Current Marker (You are here) links*/
+.p7PMMh16 .current_mark {
+	font-weight: bold;
+	color: #000;
+	text-transform: uppercase;
+}
+.p7PMMh16 ul ul .current_mark {
+	color: #FFF;
+}
+
+/*
+Utility Rule used for Clearing floats in Horizontal Menus for earlier versions. For this style theme, the element is not used.
+*/
+.p7pmmclearfloat {
+	display: none;
+}
+
+/*
+NO-SCRIPT RULES
+The following rules enable your menu to work even when javascript is disabled in the browser
+*/
+.p7PMMh16.p7PMMnoscript {
+	position: relative;
+}
+.p7PMMh16.p7PMMnoscript ul div {
+	position: absolute;
+	display: block;
+	left: -9999px;
+	top: auto;
+	bottom: 100%;
+	padding: 0;
+}
+.p7PMMh16.p7PMMnoscript ul ul div {
+	left: -9999px;
+	top: 0px;
+}
+.p7PMMh16.p7PMMnoscript li:hover div {
+	display: block;
+	left: auto;
+}
+.p7PMMh16.p7PMMnoscript li:hover ul div, .p7PMMh16.p7PMMnoscript li:hover ul ul div, 
+.p7PMMh16.p7PMMnoscript li:hover ul ul ul div, .p7PMMh16.p7PMMnoscript li:hover ul ul ul ul div, 
+.p7PMMh16.p7PMMnoscript li:hover ul ul ul ul ul div {
+	left: -9999px;
+}
+.p7PMMh16.p7PMMnoscript li li:hover div, .p7PMMh16.p7PMMnoscript li li li:hover div, 
+.p7PMMh16.p7PMMnoscript li li li li:hover div, .p7PMMh16.p7PMMnoscript li li li li li:hover div, 
+.p7PMMh16.p7PMMnoscript li li li li li li:hover div {
+	left: 160px;
+	top: 1em;
+}

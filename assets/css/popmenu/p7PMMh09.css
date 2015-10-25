@@ -1,0 +1,170 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Horizontal
+  Style Theme: 09 - Pipes
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMh09 {
+	width: auto;
+	margin: 0 auto;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: inherit;
+	text-align: left;
+	line-height: normal;
+}
+/*Hide Sub-Menu in Design View
+Compensate for LI padding on Sliding Doors themes*/
+.p7PMMh09 ul div {
+	display: none;
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMh09 ul {
+	margin: 0;
+	padding: 0;
+}
+.p7PMMh09 li {
+	list-style-type: none;
+	float: left;
+	width: 120px;
+	background-image: url(img/pmm_pipe_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+/* Hide from IE5 Mac \*/
+.p7PMMh09 li {
+	width: auto;
+}
+/*Top Level Links*/
+.p7PMMh09 a {
+	display: block;
+	text-decoration: none;
+	padding: 8px 18px 8px 12px;
+	color: #000 !important;
+	text-align: left;
+	font-variant: small-caps;
+}
+.p7PMMh09 a:hover {
+	color: #F59D3D !important;
+}
+/*
+Syntax for special classes programatically assigned to first and last links and also LIs
+See user guide for more information
+*/
+.p7PMMh09 ul a.pmmfirst {
+}
+.p7PMMh09 ul a.pmmlast {
+}
+.p7PMMh09 ul li.pmmfirst {
+	background-image: none;
+}
+.p7PMMh09 ul li.pmmlast {
+}
+/*First Sub Level*/
+.p7PMMh09 ul ul {
+	z-index: 10000;
+	background-color: #F59D3D;
+	width: 200px;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+.p7PMMh09 ul ul li {
+	float: none;
+	background-image: none;
+}
+.p7PMMh09 ul ul a {
+	padding: 4px 12px;
+	color: #000 !important;
+	background-image: none;
+	text-align: left;
+	border: 0;
+	font-variant: normal;
+	font-size: .9em;
+	overflow: hidden;
+}
+.p7PMMh09 ul ul a:hover {
+	background-color: #000 !important;
+	color: #FFF !important;
+	background-image: none;
+}
+/*Third Level (Flyouts in horizontal menu)*/
+.p7PMMh09 ul ul ul {
+	border-top: 1px solid #F8BD7C;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	border-left: 1px solid #F8BD7C;
+}
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMh09 img {
+	border: 0;
+}
+.p7PMMh09 .p7PMM_img {
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+
+/*Sub Level*/
+.p7PMMh09 ul a.trig_closed, .p7PMMh09 ul a.trig_closed_left {
+	background-image: url(img/pmm_south_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh09 ul a.trig_closed_up {
+	background-image: url(img/pmm_north_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh09 ul a.trig_open, .p7PMMh09 ul a.trig_open_up {
+	color: #F59D3D !important;
+	text-decoration: underline;
+}
+.p7PMMh09 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh09 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMh09 ul ul a.trig_open {
+	color: #FFF !important;
+	background-color: #000 !important;
+}
+/*The Current Marker (You are here) links*/
+.p7PMMh09 .current_mark {
+	font-weight: bold;
+	color: #000 !important;
+	text-transform: uppercase;
+}
+.p7PMMh09 ul ul .current_mark {
+	color: #FFF !important;
+}
+
+/*
+Utility Rule used for Clearing floats in Horizontal Menus
+*/
+.p7pmmclearfloat {
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}

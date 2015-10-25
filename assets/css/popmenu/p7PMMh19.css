@@ -1,0 +1,199 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Horizontal
+  Style Theme: 19 - Adaptations
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMh19 {
+	width: auto;
+	margin: 0 auto;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+	font-size: inherit;
+	background-color: #333;
+	text-align: left;
+	line-height: normal;
+	box-shadow: inset 0px 20px 30px #000, 0px 0px 40px #BBB;
+	border-bottom: 1px solid #FFF;
+}
+/*Hide Sub-Menu in Design View*/
+.p7PMMh19 ul div {
+	display: none;
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMh19 ul {
+	margin: 0;
+	padding: 0;
+	display: inline-block;
+}
+.p7PMMh19 li {
+	list-style-type: none;
+	float: left;
+	width: 120px;
+}
+/* Hide from IE5 Mac \*/
+.p7PMMh19 li {
+	width: auto;
+}
+/*Top Level Links*/
+.p7PMMh19 a {
+	display: block;
+	text-decoration: none;
+	padding: 12px 18px 12px 12px;
+	color: #BBB !important;
+	border-right: 1px solid #000;
+	text-align: left;
+}
+.p7PMMh19 a:hover, .p7PMMh19 ul a.trig_open, .p7PMMh19 ul a.trig_open_up {
+	color: #FFF !important;
+	background-color: #999 !important;
+	box-shadow: inset 0px -40px 40px 6px #666;
+}
+/*
+Syntax for special classes programatically assigned to first and last links and also LIs
+See user guide for more information
+*/
+.p7PMMh19 ul a.pmmfirst {
+}
+.p7PMMh19 ul a.pmmlast {
+}
+.p7PMMh19 ul li.pmmfirst {
+}
+.p7PMMh19 ul li.pmmlast {
+}
+/*First Sub Level*/
+.p7PMMh19 ul ul {
+	z-index: 10000;
+	background-color: #999;
+	width: 200px;
+	border-right: 1px solid #000;
+	border-bottom: 1px solid #000;
+	box-shadow: inset 0px 50px 30px #666;
+}
+.p7PMMh19 ul ul li {
+	float: none;
+	background-image: none;
+}
+.p7PMMh19 ul ul a {
+	padding: 4px 12px;
+	color: #000 !important;
+	border-right: 0;
+	background-image: none;
+	text-align: left;
+	overflow: hidden;
+}
+.p7PMMh19 ul ul a:hover {
+	background-color: #333333 !important;
+	color: #FFF !important;
+	background-image: none;
+}
+/*Third Level (Flyouts in horizontal menu)*/
+.p7PMMh19 ul ul ul {
+	border-top: 1px solid #E0E0E0;
+	border-right: 1px solid #333;
+	border-bottom: 1px solid #333;
+	border-left: 1px solid #E0E0E0;
+}
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMh19 img {
+	border: 0;
+}
+.p7PMMh19 .p7PMM_img {
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+
+/*Sub Level*/
+.p7PMMh19 ul a.trig_closed, .p7PMMh19 ul a.trig_closed_left {
+	background-image: url(img/pmm_south_medium.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh19 ul a.trig_closed_up {
+	background-image: url(img/pmm_north_medium.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh19 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh19 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMh19 ul ul a.trig_open {
+	color: #FFF !important;
+	background-color: #333 !important;
+	box-shadow: none;
+}
+/*The Current Marker (You are here) links*/
+.p7PMMh19 .current_mark {
+	font-weight: bold;
+	color: #EEE !important;
+}
+.p7PMMh19 ul ul .current_mark {
+	color: #FFF !important;
+}
+
+/*
+Utility Rule used for Clearing floats in Horizontal Menus
+*/
+.p7pmmclearfloat {
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}
+
+/*
+NO-SCRIPT RULES
+The following rules enable your menu to work even when javascript is disabled in the browser
+*/
+.p7PMMh19.p7PMMnoscript {
+	position: relative;
+}
+.p7PMMh19.p7PMMnoscript ul div {
+	position: absolute;
+	display: block;
+	left: -9999px;
+	top: 98%;
+}
+.p7PMMh19.p7PMMnoscript ul ul div {
+	left: -9999px;
+	top: 0px;
+}
+.p7PMMh19.p7PMMnoscript li:hover div {
+	display: block;
+	left: auto;
+}
+.p7PMMh19.p7PMMnoscript li:hover ul div, .p7PMMh19.p7PMMnoscript li:hover ul ul div, 
+.p7PMMh19.p7PMMnoscript li:hover ul ul ul div, .p7PMMh19.p7PMMnoscript li:hover ul ul ul ul div, 
+.p7PMMh19.p7PMMnoscript li:hover ul ul ul ul ul div {
+	left: -9999px;
+}
+.p7PMMh19.p7PMMnoscript li li:hover div, .p7PMMh19.p7PMMnoscript li li li:hover div, 
+.p7PMMh19.p7PMMnoscript li li li li:hover div, .p7PMMh19.p7PMMnoscript li li li li li:hover div, 
+.p7PMMh19.p7PMMnoscript li li li li li li:hover div {
+	left: 190px;
+	top: 1em;
+}

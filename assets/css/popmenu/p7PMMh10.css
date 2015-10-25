@@ -1,0 +1,115 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Horizontal
+  Style Theme: 10 - Image-Based
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMh10 {
+	width: auto;
+	margin: 0 auto;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: inherit;
+	text-align: left;
+	line-height: normal;
+}
+/*Hide Sub-Menu in Design View*/
+.p7PMMh10 ul div {
+	display: none;
+}
+.p7PMMh10 ul a {
+	display: block;
+	text-decoration: none;
+	text-align: left;
+	border: 0;
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMh10 ul {
+	margin: 0;
+	padding: 0;
+}
+.p7PMMh10 li {
+	list-style-type: none;
+	float: left;
+}
+/*First Sub Level*/
+.p7PMMh10 ul ul {
+	width: 200px;
+}
+.p7PMMh10 ul ul li {
+	float: none;
+	background-color: #27B6D4;
+}
+.p7PMMh10 ul ul a {
+	padding: 4px 12px;
+	color: #000 !important;
+	text-align: left;
+	background-color: #27B6D4;
+	border-top: 1px solid #43C1DC;
+	border-right: 1px solid #229DB7;
+	border-bottom: 1px solid #229DB7;
+	border-left: 1px solid #43C1DC;
+}
+.p7PMMh10 ul ul a:hover {
+	background-color: #000 !important;
+	color: #FFF !important;
+	background-image: none;
+}
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMh10 img {
+	border: 0;
+	vertical-align: bottom;
+}
+.p7PMMh10 .p7PMM_img {
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+
+/*Sub Level*/
+.p7PMMh10 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh10 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMh10 ul ul a.trig_open {
+	color: #FFF !important;
+	background-color: #000 !important;
+}
+/*The Current Marker (You are here) links*/
+.p7PMMh10 ul ul .current_mark {
+	color: #FFF !important;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+/*
+Utility Rule used for Clearing floats in Horizontal Menus
+*/
+.p7pmmclearfloat {
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}

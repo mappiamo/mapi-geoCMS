@@ -1,0 +1,223 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Horizontal
+  Style Theme: 01 - Multicolor
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMh01 {
+	width: auto;
+	margin: 0 auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: inherit;
+	border-top: 1px solid #ECECEC;
+	background-color: #CCC;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
+	border-left: 1px solid #ECECEC;
+	text-align: left;
+	line-height: normal;
+}
+.p7PMMh01 .p7PMM {
+	margin: 0 auto;
+}
+/*Hide Sub-Menu in Design View*/
+.p7PMMh01 ul div {
+	display: none;
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMh01 ul {
+	margin: 0;
+	padding: 0;
+}
+.p7PMMh01 li {
+	list-style-type: none;
+	float: left;
+	width: 120px;
+	margin-top: 0px;
+}
+/* Hide from IE5 Mac \*/
+.p7PMMh01 li {width: auto;}
+/* End Hiding */
+
+/*Top Level Links*/
+.p7PMMh01 a {
+	display: block;
+	text-decoration: none;
+	padding: 8px 16px 8px 12px;
+	color: #000 !important;
+	background-color: #CCC !important;
+	border-left: 1px solid #000;
+	text-align: left;
+}
+.p7PMMh01 a:hover {
+	color: #FFF !important;
+	border-color: #000;
+	background-color: #333 !important;
+}
+/*
+Syntax for special classes programatically assigned to first and last links and also LIs
+See user guide for more information
+*/
+.p7PMMh01 ul a.pmmfirst {
+}
+.p7PMMh01 ul a.pmmlast {
+	border-right: 1px solid #000;
+}
+.p7PMMh01 ul ul a.pmmlast {
+	border-right: 0;
+}
+.p7PMMh01 ul li.pmmfirst {
+}
+.p7PMMh01 ul li.pmmlast {
+}
+/*First Sub Level*/
+.p7PMMh01 ul ul {
+	width: 200px;
+	border-bottom: 1px solid #000;
+	border-right: 1px solid #000;
+	border-left: 1px solid #000;
+	background-color: #333;
+}
+.p7PMMh01 ul ul li {
+	float: none;
+}
+.p7PMMh01 ul ul a {
+	padding: 4px 12px;
+	color: #CCC !important;
+	border-left: 0;
+	background-color: #333 !important;
+	text-align: left;
+	overflow: hidden;
+}
+.p7PMMh01 ul ul a:hover {
+	color: #EEE !important;
+	background-color: #666 !important;
+}
+/*Third Level (Flyouts in horizontal menu)*/
+.p7PMMh01 ul ul ul {
+	border: 1px solid #000;
+}
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMh01 img {
+	border: 0;
+}
+.p7PMMh01 .p7PMM_img {
+	padding: 0;
+	border: 0;
+}
+/*Special Multicolor Rules*/
+/*Special Multicolor Rules*/
+.p7PMMh01 .root_1 li, .p7PMMh01 .root_1 ul a, .p7PMMh01 .root_1 a:hover,
+.p7PMMh01 .root_1 a.trig_open, .p7PMMh01 .root_1 a.trig_open_left, 
+.p7PMMh01 .root_1 a.trig_open_up {
+	background-color: #333 !important;
+	color: #D8D8D8 !important;
+	border-color: #000;
+}
+.p7PMMh01 .root_2 li, .p7PMMh01 .root_2 ul a, .p7PMMh01 .root_2 a:hover,
+.p7PMMh01 .root_2 a.trig_open, .p7PMMh01 .root_2 a.trig_open_left,
+.p7PMMh01 .root_2 a.trig_open_up {
+	background-color: #956F84 !important;
+	color: #FFF !important;
+	border-color: #000;
+}
+.p7PMMh01 .root_3 li, .p7PMMh01 .root_3 ul a, .p7PMMh01 .root_3 a:hover,
+.p7PMMh01 .root_3 a.trig_open, .p7PMMh01 .root_3 a.trig_open_left,
+.p7PMMh01 .root_3 a.trig_open_up {
+	background-color: #669CC4 !important;
+	color: #FFF !important;
+	border-color: #000;
+}
+.p7PMMh01 .root_4 li, .p7PMMh01 .root_4 ul a, .p7PMMh01 .root_4 a:hover,
+.p7PMMh01 .root_4 a.trig_open, .p7PMMh01 .root_4 a.trig_open_left,
+.p7PMMh01 .root_4 a.trig_open_up {
+	background-color: #C1DF4A !important;
+	color: #000 !important;
+	border-color: #000;
+}
+.p7PMMh01 .root_5 li, .p7PMMh01 .root_5 ul a, .p7PMMh01 .root_5 a:hover,
+.p7PMMh01 .root_5 a.trig_open, .p7PMMh01 .root_5 a.trig_open_left,
+.p7PMMh01 .root_5 a.trig_open_up {
+	background-color: #FFDB4A !important;
+	color: #000 !important;
+	border-color: #000;
+}
+.p7PMMh01 .root_1 ul a:hover, .p7PMMh01 .root_1 ul a.trig_open, .p7PMMh01 .root_1 ul a.trig_open_left {
+	background-color: #666 !important;
+	color: #FFF !important;
+}
+.p7PMMh01 .root_2 ul a:hover, .p7PMMh01 .root_2 ul a.trig_open, .p7PMMh01 .root_2 ul a.trig_open_left {
+	background-color: #A68898 !important;
+	color: #000 !important;
+}
+.p7PMMh01 .root_3 ul a:hover, .p7PMMh01 .root_3 ul a.trig_open, .p7PMMh01 .root_3 ul a.trig_open_left {
+	background-color: #98BDD8 !important;
+	color: #000 !important;
+}
+.p7PMMh01 .root_4 ul a:hover, .p7PMMh01 .root_4 ul a.trig_open, .p7PMMh01 .root_4 ul a.trig_open_left {
+	background-color: #9EBE21 !important;
+	color: #FFF !important;
+}
+.p7PMMh01 .root_5 ul a:hover, .p7PMMh01 .root_5 ul a.trig_open, .p7PMMh01 .root_5 ul a.trig_open_left {
+	background-color: #333 !important;
+	color: #FFF !important;
+}
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+.p7PMMh01 ul a.trig_closed, .p7PMMh01 ul a.trig_closed_left {
+	background-image: url(img/pmm_south_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh01 ul a.trig_closed_up {
+	background-image: url(img/pmm_north_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+/*Sub Level*/
+.p7PMMh01 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_light.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh01 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMh01 ul a.trig_open, .p7PMMh01 ul a.trig_open_up {
+	color: #CCC !important;
+	background-color: #333 !important;
+}
+.p7PMMh01 ul ul a.trig_open {
+	color: #EEE !important;
+	background-color: #666 !important;
+}
+/*The Current Marker (You are here) links*/
+.p7PMMh01 .current_mark {
+	font-weight: bold;
+	color: #ffffff !important;
+}
+/*
+Utility Rule used for Clearing floats in Horizontal Menus
+*/
+.p7pmmclearfloat {
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}
