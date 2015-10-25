@@ -100,6 +100,7 @@ class M_Assets {
 						'css'	=> array(
 								'bootstrap/bootstrap.min',
 								'bootstrap/bootstrap-theme.min',
+								//'bootstrap-material/material.min',
 								'lightbox/lightbox',
 								'slide/slide',
 								'leaflet/leaflet',
@@ -118,6 +119,7 @@ class M_Assets {
 								'jquery/jquery-1.8.0',
 								'jquery-geo/jquery.geo.core',
 								'bootstrap/bootstrap.min',
+								//'bootstrap-material/material.min',
 								'leaflet/leaflet',
 								'leaflet-photomarker/PhotoMarkerMatrix',
 								'leaflet-photomarker/PhotoMarker',

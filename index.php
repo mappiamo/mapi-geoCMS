@@ -25,7 +25,7 @@ define( 'RPATH', $rpath );
 define( 'ENV', 'frontend' );
 
 $geocoder = null;
-$coords = array( 'lat' => 0, 'lng' => 0 );
+$coords = array( 'lat' => 40.36329, 'lng' => 18.17278 );
 $content = null;
 
 if ( ! is_file( 'mappiamo.php' ) || ! is_readable( 'mappiamo.php' ) ) die;

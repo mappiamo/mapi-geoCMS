@@ -45,7 +45,7 @@ class MValidate {
 		static function url( $value ) {
 				if ( ! MValidate::string( $value ) ) return false;
 
-				$domain = '([a-z]+([a-z0-9\-]*[a-z0-9])?\.)+[a-z]{2,}';
+				$domain = '([a-z]+([a-z0-9\-]*[a-z0-9])?\.)+[a-z]{2,}|\#';
 				$ip = '(?:(?:[01]?\d?\d|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d?\d|2[0-4]\d|25[0-5])';
 				$host = '[a-z \:]+(?:[a-z0-9\-]*[a-z0-9]\.?|\.)*';
 
