@@ -158,7 +158,7 @@
 										$PlaceData = ORM::for_table('contents')->select('title')->select('route', 'point')->select('id')->select('lat')->select('lng')->select('start')->select('end')->select('address')->select('text')->where_raw($QueryString)->where('enabled', 1)->where('language', $contentlang)->find_array();
 									}
 								} else {
-									$PlaceData = ORM::for_table('contents')->select('title')->select('route', 'point')->select('id')->select('lat')->select('lng')->select('start')->select('end')->select('address')->select('text')->where_raw($QueryString)->where('enabled', 1)->where('type', $type_filter)->where('language', $contentlang)->find_array();
+									$PlaceData = ORM::for_table('contents')->select('title')->select('route', 'point')->select('id')->select('lat')->select('lng')->select('start')->select('end')->select('address')->select('text')->where_raw($QueryString)->where('enabled', 1)->where('language', $contentlang)->find_array();
 								}
 							} else {
 								//$PlaceData = ORM::for_table('contents')->select_many('id', 'lat', 'lng')->where_raw($QueryString)->where('enabled', 1)->where('type', 'place')->find_array();
@@ -168,7 +168,7 @@
 										$PlaceData = ORM::for_table('contents')->raw_query($PlaceQuery)->where('enabled', 1)->where('language', $contentlang)->find_array();
 									}
 								} else {
-									$PlaceData = ORM::for_table('contents')->raw_query($PlaceQuery)->where('type', $type_filter)->where('enabled', 1)->where('language', $contentlang)->find_array();
+									$PlaceData = ORM::for_table('contents')->raw_query($PlaceQuery)->where('enabled', 1)->where('language', $contentlang)->find_array();
 								}
 								foreach ($PlaceData as $PlaceKey => $OnePlace_array) {
 									$PlaceData[$PlaceKey]['point'] = 'POINT(' . $OnePlace_array['lng'] . ' ' . $OnePlace_array['lat'] . ')';
