@@ -10,7 +10,7 @@ function MMap() {
         this.marker = null;
         this.markers = new Array();
 
-        this.proba = 'hello!';
+        //this.proba = 'hello!';
 
         this.set_lat = function( lat ) {
                 if ( typeof( lat ) !== 'number' ) this.lat = 40.36329;
@@ -38,13 +38,35 @@ function MMap() {
 
                 L.control.zoom( { position: 'topleft' } ).addTo( this.map );
 
-                L.tileLayer( 
-                        'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
-                        {
-                                attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Powered by © <a href="http://www.mappiamo.org">#mappiamo</a>',
-                                maxZoom: 18
-                        }
-                ).addTo( this.map );
+            L.tileLayer(
+             'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+             {
+             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Powered by © <a href="http://www.mappiamo.org">#mappiamo</a>',
+             maxZoom: 18
+             }
+             ).addTo( this.map );
+
+
+            /* var osmTiles = L.tileLayer(
+                'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                {
+                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Powered by © <a href="http://www.mappiamo.org">#mappiamo</a>',
+                    maxZoom: 18
+                }
+            );
+            var ortoPiemonte = L.tileLayer.wms("http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010?", {
+                layers: 'OrtofotoRegione2010',
+                format: 'image/png',
+                transparent: true,
+                attribution: "Ortofoto Regione Piemonte 2010"
+            }).addTo(this.map);
+
+            var baseMaps = {
+                "OSM": osmTiles,
+                "Ortofoto Piemonte": ortoPiemonte
+            };
+            L.control.layers(baseMaps, {}).addTo(this.map); */
+
         }
 
         this.create_marker = function( drag ) {
