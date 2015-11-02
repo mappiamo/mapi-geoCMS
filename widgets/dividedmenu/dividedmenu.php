@@ -32,7 +32,7 @@
 
 					?>
 					<div<?php echo $class.$id; ?> style="position: relative;">
-						<a href="<?php echo $TheRealLink; //MPut::_link( $page->get_url() ); ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
+						<a href="<?php MPut::_link( $page->get_url() ); //echo $TheRealLink; ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
 							<?php //MPut::_html( $page->get_title() ); ?>
 							<?php __( $page->get_title() ); ?>
 						</a>

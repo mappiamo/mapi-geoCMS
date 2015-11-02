@@ -49,11 +49,13 @@
 											$QueryString .= '`id` = ' .  $ContentID . ' OR ';
 										}
 									}
+
+									$QueryString = '(' . rtrim($QueryString, ' OR ') . ')';
+									$PlaceSearch_category = ORM::for_table('contents')->select('title')->select('route', 'point')->select('id')->select('lat')->select('lng')->select('start')->select('end')->select('address')->select('text')->where_raw($QueryString)->where('enabled', 1)->where('language', $contentlang)->find_array();
+
 								}
 							}
 						}
-						$QueryString = '(' . rtrim($QueryString, ' OR ') . ')';
-						$PlaceSearch_category = ORM::for_table('contents')->select('title')->select('route', 'point')->select('id')->select('lat')->select('lng')->select('start')->select('end')->select('address')->select('text')->where_raw($QueryString)->where('enabled', 1)->where('language', $contentlang)->find_array();
 					}
 				}
 

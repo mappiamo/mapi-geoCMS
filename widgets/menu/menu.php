@@ -46,11 +46,10 @@ function mwidget_menu( $menu_id, $class = null, $id = null ) {
 												?>
 												<?PHP if ((($page->is_enabled()) == 1) && ($ContentEnabled == 1)) { ?>
 												<?PHP if ($page->page_on_blank() == TRUE) { $TargetString = '_blank'; } else { $TargetString = '_self'; } ?>
-														<li><span class="subtext_container">
-																<a href="<?php echo $TheRealLink; //MPut::_link( $page->get_url() ); ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
+														<li>
+																<a href="<?php MPut::_link( $page->get_url() ); //echo $TheRealLink; ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>">
 																		<?php MPut::_html( $page->get_title() ); ?>
 																</a>
-																</span>
 														</li>
 												<?PHP } ?>
 										<?php endforeach; ?>

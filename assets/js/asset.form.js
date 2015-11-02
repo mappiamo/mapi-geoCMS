@@ -262,7 +262,7 @@ function MPage() {
             content_id = selected.val();
         }
 
-        var url = this.base_url;
+        var url = ''; //this.base_url;
         if (content_id) url += 'index.php?module=content&object=' + content_id;
 
         $('#page_url').val(url);
@@ -277,7 +277,7 @@ function MPage() {
             category_id = selected.val();
         }
 
-        var url = this.base_url;
+        var url = ''; //this.base_url;
         //var pathname = window.location.pathname;
         //var pathname = window.location.pathname.split('/')[1] + "/";
         //var pathname = window.location.pathname.substring(0, window.location.pathname.lastIndexOf("/"));
@@ -296,7 +296,7 @@ function MPage() {
             return this.value;
         }).get();
 
-        var url = this.base_url;
+        var url = ''; //this.base_url;
 
         if (events.length > 0) {
             url += 'index.php?module=event&object={' + events + '}';
@@ -343,7 +343,7 @@ function MPage() {
         var module_name = $("[name='module_name']").find(':selected').val();
         var module_task = $("[name='module_task']").val();
 
-        var url = this.base_url;
+        var url = ''; //this.base_url;
         if (module_name.length > 0) url += 'index.php?module=' + module_name;
         if (module_task.length > 0) url += '&task=' + module_task;
 

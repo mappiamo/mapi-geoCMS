@@ -55,6 +55,7 @@
 
 						<?PHP
 							unset($FullMenuResult['data']);
+
 							foreach ($FullMenuResult as $MenuKey => $MenuData) {
 
 							if (array_key_exists('subtitles', $MenuData)) { ?>
@@ -62,12 +63,17 @@
 								<?PHP if ($LinkType == 'link') { ?>
 									<li><a href="<?PHP echo $MenuData['url']; ?>"><?PHP echo $MenuData['title']; ?></a>
 								<?PHP } elseif ($LinkType == 'check') { ?>
-									<?PHP if (filter_var($MenuData['url'], FILTER_VALIDATE_URL)) {
+									<?PHP //if (filter_var($MenuData['url'], FILTER_VALIDATE_URL)) {
+										if (MValidate::url($MenuData['url'])) {
 										$TheQuery = parse_url($MenuData['url'], PHP_URL_QUERY);
 										parse_str($TheQuery, $outputID);
-										?>
 
-										<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $MenuData['title']; ?></label></a>
+										if (isset($outputID['object'])) {
+										?>
+											<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object']; ?>"> <?PHP echo $MenuData['title']; ?></label></a>
+										<?PHP } else { ?>
+											<li><a href="#"><?PHP echo $MenuData['title']; ?></a>
+										<?PHP } ?>
 									<?PHP } else { ?>
 										<li><a href="#"><?PHP echo $MenuData['title']; ?></a>
 									<?PHP } ?>
@@ -81,11 +87,19 @@
 												<?PHP if ($LinkType == 'link') { ?>
 													<li><a href="<?PHP echo $MenuData['suburls'][$SubKey]; ?>"><?PHP echo $Subval; ?></a></li>
 												<?PHP } elseif ($LinkType == 'check') { ?>
-													<?PHP if (filter_var($MenuData['suburls'][$SubKey], FILTER_VALIDATE_URL)) {
+													<?PHP //if (filter_var($MenuData['suburls'][$SubKey], FILTER_VALIDATE_URL)) {
+														if (MValidate::url($MenuData['suburls'][$SubKey])) {
 														$TheQuery = parse_url($MenuData['suburls'][$SubKey], PHP_URL_QUERY);
 														parse_str($TheQuery, $outputID);
+
+														if (isset($outputID['object'])) {
 														?>
-														<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $Subval; ?></label></a></li>
+
+															<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $Subval; ?></label></a></li>
+														<?PHP } else { ?>
+															<li><a href="#"><?PHP echo $MenuData['title']; ?></a>
+														<?PHP } ?>
+
 													<?PHP } else { ?>
 														<li><a href="#"><?PHP echo $Subval; ?></a></li>
 													<?PHP } ?>
@@ -102,11 +116,19 @@
 								<?PHP if ($LinkType == 'link') { ?>
 									<li><a href="<?PHP echo $MenuData['url']; ?>"><?PHP echo $MenuData['title']; ?></a></li>
 								<?PHP } elseif ($LinkType == 'check') { ?>
-									<?PHP if (filter_var($MenuData['url'], FILTER_VALIDATE_URL)) {
+									<?PHP //if (filter_var($MenuData['url'], FILTER_VALIDATE_URL)) {
+										if (MValidate::url($MenuData['url'])) {
 										$TheQuery = parse_url($MenuData['url'], PHP_URL_QUERY);
 										parse_str($TheQuery, $outputID);
+
+										if (isset($outputID['object'])) {
 										?>
-										<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $MenuData['title']; ?></label></a></li>
+
+											<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $MenuData['title']; ?></label></a></li>
+										<?PHP } else { ?>
+											<li><a href="#"><?PHP echo $MenuData['title']; ?></a>
+										<?PHP } ?>
+
 									<?PHP } else { ?>
 										<li><a href="#"><?PHP echo $MenuData['title']; ?></a></li>
 									<?PHP } ?>
@@ -142,7 +164,7 @@
 			<script type="text/javascript">
 				<!--
 				<?PHP if ($ClassKeyword == 'TMM') { ?>
-					P7_TMMop('p7TMM_<?PHP echo $ClassID; ?>',1,0,0,3,1,1,0,0,-1,150);
+					P7_TMMop('p7TMM_<?PHP echo $ClassID; ?>',1,0,0,3,1,1,0,1,-1,150);
 				<?PHP } elseif ($ClassKeyword == 'PMM') { ?>
 					P7_PMMop('p7PMM_<?PHP echo $ClassID; ?>',0,3,0,0,0,0,0,1,0,3,0,0,0);
 				<?PHP } ?>

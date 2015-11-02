@@ -84,6 +84,7 @@ class M_Template extends M_Extension {
 								echo '<meta name="' . MPut::html_attr( $key ) . '" content="' . MPut::html_attr( $value ) . '" />' . "\n\t";
 						}
 				}
+			//echo '<base href="' . rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\') . '/">';
 		}
 
 		public function js() {

@@ -35,7 +35,7 @@ function mwidget_dropdownmenu( $menu_item ) {
 							?>
 										<div style="position: relative; margin:6px; text-align:left;">
 												<li style="white-space:nowrap;">
-												<a href="<?php echo $TheRealLink; //MPut::_link( $page->get_url() ); ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>" style="margin: 6px 0; font-size: 13px;">
+												<a href="<?php MPut::_link( $page->get_url() ); //echo $TheRealLink; ?>" target="<?PHP echo $TargetString; ?>" title="<?php MPut::_html_attr( $page->get_title() ); ?>" style="margin: 6px 0; font-size: 13px;">
 														<?php //MPut::_html( $page->get_title() ); ?>
 														<?php __( $page->get_title() ); ?>
 												</a>
