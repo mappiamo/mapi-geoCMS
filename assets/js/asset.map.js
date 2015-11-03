@@ -171,6 +171,7 @@ function MMap() {
                                 if ( result.status === 'OK' ) {
                                         if ( $( '#DefaultLatitude' ) ) $( '#DefaultLatitude' ).val( result.lat );
                                         if ( $( '#DefaultLongitude' ) ) $( '#DefaultLongitude' ).val( result.lng );
+                                        map.panTo( [result.lat, result.lng] );
                                 } else {
                                         alert( 'Address not found!' );
                                 }

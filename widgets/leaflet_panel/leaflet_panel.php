@@ -15,7 +15,7 @@
 		$TemplateName = new layermodels();
 		$TemplateResult = $TemplateName->GetTemplateName();
 
-		include_once('templates/' . $TemplateResult . '/search.php');
+		include_once('templates/' . $TemplateResult . '/address_search.php');
 		include_once('templates/' . $TemplateResult . '/category_panel.php');
 		include_once('templates/' . $TemplateResult . '/classified_panel.php');
 		include_once('templates/' . $TemplateResult . '/pages_panel.php');

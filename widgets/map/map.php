@@ -28,8 +28,8 @@
 				<script>
 					var mmap = new MMap();
 					mmap.set_zoom(<?php MPut::_numeric( $zoom ); ?>);
-                    mmap.set_lat(<?php echo $coords['lat'];?>);
-                    mmap.set_lng(<?php echo $coords['lng'];?>);
+					mmap.set_lat(<?php echo $coords['lat'];?>);
+					mmap.set_lng(<?php echo $coords['lng'];?>);
 					mmap.create_map('mmap');
 
 					mmap.address_search();
@@ -181,7 +181,6 @@
 				mmap.set_zoom(<?php MPut::_numeric( $zoom ); ?>);
 				mmap.set_lat(<?php MPut::_numeric( $coords['lat'] ); ?>);
 				mmap.set_lng(<?php MPut::_numeric( $coords['lng'] ); ?>);
-
 
 				mmap.create_map('mmap');
 

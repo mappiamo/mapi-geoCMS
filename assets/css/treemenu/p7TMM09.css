@@ -12,7 +12,8 @@
 	font-family: Arial, Helvetica, sans-serif;
 	padding: 6px;
 	zoom: 1;
-	background-color: #222;
+	/* background-color: #222; */
+	background-color: #E1E1D0;
 }
 .p7TMM09 div {
 	zoom: 1;
@@ -99,18 +100,20 @@
 }
 /*First Root Menu*/
 .p7TMM09 .root_1 ul, .p7TMM09 .root_1 a.trig_closed {
-	border-top: 1px solid #FFD942;
+	/* border-top: 1px solid #FFD942;
 	border-right: 1px solid #E6B800;
 	border-bottom: 1px solid #E6B800;
 	border-left: 1px solid #FFD942;
-	background-color: #FC0;
+	background-color: #FC0; */
+	background-color: #F7F7DB;
 	color: #000;
 }
 .p7TMM09 .root_1 ul a:hover, .p7TMM09 .root_1 ul a:focus, .p7TMM09 .root_1 ul a:active {
 	color: #039;
 }
 .p7TMM09 .root_1 a.trig_open {
-	color: #FFF;
+	/* color: #FFF; */
+	color: #5a5a5a;
 	border: 0;
 	background-color: transparent;
 }
