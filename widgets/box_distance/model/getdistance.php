@@ -25,8 +25,28 @@
 				if ($content_data['type'] == 'route') {
 					$SeekTitle = $content_data['title'];
 					$SeekName = $content_data['name'];
-					$get_similar_byaddress = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address')->where_like('address', '%' . $SeekTitle . '%')->where('type', 'place')->where('language', $language)->where('enabled', 1)->order_by_asc('title')->find_array();
-					$get_similar_byid = ORM::for_table('categories')->select_many('id', 'contents', 'title')->where_like('name', '%' . $SeekName . '%')->find_array();
+					$TheGEOMData = $content_data['route'];
+					$Geomtype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$TheGEOMData')) AS GEOMType";
+					$Geomtype = ORM::for_table('contents')->raw_query($Geomtype_SQL)->where('enabled', 1)->find_array();
+
+					if ($Geomtype[0]['GEOMType'] == 'MULTIPOLYGON') {
+						$PlacesArray = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address', 'lat', 'lng', 'route')->where('type', 'place')->where('enabled', 1)->where('language', $language)->find_array();
+
+						foreach ($PlacesArray as $PlaceKey => $PlaceVal) {
+							if ($PlaceVal['route']) {
+								$PlaceString = $PlaceVal['route'];
+								$Filter_SQL =
+								"SELECT ST_Contains(ST_GeomFromText('$TheGEOMData', 4326), ST_GeomFromText('$PlaceString', 4326)) AS FilterResult";
+								$Filter_DATA = ORM::for_table('contents')->raw_query($Filter_SQL)->find_array();
+								if ($Filter_DATA[0]['FilterResult'] == TRUE) {
+									$get_similar_byaddress[] = $PlaceVal;
+								}
+							}
+						}
+					} else {
+						$get_similar_byaddress = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address')->where_like('address', '%' . $SeekTitle . '%')->where('type', 'place')->where('language', $language)->where('enabled', 1)->order_by_asc('title')->find_array();
+						$get_similar_byid = ORM::for_table('categories')->select_many('id', 'contents', 'title')->where_like('name', '%' . $SeekName . '%')->find_array();
+					}
 
 					if (count($get_similar_byaddress) > 0) {
 						foreach ($get_similar_byaddress as $OneByAddress) {

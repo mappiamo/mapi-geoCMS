@@ -39,7 +39,7 @@
 	border-bottom: 1px solid #000;
 }
 .p7TMM09 ul ul li {
-	padding-left: 1em;
+	/* padding-left: 1em; */
 }
 .p7TMM09 ul ul li {
 	border-bottom: 0;
@@ -68,7 +68,7 @@
 	border: 0 !important;
 }
 .p7TMM09 a.p7tmm_page {
-	background-image: url(img/tmm_page_square.gif);
+	/* background-image: url(img/tmm_page_square.gif); */
 	background-repeat: no-repeat;
 	background-position: left center;
 }

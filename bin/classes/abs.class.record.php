@@ -66,8 +66,12 @@
 			$created = array('when' => $this->created, 'by' => $this->createdby);
 
 			$user = MObject::get('user', $this->createdby);
+
 			if ($user && $user->get_username()) {
 				$created['by_user'] = $user->get_username();
+			}
+			if ($user && $user->get_email()) {
+				$created['by_email'] = $user->get_email();
 			}
 			if ($user && $user->get_name()) {
 				$created['by_name'] = $user->get_name();

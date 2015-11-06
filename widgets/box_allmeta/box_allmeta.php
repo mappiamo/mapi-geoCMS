@@ -10,7 +10,7 @@
 	$MetaResult = $AllMeta->getmetadata($id);
 
 		if ($MetaResult) {
-			$DisabledMeta = array('vincoli', 'parent_id', 'route-color', 'creazione', 'modifica', 'utilizzo_attuale', 'notizie_storiche', 'epoca', 'bibliografia', 'bibliografia_fonti', 'x', 'y', 'tipologia', 'categoria', 'tipo_itine', 'icon-file');
+			$DisabledMeta = array('vincoli', 'parent_id', 'image0_thumb_middle', 'image0_thumb_small', 'audio', 'route-color', 'creazione', 'modifica', 'utilizzo_attuale', 'notizie_storiche', 'epoca', 'bibliografia', 'bibliography', 'bibliografia_fonti', 'x', 'y', 'tipologia', 'categoria', 'tipo_itine', 'icon-file');
 			?>
 
 			<div class="box_container">

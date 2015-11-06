@@ -10,7 +10,12 @@
 
 	function mwidget_address() { ?>
 
-		<input type="hidden" name="mapi_csrf" id="mapi_csrf" value="<?php echo $_SESSION['mapi_csrf']; ?>" />
+		<?PHP if (isset($_SESSION['mapi_csrf'])) { ?>
+			<input type="hidden" name="mapi_csrf" id="mapi_csrf" value="<?php echo $_SESSION['mapi_csrf']; ?>" />
+		<?PHP } else { ?>
+			<input type="hidden" name="mapi_csrf" id="mapi_csrf" value="" />
+		<?PHP } ?>
+
 		<input type="text" name="search" id="address_search_input" class="text" value="" placeholder="Address, City, Country"/>
 		<input type="submit" name="search_button" id="address_search_button" class="button" value="Go!" />
 
