@@ -81,14 +81,22 @@ class MModel_Content {
 
 		static function content_props( $content ) {
 				$created = $content->created();
-				
+
 				?>
 						<div class="content-data">
-								<img src="media/images/avatar.png" style="height: 42px; position: relative; top: -8px;" />
+
+								<?PHP if (!isset($created['by_email'])) { ?>
+									<img src="<?PHP M_Template::widget('gravatar', array(NULL)); ?>" style="height: 42px; border-radius: 21px; position: relative; top: -8px;" />
+								<?PHP } else { $CreatorMail = $created['by_email']; ?>
+									<img src="<?PHP M_Template::widget('gravatar', array($CreatorMail)); ?>" style="height: 42px; border-radius: 21px; position: relative; top: -8px;" />
+								<?PHP } ?>
+
 								<div style="display: inline-block; font-size: 10pt;">
-										<?php if( isset( $created['by_name'] ) ): ?>
+										<?php if( isset( $created['by_name'] ) ) { ?>
 							  					<span itemprop="author"><?php MPut::_html( $created['by_name'] ); ?></span>, &nbsp;
-							  			<?php endif; ?>
+							  			<?php } else { ?>
+													<span itemprop="author">Unknown author</span>, &nbsp;
+											<?PHP } ?>
 										<?php if( isset( $created['when'] ) ): ?>
 												<br />
 												<span itemprop="datePublished"><?php MPut::_html( $created['when'] ); ?></span>
