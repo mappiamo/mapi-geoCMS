@@ -24,8 +24,11 @@
 
 
 		if ($contents) {
-			if ((is_array($contents)) && (count($contents) > 0)) {
-				foreach ($contents as $One_Content) { ?>
+			if ((is_array($contents)) && (count($contents) > 0)) { ?>
+
+				<h3 class="color">Latest contents:</h3>
+
+				<?PHP foreach ($contents as $One_Content) { ?>
 
 					<div class="latest">
 						<a href="index.php?module=content&object=<?PHP echo $One_Content['id']; ?>" title="<?PHP echo $One_Content['title']; ?>"><h3 class="color"><?PHP echo $One_Content['title']; ?></h3></a>
