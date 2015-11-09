@@ -27,10 +27,10 @@
 
 		$ClassID = rand(1000,9999);
 
-			if (strpos($IsScriptLoaded, $AssetDir . '_' . $ClassKeyword . '-') === false) { ?>
-				<script type="text/javascript" src="assets/js/<?PHP echo $AssetDir; ?>/p7<?PHP echo $ClassKeyword; ?>scripts.js"></script>
-			<?PHP
-			}
+		if (strpos($IsScriptLoaded, $AssetDir . '_' . $ClassKeyword . '-') === false) { ?>
+			<script type="text/javascript" src="assets/js/<?PHP echo $AssetDir; ?>/p7<?PHP echo $ClassKeyword; ?>scripts.js"></script>
+		<?PHP
+		}
 
 		if (strpos($IsCSSLoaded, $AssetDir . '_' . $ClassKeyword . '_' . $TemplateNum . '-') === false) { ?>
 			<link href="assets/css/<?PHP echo $AssetDir; ?>/p7<?PHP echo $ClassKeyword; ?><?PHP echo $TemplateNum; ?>.css" rel="stylesheet" media="all">

@@ -12,10 +12,6 @@
 
 		<?PHP if ((is_array($OWL_Data)) && count($OWL_Data) > 1) { ?>
 
-			<link rel="stylesheet" href="widgets/owl_video/css_js/owl.carousel.css"/>
-			<link rel="stylesheet" href="widgets/owl_video/css_js/owl.theme.css"/>
-			<script type="text/javascript" src="widgets/owl_video/css_js/owl.carousel.min.js"></script>
-
 			<div id="owl-movie" class="owl-carousel">
 
 				<?PHP foreach($OWL_Data as $OneContent) { ?>
