@@ -74,6 +74,7 @@
 					$("#owl-images").owlCarousel({
 						items : <?PHP echo $Items; ?>,
 						stopOnHover : true,
+						autoPlay: 4000,
 						navigation : false
 					});
 				});
