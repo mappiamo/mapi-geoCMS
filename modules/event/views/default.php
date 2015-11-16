@@ -188,7 +188,7 @@
 
 									<script type="text/javascript">
 
-										$(window).load(function () {
+										$(document).ready(function() {
 
 											/* $('.sort_and_filters').hide();
 											 $('.title').click(function () {

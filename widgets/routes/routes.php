@@ -587,7 +587,7 @@
 				});
 			});
 			
-		$(document).ajaxError(
+			$(document).ajaxError(
 	    function (event, jqXHR, ajaxSettings, thrownError) {
 	        alert('[event:' + event + '], [jqXHR:' + jqXHR + '], [ajaxSettings:' + ajaxSettings + '], [thrownError:' + thrownError + '])');
 	    });
