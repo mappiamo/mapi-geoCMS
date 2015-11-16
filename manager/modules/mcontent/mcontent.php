@@ -43,7 +43,8 @@ class MModule_MContent extends M_Module {
 				$this->set_page_title( '#mappiamo - Translate content' );
 				
 				$content = $this->model( 'add_content_translation' );
-				if ( $content && $content->get_id() ) { 
+
+				if ( $content && $content->get_id() ) {
 						header( 'Location: index.php?module=mcontent&task=content_edit&object=' . intval( $content->get_id() ) );
 						exit( 0 );
 				}

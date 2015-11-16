@@ -88,6 +88,11 @@ class MModel_MContent {
 				$translated_content->set_lat( $content->get_lat() );
 				$translated_content->set_lng( $content->get_lng() );
 				$translated_content->set_route( $content->get_route() );
+
+				$translated_content->set_start( date("Y-m-d H:i", strtotime($content->get_start())) );
+				$translated_content->set_end( date("Y-m-d H:i", strtotime($content->get_end())) );
+				//		$translated_content->set_id( $content->get_id() );
+
 				$translated_content->set_text( $content->get_text() );
 				$content_metas = $content->get_meta();
 				if ( $content->get_parent() ) {
@@ -112,7 +117,7 @@ class MModel_MContent {
 				foreach( $content_metas as $meta ) {
 						$translated_content->add_meta( $meta->get("name"), $meta->get("value") );
 				}
-				
+
 				return $translated_content;
 				
 		}

@@ -332,7 +332,7 @@
 						<?PHP if ($record['type'] == 'route') { ?>
 							routeControl.setWaypoints(Routearray);
 
-							$(window).load(function() {
+							$(document).ready(function() {
 								document.getElementById("content_route").value = '<?PHP echo $record['route']; ?>';;
 							});
 
@@ -343,7 +343,7 @@
 								GeomDATA = SubCollection.slice(0, -1);
 							}
 
-							$(window).load(function() {
+							$(document).ready(function() {
 								document.getElementById("content_route").value = GeomDATA;
 							});
 						<?PHP } ?>
