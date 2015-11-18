@@ -81,7 +81,7 @@
 
 .col-md-12 hr {
 	border-top-width: thin;
-	border-top-style: dashed;
+	border-top-style: solid;
 	border-top-color: #C4C4C4;
 	margin-top: 0px;
 	margin-right: 0px;
