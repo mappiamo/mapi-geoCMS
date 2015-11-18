@@ -4,7 +4,7 @@
 defined( 'DACCESS' ) or die;
 
 function mwidget_content_image( $id ) {
-		$img = mapi_get_default_media( $id, 'failover' );
+		$img = mapi_get_default_media( $id, NULL );
 
 		if ( ! empty( $img['url'] ) ) {
 

@@ -8,7 +8,9 @@
 
 	defined('DACCESS') or die;
 
-	function mwidget_owl_image($Type, $Items, $Source) {
+	function mwidget_owl_image($Type, $Items, $Source, $Link = NULL) {
+
+		$ClassID = rand(1000,9999);
 
 		if ($Type == 'path') {
 
@@ -21,14 +23,12 @@
 					} else {
 						$GalleryImages = glob($Source . '/*.jpg');
 					}
-
 					sort($GalleryImages, SORT_NATURAL | SORT_FLAG_CASE);
-
 				}
 			}
 		?>
 
-		<div id="owl-images" class="owl-carousel">
+		<div id="owl-images_<?PHP echo $ClassID; ?>" class="owl-carousel">
 
 			<?PHP foreach($GalleryImages as $OneContent) {
 
@@ -36,10 +36,12 @@
 				$FileExtension = pathinfo($OneContent, PATHINFO_EXTENSION);
 
 				if ((preg_match("/_b$/", $FileName)) || (preg_match("/_c$/", $FileName))) {
+
 					$ColoredFile = str_replace('_b', '_c', $FileName);
 					if (file_exists($Source . '/' . $ColoredFile . '.' . $FileExtension)) {
 
 						if (preg_match("/_b$/", $FileName)) {
+							if ($Link) { echo '<a href="' . $Link . '">'; }
 							?>
 
 							<div class="ImageBox">
@@ -48,28 +50,31 @@
 										 onmouseout="this.src='<?PHP echo $OneContent; ?>'">
 							</div>
 
-					<?PHP }
-					} else { ?>
-
+							<?PHP if ($Link) { echo '</a>'; }
+						}
+					} else {
+						if ($Link) { echo '<a href="' . $Link . '">'; }
+						?>
 							<div class="ImageBox"><img src="<?PHP echo $OneContent; ?>"></div>
-
-					<?PHP
+						<?PHP
+						if ($Link) { echo '</a>'; }
 					}
-					//die($Source . '/' . $ColoredFile . '.' . $FileExtension);
 
-				} else { ?>
-					<div class="ImageBox"><img src="<?PHP echo $OneContent; ?>"></div>
-				<?PHP
+				} else {
+					if ($Link) { echo '<a href="' . $Link . '">'; }
+					?>
+						<div class="ImageBox"><img src="<?PHP echo $OneContent; ?>"></div>
+					<?PHP
+					if ($Link) { echo '</a>'; }
 				}
 
 				?>
-
 			<?PHP } ?>
 		</div>
 
 			<script type="text/javascript">
 				$( document ).ready(function() {
-					$("#owl-images").owlCarousel({
+					$("#owl-images_<?PHP echo $ClassID; ?>").owlCarousel({
 						items : <?PHP echo $Items; ?>,
 						stopOnHover: true,
 						lazyLoad: true,
@@ -111,7 +116,7 @@
 
 			if (count($ContentListArray) > 0) { ?>
 
-				<div id="owl-cat-images" class="owl-carousel">
+				<div id="owl-cat-images_<?PHP echo $ClassID; ?>" class="owl-carousel">
 
 				<?PHP
 					foreach ($ContentListArray as $CKey => $Content) {
@@ -135,7 +140,7 @@
 
 				<script type="text/javascript">
 					$( document ).ready(function() {
-						$('#owl-cat-images').owlCarousel({
+						$('#owl-cat-images_<?PHP echo $ClassID; ?>').owlCarousel({
 							items : <?PHP echo $Items; ?>,
 							stopOnHover : true,
 							center: true,
@@ -149,8 +154,7 @@
 				</script>
 
 			<?PHP
-				}
-
+			}
 		}
 	} ?>
 

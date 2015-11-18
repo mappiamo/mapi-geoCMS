@@ -8,7 +8,7 @@
 
 	defined('DACCESS') or die;
 
-	function mwidget_lastcontent($c_num = 5, $c_type = 'place', $c_order = 'created', $c_filter = NULL) {
+	function mwidget_lastcontent($c_num = 5, $c_type = 'place', $c_order = 'modified', $c_filter = NULL) {
 
 		$lang = new M_Language;
 		$language = $lang->getLanguage();
@@ -18,19 +18,28 @@
 		} else {
 			if ($c_filter ==  'now') {
 				$DateFilter = "`end` >= now() AND `start` <= now()";
-				$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')->where('type', $c_type)->where_raw($DateFilter)->order_by_desc($c_order)->limit($c_num)->find_array();
+			} elseif ($c_filter ==  'from_now') {
+				$DateFilter = "`end` >= now()";
 			}
+			$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')->where('type', $c_type)->where_raw($DateFilter)->order_by_desc($c_order)->limit($c_num)->find_array();
 		}
 
 
 		if ($contents) {
 			if ((is_array($contents)) && (count($contents) > 0)) { ?>
 
-				<h3 class="color">Latest contents:</h3>
+				<div class="latest-box">
 
-				<?PHP foreach ($contents as $One_Content) { ?>
+					<?PHP if ($c_type == 'place') { ?>
+						<h3 class="color"><span class="glyphicon glyphicon-map-marker"></span> Luoghi</h3>
+					<?PHP } elseif ($c_type == 'event') { ?>
+						<h3 class="color"><span class="glyphicon glyphicon-calendar"></span> Eventi</h3>
+					<?PHP } elseif ($c_type == 'post') { ?>
+						<h3 class="color"><span class="glyphicon glyphicon-pencil"></span> Blog</h3>
+					<?PHP } ?>
 
-					<div class="latest">
+					<?PHP foreach ($contents as $One_Content) { ?>
+
 						<a href="index.php?module=content&object=<?PHP echo $One_Content['id']; ?>" title="<?PHP echo $One_Content['title']; ?>"><h3 class="color"><?PHP echo $One_Content['title']; ?></h3></a>
 						<div>
 
@@ -49,24 +58,27 @@
 							<div class="latest-content">
 								<?PHP
 									if ($c_type == 'event') {
-										echo '<span class="glyphicon glyphicon-circle-arrow-right"></span> ' . date('d-m-Y H:i', strtotime($One_Content['start'])) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-circle-arrow-left"></span> ' . date('d-m-Y H:i', strtotime($One_Content['end']));
+										echo '<div class="event_date"><span class="glyphicon glyphicon-circle-arrow-right"></span> ' . date('d-m-Y H:i', strtotime($One_Content['start'])) . '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-circle-arrow-left"></span> ' . date('d-m-Y H:i', strtotime($One_Content['end'])) . '</div>';
+										echo '<div class="event_address"><span class="glyphicon glyphicon-map-marker"></span> ' . $One_Content['address'] . '</div>';
 									}
 								?>
-								<p>
-									<?PHP echo mb_substr(strip_tags($One_Content['text']), 0, 150, 'UTF-8'); ?>...<br />
+								<p class="<?PHP echo 'lclass_' . $c_type; ?>">
+									<?PHP echo mb_substr(strip_tags($One_Content['text']), 0, 120, 'UTF-8'); ?>...<br />
 									<a href="index.php?module=content&object=<?PHP echo $One_Content['id']; ?>" title="<?PHP echo $One_Content['title']; ?>" class="readmore">Leggi tutto &gt;</a>
 								</p>
 							</div>
 							<div style="clear: both;"></div>
 						</div>
-					</div>
+
 					<div class="separator"></div>
 
+
 				<?PHP }
+				echo '</div>';
 			}
 		} else { ?>
-			<div class="latest">
-				No running events today.
-			</div>
+			<!-- <div class="latest">
+				No data for this widget.
+			</div> -->
 		<?PHP }
 	}

@@ -12,6 +12,8 @@
 
 	function mwidget_box_collabrators($Max = 5) {
 
+		if (!isset($_GET["object"])) { return; }
+
 		$id = $_GET["object"];
 		$AllCollab = new getcollab();
 		$CollabArticlesResult = $AllCollab->getcollabadata($id, $Max);
@@ -21,11 +23,12 @@
 		if ($CollabArticlesResult) {
 			if ((is_array($CollabArticlesResult)) && (count($CollabArticlesResult) > 0)) { ?>
 
-				<h3 class="color">Collaborator's articles:</h3>
+			<div class="collab-box">
+
+				<h3 class="color"><span class="glyphicon glyphicon-book"></span> Articoli correlati</h3>
 
 				<?PHP foreach ($CollabArticlesResult as $One_Content) { ?>
 
-					<div class="latest">
 						<a href="index.php?module=content&object=<?PHP echo $One_Content['id']; ?>"
 							 title="<?PHP echo $One_Content['title']; ?>"><h3 class="color"><?PHP echo $One_Content['title']; ?></h3>
 						</a>
@@ -39,24 +42,25 @@
 								if ($image_url) {
 									?>
 
-									<div class="latest-image">
+									<div class="collab-image">
 										<img src="<?PHP echo $image_url['url']; ?>" alt="<?PHP echo $image_url['title']; ?>"/>
 									</div>
 
 								<?PHP } ?>
 
 							<div class="latest-content">
-									<?PHP echo mb_substr(strip_tags($One_Content['text']), 0, 150, 'UTF-8'); ?>...<br/>
+									<?PHP echo mb_substr(strip_tags($One_Content['text']), 0, 120, 'UTF-8'); ?>...<br/>
 									<a href="index.php?module=content&object=<?PHP echo $One_Content['id']; ?>"
 										 title="<?PHP echo $One_Content['title']; ?>" class="readmore">Leggi tutto &gt;</a>
 								</p>
 							</div>
 							<div style="clear: both;"></div>
 						</div>
-					</div>
+
 					<div class="separator"></div>
 
 				<?PHP }
+				echo '</div>';
 			}
 		}
 	}
