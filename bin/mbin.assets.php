@@ -85,6 +85,8 @@ class M_Assets {
 							'leaflet-rm/leaflet-routing-machine',
 							'leaflet-rm/Control.Geocoder',
 
+							'leaflet-markercluster/leaflet.markercluster-src',
+
 							'asset.form',
 							'asset.map',
 							'pikaday/moment',
@@ -109,6 +111,8 @@ class M_Assets {
 								'leaflet-rm/leaflet-routing-machine',
 								'jssor/jssor.slider',
 								'leaflet-photomarker/leaflet.photomarker',
+								'leaflet-markercluster/MarkerCluster',
+								'leaflet-markercluster/MarkerCluster.Default',
 								//'leaflet-groupedlayercontrol/leaflet.groupedlayercontrol',
 								'box/box',
 								'jPlayer/css/jplayer.blue.monday.min'
@@ -128,6 +132,7 @@ class M_Assets {
 								'leaflet-photomarker/PhotoMarker',
 								'leaflet-photomarker/PhotoIcon',
 								'leaflet-weather/leaflet-weathericonslayer',
+								'leaflet-markercluster/leaflet.markercluster-src',
 								'jssor/jssor',
 								'jssor/jssor.slider',
 								'lightbox/lightbox.min',
