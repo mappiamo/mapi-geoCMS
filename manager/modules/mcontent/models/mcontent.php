@@ -51,6 +51,13 @@ class MModel_MContent {
 						$content->set_lat( MGet::double( 'content_lat' ) );
 						$content->set_lng( MGet::double( 'content_lng' ) );
 						$content->set_route( MGet::string( 'content_route' ) );
+
+						$userGID = MAuth::group_id();
+						if ($userGID <= 2) {
+							$content->set_enabled( 1 );
+						} else {
+							$content->set_enabled( 0 );
+						}
 				}
 
 				$content->add();

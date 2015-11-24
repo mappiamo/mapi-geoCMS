@@ -148,9 +148,14 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Status</div>
 				<div class="panel-body">
-					<input type="checkbox" name="content_enabled" id="content_enabled" <?php if (1 == $data->enabled) {
-						echo 'checked="checked"';
-					} ?> value="1"/>
+					<input type="checkbox" name="content_enabled" id="content_enabled"
+
+					<?php
+						if (1 == $data->enabled) { echo 'checked="checked"'; }
+						if ((0 == $data->enabled) && (MAuth::group_id() >= 3)) { echo ' disabled'; }
+					?>
+
+						value="1"/>
 					<label>Enabled</label>
 				</div>
 			</div>
