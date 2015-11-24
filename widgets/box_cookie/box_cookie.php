@@ -28,7 +28,7 @@
 			<div class="cookie-alert">
 				<?PHP echo $CookieContent['value']; ?>
 				<p>
-				<a href="index.php?module=content&object=<?PHP echo $CookieContent['external_id']; ?>">Read more...</a>
+				<a href="index.php?module=content&object=<?PHP echo $CookieContent['external_id']; ?>">Leggi tutto...</a>
 				</p>
 				<div class="cookie_button" id="Cookie_Button_OK">OK</div>
 			</div>
