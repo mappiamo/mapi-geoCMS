@@ -1,14 +1,16 @@
 $( document ).ready( function() {
 
-    $('#AddressButton').click(function() {
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-    });
+        $('#AddressButton').click(function() {
+                $("html, body").animate({ scrollTop: 0 }, "slow");
+        });
+
 });
 
 function MMap() {
         this.map = null;
         this.marker = null;
         this.markers = new Array();
+        var markersCluster = new L.MarkerClusterGroup();
 
         //this.proba = 'hello!';
 
@@ -38,34 +40,34 @@ function MMap() {
 
                 L.control.zoom( { position: 'topleft' } ).addTo( this.map );
 
-            L.tileLayer(
-             'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-             {
-             attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Powered by © <a href="http://www.mappiamo.org">#mappiamo</a>',
-             maxZoom: 18
-             }
-             ).addTo( this.map );
+                L.tileLayer(
+                    'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                    {
+                            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Powered by © <a href="http://www.mappiamo.org">#mappiamo</a>',
+                            maxZoom: 18
+                    }
+                ).addTo( this.map );
 
 
-            /* var osmTiles = L.tileLayer(
-                'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                {
-                    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Powered by © <a href="http://www.mappiamo.org">#mappiamo</a>',
-                    maxZoom: 18
-                }
-            );
-            var ortoPiemonte = L.tileLayer.wms("http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010?", {
-                layers: 'OrtofotoRegione2010',
-                format: 'image/png',
-                transparent: true,
-                attribution: "Ortofoto Regione Piemonte 2010"
-            }).addTo(this.map);
+                /* var osmTiles = L.tileLayer(
+                 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                 {
+                 attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Powered by © <a href="http://www.mappiamo.org">#mappiamo</a>',
+                 maxZoom: 18
+                 }
+                 );
+                 var ortoPiemonte = L.tileLayer.wms("http://geomap.reteunitaria.piemonte.it/ws/taims/rp-01/taimsortoregp/wms_ortoregp2010?", {
+                 layers: 'OrtofotoRegione2010',
+                 format: 'image/png',
+                 transparent: true,
+                 attribution: "Ortofoto Regione Piemonte 2010"
+                 }).addTo(this.map);
 
-            var baseMaps = {
-                "OSM": osmTiles,
-                "Ortofoto Piemonte": ortoPiemonte
-            };
-            L.control.layers(baseMaps, {}).addTo(this.map); */
+                 var baseMaps = {
+                 "OSM": osmTiles,
+                 "Ortofoto Piemonte": ortoPiemonte
+                 };
+                 L.control.layers(baseMaps, {}).addTo(this.map); */
 
         }
 
@@ -87,7 +89,7 @@ function MMap() {
 
                 if ( this.marker ) {
                         var position = this.marker.getLatLng();
-                        
+
                         if ( lat == position.lat && lng == position.lng ) add = false;
                 }
 
@@ -102,35 +104,72 @@ function MMap() {
         }
 
         this.clear_markers = function() {
-                if ( ! this.markers.length > 0 ) return null;
-                
-                for ( var i = 0; i < this.markers.length; i++ ) this.map.removeLayer( this.markers[i] );
 
-                this.markers = new Array();
+                //if ( ! this.markers.length > 0 ) return null;
+                //for ( var i = 0; i < this.markers.length; i++ ) this.map.removeLayer( this.markers[i] );
+                //this.markers = new Array();
+
+                if (map.hasLayer(markersCluster)) { markersCluster.clearLayers(); }
         }
 
         this.create_categories = function( id ) {
                 if ( typeof( id ) !== 'number' ) return null;
+                var BoxCorners = {};
 
-                var query = $.ajax( { dataType: "json", context: this, url: 'index.php?module=content&task=get_category&object=' + id } );
-                query.done( function( data ) { 
+                //var Corners = map.getBounds();
+                //var neast = Corners._northEast;
+                //var swest = Corners._southWest;
+                //alert(neast + '->>' + swest); return;
+                //$.each(Corners, function(name, value) {
+                //alert(name + '--->' + value);
+                //});
+
+                var bounds = map.getBounds();
+                var southWest = bounds.getSouthWest();
+                var northEast = bounds.getNorthEast();
+
+                BoxCorners['NE_lat'] = northEast.lat,
+                BoxCorners['NE_lng'] = northEast.lng,
+                BoxCorners['SE_lat'] = southWest.lat,
+                BoxCorners['SE_lng'] = southWest.lng;
+                //lngSpan = northEast.lng - southWest.lng,
+                //latSpan = northEast.lat - southWest.lat;
+
+                //alert(BoxCorners['SE_lng']); return;
+
+                var query = $.ajax({
+                        dataType: "json",
+                        context: this,
+                        url: 'index.php?module=content&task=get_category&object=' + id,
+                        type: 'POST',
+                        data: {
+                                CornersData: BoxCorners
+                        }
+                });
+                query.done( function( data ) {
                         if ( data.length > 0 ) {
+                                //alert(data); return;
+                                //var markersCluster = new L.MarkerClusterGroup();
                                 for ( var i = 0; i < data.length; i++ ) {
                                         if ( data[i].lat == undefined ) continue;
                                         if ( data[i].lng == undefined ) continue;
                                         if ( data[i].category == undefined ) continue;
 
-                                        marker = this.add_marker( data[i].lat, data[i].lng, data[i].category );
-
-                                        if ( marker === null ) continue;
+                                        //marker = this.add_marker( data[i].lat, data[i].lng, data[i].category );
+                                        //if ( marker === null ) continue;
 
                                         var mcontent = "";
                                         mcontent += "</h3>" + data[i].title + "</h3>";
                                         mcontent += "<p>" + data[i].text + "</p>";
 
-                                        marker.bindPopup( mcontent );
+                                        //marker.bindPopup( mcontent );
+                                        //this.markers.push( marker );
 
-                                        this.markers.push( marker );
+                                        var icon = L.icon( { iconUrl: 'media/mapicons/' + encodeURIComponent( data[i].category ) + '.png', iconSize: [32, 37], iconAnchor: [16, 37] } );
+                                        var marker = L.marker([data[i].lat, data[i].lng], { icon: icon }).bindPopup(mcontent);
+                                        marker.addTo(markersCluster);
+
+                                        if ( marker === null ) continue;
 
                                         marker.content = new Object();
                                         if ( data[i].title !== undefined ) marker.content.title = data[i].title;
@@ -142,6 +181,7 @@ function MMap() {
                                                 $( '#mmap_modal' ).modal( 'show' );
                                         } );
                                 }
+                                map.addLayer(markersCluster);
                         }
                 } );
         }
@@ -191,18 +231,18 @@ function MMap() {
 
                         if ( '#address_button' ) $( '#address_button' ).html( 'Searching ...' );
 
-                                $.ajax( { url: url, dataType: "json" } ).done( function( result ) {
-                                        if ( result.status === 'OK' ) {
-                                                if ( $( '#content_lat' ) ) $( '#content_lat' ).val( result.lat );
-                                                if ( $( '#content_lat' ) ) $( '#content_lng' ).val( result.lng );
-                                                map.panTo( [result.lat, result.lng] );
-                                                marker.setLatLng( [result.lat, result.lng] );
-                                        } else {
-                                                alert( 'Address not found!' );
-                                        }
-                                } ).done( function() {
-                                    if ( '#address_button' ) $( '#address_button' ).html( 'Go!' );
-                                } );
+                        $.ajax( { url: url, dataType: "json" } ).done( function( result ) {
+                                if ( result.status === 'OK' ) {
+                                        if ( $( '#content_lat' ) ) $( '#content_lat' ).val( result.lat );
+                                        if ( $( '#content_lat' ) ) $( '#content_lng' ).val( result.lng );
+                                        map.panTo( [result.lat, result.lng] );
+                                        marker.setLatLng( [result.lat, result.lng] );
+                                } else {
+                                        alert( 'Address not found!' );
+                                }
+                        } ).done( function() {
+                                if ( '#address_button' ) $( '#address_button' ).html( 'Go!' );
+                        } );
                 } );
         }
 

@@ -34,6 +34,7 @@
 
 					mmap.address_search();
 					var mmap_control = new MMapControl(mmap);
+					//var markerClusters = L.markerClusterGroup();
 
 					<?php if ( $content ) { ?>
 
@@ -51,7 +52,7 @@
 						var Geoms = L.geoJson(geoj).bindPopup(GeomPoupString);
 						Geoms.addTo(map);
                         console.log(Geoms);
-                        //map.panTo([<?php echo $coords['lat'].",".$coords['lng'];?>]);
+                        //map.panTo([<?php //echo $coords['lat'].",".$coords['lng'];?>]);
 						//map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
 
 					<?php } else {
@@ -203,7 +204,16 @@
 
 			</script>
 
-		<?PHP }
-	}
+		<?PHP } ?>
 
+		<script>
+			$(document).ready(function() {
+				map.on('moveend', function () {
+					mmap_control.auto_on();
+				});
+			});
+		</script>
+
+	<?PHP
+	}
 ?>
