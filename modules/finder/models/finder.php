@@ -15,6 +15,8 @@
 			$searchstring = $key;
 			if (strlen($searchstring) >= 3) {
 
+				$searchstring = str_replace(array('\'', '`'), array('\\\'', '\\`'), $searchstring);
+
 				$language = new M_Language;
 				$contentlang = $language->getLanguage();
 

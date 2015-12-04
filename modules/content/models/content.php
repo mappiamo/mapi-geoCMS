@@ -7,12 +7,15 @@ class MModel_Content {
 
 		static function display_post( $post ) {
 				?>
-						<div itemscope itemtype="http://schema.org/Blog">
-								<h1 class="content-title"><span itemprop="name"><?php MPut::_html( $post->get_title() ); ?></span></h1>
+
+						<?php self::add_schema( $post ); ?>
+
+
+								<h1 class="content-title"><?php MPut::_html( $post->get_title() ); ?></h1>
 
 								<?php self::content_props( $post ); ?>
 								
-								<div class="content-text"  itemprop="articleBody">
+								<div class="content-text">
 										<?php MPut::_text( $post->get_text() ); ?>
 								</div>
 
@@ -23,18 +26,19 @@ class MModel_Content {
 								<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<?php self::content_location( $post ); ?>
 							</button>
 
-						</div>
 				<?php
 		}
 
 		static function display_place( $place ) {
 				?>
-						<div itemscope itemtype="http://schema.org/Place">
-								<h1 class="content-title"><span itemprop="name"><?php MPut::_html( $place->get_title() ); ?></span></h1>
+
+						<?php self::add_schema( $place ); ?>
+
+								<h1 class="content-title"><?php MPut::_html( $place->get_title() ); ?></h1>
 
 								<?php self::content_props( $place ); ?>
 								
-								<div class="content-text" itemprop="description">
+								<div class="content-text">
 										<?php MPut::_text( $place->get_text() ); ?>
 								</div>
 
@@ -45,25 +49,24 @@ class MModel_Content {
 								<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<?php self::content_location( $place ); ?>
 							</button>
 
-						</div>
 				<?php
 		}
 
 		static function display_event( $event ) {
 				?>
-						<div itemscope itemtype="http://schema.org/Event">
-								<h1 class="content-title"><span itemprop="name"><?php MPut::_html( $event->get_title() ); ?></span></h1>
+
+						<?php self::add_schema( $event ); ?>
+
+								<h1 class="content-title"><?php MPut::_html( $event->get_title() ); ?></h1>
 
 								<?php self::content_props( $event ); ?>
 								
-								<div class="content-text" itemprop="description">
+								<div class="content-text">
 										<div class="content-dates">
-												<meta itemprop="startDate" content="<?php MPut::_html_attr( date_format( new Datetime( $event->get_start() ), 'Y-m-dTH:i' ) ); ?>">
-												<meta itemprop="endDate" content="<?php MPut::_html_attr( date_format( new Datetime( $event->get_end() ), 'Y-m-dTH:i' ) ); ?>">
-												<!-- <h5>
+												<h5>
 														<span class="glyphicon glyphicon-circle-arrow-right"></span> <?php MPut::_html_attr( date_format( new Datetime( $event->get_start() ), 'Y-m-d H:i' ) ); ?>&nbsp;
 														<span class="glyphicon glyphicon-circle-arrow-left"></span> <?php MPut::_html_attr( date_format( new Datetime( $event->get_end() ), 'Y-m-d H:i' ) ); ?>
-												</h5> -->
+												</h5>
 										</div>
 										<?php MPut::_text( $event->get_text() ); ?>
 								</div>
@@ -75,8 +78,64 @@ class MModel_Content {
 								<span class="glyphicon glyphicon-map-marker"></span>&nbsp;&nbsp;&nbsp;<?php self::content_location( $event ); ?>
 							</button>
 
-						</div>
 				<?php
+		}
+
+		static function add_schema( $data ) {
+				$schema_data = array();
+				$FullURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; //rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\');
+
+				$schema_data['@context'] = 'http://schema.org';
+				if ($data->get_type() == 'post') {
+					$schema_data['@type'] = 'blog';
+					$LocationString = 'contentLocation';
+				} else {
+					$schema_data['@type'] = $data->get_type();
+					$LocationString = 'location';
+				}
+
+				$schema_data['name'] = $data->get_title();
+				$schema_data['url'] = $FullURL;
+
+				if ($data->get_type() == 'place') {
+					$schema_data['address']['@type'] = 'Place';
+					$schema_data['address'] = $data->get_address();
+					$schema_data['geo']['@type'] = 'GeoCoordinates';
+					$schema_data['geo']['latitude'] = $data->get_lat();
+					$schema_data['geo']['longitude'] = $data->get_lng();
+				} else {
+					$schema_data[$LocationString]['@type'] = 'Place';
+					$schema_data[$LocationString]['address'] = $data->get_address();
+					$schema_data[$LocationString]['geo']['@type'] = 'GeoCoordinates';
+					$schema_data[$LocationString]['geo']['latitude'] = $data->get_lat();
+					$schema_data[$LocationString]['geo']['longitude'] = $data->get_lng();
+				}
+
+				$schema_data['description'] = mb_substr(str_replace('"', '', strip_tags($data->get_text())), 0, 100, 'UTF-8');
+
+				if ($data->get_type() == 'event') {
+					$schema_data['startDate'] = $data->get_start();
+					$schema_data['endDate'] = $data->get_end();
+					$schema_data[$LocationString]['name'] = $data->get_address();
+				} elseif ($data->get_type() == 'post') {
+					$schema_data['inLanguage'] = strtolower($data->get_language()) . '_' . strtoupper($data->get_language());
+					$schema_data['dateCreated'] = $data->created()['when'];
+					$schema_data['text'] = mb_substr(str_replace('"', '', strip_tags($data->get_text())), 0, 200, 'UTF-8');
+					$schema_data['author'] = $data->created()['by_name'];
+				}
+
+				?>
+
+				<div class="microformat">
+
+					<script type="application/ld+json">
+
+						[<?PHP print_r(json_encode($schema_data)); ?>]
+
+					</script>
+				</div>
+
+				<?PHP
 		}
 
 		static function content_props( $content ) {
@@ -93,13 +152,13 @@ class MModel_Content {
 
 								<div style="display: inline-block; font-size: 10pt;">
 										<?php if( isset( $created['by_name'] ) ) { ?>
-							  					<span itemprop="author"><?php MPut::_html( $created['by_name'] ); ?></span>, &nbsp;
+							  					<?php MPut::_html( $created['by_name'] ); ?>, &nbsp;
 							  			<?php } else { ?>
-													<span itemprop="author">Unknown author</span>, &nbsp;
+													Unknown author, &nbsp;
 											<?PHP } ?>
 										<?php if( isset( $created['when'] ) ): ?>
 												<br />
-												<span itemprop="datePublished"><?php MPut::_html( $created['when'] ); ?></span>
+												<?php MPut::_html( $created['when'] ); ?>
 										<?php endif; ?>
 								</div>
 						</div>
@@ -109,13 +168,7 @@ class MModel_Content {
 		static function content_location( $content ) {
 				?>
 						<div class="content-location">
-								<div itemprop="address" itemscope itemtype="http://schema.org/PostalAddress">
-										<span itemprop="streetAddress"><?php MPut::_text( $content->get_address() ); ?></span>
-								</div>
-								<span itemprop="geo" itemscope itemtype="http://schema.org/GeoCoordinates">
-										<meta itemprop="latitude" content="<?php MPut::_numeric( $content->get_lat() ); ?>" />
-										<meta itemprop="longitude" content="<?php MPut::_numeric( $content->get_lng() ); ?>"  />
-								</span>
+										<?php MPut::_text( $content->get_address() ); ?>
 						</div>
 				<?php
 		}
