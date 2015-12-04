@@ -7,19 +7,22 @@ defined( 'DACCESS' ) or die;
 
 <ul class="nav nav-pills nav-stacked">
 		<li><a href="index.php?module=mcontent&task=content_list">Contents <span class="glyphicon glyphicon-list"></span></a></li>
-        <li><a href="index.php?module=mcategory&task=category_list">Categories <span class="glyphicon glyphicon-list-alt"></span></a></li>
+
+    <?php if ( 2 >= MAuth::group_id() ): ?>
+    <li><a href="index.php?module=mcategory&task=category_list">Categories <span class="glyphicon glyphicon-list-alt"></span></a></li>
         <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Add <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                        <li><a href="index.php?module=mcontent&task=content_add">Add new content <span class="glyphicon glyphicon-plus"></span></a></li>
-                        <li><a href="index.php?module=mcontent&task=content_import">Import content <span class="glyphicon glyphicon-import"></span></a></li>
-                        <li><a href="index.php?module=mxmlimport&task=mxml_preview">Import content from XML<span class="glyphicon glyphicon-import"></span></a></li>
-                        <li><a href="index.php?module=mcategory&task=category_add">Add new category <span class="glyphicon glyphicon-plus"></span></a></li>
-                </ul>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Add <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                  <li><a href="index.php?module=mcontent&task=content_add">Add new content <span class="glyphicon glyphicon-plus"></span></a></li>
+                  <li><a href="index.php?module=mcontent&task=content_import">Import content <span class="glyphicon glyphicon-import"></span></a></li>
+                  <li><a href="index.php?module=mxmlimport&task=mxml_preview">Import content from XML<span class="glyphicon glyphicon-import"></span></a></li>
+                  <li><a href="index.php?module=mcategory&task=category_add">Add new category <span class="glyphicon glyphicon-plus"></span></a></li>
+            </ul>
         </li>
 
   		<li class="divider"></li>
 
+    <?php endif; ?>
 <?php if ( 2 >= MAuth::group_id() ): ?>
 
   		<li><a href="index.php?module=mpage&task=page_list">Pages <span class="glyphicon glyphicon-inbox"></span></a></li>
