@@ -127,7 +127,6 @@ class MModel_Content {
 				?>
 
 				<div class="microformat">
-
 					<script type="application/ld+json">
 
 						[<?PHP print_r(json_encode($schema_data)); ?>]
