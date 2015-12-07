@@ -39,9 +39,9 @@ class MModel_Event {
 
 					if (isset($_GET['address'])) {
 						$TheAddress = '%' . $_GET['address'] . '%';
-						$AllContents = ORM::for_table('contents')->select_many('id', 'title', 'address', 'text', 'start', 'end', 'created', 'modified', 'language')->where_like('address', $TheAddress)->where('enabled', 1)->where('type', 'event')->find_array();
+						$AllContents = ORM::for_table('contents')->select_many('id', 'title', 'address', 'text', 'start', 'end', 'created', 'modified', 'language', 'lat', 'lng')->where_like('address', $TheAddress)->where('enabled', 1)->where('type', 'event')->find_array();
 					} else {
-						$AllContents = ORM::for_table('contents')->select_many('id', 'title', 'address', 'text', 'start', 'end', 'created', 'modified', 'language')->where('enabled', 1)->where('type', 'event')->find_array();
+						$AllContents = ORM::for_table('contents')->select_many('id', 'title', 'address', 'text', 'start', 'end', 'created', 'modified', 'language', 'lat', 'lng')->where('enabled', 1)->where('type', 'event')->find_array();
 					}
 
 					foreach ($AllContents as $Content) {
@@ -108,9 +108,9 @@ class MModel_Event {
 
 		if (isset($_GET['address'])) {
 			$TheAddress = '%' . $_GET['address'] . '%';
-			$category_contents = ORM::for_table('contents')->select_many('id', 'title', 'address', 'text', 'start', 'end', 'created', 'modified', 'language')->where_raw($QueryString)->where_like('address', $TheAddress)->where('enabled', 1)->where('type', 'event')->find_array();
+			$category_contents = ORM::for_table('contents')->select_many('id', 'title', 'address', 'text', 'start', 'end', 'created', 'modified', 'language', 'lat', 'lng')->where_raw($QueryString)->where_like('address', $TheAddress)->where('enabled', 1)->where('type', 'event')->find_array();
 		} else {
-			$category_contents = ORM::for_table('contents')->select_many('id', 'title', 'address', 'text', 'start', 'end', 'created', 'modified', 'language')->where_raw($QueryString)->where('enabled', 1)->where('type', 'event')->find_array();
+			$category_contents = ORM::for_table('contents')->select_many('id', 'title', 'address', 'text', 'start', 'end', 'created', 'modified', 'language', 'lat', 'lng')->where_raw($QueryString)->where('enabled', 1)->where('type', 'event')->find_array();
 		}
 
 		foreach ($category_contents as $Content) {

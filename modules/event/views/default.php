@@ -255,10 +255,37 @@
 							<?php
 
 								if (sizeof($data) > 0) {
+
+									$schema_data['@context'] = 'http://schema.org';
+									$schema_data['@type'] = 'event';
+
 									foreach ($data[0] as $content) {
 										$text_wrap = wordwrap(strip_tags($content['text'], '<br>'), 800, "%|%");
 										$text_array = explode('%|%', $text_wrap);
+										$FullURL = rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\') . '/index.php?module=content&object=' . $content['id'];
+
+										$schema_data['name'] = $content['title'];
+										$schema_data['url'] = $FullURL;
+
+										$schema_data['location']['@type'] = 'Place';
+										$schema_data['location']['address'] = $content['address'];
+										$schema_data['location']['geo']['@type'] = 'GeoCoordinates';
+										$schema_data['location']['geo']['latitude'] = $content['lat'];
+										$schema_data['location']['geo']['longitude'] = $content['lng'];
+										$schema_data['description'] = mb_substr(str_replace('"', '', strip_tags($content['text'])), 0, 100, 'UTF-8');
+										$schema_data['startDate'] = $content['start'];
+										$schema_data['endDate'] = $content['end'];
+										$schema_data['location']['name'] = $content['address'];
+
 										?>
+
+										<div class="microformat">
+											<script type="application/ld+json">
+
+												[<?PHP print_r(json_encode($schema_data)); ?>]
+
+											</script>
+										</div>
 
 										<div class="row main-header">
 											<div class="row content-title">
