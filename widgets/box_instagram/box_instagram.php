@@ -6,6 +6,10 @@
 	function mwidget_box_instagram($HashTag = 'tourism') {
 
 		//$hashtag = NULL;
+		$id = $_GET["object"];
+		$meta_hash = ORM::for_table('content_meta')->select_many('value')->where('name', 'hashtag-instagram')->where('external_id', $id)->find_one();
+
+		if ($meta_hash) { $HashTag = $meta_hash['value']; }
 
 		global $coords;
 		$lat = $coords['lat'];
