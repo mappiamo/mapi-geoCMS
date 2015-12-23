@@ -106,6 +106,6 @@
     min-width: 300px;
 }
 .scrollable {
-    max-height: 500px;
-    overflow-y: auto;
+    /* max-height: 500px;
+    overflow-y: auto; */
 }
