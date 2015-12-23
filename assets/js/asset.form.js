@@ -41,6 +41,15 @@ function MFrm() {
 
 }
 
+function MMWizard() {
+
+    this.module = 'mcontent';
+
+    this.add_bulk_meta = function () {
+        alert('meta wizard client');
+    }
+}
+
 function MContent() {
 
     this.module = 'mcontent';
@@ -383,6 +392,7 @@ MModule.prototype = new MFrm();
 MTemplate.prototype = new MFrm();
 MWidget.prototype = new MFrm();
 MPage.prototype = new MFrm();
+MMWizard.prototype = new MFrm();
 
 $(document).ready(function () {
     $(".leaflet-routing-container").hide();

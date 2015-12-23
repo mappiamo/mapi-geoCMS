@@ -387,6 +387,96 @@
 <div class="tab-pane" id="meta">
 
 	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-12">
+			<br/>
+			<div class="panel panel-default">
+				<div class="panel-heading">Use meta data wizzard</div>
+
+					<div class="panel-body" id="meta_panel">
+
+						<?PHP
+							$FormPath = getcwd() . '/modules/mcontent/meta_wizard/';
+							if (is_dir($FormPath)) {
+								$Form_files = array_diff(scandir($FormPath), array('..', '.'));
+								if (count($Form_files) > 0) { ?>
+
+									<label for="bulk_meta_select">Select wizard for:</label>
+									<select name="bulk_meta_select" id="bulk_meta_select">
+									<option value="" selected>Please select</option>
+
+									<?PHP foreach ($Form_files as $OneForm) {
+										$OneForm_path = getcwd() . '/modules/mcontent/meta_wizard/' . $OneForm;
+										if (is_file($OneForm_path)) {
+											include_once $OneForm_path;
+											$ClassName = pathinfo($OneForm_path, PATHINFO_FILENAME);
+											echo '<option value="' . $ClassName::FormName() . '">' . $ClassName::FormValue() . '</option>';
+											$WizardData[$ClassName::FormName()]['title'] = $ClassName::FormTitle();
+											$WizardData[$ClassName::FormName()]['description'] = $ClassName::FormDescription();
+											$WizardData[$ClassName::FormName()]['formname'] = $ClassName::FormName();
+											$FormData[$ClassName::FormName()] = $ClassName::FormBody();
+										}
+									}
+									$WizardDataString = json_encode($WizardData);
+									$FormString = json_encode($FormData);
+									?>
+
+									</select>
+
+									<script>
+										$(document).ready(function() {
+											$("#bulk_meta_select").change(function () {
+												var FormSelectedClass = this.value;
+												if (FormSelectedClass) {
+													var SelectedData = [];
+													var SelectedForm = [];
+													SelectedData = <?PHP echo $WizardDataString; ?>;
+													SelectedForm = <?PHP echo $FormString; ?>;
+													$("#form_title").add("#form_title_modal").html(SelectedData[FormSelectedClass]['title']);
+													$("#form_description").add("#form_description_modal").html(SelectedData[FormSelectedClass]['description']);
+
+													$('input[name=SchemaType]').val(SelectedData[FormSelectedClass]['formname']);
+													$('input[name=ContentID]').val(<?PHP echo $_GET['object']; ?>);
+
+													$("#form_content_modal").html(SelectedForm[FormSelectedClass]);
+													//alert(SelectedData[FormSelectedClass]['title']);
+												} else {
+													$("#form_title").add("#form_title_modal").html('');
+													$("#form_description").add("#form_description_modal").html('');
+													$("#form_content_modal").html('');
+													$('input[name=SchemaType]').val('');
+													$('input[name=ContentID]').val('');
+												}
+											});
+										});
+									</script>
+
+									<br>
+									<div id="form_title" class="form_title"></div>
+									<div id="form_description" class="form_description"></div>
+
+									<?PHP
+								}
+							}
+						?>
+						<hr>
+						<div class="form-group">
+							<a href="#" data-toggle="modal" data-target="#meta-wizard">
+								<button type="button" class="btn btn-primary">
+									Check and fill selected form
+								</button>
+							</a>
+
+							<!-- <button type="button" class="btn btn-primary" name="bulk_meta_add" id="bulk_meta_add"
+											onclick="new MContent().add_bulk_meta();">Add meta by selected form
+							</button> -->
+
+						</div>
+					</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-9">
 
 			<br/>
@@ -403,6 +493,7 @@
 			<?php endif; ?>
 
 		</div>
+
 		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
 
 			<br/>
@@ -514,3 +605,5 @@
 </div>
 
 </form>
+
+<?php include( 'modal.php' ); ?>

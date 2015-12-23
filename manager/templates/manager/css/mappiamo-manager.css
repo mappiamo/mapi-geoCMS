@@ -203,3 +203,44 @@ code.green {
     padding-bottom: 1px;
     font-size: 12px;
 }
+.form_content input[type=text]  {
+	width: 100%;
+	background-color: #FBF8DA;
+	display: block;
+}
+.form_content textarea {
+	width: 100%;
+	height: 100px;
+	background-color: #FBF8DA;
+	display: block;
+}
+.form_content label {
+	font-weight: bold;
+	font-size: 16px;
+	display: inline-block;
+}
+.form_content table td {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-top: thin solid #B9B9B9;
+	border-bottom: thin solid #B9B9B9;
+	padding-right: 10px;
+
+}
+.form_content select {
+	background-color: #FBF8DA;
+	min-width: 20%;
+	font-size: 16px;
+	font-weight: normal;
+}
+.form_content .small_textinput {
+	display: inline-block;
+	width: 50%;
+	max-width: 50%;
+	margin-left: 25px;
+}
+.form_title {
+	font-weight: bold;
+	font-size: 22px;
+	color: #337AC6;
+}
