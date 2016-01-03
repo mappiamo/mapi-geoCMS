@@ -6,7 +6,7 @@
 	function mwidget_content_allmeta() {
 
 	$id = $_GET["object"];
-	$AllMeta = new getallmeta();
+	$AllMeta = new getallmeta_content();
 	$MetaResult = $AllMeta->getmetadata($id);
 
 		if ($MetaResult) {

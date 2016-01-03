@@ -1,7 +1,7 @@
 <?PHP
 	defined( 'DACCESS' ) or die;
 
-	class getallmeta {
+	class getallmeta_content {
 
 		function getmetadata($id) {
 
