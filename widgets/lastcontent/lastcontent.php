@@ -46,6 +46,13 @@
 							<?PHP
 								$ExtID = $One_Content['id'];
 								$image_url = ORM::for_table('content_media')->select_many('title', 'url')->where('external_id', $ExtID)->where('default_media', 1)->limit(1)->find_one();
+
+								if ($c_type == 'event') {
+									$NowTime = strtotime(date('Y-m-d H:i:s'));
+									$StartTime = strtotime($One_Content['start']);
+									$EndTime = strtotime($One_Content['end']);
+									if (($NowTime > $EndTime) || ($NowTime < $StartTime)) { $image_url = NULL; }
+								}
 								if ($image_url) {
 							?>
 
