@@ -20,10 +20,11 @@ defined( 'DACCESS' ) or die;
 	        	<input type="password" name="pass_repeat" class="form-control" placeholder="Repeat password">
 
 	        	<script>
-				 		var RecaptchaOptions = {
-				    			theme : 'white'
-				 		};
-				</script>
+							var RecaptchaOptions = {
+										theme : 'white'
+							};
+						</script>
+
 	        	<?php echo recaptcha_get_html('6LeZNOUSAAAAALQAQuZXkMq-kI0ZOnaCb-YMP5z1'); ?>
 	        	<br />
 	        	<label>All fields are required</label>
@@ -32,7 +33,8 @@ defined( 'DACCESS' ) or die;
 
 	        	<br />
                 <p>
-                        Already have an account? Login <a href="index.php?module=login">here</a>.
+									Already have an account? Login <a href="index.php?module=login">here</a>.<br>
+									Forgot your password? Renew <a href="index.php?module=passrenew">here</a>.
                 </p>
 	    </form>
 

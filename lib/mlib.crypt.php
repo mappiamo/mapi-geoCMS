@@ -35,7 +35,7 @@ class MCrypt{
 
             if ( $base64 ) $content = base64_decode( $input );
             else $content = $input;
-         
+
             $iv = substr( $content, 0, 32 );
             $extract = substr( $content, ( strlen( $content ) - 32 ) );
             $content = substr( $content, 32, strlen( $content ) - 64 );

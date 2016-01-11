@@ -124,6 +124,7 @@ class M_User {
 
 				if ( $user ) {
 						$user->lastlogin = $lastlogin;
+						$user->set('activation', NULL);
 						$user->save();
 				}
 		}

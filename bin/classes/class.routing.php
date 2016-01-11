@@ -53,15 +53,18 @@ class M_URLRouter {
 
 			if ( 'manager' == $env ) {
 					if ( 'register' != $this->module ) {
-							if ( 'login' != $this->module && ! MAuth::is_auth() ) 
-									$this->reset_to( 'login' );
-							elseif( 'login' == $this->module && MAuth::is_auth() && ! isset( $_POST['do-logout'] ) ) 
-									$this->reset_to( 'dashboard' );
+							if ( 'login' != $this->module && 'passrenew' != $this->module && ! MAuth::is_auth() ) {
+								$this->reset_to('login');
+							} elseif ( 'login' == $this->module && MAuth::is_auth() && ! isset( $_POST['do-logout'] ) ) {
+								$this->reset_to('dashboard');
+							} elseif( 'passrenew' == $this->module && MAuth::is_auth()) {
+								$this->reset_to('dashboard');
+							}
 					} else {
 							if ( MAuth::is_auth() ) $this->reset_to( 'dashboard' );
 					}
 
-					if ( 'login' != $this->module && 'register' != $this->module ) { 
+					if ( 'login' != $this->module && 'register' != $this->module && 'passrenew' != $this->module) {
 							//if ( ! MAuth::check_perm( self::$this->module, $this->task ) ) $this->reset_to( 'denied' );
 					}
 			}
