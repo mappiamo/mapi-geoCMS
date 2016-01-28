@@ -6,14 +6,14 @@ defined( 'DACCESS' ) or die;
 function mwidget_videobox() {
 	$id = $_GET["object"];
 
-	$vidurl = ORM::for_table('content_meta')->select('value')->where('external_id', $id)->where('name', 'filmato')->find_one();
+	$vidurl = ORM::for_table('content_meta')->select('value')->where('external_id', $id)->where('name', 'videobox')->find_one();
 
 	if ($vidurl['value']) {
 		parse_str(parse_url($vidurl['value'], PHP_URL_QUERY), $result_array);
 
 		if ($result_array['v']) { ?>
 
-			<div class="panoramabox">
+			<div class="videobox">
 				<iframe src="https://www.youtube-nocookie.com/embed/<?PHP echo $result_array['v']; ?>?rel=0" frameborder="0" allowfullscreen></iframe>
 			</div>
 
@@ -26,7 +26,7 @@ function mwidget_videobox() {
 			if (is_int($VimeoID)) {
 			?>
 
-			<div class="panoramabox">
+			<div class="videobox">
 				<iframe src="https://player.vimeo.com/video/<?PHP echo $VimeoID; ?>?title=0&byline=0&portrait=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
 			</div>
 

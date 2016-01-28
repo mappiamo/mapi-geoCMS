@@ -1,6 +1,6 @@
-© Berross (www.berross.com)
+ï¿½ Berross (www.berross.com)
 license GPL v2.1
-Author Perjés László (perjeslaszlo@gmail.com)
+Author Perjï¿½s Lï¿½szlï¿½ (perjeslaszlo@gmail.com)
 
 ---------------------------------------------
 
@@ -173,6 +173,16 @@ Usage code example:
 This widget have no parameters, creating javascript player for audio (or video) content.
 The required meta name is 'audio' and the meta value must be the full url of audio or video file.
 
+#videobox
+##0.0.6
+
+Widget name: videobox
+Usage code example:
+
+## <?PHP $this->widget('videobox'); ?>
+
+This widget have no parameters, creating embedd iframe player for youtube content by full url.
+The required meta name is 'videobox' and the meta value must be the full url of youtube video.
 
 #lastcontent
 ##0.0.6

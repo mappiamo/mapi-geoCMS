@@ -8,20 +8,36 @@
 
 	defined('DACCESS') or die;
 
-	function mwidget_lastcontent($c_num = 5, $c_type = 'place', $c_order = 'modified', $c_filter = NULL) {
+	function mwidget_lastcontent($c_num = 5, $c_type = 'place', $c_order = 'modified', $c_filter = NULL, $c_orderby = 'desc') {
 
 		$lang = new M_Language;
 		$language = $lang->getLanguage();
 
 		if (!$c_filter) {
-			$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')->where('language', $language)->where('enabled', 1)->where('type', $c_type)->order_by_desc($c_order)->limit($c_num)->find_array();
+			if ($c_orderby == 'asc') {
+				$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')
+											 ->where('language', $language)->where('enabled', 1)->where('type', $c_type)
+											 ->order_by_asc($c_order)->limit($c_num)->find_array();
+			} else {
+				$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')
+											 ->where('language', $language)->where('enabled', 1)->where('type', $c_type)
+											 ->order_by_desc($c_order)->limit($c_num)->find_array();
+			}
 		} else {
 			if ($c_filter ==  'now') {
 				$DateFilter = "`end` >= now() AND `start` <= now()";
 			} elseif ($c_filter ==  'from_now') {
 				$DateFilter = "`end` >= now()";
 			}
-			$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')->where('language', $language)->where('enabled', 1)->where('type', $c_type)->where_raw($DateFilter)->order_by_desc($c_order)->limit($c_num)->find_array();
+			if ($c_orderby == 'asc') {
+				$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')
+											 ->where('language', $language)->where('enabled', 1)->where('type', $c_type)
+											 ->where_raw($DateFilter)->order_by_asc($c_order)->limit($c_num)->find_array();
+			} else {
+				$contents = ORM::for_table('contents')->select_many('title', 'id', 'text', 'address', 'start', 'end')
+											 ->where('language', $language)->where('enabled', 1)->where('type', $c_type)
+											 ->where_raw($DateFilter)->order_by_desc($c_order)->limit($c_num)->find_array();
+			}
 		}
 
 
