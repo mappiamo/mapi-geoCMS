@@ -16,6 +16,20 @@
 				$sender_email = filter_var($sender_email, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH);
 				if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
 
+					$CaptchaKey =	ORM::for_table('preferences')->select_many('value')
+													->where('name', 'Reacaptcha_key')
+													->find_one();
+
+					if ($CaptchaKey) {
+						$privatekey = $CaptchaKey['value'];
+						$resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
+																					 $_POST["recaptcha_response_field"]);
+
+						if (!$resp->is_valid) {
+							return mapi_report('Captcha: '.$resp->error);
+						}
+					}
+
 					$UserData =	ORM::for_table('users')->select_many('email', 'username')
 					->where('email', $sender_email)
 					->where('enabled', 1)

@@ -6,7 +6,22 @@ defined( 'DACCESS' ) or die;
 class MModel_Register {
 
 		static function register() {
-				if ( ! MValidate::password( MGet::string( 'pass' ) ) ) return mapi_report( 'Invalid password.' );
+
+			$CaptchaKey =	ORM::for_table('preferences')->select_many('value')
+												->where('name', 'Reacaptcha_key')
+												->find_one();
+
+			if ($CaptchaKey) {
+				$privatekey = $CaptchaKey['value'];
+				$resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
+																			 $_POST["recaptcha_response_field"]);
+
+				if (!$resp->is_valid) {
+					return mapi_report('Captcha: '.$resp->error);
+				}
+			}
+
+			if ( ! MValidate::password( MGet::string( 'pass' ) ) ) return mapi_report( 'Invalid password.' );
 				if ( MGet::string( 'pass' ) !== MGet::string( 'pass_repeat' ) ) return mapi_report( 'Passwords do not match.' );
 
 				$user = MObject::create( 'user' );

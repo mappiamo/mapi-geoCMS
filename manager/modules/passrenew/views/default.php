@@ -26,7 +26,15 @@
 				theme : 'white'
 			};
 		</script>
-		<?php echo recaptcha_get_html('6LeZNOUSAAAAALQAQuZXkMq-kI0ZOnaCb-YMP5z1'); ?>
+		<?php
+			$CaptchaKey =	ORM::for_table('preferences')->select_many('value')
+												->where('name', 'Reacaptcha_key')
+												->find_one();
+
+			if ($CaptchaKey) {
+				echo recaptcha_get_html($CaptchaKey['value']);
+			}
+		?>
 		<br />
 		<label>All fields are required</label>
 		<input type="hidden" name="mapi_csrf" id="mapi_csrf" value="<?php MPut::_html_attr( mapi_csrf_value() ); ?>" />
