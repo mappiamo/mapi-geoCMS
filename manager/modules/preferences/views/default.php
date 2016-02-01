@@ -180,12 +180,27 @@ defined( 'DACCESS' ) or die;
 														      			<input type="text" name="facebook_app_id" class="form-control" id="facebook_app_id" value="<?php MPut::_html_attr( $data['facebook_app_id'] ); ?>" />
 														    	</div>
 														</div>
+
 														<div class="form-group">
 														    	<label for="facebook_secret" class="control-label">Secret</label>
 														    	<div>
 														      			<input type="text" name="facebook_secret" class="form-control" id="facebook_secret" value="<?php MPut::_html_attr( $data['facebook_secret'] ); ?>" />
 														    	</div>
 														</div>
+
+													<div class="form-group">
+														<label for="DisqusName" class="control-label">Disqus sitename</label>
+														<div>
+															<input type="text" name="DisqusName" class="form-control" id="DisqusName" value="<?php if (isset($data['DisqusName'])) { MPut::_html_attr( $data['DisqusName'] ); } ?>" />
+														</div>
+													</div>
+
+													<div class="form-group">
+														<label for="Reacaptcha_key" class="control-label">ReCaptcha ID</label>
+														<div>
+															<input type="text" name="Reacaptcha_key" class="form-control" id="Reacaptcha_key" value="<?php if (isset($data['Reacaptcha_key'])) { MPut::_html_attr( $data['Reacaptcha_key'] ); } ?>" />
+														</div>
+													</div>
 
 												</div>
 										</div>

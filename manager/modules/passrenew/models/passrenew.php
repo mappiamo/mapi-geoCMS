@@ -20,7 +20,7 @@
 													->where('name', 'Reacaptcha_key')
 													->find_one();
 
-					if ($CaptchaKey) {
+					if (($CaptchaKey) && (strlen($CaptchaKey['value']) > 3)) {
 						$privatekey = $CaptchaKey['value'];
 						$resp = recaptcha_check_answer($privatekey, $_SERVER["REMOTE_ADDR"], $_POST["recaptcha_challenge_field"],
 																					 $_POST["recaptcha_response_field"]);

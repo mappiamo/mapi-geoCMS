@@ -30,7 +30,7 @@ defined( 'DACCESS' ) or die;
 																->where('name', 'Reacaptcha_key')
 																->find_one();
 
-							if ($CaptchaKey) {
+							if (($CaptchaKey) && (strlen($CaptchaKey['value']) > 3)) {
 								echo recaptcha_get_html($CaptchaKey['value']);
 							}						?>
 	        	<br />
