@@ -8,12 +8,17 @@
 
 	defined( 'DACCESS' ) or die;
 
-		function mwidget_disqus() {
+		function mwidget_disqus($TypeArray = array('post')) {
 			$DisqusName =	ORM::for_table('preferences')->select_many('value')
 												->where('name', 'DisqusName')
 												->find_one();
 
-			if ($DisqusName) {
+			$CID = $_GET['object'];
+			$ContentType =	ORM::for_table('contents')->select_many('type')
+												 ->where('id', $CID)
+												 ->find_one();
+
+			if (($DisqusName) && ($ContentType) && (in_array($ContentType['type'], $TypeArray))) {
 				$DisqusKey = $DisqusName['value']; ?>
 
 				<h1>Comments</h1>
