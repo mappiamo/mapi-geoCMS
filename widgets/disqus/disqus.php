@@ -47,9 +47,13 @@
 				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 
 			<?PHP
-			} else { ?>
-				Register your site if you want to use Disqus comment engine <a href="https://disqus.com/admin/create/" target="_blank">from here</a>
-			<?PHP
+			} else {
+				if (in_array($ContentType['type'], $TypeArray)) {
+					?>
+					Register your site if you want to use Disqus comment engine <a href="https://disqus.com/admin/create/"
+																																				 target="_blank">from here</a>
+					<?PHP
+				}
 			}
 		}
 
