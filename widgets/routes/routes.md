@@ -1,6 +1,6 @@
-Â© Berross (www.berross.com)
+© Berross (www.berross.com)
 license GPL v2.1
-Author PerjÃ©s LÃ¡szlÃ³ (perjeslaszlo@gmail.com)
+Author Perjés László (perjeslaszlo@gmail.com)
 
 #routes
 ##0.0.6

@@ -18,7 +18,7 @@
 												 ->where('id', $CID)
 												 ->find_one();
 
-			if (($DisqusName) && ($ContentType) && (in_array($ContentType['type'], $TypeArray))) {
+			if (($DisqusName) && (strlen($DisqusName['value']) > 2) && ($ContentType) && (in_array($ContentType['type'], $TypeArray))) {
 				$DisqusKey = $DisqusName['value']; ?>
 
 				<h1>Comments</h1>
@@ -50,8 +50,7 @@
 			} else {
 				if (in_array($ContentType['type'], $TypeArray)) {
 					?>
-					Register your site if you want to use Disqus comment engine <a href="https://disqus.com/admin/create/"
-																																				 target="_blank">from here</a>
+					Register your site if you want to use Disqus comment engine <a href="https://disqus.com/admin/create/" target="_blank">from here</a>
 					<?PHP
 				}
 			}
