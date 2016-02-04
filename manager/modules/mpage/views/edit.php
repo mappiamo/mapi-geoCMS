@@ -117,7 +117,7 @@
 										<?PHP } ?>
 
 										<?PHP
-											$PageData = ORM::for_table('pages')->select_many('id', 'parent_id')
+											$PageData = ORM::for_table('pages')->select_many('id')
 																		 ->where_raw('(`enabled` = ? AND `id` = ?)', array(1, $data->id))
 																		 ->find_one();
 
@@ -240,15 +240,6 @@
 
 				</div>
 				<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
-
-					<br/>
-
-					<div class="panel panel-default">
-						<div class="panel-heading">Current position</div>
-						<div class="panel-body">
-							where is this page on the menu system?
-						</div>
-					</div>
 
 					<br/>
 
