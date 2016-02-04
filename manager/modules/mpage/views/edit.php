@@ -117,7 +117,7 @@
 										<?PHP } ?>
 
 										<?PHP
-											$PageData = ORM::for_table('pages')->select_many('id')
+											$PageData = ORM::for_table('pages')->select_many('id', 'parent_id')
 																		 ->where_raw('(`enabled` = ? AND `id` = ?)', array(1, $data->id))
 																		 ->find_one();
 
