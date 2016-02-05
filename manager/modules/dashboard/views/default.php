@@ -29,6 +29,47 @@ defined( 'DACCESS' ) or die;
 								</blockquote>
 					  	</div>
 				</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">#mappiamo links:</div>
+				<div class="panel-body">
+					<blockquote>
+						<p>Public repository</p>
+						<small><a href="https://github.com/mappiamo/">https://github.com/mappiamo/</a></small>
+						<small>mapi-geocms (main repo of CMS)</small>
+						<small>mapi-app (hybrid application for iOS, android, winphone)</small>
+						<small>mapi-wikitude (mobile app based on augmented reality plugin: wikitude)</small>
+					</blockquote>
+					<blockquote>
+						<p>Private repository</p>
+						<small><a href="https://bitbucket.com/mappiamo/">https://bitbucket.com/mappiamo/</a></small>
+						<small>v2 roadmap</small>
+					</blockquote>
+					<blockquote>
+						<p>helpdesk for #mappiamo user</p>
+						<small><a href="https://www.facebook.com/groups/mappiamo/">https://www.facebook.com/groups/mappiamo/</a></small>
+					</blockquote>
+					<blockquote>
+						<p>Developers list</p>
+						<small><a href="http://mail.mappiamo.org/mailman/listinfo">http://mail.mappiamo.org/mailman/listinfo</a></small>
+						<small>mapi-dev (this list)</small>
+					</blockquote>
+					<blockquote>
+						<p>#mappiamo G+ community</p>
+						<small><a href="https://plus.google.com/communities/115601965828994469496">https://plus.google.com/communities/115601965828994469496</a></small>
+					</blockquote>
+				</div>
+			</div>
+
+			<div class="panel panel-default">
+				<div class="panel-heading">Changelog</div>
+				<div class="panel-body">
+					<blockquote>
+
+					</blockquote>
+				</div>
+			</div>
+
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 				<div class="panel panel-default">
