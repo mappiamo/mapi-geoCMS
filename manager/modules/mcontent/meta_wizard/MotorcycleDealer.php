@@ -1,10 +1,4 @@
 <?php
-	/**
-	 * Created by PhpStorm.
-	 * User: Laca
-	 * Date: 2015.12.09.
-	 * Time: 11:53
-	 */
 
 	class MotorcycleDealer {
 

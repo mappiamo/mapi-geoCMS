@@ -1,10 +1,4 @@
 <?php
-	/**
-	 * Created by PhpStorm.
-	 * User: Laca
-	 * Date: 2016.01.24.
-	 * Time: 11:32
-	 */
 
 	include('Database/Configuration.php');
 	include('Database/Connection.php');

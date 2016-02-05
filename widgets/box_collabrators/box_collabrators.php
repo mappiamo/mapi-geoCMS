@@ -1,10 +1,4 @@
 <?php
-	/**
-	 * Created by PhpStorm.
-	 * User: Laca
-	 * Date: 2015.11.05.
-	 * Time: 17:29
-	 */
 
 	defined('DACCESS') or die;
 

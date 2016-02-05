@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Laca
- * Date: 2015.06.04.
- * Time: 12:40
- */
-
 
 class MModel_Event {
 

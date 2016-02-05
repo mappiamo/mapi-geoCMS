@@ -1,10 +1,4 @@
 <?php
-	/**
-	 * Created by PhpStorm.
-	 * User: Laca
-	 * Date: 2016.01.12.
-	 * Time: 13:30
-	 */
 
 	class gpsbooking {
 

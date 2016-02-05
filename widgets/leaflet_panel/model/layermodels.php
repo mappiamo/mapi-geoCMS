@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Laca
- * Date: 2015.10.20.
- * Time: 10:46
- */
 
 	class layermodels {
 

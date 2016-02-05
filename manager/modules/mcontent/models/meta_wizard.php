@@ -1,10 +1,4 @@
 <?php
-	/**
-	 * Created by PhpStorm.
-	 * User: Laca
-	 * Date: 2015.12.17.
-	 * Time: 14:25
-	 */
 
 	error_reporting( E_ALL );
 	ini_set( 'display_errors', 0 );
