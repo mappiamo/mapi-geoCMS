@@ -163,9 +163,12 @@ Lastcontent
 --------------
 
 Usage code examples:
-## <?php $this->widget('lastcontent', array(5)); ?>
-## <?php $this->widget('lastcontent', array(5, 'event', 'start', 'from_now')); ?>
-## <?php $this->widget('lastcontent', array(5, 'post', 'created')); ?>
+
+<?php $this->widget('lastcontent', array(5)); ?>
+
+<?php $this->widget('lastcontent', array(5, 'event', 'start', 'from_now')); ?>
+
+<?php $this->widget('lastcontent', array(5, 'post', 'created')); ?>
 
 This widget have parameters. The first is the maximum number of content, this is required.
 All other paramteres are optional: [content type], [ordering column name], 
@@ -183,8 +186,11 @@ selected categories on the map.
 
 the parameters: 
 1, The category name
+
 2, Menu type: 'treemenu' or 'popmenu'
+
 3, Template number of menu only. Menus have 15 templates.
+
 4, How menu display the selected catorgory contents: 
     'link' - the category opens new page with content list
     'check' - the category displays as marker on the map
@@ -193,8 +199,10 @@ Owl image
 ------------
 
 Usage code example:
-## <?PHP $this->widget('owl_image', array('category', 4, 60)); ?>
-## <?PHP $this->widget('owl_image', array('path', 6, 'templates/soccorso/images/partners', 'index.php?module=category&object=59')); ?>
+
+<?PHP $this->widget('owl_image', array('category', 4, 60)); ?>
+
+<?PHP $this->widget('owl_image', array('path', 6, 'templates/soccorso/images/partners', 'index.php?module=category&object=59')); ?>
 
 This widget have parameters, creating image carousel to the content column.
 The source images can get from two different source: 'category' or 'path'. This is the first parameter.
@@ -207,9 +215,10 @@ will open the document contains clicked image.
 Owl video
 -------------
 
-Widget name: owl_video
 Usage code example:
+
 $TubeID = array('jkovdYV0qm0', 'dw6wZQkfsn0', 'CqdSzVXkhmY', 'km3JiaPqWMI', 'NyCwOdyhZco', 'YJTxnhjpF3U', 'HOVYTZkvjH8', '2Tlou1Vdg6Y', '0_rtwI_nUlI', 'LCtp7D0uCjA');
+
 $this->widget('owl_video', array($TubeID, 3));
 
 This widget have parameters, creating video carousel to the content column.
@@ -228,8 +237,10 @@ Disqus
 ----------
 
 Usage code example:
-## $Types = array('post', 'event');
-## <?php M_Template::widget('disqus', array($Types)); ?>
+
+$Types = array('post', 'event');
+
+<?php M_Template::widget('disqus', array($Types)); ?>
 
 This widget have no parameter as array. Creating comment section on content page.
 Disqus account and disqus site name required for preferences. The parameter contains types where the disqus available. 
