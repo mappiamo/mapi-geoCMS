@@ -28,6 +28,14 @@ Address
 This widget have no parameters, creating search box for map, the widget centering map for the search address.
 The search string must be real name (for example city name) to get real latitude and longitude.
 
+Bottom menu
+------------
+
+- Usage code example:
+- <?php M_Template::widget('bottommenu', array($ID)); ?>
+
+Display bottom menu items. This widget have 1 parameter, the menu ID.
+
 Allmeta box
 -------------
 
@@ -36,6 +44,14 @@ Allmeta box
 
 This widget have no parameters, creating list (table) of all meta data of content.
 This widget is ideal for right column. The disabled meta names is on the row 13 on the code.
+
+Box
+-----
+
+- Usage code example:
+- <?php M_Template::widget('box', array($image, $title, $desc, $link)); ?>
+
+This widget display image box, using four parameters.
 
 Collabrators box
 --------------------
@@ -109,6 +125,38 @@ Allmeta
 This widget have no parameters, creating list (table) of meta data from the current content.
 This widget created for list or table of standard schemantic data if available.
 
+Slideshow
+-----------
+
+- Usage code example:
+- <?PHP $this->widget('content_slideshow'); ?>
+
+This widget have no parameters, creating slideshow on the content column from all images included to the current content.
+
+Divided menu
+--------------
+
+- Usage code example:
+- <?php M_Template::widget('dividedmenu', array($ID)); ?>
+
+Display divided menu. This widget have 1 parameter, the menu ID.
+
+Dropdown menu
+--------------
+
+- Usage code example:
+- <?php M_Template::widget('dropdownmenu', array($ID)); ?>
+
+Display dropdown menu. This widget have 1 parameter, the menu ID.
+
+Intro
+---------
+
+- Usage code example:
+- <?PHP $this->widget('intro'); ?>
+
+This widget have no parameters, display intro image.
+
 Headline
 ---------
 
@@ -148,6 +196,22 @@ Jplayer
 
 This widget have no parameters, creating javascript player for audio (or video) content.
 The required meta name is 'audio' and the meta value must be the full url of audio or video file.
+
+Map
+----
+
+- Usage code example:
+- <?PHP $this->widget('map' array($zoom)); ?>
+
+This widget have 1 parameter, the default zoom. This widget display map on the conent page.
+
+Menu
+-----
+
+- Usage code example:
+- <?PHP $this->widget('menu' array($ID)); ?>
+
+This widget have 1 parameter, the menu id. This widget display menu item.
 
 Video box
 -----------
@@ -210,6 +274,22 @@ Owl video
 This widget have parameters, creating video carousel to the content column.
 The first parameter must be an array, contains all youtube video id required for the carousel.
 The second parameter is how many videos display at once by the carousel.
+
+Share
+------
+
+- Usage code example:
+- <?PHP $this->widget('share', array($site_id)); ?>
+
+Share content on sicial networks.
+
+Slider
+--------
+
+- Usage code example:
+- <?PHP $this->widget('slider', array($content_id)); ?>
+
+This widget creating image slider from the content by content ID.
 
 Weather
 --------
