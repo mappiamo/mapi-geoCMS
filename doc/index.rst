@@ -21,7 +21,7 @@ You can insert several widgets to your own #mappiamo template. You have to edit 
 Address
 ---------
 
-- Usage code example:
+- Usage code example::
     $ <?php M_Template::widget('address'); ?>
 
 This widget have no parameters, creating search box for map, the widget centering map for the search address.
@@ -30,7 +30,7 @@ The search string must be real name (for example city name) to get real latitude
 Bottom menu
 ------------
 
-- Usage code example:
+- Usage code example::
     $ <?php M_Template::widget('bottommenu', array($ID)); ?>
 
 Display bottom menu items. This widget have 1 parameter, the menu ID.
@@ -38,8 +38,8 @@ Display bottom menu items. This widget have 1 parameter, the menu ID.
 Allmeta box
 -------------
 
-- Usage code example:
-- <?php $this->widget('box_allmeta'); ?>
+- Usage code example::
+    $ <?php $this->widget('box_allmeta'); ?>
 
 This widget have no parameters, creating list (table) of all meta data of content.
 This widget is ideal for right column. The disabled meta names is on the row 13 on the code.
