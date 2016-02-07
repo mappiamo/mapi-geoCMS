@@ -23,7 +23,6 @@ Address
 ---------
 
 Usage code example:
-code:: PHP
 <?php M_Template::widget('address'); ?>
 
 This widget have no parameters, creating search box for map, the widget centering map for the search address.
