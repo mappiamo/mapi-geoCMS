@@ -183,9 +183,7 @@ selected categories on the map.
 1) The category name
 2) Menu type: 'treemenu' or 'popmenu'
 3) Template number of menu only. Menus have 15 templates.
-4) How menu display the selected catorgory contents: 
-- 'link' - the category opens new page with content list
-- 'check' - the category displays as marker on the map
+4) How menu display the selected catorgory contents: 'link' - the category opens new page with content list 'check' - the category displays as marker on the map
     
 Owl image
 ------------
