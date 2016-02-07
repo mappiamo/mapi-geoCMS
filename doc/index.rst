@@ -3,7 +3,6 @@ Mappiamo
 
 This is the Mappiamo documentation.
 
-
 Introduction
 ============
 
@@ -23,7 +22,7 @@ Address
 ---------
 
 - Usage code example:
-- <?php M_Template::widget('address'); ?>
+    $ <?php M_Template::widget('address'); ?>
 
 This widget have no parameters, creating search box for map, the widget centering map for the search address.
 The search string must be real name (for example city name) to get real latitude and longitude.
@@ -32,7 +31,7 @@ Bottom menu
 ------------
 
 - Usage code example:
-- <?php M_Template::widget('bottommenu', array($ID)); ?>
+    $ <?php M_Template::widget('bottommenu', array($ID)); ?>
 
 Display bottom menu items. This widget have 1 parameter, the menu ID.
 
