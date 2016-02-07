@@ -9,7 +9,12 @@ Introduction
 
 `#mappiamo <http://www.mappiamo.org/>`_ is a CMS that allows you to create and leverage content through the use of OpenData, the geo-location and microformats. It can be used for processing the data produced by public administrations, collecting content (crowdsourcing), civic hacking and providing a basis for the portal of a smart city. 
 
-the next chapter
+Installation
 =====================
 
-sgsdgf sdf gds gs gfdsdsfg dsfg dsfg s
+Download #mappiamo package from GIT, and copy all files to your web host by FTP. Copy files to subdirectory if required. Login to your control panel or phpMyadmin to create database user and database. Give all access rights to your database user. When you copied all files to your host, access to the #mappiamo root by your browser. Setup process will be started. Fill all fields. If the process done witohot error, you can access to the content manager on the URL: http://[your_host]/manager/
+
+Widgets on your template
+===========================
+
+You can insert several widgets to yoyr own #mappiamo template.
