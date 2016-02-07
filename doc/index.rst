@@ -46,3 +46,29 @@ Usage code example:
 This widget have one parameters "n", what is the maximum number of collabotators article based on the selected content. 
 The collaborator's e-mail must be saved to the meta value with name "collaborator".
 
+Cookie box
+------------
+
+Usage code example:
+<?PHP $this->widget('box_cookie'); ?>
+
+This widget have no parameters, creating alert box for cookie usage.
+
+Distance box
+---------------
+
+Usage code example:
+<?PHP $this->widget('box_distance'); ?>
+
+This widget have no parameters, creating list (table) of related articles not far from the current content.
+The distance is fixed on code, the radius is 1 km.
+
+Events box
+-----------
+
+Usage code example:
+<?PHP $this->widget('box_events'); ?>
+
+This widget have no parameters, creating list (table) of events not far from the current content.
+The distance is fixed on code, the radius is 1 km.
+
