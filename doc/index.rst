@@ -17,4 +17,14 @@ Download #mappiamo package from GIT, and copy all files to your web host by FTP.
 Widgets on your template
 ===========================
 
-You can insert several widgets to yoyr own #mappiamo template.
+You can insert several widgets to your own #mappiamo template. You have to edit tamplete files only with your favorite IDE / text editor.
+
+Address
+---------
+
+Usage code example:
+code:: PHP
+<?php M_Template::widget('address'); ?>
+
+This widget have no parameters, creating search box for map, the widget centering map for the search address.
+The search string must be real name (for example city name) to get real latitude and longitude.
