@@ -174,7 +174,7 @@ This widget have parameters. The first is the maximum number of content, this is
 All other paramteres are optional: [content type], [ordering column name], 
 and if the content type is 'event', the last parameter 'from_now' shows only current and future events.
 
-menu_full
+Full featured menu
 ----------
 
 Usage code example:
