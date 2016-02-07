@@ -27,3 +27,22 @@ Usage code example:
 
 This widget have no parameters, creating search box for map, the widget centering map for the search address.
 The search string must be real name (for example city name) to get real latitude and longitude.
+
+Allmeta box
+-------------
+
+Usage code example:
+<?php $this->widget('box_allmeta'); ?>
+
+This widget have no parameters, creating list (table) of all meta data of content.
+This widget is ideal for right column. The disabled meta names is on the row 13 on the code.
+
+Collabrators box
+--------------------
+
+Usage code example:
+<?php $this->widget('box_collabrators' array(n)); ?>
+
+This widget have one parameters "n", what is the maximum number of collabotators article based on the selected content. 
+The collaborator's e-mail must be saved to the meta value with name "collaborator".
+
