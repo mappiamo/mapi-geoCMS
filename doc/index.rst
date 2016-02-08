@@ -9,17 +9,38 @@ Introduction
 `#mappiamo <http://www.mappiamo.org/>`_ is a CMS that allows you to create and leverage content through the use of OpenData, the geo-location and microformats. It can be used for processing the data produced by public administrations, collecting content (crowdsourcing), civic hacking and providing a basis for the portal of a smart city. 
 
 Installation
-=====================
+============
 
 Download #mappiamo package from GIT, and copy all files to your web host by FTP. Copy files to subdirectory if required. Login to your control panel or phpMyadmin to create database user and database. Give all access rights to your database user. When you copied all files to your host, access to the #mappiamo root by your browser. Setup process will be started. Fill all fields. If the process done witohot error, you can access to the content manager on the URL: http://[your_host]/manager/
 
+Using admin's content manager
+=============================
+
+Create new content
+------------------
+
+About semantic web
+------------------
+
+Create automatic meta data by form
+----------------------------------
+
+Insert content to category
+--------------------------
+
+Create pages
+------------
+
+Create custom menus
+-------------------
+
 Widgets on your template
-===========================
+========================
 
 You can insert several widgets to your own #mappiamo template. You have to edit tamplete files only with your favorite IDE / text editor.
 
 Address
----------
+-------
 
 - Usage code example::
 
@@ -29,7 +50,7 @@ This widget have no parameters, creating search box for map, the widget centerin
 The search string must be real name (for example city name) to get real latitude and longitude.
 
 Bottom menu
-------------
+-----------
 
 - Usage code example::
 
@@ -38,7 +59,7 @@ Bottom menu
 Display bottom menu items. This widget have 1 parameter, the menu ID.
 
 Allmeta box
--------------
+-----------
 
 - Usage code example::
 
@@ -48,7 +69,7 @@ This widget have no parameters, creating list (table) of all meta data of conten
 This widget is ideal for right column. The disabled meta names is on the row 13 on the code.
 
 Box
------
+---
 
 - Usage code example::
 
@@ -57,7 +78,7 @@ Box
 This widget display image box, using four parameters.
 
 Collabrators box
---------------------
+----------------
 
 - Usage code example::
 
@@ -67,7 +88,7 @@ This widget have one parameters "n", what is the maximum number of collabotators
 The collaborator's e-mail must be saved to the meta value with name "collaborator".
 
 Cookie box
-------------
+----------
 
 - Usage code example::
 
@@ -76,7 +97,7 @@ Cookie box
 This widget have no parameters, creating alert box for cookie usage.
 
 Distance box
----------------
+------------
 
 - Usage code example::
 
@@ -86,7 +107,7 @@ This widget have no parameters, creating list (table) of related articles not fa
 The distance is fixed on code, the radius is 1 km.
 
 Events box
------------
+----------
 
 - Usage code example::
 
@@ -96,7 +117,7 @@ This widget have no parameters, creating list (table) of events not far from the
 The distance is fixed on code, the radius is 1 km.
 
 Instagram box
-----------------
+-------------
 
 - Usage code example::
 
@@ -107,7 +128,7 @@ If this parameter missing or NULL, the default hashtag is 'tourism'.
 With meta name 'hashtag-instagram' can be overwite the deafult hashtag to anything else.
 
 Onemeta box
-------------
+-----------
 
 - Usage code example::
 
@@ -117,7 +138,7 @@ This widget have one parameter what is the meta name to get the value of only oa
 This widget can be used on the column of main content.
 
 Youtube box
---------------
+-----------
 
 - Usage code example::
 
@@ -127,7 +148,7 @@ This widget have 3 parameters. Developer key, youtube channel id, and the maximu
 This widget can be inserted to the left column, and creating scrollable carousel of selected channel content.
 
 Allmeta
-----------
+-------
 
 - Usage code example::
 
@@ -137,7 +158,7 @@ This widget have no parameters, creating list (table) of meta data from the curr
 This widget created for list or table of standard schemantic data if available.
 
 Slideshow
------------
+---------
 
 - Usage code example::
 
@@ -146,7 +167,7 @@ Slideshow
 This widget have no parameters, creating slideshow on the content column from all images included to the current content.
 
 Divided menu
---------------
+------------
 
 - Usage code example::
 
@@ -155,7 +176,7 @@ Divided menu
 Display divided menu. This widget have 1 parameter, the menu ID.
 
 Dropdown menu
---------------
+-------------
 
 - Usage code example::
 
@@ -164,7 +185,7 @@ Dropdown menu
 Display dropdown menu. This widget have 1 parameter, the menu ID.
 
 Intro
----------
+-----
 
 - Usage code example::
 
@@ -173,7 +194,7 @@ Intro
 This widget have no parameters, display intro image.
 
 Headline
----------
+--------
 
 - Usage code example::
 
@@ -182,7 +203,7 @@ Headline
 This widget have no parameters, creating group of some data and metadata which are rewired on content column between title and content text.
 
 Flickr
---------
+------
 
 - Usage code example::
 
@@ -191,7 +212,7 @@ Flickr
 This widget have no parameters, creating flickr image groups on the map by visible box of map.
 
 Form contact
----------------
+------------
 
 - Usage code example::
 
@@ -201,7 +222,7 @@ This widget have one parameter, the parameter must be the username of registered
 This widget creating form with input fileds for sending simple message with server side validation. 
 
 Gravatar
-----------
+--------
 
 This widget included to the content module, cannot use on the template or view.
 The widget fetching gravatar icon by the user's e-mail address, if the user registered on this service.
@@ -217,7 +238,7 @@ This widget have no parameters, creating javascript player for audio (or video) 
 The required meta name is 'audio' and the meta value must be the full url of audio or video file.
 
 Map
-----
+---
 
 - Usage code example::
 
@@ -226,7 +247,7 @@ Map
 This widget have 1 parameter, the default zoom. This widget display map on the conent page.
 
 Menu
------
+----
 
 - Usage code example::
 
@@ -235,7 +256,7 @@ Menu
 This widget have 1 parameter, the menu id. This widget display menu item.
 
 Video box
------------
+---------
 
 - Usage code example::
 
@@ -245,7 +266,7 @@ This widget have no parameters, creating embedd iframe player for youtube conten
 The required meta name is 'videobox' and the meta value must be the full url of youtube video.
 
 Lastcontent
---------------
+-----------
 
 - Usage code examples::
 
@@ -258,7 +279,7 @@ All other paramteres are optional: [content type], [ordering column name],
 and if the content type is 'event', the last parameter 'from_now' shows only current and future events.
 
 Full featured menu
-----------
+------------------
 
 - Usage code example::
 
@@ -274,7 +295,7 @@ selected categories on the map.
 4) How menu display the selected catorgory contents: 'link' - the category opens new page with content list 'check' - the category displays as marker on the map
     
 Owl image
-------------
+---------
 
 - Usage code example::
 
@@ -290,7 +311,7 @@ The 4th parameter is the link to open when user click on image. This is optional
 will open the document contains clicked image.
 
 Owl video
--------------
+---------
 
 - Usage code example::
 
@@ -302,7 +323,7 @@ The first parameter must be an array, contains all youtube video id required for
 The second parameter is how many videos display at once by the carousel.
 
 Share
-------
+-----
 
 - Usage code example::
 
@@ -311,7 +332,7 @@ Share
 Share content on sicial networks.
 
 Slider
---------
+------
 
 - Usage code example::
 
@@ -320,7 +341,7 @@ Slider
 This widget creating image slider from the content by content ID.
 
 Weather
---------
+-------
 
 - Usage code example::
 
@@ -329,7 +350,7 @@ Weather
 This widget have no parameters, creating weather report on the map.
 
 Disqus
-----------
+------
 
 - Usage code example::
 
