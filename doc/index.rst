@@ -19,6 +19,15 @@ Using admin's content manager
 Create new content
 ------------------
 
+You can create several types of content. 
+
+1) Post: this is a simple text based blog content
+2) Place: content for one place selected on the map
+3) Event: event is like the place, but you can define start and end dates
+4) Route: this content contains route on the map for long distance travels
+
+All content types can difine place-marker on the map and can be used draw functions exloding route.
+
 About semantic web
 ------------------
 
