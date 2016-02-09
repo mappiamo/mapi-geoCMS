@@ -31,6 +31,12 @@ All content types can create place-marker on the map and can be used draw functi
 About semantic web
 ------------------
 
+Mappiamo automatically support semantic web for better result on google searches.
+
+The Semantic Web is an extension of the Web through standards by the World Wide Web Consortium (W3C). The standards promote common data formats and exchange protocols on the Web, most fundamentally the Resource Description Framework (RDF).
+
+According to the W3C, "The Semantic Web provides a common framework that allows data to be shared and reused across application, enterprise, and community boundaries". The term was coined by Tim Berners-Lee for a web of data that can be processed by machines. While its critics have questioned its feasibility, proponents argue that applications in industry, biology and human sciences research have already proven the validity of the original concept. (wikipedia)
+
 Create automatic meta data by form
 ----------------------------------
 
