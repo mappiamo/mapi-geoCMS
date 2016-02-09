@@ -50,6 +50,8 @@ Create category, and select any of them from the content page. The selected cate
 Create pages
 ------------
 
+Create content type "pages" if you want to display the collection of content by menu. Pages can contains category (with any contents), one content, module generated service or page, and events with date filter on the top of page.
+
 Create custom menus
 -------------------
 
