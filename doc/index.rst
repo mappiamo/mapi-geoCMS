@@ -26,7 +26,7 @@ You can create several types of content.
 3) Event: event is like the place, but you can define start and end dates
 4) Route: this content contains route on the map for long distance travels
 
-All content types can difine place-marker on the map and can be used draw functions exloding route.
+All content types can create place-marker on the map and can be used draw functions excluding route.
 
 About semantic web
 ------------------
