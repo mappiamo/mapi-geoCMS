@@ -55,6 +55,8 @@ Create content type "pages" if you want to display the collection of content by 
 Create custom menus
 -------------------
 
+Create menu with name on the content manager. When menu named and created, use it on "Page". Select manager menu "Page", click on previously created page-content (with document, category, modul or events) and insert selected page content to any menu. Select more than one times and add if required.
+
 Widgets on your template
 ========================
 
