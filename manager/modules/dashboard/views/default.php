@@ -66,6 +66,18 @@ defined( 'DACCESS' ) or die;
 				<div class="panel-body">
 					<blockquote>
 
+						<?PHP
+							$ChangeLogSource = 'https://raw.githubusercontent.com/mappiamo/mapi-geoCMS/master/CHANGELOG.txt';
+
+							$file_headers = @get_headers($ChangeLogSource);
+							if($file_headers[0] != 'HTTP/1.1 404 Not Found') {
+								$CLCuntent = file_get_contents($ChangeLogSource);
+								echo '<pre>'.$CLCuntent.'</pre>';
+							} else {
+								echo '<pre>Changelog not accesible. Please visit GIT repo.</pre>';
+							}
+						?>
+
 					</blockquote>
 				</div>
 			</div>
