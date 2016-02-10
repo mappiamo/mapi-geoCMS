@@ -66,7 +66,9 @@ Create menu with name on the content manager. When menu named and created, use i
 Widgets on your template
 ========================
 
-You can insert several widgets to your own #mappiamo template. You have to edit tamplete files only with your favorite IDE / text editor.
+You can insert several widgets to your own #mappiamo template. You have to edit tamplete files only with your favorite IDE / text editor. Widgets are the part of ducument front-end with several functions. Some of them can be inserted to the content, some of then can be inserted to the sidebar on left or right.
+
+.. note:: If the widger name contains word "Box", the widget primary created for the sidebar, not the column of main content. but because the template can be modified with several tricks, these widget can be used under or within the main content text.
 
 Address
 -------
@@ -78,6 +80,8 @@ Address
 This widget have no parameters, creating search box for map, the widget centering map for the search address.
 The search string must be real name (for example city name) to get real latitude and longitude.
 
+.. note:: This widget is the part of Leaflet panel widget, this widger required to show address search function.
+
 Bottom menu
 -----------
 
@@ -87,6 +91,8 @@ Bottom menu
 
 Display bottom menu items. This widget have 1 parameter, the menu ID.
 
+.. note:: Menu must be created by manager, you can insert any menu of them by ID.
+
 Allmeta box
 -----------
 
@@ -95,7 +101,7 @@ Allmeta box
     <?php $this->widget('box_allmeta'); ?>
 
 This widget have no parameters, creating list (table) of all meta data of content.
-This widget is ideal for right column. The disabled meta names is on the row 13 on the code.
+This widget is ideal for right column, but van be used unser the main content. The disabled meta names is on the row 13 on the code.
 
 Box
 ---
@@ -106,6 +112,11 @@ Box
 
 This widget display image box, using four parameters.
 
+1) $image -> image path
+2) $title -> title text on image (positioned by customizable CSS!)
+3) $desc -> description of image (positioned by customizable CSS!)
+4) $link -> link if user click on the image
+
 Collabrators box
 ----------------
 
@@ -113,8 +124,9 @@ Collabrators box
 
     <?php $this->widget('box_collabrators' array(n)); ?>
 
-This widget have one parameters "n", what is the maximum number of collabotators article based on the selected content. 
-The collaborator's e-mail must be saved to the meta value with name "collaborator".
+This widget have one parameters "n", what is the maximum number of collabotators article based on the selected content. The collaborator's e-mail must be saved to the meta value with name "collaborator".
+
+.. note:: This widget have no parameter about collaborators name ir e-mail, because these names depending on the document. This is the reason why the collaborator's identifier definied by meta data of selected document not by the template.
 
 Cookie box
 ----------
