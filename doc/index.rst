@@ -11,31 +11,31 @@ Introduction
 Installation
 ============
 
-Download #mappiamo package from GIT, and copy all files to your web host by FTP. Copy files to subdirectory if required. Login to your control panel or phpMyadmin to create database user and database. Give all access rights to your database user. When you copied all files to your host, access to the #mappiamo root by your browser. Setup process will be started. Fill all fields. If the process done witohot error, you can access to the content manager on the URL: http://[your_host]/manager/
+Download #mappiamo package from GIT, and copy all files to your web host by FTP. Copy files to subdirectory if required, or to public_html root. Login to your control panel or phpMyadmin to create database user with password and add database to user. Give all access rights to your database user. When you copied all files to your host, access to the #mappiamo root by your browser by http. Setup process will be started. Fill all required fields. If the process done without error, you can access to the content manager on the URL: http://[your_host]/manager/
 
-Using admin's content manager
-=============================
+Using content manager as admin or editor
+========================================
 
 Create new content
 ------------------
 
 You can create several types of content. 
 
-1) Post: this is a simple text based blog content
-2) Place: content for one place selected on the map
-3) Event: event is like the place, but you can define start and end dates
-4) Route: this content contains route on the map for long distance travels
+1) Post: this is a simple text based blog content (with marker on the map if required)
+2) Place: content for the place selected on the map
+3) Event: event is like the place, but you can define start and end dates on extra fields
+4) Route: this content contains longer route on the map for long distance travels between cities
 
-All content types can create place-marker on the map and can be used draw functions excluding route.
+All content types can create marker on the map and can be used draw-on-the-map functions, excluding route. Route can contains only route plan.
 
 About semantic web
 ------------------
 
-Mappiamo automatically support semantic web for better result on google searches.
-
 The Semantic Web is an extension of the Web through standards by the World Wide Web Consortium (W3C). The standards promote common data formats and exchange protocols on the Web, most fundamentally the Resource Description Framework (RDF).
 
 According to the W3C, "The Semantic Web provides a common framework that allows data to be shared and reused across application, enterprise, and community boundaries". The term was coined by Tim Berners-Lee for a web of data that can be processed by machines. While its critics have questioned its feasibility, proponents argue that applications in industry, biology and human sciences research have already proven the validity of the original concept. (wikipedia)
+
+.. note:: Mappiamo automatically support semantic web for better result on google searches by content and meta data. The standard semantic data generated automatically by the content module.
 
 Create automatic meta data by form
 ----------------------------------
@@ -57,7 +57,6 @@ Create custom menus
 
 Create menu with name on the content manager. When menu named and created, use it on "Page". Select manager menu "Page", click on previously created page-content (with document, category, modul or events) and insert selected page content to any menu. Select more than one times and add if required.
 
-========================
 Widgets on your template
 ========================
 
