@@ -70,6 +70,8 @@ You can insert several widgets to your own #mappiamo template. You have to edit 
 
 .. note:: If the widger name contains word "Box", the widget primary created for the sidebar, not the column of main content. but because the template can be modified with several tricks, these widget can be used under or within the main content text.
 
+.. note:: New widgets required new CSS classes for correct display. Check the HTML source code to get widget's class names.
+
 Address
 -------
 
@@ -145,7 +147,8 @@ Distance box
     <?PHP $this->widget('box_distance'); ?>
 
 This widget have no parameters, creating list (table) of related articles not far from the current content.
-The distance is fixed on code, the radius is 1 km.
+
+.. note:: The distance is fixed on code, the radius is 1 km.
 
 Events box
 ----------
@@ -155,7 +158,8 @@ Events box
     <?PHP $this->widget('box_events'); ?>
 
 This widget have no parameters, creating list (table) of events not far from the current content.
-The distance is fixed on code, the radius is 1 km.
+
+.. note:: The distance is fixed on code, the radius is 1 km.
 
 Instagram box
 -------------
@@ -168,6 +172,8 @@ This widget have one parameter what is the hashtag for images.
 If this parameter missing or NULL, the default hashtag is 'tourism'.
 With meta name 'hashtag-instagram' can be overwite the deafult hashtag to anything else.
 
+.. note:: If you use meta to define instagram hashtag instead of template, you can get images several hashtags on all documents where 'hashtag-instagram' have value.
+
 Onemeta box
 -----------
 
@@ -176,7 +182,8 @@ Onemeta box
     <?PHP $this->widget('box_onemeta', '[meta_name]'); ?>
 
 This widget have one parameter what is the meta name to get the value of only oane meta data.
-This widget can be used on the column of main content.
+
+.. note:: This widget can be used on the column of main content.
 
 Youtube box
 -----------
@@ -186,7 +193,8 @@ Youtube box
     <?php $this->widget('box_youtube', array('[developer key]', '[channel id]', [maximum content])); ?>
 
 This widget have 3 parameters. Developer key, youtube channel id, and the maximum number of youtube content.
-This widget can be inserted to the left column, and creating scrollable carousel of selected channel content.
+
+.. note:: This widget can be inserted to the left or right sidebar column, and creating scrollable carousel of selected channel content.
 
 Allmeta
 -------
@@ -196,7 +204,8 @@ Allmeta
     <?PHP $this->widget('content_allmeta'); ?>
 
 This widget have no parameters, creating list (table) of meta data from the current content.
-This widget created for list or table of standard schemantic data if available.
+
+.. note:: This widget created for list or table of standard schemantic data if available.
 
 Slideshow
 ---------
@@ -206,6 +215,8 @@ Slideshow
     <?PHP $this->widget('content_slideshow'); ?>
 
 This widget have no parameters, creating slideshow on the content column from all images included to the current content.
+
+.. note:: If more than one images inserted to the content, the widget will be show the gallery where you insert. The best place is under the content column.
 
 Divided menu
 ------------
@@ -259,14 +270,13 @@ Form contact
 
     <?PHP $this->widget('form_contact', array('[registered username]')); ?>
 
-This widget have one parameter, the parameter must be the username of registered Mappiamo user.
-This widget creating form with input fileds for sending simple message with server side validation. 
+This widget have one parameter, the parameter must be the username of registered Mappiamo user. This widget creating form with input fields for sending simple message with ajax validation. 
 
 Gravatar
 --------
 
-This widget included to the content module, cannot use on the template or view.
-The widget fetching gravatar icon by the user's e-mail address, if the user registered on this service.
+This widget included to the content module, cannot use on the template or MVC view.
+The widget fetching gravatar icon by the content creator's e-mail address, if the editor registered on this service.
 
 Jplayer
 -------
@@ -278,6 +288,8 @@ Jplayer
 This widget have no parameters, creating javascript player for audio (or video) content.
 The required meta name is 'audio' and the meta value must be the full url of audio or video file.
 
+.. note:: The meta data value is the full URL of audio file, but the correct encoding is very important. Plase refer to the officiel JPlayer page to inform about usable audio formats.
+
 Map
 ---
 
@@ -285,7 +297,7 @@ Map
 
     <?PHP $this->widget('map' array($zoom)); ?>
 
-This widget have 1 parameter, the default zoom. This widget display map on the conent page.
+This widget have 1 parameter, the default zoom. This widget display map anywhere on the content page. This widget display map (with markers, draw or route) on the visitor's interface.
 
 Menu
 ----
@@ -303,8 +315,7 @@ Video box
 
     <?PHP $this->widget('videobox'); ?>
 
-This widget have no parameters, creating embedd iframe player for youtube content by full url.
-The required meta name is 'videobox' and the meta value must be the full url of youtube video.
+This widget have no parameters, creating embedd iframe player for youtube content by full url. The required meta name is 'videobox' and the meta value must be the full url of youtube video.
 
 Lastcontent
 -----------
@@ -316,8 +327,8 @@ Lastcontent
     <?php $this->widget('lastcontent', array(5, 'post', 'created')); ?>
 
 This widget have parameters. The first is the maximum number of content, this is required.
-All other paramteres are optional: [content type], [ordering column name], 
-and if the content type is 'event', the last parameter 'from_now' shows only current and future events.
+
+All other paramteres are optional (not required because default values are available): [content type], [ordering column name], and if the content type is 'event', the last parameter 'from_now' shows only current and future events.
 
 Full featured menu
 ------------------
@@ -326,14 +337,16 @@ Full featured menu
 
     <?php M_Template::widget('menu_full', array('[category name]', '[treemenu|popmenu]', '09', 'check')); ?>
 
-This widget have parameters. Creating custom menu system by Mappiamo "pages" and "menus", and display
-selected categories on the map.
+This widget have parameters. Creating custom menu system by Mappiamo "pages" and "menus", and display selected categories on the map.
 
 - Parameters:
 1) The category name
 2) Menu type: 'treemenu' or 'popmenu'
-3) Template number of menu only. Menus have 15 templates.
-4) How menu display the selected catorgory contents: 'link' - the category opens new page with content list 'check' - the category displays as marker on the map
+3) Template number of menu only. Menus have 15 templates, the menu template number can be 1 to 15.
+4) How menu display the selected catorgory contents: 
+
+- 'link' - the category opens new page with content list 
+- 'check' - the category displays as marker on the map
     
 Owl image
 ---------
@@ -343,13 +356,16 @@ Owl image
     <?PHP $this->widget('owl_image', array('category', 4, 60)); ?>
     <?PHP $this->widget('owl_image', array('path', 6, 'templates/soccorso/images/partners', 'index.php?module=category&object=59')); ?>
 
-This widget have parameters, creating image carousel to the content column.
+This widget have parameters, creating image carousel to the main content column.
 The source images can get from two different source: 'category' or 'path'. This is the first parameter.
+
 If the image source is 'path', the 3rd parameter must be the relative path to the directory contains images.
-If the image source is 'category', the 3rd parameter must be the id number of category where the widget reads all images from content.
-The second parameter is the maximum number of items to show.
-The 4th parameter is the link to open when user click on image. This is optional. If the source is 'category', the link
-will open the document contains clicked image.
+
+If the image source is 'category', the 3rd parameter must be the id number of category where the widget reads all images from content. This category must be created and filled with grouop of contents.
+
+The 2nd parameter is the maximum number of items to show.
+
+The 4th parameter is the link to open when user click on image. This is optional. If the source is 'category', the link will open the document contains clicked image.
 
 Owl video
 ---------
@@ -359,9 +375,10 @@ Owl video
     $TubeID = array('jkovdYV0qm0', 'dw6wZQkfsn0', 'CqdSzVXkhmY', 'km3JiaPqWMI', 'NyCwOdyhZco', 'YJTxnhjpF3U', 'HOVYTZkvjH8', '2Tlou1Vdg6Y', '0_rtwI_nUlI', 'LCtp7D0uCjA');
     $this->widget('owl_video', array($TubeID, 3));
 
-This widget have parameters, creating video carousel to the content column.
-The first parameter must be an array, contains all youtube video id required for the carousel.
-The second parameter is how many videos display at once by the carousel.
+This widget have parameters, creating video carousel to the main content column.
+The first parameter must be an array on the separated variable, contains all youtube video id required for the carousel.
+
+The second parameter is how many videos display at once by the scrollable carousel.
 
 Share
 -----
@@ -370,7 +387,7 @@ Share
 
     <?PHP $this->widget('share', array($site_id)); ?>
 
-Share content on sicial networks.
+Share content on social networks.
 
 Slider
 ------
@@ -398,5 +415,6 @@ Disqus
     $Types = array('post', 'event');
     <?php M_Template::widget('disqus', array($Types)); ?>
 
-This widget have no parameter as array. Creating comment section on content page.
-Disqus account and disqus site name required for preferences. The parameter contains types where the disqus available. 
+This widget have parameter as array named $Types. Creating comment section on content page. Disqus account and disqus site name required. On the parameter '$Types' must be listed all content types (post, event, place, route) where the disqus comment service will be available. Insert this widget under the main content page.
+
+.. note:: You must register your installed #mappiamo on the Disqus service page as site administrator to get your unique Disqus site name. If you have this name, you must define it on the manager -> preferences.
