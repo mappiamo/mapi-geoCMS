@@ -7,9 +7,7 @@ mappiamo
     
     manual_en
     
-.. toctree::
-    :maxdepth: 2
+
     :caption: Documentazione italiana
-    
-    manual_it
+    :doc:`manual_it`
 
