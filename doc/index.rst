@@ -9,5 +9,6 @@ mappiamo
     
 
     :caption: Documentazione italiana
-    :doc:`manual_it`
+    
+    manual_it
 
