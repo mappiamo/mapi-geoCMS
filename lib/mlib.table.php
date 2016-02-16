@@ -13,6 +13,7 @@ class MTable {
 		static $radio_select;
 		static $radio_select_current = null;
 		static $checkbox_select;
+		static $checkbox_select_current = null;
 		static $actions;
 		static $links;
 		static $badges;
@@ -83,8 +84,9 @@ class MTable {
 				if ( $radio_select_current = strval( $current ) ) self::$radio_select_current = $radio_select_current;
 		}
 
-		static function checkbox_select( $value ) {
+		static function checkbox_select( $value, $current ) {
 				if ( $checkbox_select = strval( $value ) ) self::$checkbox_select = $checkbox_select;
+				if ( $checkbox_select_current = strval( $current ) ) self::$checkbox_select_current = $checkbox_select_current;
 		}
 
 		static function actions( $actions ) {
@@ -128,6 +130,10 @@ class MTable {
 								echo '<th>&nbsp;</th>';
 						}
 
+						if ( self::$checkbox_select ) {
+								echo '<th>&nbsp;</th>';
+						}
+
 						foreach ( self::$columns as $column ) {
 								if ( isset( self::$rename_header[$column] ) ) echo '<th>' . MPut::html( self::$rename_header[$column] ) . '</th>';
 								else echo '<th>' . MPut::html( $column ) . '</th>';
@@ -157,6 +163,17 @@ class MTable {
 												} else {
 														echo '<input type="radio" name="' . self::$id . '" value="' . $object->$r_column . '" />';
 												}
+										echo '</td>';
+								}
+
+								if ( self::$checkbox_select && in_array( self::$checkbox_select, self::$columns ) ) {
+										$c_column = self::$checkbox_select;
+										echo '<td>';
+										if ( $object->$c_column == self::$checkbox_select_current ) {
+												echo '<input type="checkbox" name="' . self::$id . '" value="' . $object->$c_column . '" checked="checked" />';
+										} else {
+												echo '<input type="checkbox" name="' . self::$id . '" value="' . $object->$c_column . '" />';
+										}
 										echo '</td>';
 								}
 

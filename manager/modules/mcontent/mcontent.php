@@ -25,7 +25,7 @@ class MModule_MContent extends M_Module {
 		public function content_add() {
 				$this->set_page_title( '#mappiamo - Add content' );
 
-				if ( isset( $_POST['content_add'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) { 
+				if ( isset( $_POST['content_add'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) {
 						$content = $this->model( 'add_content' );
 
 						if ( $content && $content->get_id() ) { 
@@ -43,7 +43,8 @@ class MModule_MContent extends M_Module {
 				$this->set_page_title( '#mappiamo - Translate content' );
 				
 				$content = $this->model( 'add_content_translation' );
-				if ( $content && $content->get_id() ) { 
+
+				if ( $content && $content->get_id() ) {
 						header( 'Location: index.php?module=mcontent&task=content_edit&object=' . intval( $content->get_id() ) );
 						exit( 0 );
 				}
@@ -54,10 +55,12 @@ class MModule_MContent extends M_Module {
 				$this->add_page_asset( 'js', 'tinymce/tinymce.min' );
 				$this->add_page_asset( 'js', 'tinymce/tinymce.init' );
 
-				if ( isset( $_POST['content_save'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) $this->model( 'update_content', $this->get_object() );
+				if ( isset( $_POST['content_save'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) {
+					$this->model( 'update_content', $this->get_object() );
+				}
 
 				$content = $this->model( 'get_content', $this->get_object() );
-				
+
 				if ( $content ) {
 						$data = $this->model( 'data_object', array( 'content_edit', $content ) );
 
@@ -97,6 +100,7 @@ class MModule_MContent extends M_Module {
 
 		public function content_media() {
 				$this->set_as_ajax();
+			//die('aaa');
 
 				if ( isset( $_GET['media_add'] ) && ! empty( $_FILES ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) $this->model( 'add_media', $this->get_object() );
 				if ( isset( $_GET['media_remove'] ) && mapi_csrf_check( MGet::string( 'mapi_csrf' ) ) ) $this->model( 'remove_media', $this->get_object() );

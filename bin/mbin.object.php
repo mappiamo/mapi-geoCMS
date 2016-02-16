@@ -3,7 +3,7 @@
 class MObject {
 
 		static $objects = array( 'category', 'content', 'menu', 'page', 'preference', 'user' );
-		static $types = array( 'post', 'place', 'event' );
+		static $types = array( 'post', 'place', 'event', 'route' );
 	
 		static public function get( $object, $id ) {
 				if ( ! in_array( $object, self::$objects ) ) return null;

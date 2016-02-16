@@ -1,0 +1,184 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Horizontal
+  Style Theme: 07 - See-Through
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMh07 {
+	width: auto;
+	margin: 0 auto;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: inherit;
+	padding: 1px;
+	text-align: left;
+	line-height: normal;
+}
+/*Hide Sub-Menu in Design View*/
+.p7PMMh07 ul div {
+	display: none;
+}
+/*Provide Buffer for lowered 1st level Drop Down*/
+.p7PMMh07 ul div {
+	padding-top: 6px;
+	background-image: url(img/pmm_iefix.gif);
+}
+/*Remove Buffer 2nd level flyouts*/
+.p7PMMh07 ul ul div {
+	padding-top: 0px;
+	background-image: none;
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMh07 ul {
+	margin: 0;
+	padding: 0;
+}
+.p7PMMh07 li {
+	list-style-type: none;
+	float: left;
+	width: 120px;
+	margin-right: 6px;
+	background-image: url(img/pmm_sheer_root.png);
+}
+/* Hide from IE5 Mac \*/
+.p7PMMh07 li {
+	width: auto;
+}
+/*Top Level Links*/
+.p7PMMh07 ul a {
+	display: block;
+	text-decoration: none;
+	padding: 10px 14px;
+	color: #000 !important;
+	border: 1px solid #000;
+	text-align: left;
+}
+.p7PMMh07 a:hover {
+	color: #000 !important;
+	border-color: #FFF;
+}
+.p7PMMh07 li:hover {
+	background-position: 0px -80px;
+}
+/*
+Syntax for special classes programatically assigned to first and last links and also LIs
+See user guide for more information
+*/
+.p7PMMh07 ul a.pmmfirst {
+}
+.p7PMMh07 ul a.pmmlast {
+
+}
+.p7PMMh07 ul li.pmmfirst {
+}
+.p7PMMh07 ul li.pmmlast {
+}
+/*First Sub Level*/
+.p7PMMh07 ul ul {
+	z-index: 10000;
+	width: 200px;
+	border-right: 1px solid #86A40D;
+	border-bottom: 1px solid #86A40D;
+	background-image: url(img/pmm_sheer_subs.png);
+	border-top: 1px solid #C8EF2C;
+	border-left: 1px solid #C8EF2C;
+}
+.p7PMMh07 ul ul li {
+	float: none;
+	background-image: none;
+	margin-right: 0px;
+}
+.p7PMMh07 ul ul a {
+	padding: 4px 14px;
+	color: #000 !important;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+	text-align: left;
+	overflow: hidden;
+}
+.p7PMMh07 ul ul a:hover {
+	background-color: #2A2A2A !important;
+	color: #FFF !important;
+	background-image: none;
+}
+/*Third Level (Flyouts in horizontal menu)*/
+.p7PMMh07 ul ul ul {
+
+}
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMh07 img {
+	border: 0;
+}
+.p7PMMh07 .p7PMM_img {
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+
+.p7PMMh07 ul a.trig_closed {
+	background-image: url(img/pmm_south_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMh07 ul a.trig_closed_up {
+	background-image: url(img/pmm_north_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMh07 ul li.trig_open, .p7PMMh07 ul li.trig_open_left, .p7PMMh07 ul li.trig_open_up {
+	color: #000 !important;
+	background-color: transparent;
+	background-position: 0px -80px;
+}
+/*Sub Level*/
+.p7PMMh07 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_light.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMh07 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_medium.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMh07 ul ul a.trig_open {
+	color: #FFF !important;
+	background-image: none;
+	background-color: #2A2A2A !important;
+}
+/*The Current Marker (You are here) links*/
+.p7PMMh07 .current_mark {
+	font-weight: bold;
+	color: #000 !important;
+	letter-spacing: 0.1em;
+}
+.p7PMMh07 ul ul .current_mark {
+	color: #000 !important;
+}
+
+/*
+Utility Rule used for Clearing floats in Horizontal Menus
+*/
+.p7pmmclearfloat {
+	clear: both;
+	height: 0;
+	line-height: 0;
+	font-size: 0;
+}

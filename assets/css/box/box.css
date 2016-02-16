@@ -1,0 +1,137 @@
+@charset "utf-8";
+
+.DataTable {
+	display: table;
+	width: 100%;
+	font-size: 17px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+
+}
+
+.DataTable .DataRow {
+	display: table-row;
+	width: 100%;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+
+}
+.DataTable .DataRow:nth-child(odd) {
+	background-color: rgba(224,224,224,1.00);
+}
+
+.DataTable .DataRow .DataCell {
+	display: table-cell;
+	padding-top: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	padding-left: 2px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+}
+
+.DataTable .DataRow .DataCell img {
+    max-width: 20px;
+    max-height: 22px;
+    height: auto;
+}
+
+.DataTable .DataRow .DataCell .cell_address {
+    font-size: 12px;
+}
+
+.DataTable .DataRow .nowrap {
+    white-space: nowrap;
+}
+.DataTable .DataRow .name {
+	font-weight: bold;
+	text-transform: capitalize;
+}
+.DataTable .DataRow .nocap {
+    text-transform: none;
+}
+.DataTable .header {
+    font-weight: bold;
+    text-align: left;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.DataTable .header div {
+    background-color: #008be0;
+}
+
+.DataTable .DataRow .value {
+	padding-left: 10px;
+    font-size: 15px;
+}
+.box_title {
+	background-color: rgb(0, 113, 188);
+	color: rgba(255,255,255,1.00);
+	text-align: center;
+	display: block;
+	padding-top: 1px;
+	padding-right: 1px;
+	padding-bottom: 1px;
+	padding-left: 1px;
+	font-weight: 400;
+	font-size: 28px;
+	margin-bottom: 10px;
+}
+.box_container {
+	background-color: rgba(239,239,239,1.00);
+	width: 100%;
+	padding-top: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-left: 10px;
+	margin-bottom: 20px;
+	/* overflow-y: auto; */
+	height: auto;
+	/* max-height: 500px; */
+    min-width: 300px;
+}
+.scrollable {
+    max-height: 500px;
+    overflow-y: auto;
+}
+.addressrow {
+	font-size: 12px;
+	font-weight: normal;
+	text-align: left;
+}
+
+.namerow {
+	font-size: 16px;
+	font-weight: normal;
+	text-align: left;
+}
+
+.DataRow .DataCell .image {
+	width: 50px;
+	height: 25px;
+}
+
+.DataRow > .DataCell > .image > img {
+	width: 100%;
+	max-width: 100%;
+	overflow: hidden;
+}
+.rating {
+	font-size: 12px;
+	margin-right: 15px;
+}

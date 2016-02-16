@@ -1,7 +1,7 @@
 <?php
 
 class M_Event extends M_Post {
-	
+
 		protected $type = 'event';
 		protected $start = null;
 		protected $end = null;

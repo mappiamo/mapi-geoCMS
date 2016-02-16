@@ -4,7 +4,7 @@
 defined( 'DACCESS' ) or die;
 
 class MValidate {
-	
+
 		static function id( $value ) {
 				if ( ! ctype_digit( strval( $value ) ) ) return false;
 				return MValidate::numeric( intval( $value ), 'POZITIVE_NOZERO' );
@@ -45,7 +45,7 @@ class MValidate {
 		static function url( $value ) {
 				if ( ! MValidate::string( $value ) ) return false;
 
-				$domain = '([a-z]+([a-z0-9\-]*[a-z0-9])?\.)+[a-z]{2,}';
+				$domain = '([a-z]+([a-z0-9\-]*[a-z0-9])?\.)+[a-z]{2,}|\#';
 				$ip = '(?:(?:[01]?\d?\d|2[0-4]\d|25[0-5])\.){3}(?:[01]?\d?\d|2[0-4]\d|25[0-5])';
 				$host = '[a-z \:]+(?:[a-z0-9\-]*[a-z0-9]\.?|\.)*';
 

@@ -10,6 +10,14 @@ $includes = APATH . '/includes.php';
 $libraries = APATH . '/libraries.php';
 $binaries = APATH . '/binaries.php';
 
+if (!is_file($settings)) {
+	$TheServerRoot = str_replace("/manager", "", rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\'));
+
+	header("Location: " . $TheServerRoot . "/setup/index.php");
+	die();
+}
+
+
 if ( ! is_file( $settings ) || ! is_readable( $settings ) ) die( 'M_ERROR (00110): A required file: settings.php is missing or not readable!' );
 else include( $settings );
 

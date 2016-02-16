@@ -59,7 +59,9 @@ class MModel_Preferences {
 						'domain',
 						'location',
 						'DefaultLatitude',
-						'DefaultLongitude'
+						'DefaultLongitude',
+						'Reacaptcha_key',
+						'DisqusName'
 				);
 
 				foreach ( $preference_keys as $key ) {

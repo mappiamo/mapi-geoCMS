@@ -55,26 +55,63 @@ defined( 'DACCESS' ) or die;
 
 											var mmap = new MMap();
 											mmap.set_lat( <?php MPut::_numeric( $coords['lat'] ) ?> );
-	                    mmap.set_lng( <?php MPut::_numeric( $coords['lng'] ) ?> );
+											mmap.set_lng( <?php MPut::_numeric( $coords['lng'] ) ?> );
 											mmap.create_map( 'mmap' );
 											mmap.create_marker( true );
 
-											mmap.update_inputs();
-											mmap.address_search();
+ 										  mmap.update_inputs();
+										 	mmap.address_search();
 									</script>
+
+									<script type="text/javascript" src="../assets/js/leaflet.draw.setting.js"></script>
+									<script type="text/javascript" src="../assets/js/leaflet.rm.setting.js"></script>
+
 
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-4 col-lg-3">
 
 									<br />
 									<ul class="nav nav-pills">
-											<li><a href="#post" data-toggle="tab">Post</a></li>
-											<li><a href="#place" data-toggle="tab">Place</a></li>
-											<li><a href="#event" data-toggle="tab">Event</a></li>
+											<li><a href="#post" data-toggle="tab" id="PostTab">Post</a></li>
+											<li><a href="#place" data-toggle="tab" id="PlaceTab">Place</a></li>
+											<li><a href="#event" data-toggle="tab" id="EventTab">Event</a></li>
+											<li><a href="#route" data-toggle="tab" id="RouteTab">Route</a></li>
 									</ul>
 									<br />
 
 									<div class="tab-content">
+
+											<div class="tab-pane" id="route">
+													<div class="panel panel-default">
+															<div class="panel-heading">New route</div>
+															<div class="panel-body">
+																<div class="form-group">
+																	<label>Title</label>
+																	<input type="text" name="route_title" class="form-control input-sm" id="route_title" value="<?php MPut::_html_attr( $data->title ); ?>">
+																</div>
+
+																<div class="form-group">
+																	<label>License</label>
+																	<select name="route_license" class="form-control input-sm" id="route_license">
+																		<?php if ( sizeof( $licenses ) > 0 ): ?>
+																			<?php foreach ( $licenses as $license ): ?>
+																				<?php if ( $data->license == $license->id ): ?>
+																					<option value="<?php MPut::_id( $license->id ); ?>" selected="selected"><?php MPut::_html( $license->title ); ?></option>
+																				<?php else: ?>
+																					<option value="<?php MPut::_id( $license->id ); ?>"><?php MPut::_html( $license->title ); ?></option>
+																				<?php endif; ?>
+																			<?php endforeach; ?>
+																		<?php endif; ?>
+																	</select>
+																</div>
+															</div>
+													</div>
+
+													<!-- <div class="btn-group">
+															<button type="button" id="coordcheck" class="btn btn-primary" name="coordscheck">Check coords</button>
+													</div> -->
+
+											</div>
 
 											<div class="tab-pane" id="post">
 													<div class="panel panel-default">
@@ -181,6 +218,10 @@ defined( 'DACCESS' ) or die;
 															<input type="text" name="content_lng" class="form-control input-sm" id="content_lng" value="<?php MPut::_html_attr( $coords['lng'] ); ?>" />
 													</div>
 											</div>
+									</div>
+
+									<div class="form-group">
+										<input type="hidden" name="content_route" class="form-control input-sm" id="content_route" value="" />
 									</div>
 
 									<div class="btn-group">

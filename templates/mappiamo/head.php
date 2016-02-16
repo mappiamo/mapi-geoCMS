@@ -28,6 +28,11 @@ defined( 'DACCESS' ) or die;
                 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
         <script src="<?php MPut::_link( $this->get_dir() ); ?>/js/holder.js"></script>
+				<script src="<?php MPut::_link( $this->get_dir() ); ?>/js/ajax.test.js"></script>
+
+				<script type="text/javascript">
+					var SiteRoot = "<?PHP echo MPut::_link( $this->get_dir() ); ?>";
+				</script>
 
         <script type="text/javascript">
                 function map_banner_size() {

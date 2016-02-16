@@ -1,0 +1,118 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Vertical
+  Style Theme: 10 - Image-Based
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMv10 {
+	width: auto;
+	margin: 0 auto;
+	font-family: Tahoma, Geneva, sans-serif;
+	font-size: inherit;
+	padding: 0px;
+	text-align: left;
+	line-height: normal;
+}
+/*Hide Sub-Menu in Design View*/
+.p7PMMv10 ul div {
+	display: none;
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMv10 ul {
+	margin: 0;
+	padding: 0;
+}
+.p7PMMv10 li {
+	list-style-type: none;
+}
+.p7PMMv10 a {
+	display: block;
+	text-decoration: none;
+	text-align: left;
+}
+/*
+
+/*First Sub Level*/
+.p7PMMv10 ul ul {
+	z-index: 10000;
+	width: 180px;
+}
+.p7PMMv10 ul ul li {
+	background-image: none;
+	background-color: #27B6D4;
+	margin-bottom: 0px;
+}
+.p7PMMv10 ul ul a {
+	padding: 5px 12px;
+	color: #000 !important;
+	text-align: left;
+	background-color: #27B6D4;
+	border-top: 1px solid #43C1DC;
+	border-right: 1px solid #229DB7;
+	border-bottom: 1px solid #229DB7;
+	border-left: 1px solid #43C1DC;
+}
+.p7PMMv10 ul ul a:hover {
+	background-color: #000 !important;
+	color: #FFF !important;
+	background-image: none;
+}
+
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMv10 img {
+	border: 0 !important;
+	vertical-align: bottom;
+}
+.p7PMMv10 .p7PMM_img {
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+/*Sub Level*/
+.p7PMMv10 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMv10 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMv10 ul ul a.trig_open, .p7PMMv10 ul ul a.trig_open_left {
+	color: #FFF !important;
+	background-color: #000 !important;
+	background-image: none;
+}
+
+/*The Current Marker (You are here) links*/
+.p7PMMv10 .current_mark {
+	font-weight: bold;
+	color: #000 !important;
+	text-transform: uppercase;
+}
+.p7PMMv10 ul ul .current_mark {
+	color: #FFF !important;
+}
+.p7PMMv10 .current_mark:hover {
+	font-weight: bold;
+	color: #FFFFFF !important;
+}

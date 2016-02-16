@@ -1,0 +1,143 @@
+/* Fades in the slideshow. Hides the initial animation on the li tag. Ooops!! */
+
+@-webkit-keyframes fadeIn {
+	0% {
+		opacity: 0;
+		
+	}
+	
+	50% { 
+		opacity: 0;
+	}
+	
+	100% { 
+		opacity: 1;
+	}
+}
+
+#slide_box {
+	text-align: left;
+	width: 100%;
+	margin: 30px auto 0 auto;
+	background: #fff;
+	overflow: hidden;
+	border: 10px solid #fff;
+	/* -webkit-box-shadow: #131313 0px 2px 10px;
+	-moz-box-shadow: #131313 0px 3px 10px;
+	box-shadow: #131313 0px 3px 10px; */	
+	-webkit-animation-name: fadeIn; 
+  	-webkit-animation-duration: 3s; 
+  	-webkit-animation-iteration-count: 1;
+  	-webkit-animation-delay: 0s;
+}
+
+ul#slide_slider{
+	-webkit-border-radius: 10px;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+	position: relative;
+	width: 100%;
+	height: 400px;
+	overflow: hidden;	
+}
+
+ul#slide_thumb {
+	overflow: none;
+	margin: 0px 0px 0px 0px;
+	padding: 0px;
+	list-style: none;
+	position: relative;
+	background: #fff;
+	overflow: auto;
+	width: 100%;
+}
+
+ul#slide_thumb a {
+	-webkit-transition: opacity .2s ease-in-out;
+	border: 1px solid #979797;
+	width: 35px;
+	height: 35px;
+	display: block;
+	overflow: hidden;
+	float: left;
+	margin: 6px 0px 0px 6px;
+	opacity: 0.75;
+}
+
+ul#slide_thumb a:hover {
+	opacity: 1;
+} 
+
+ul#slide_slider li {	
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	}
+	
+ul#slide_slider li p {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: inherit;
+	color: #fff;
+	background: rgba(0, 0, 0, .5);
+	width: 100%;
+}
+
+ul#slide_slider li p span {
+	line-height: 1.2em;
+	padding: 10px;
+	display: block;
+}
+
+/* Animation for the :target image. Slides the image in. */
+
+@-webkit-keyframes moveTarget {
+	0% {
+		left: -100%;
+		
+	}
+	
+	100% { 
+		left:0px;
+	}
+}
+
+
+ul#slide_slider li:target {
+	-webkit-animation-name: moveTarget; 
+	-webkit-animation-duration: .5s; 
+	-webkit-animation-iteration-count: 1;
+	top:0px;
+	left: 0px;
+	z-index: 10;
+}
+
+/*
+Animation for the current image. Slides it out the frame and back to the starting position. 
+Adds a lower z-index than the now current image.
+*/
+
+@-webkit-keyframes moveIt {
+	0% {
+		left:0px;
+		
+	}
+	50% {
+		left 100%;
+		
+	}
+	100% { 
+		left: -100%;
+		z-index: 5;
+	}
+}
+
+ul#slide_slider li:not(:target) {
+	-webkit-animation-name: moveIt; 
+  	-webkit-animation-duration: 1.5s; 
+  	-webkit-animation-iteration-count: 1;
+	top:0px;
+	left: 0px;
+}

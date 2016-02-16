@@ -1,0 +1,193 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Vertical
+  Style Theme: 19 - Adaptations
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMv19 {
+	width: auto;
+	margin: 0 auto;
+	font-size: inherit;
+	padding: 0px;
+	text-align: left;
+	line-height: normal;
+	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+/*Hide Sub-Menu in Design View*/
+.p7PMMv19 ul div {
+	display: none;
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMv19 ul {
+	margin: 0;
+	padding: 0;
+	background-color: #222;
+	background: rgba(0,0,0,.5);
+	border-radius: 5px;
+}
+.p7PMMv19 li {
+	list-style-type: none;
+}
+.p7PMMv19 a {
+	display: block;
+	text-decoration: none;
+	padding: 5px 10px 5px 20px;
+	color: #BBB !important;
+	text-align: left;
+}
+.p7PMMv19 a:hover, .p7PMMv19 a.trig_open, .p7PMMv19 a.trig_open_left {
+	color: #FFF !important;
+	background-color: #666 !important;
+}
+/*
+Syntax for special classes programatically assigned to first and last links and also LIs
+See user guide for more information
+*/
+.p7PMMv19 ul a.pmmfirst {
+}
+.p7PMMv19 ul a.pmmlast {
+}
+.p7PMMv19 ul li.pmmfirst {
+}
+.p7PMMv19 ul li.pmmlast {
+}
+.p7PMMv19 ul ul a.pmmfirst {
+	border-radius: 5px 5px 0px 0px;
+}
+.p7PMMv19 ul ul a.pmmlast {
+	border-radius: 0px 0px 5px 5px !important;
+}
+
+/*First Sub Level*/
+.p7PMMv19 ul ul {
+	z-index: 10000;
+	width: 200px;
+	background-color: #BBB;
+	background-repeat: repeat-x;
+	border-radius: 5px;
+	box-shadow: inset 0px 50px 30px #666, 0px 1px 2px #000;
+}
+.p7PMMv19 ul ul li {
+	background-image: none;
+}
+.p7PMMv19 ul ul a {
+	color: #000 !important;
+	text-align: left;
+	overflow: hidden;
+	font-size: 90%;
+}
+
+.p7PMMv19 ul ul a:hover, .p7PMMv19 ul ul a.trig_open, .p7PMMv19 ul ul a.trig_open_left {
+	background-color: #333 !important;
+	box-shadow: inset 0px 0px 24px #000;
+}
+
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMv19 img {
+	border: 0;
+}
+.p7PMMv19 .p7PMM_img {
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+
+/*Root Level*/
+.p7PMMv19 li.trig_open {
+}
+.p7PMMv19 a.trig_closed {
+	background-image: url(img/pmm_east_medium.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMv19 a.trig_open {
+	background-image: url(img/pmm_east_light.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMv19 a.trig_closed_left {
+	background-image: url(img/pmm_west_medium.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMv19 a.trig_closed_up {
+	background-image: url(img/pmm_north_medium.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+/*Sub Level*/
+.p7PMMv19 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMv19 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+
+/*The Current Marker (You are here) links*/
+.p7PMMv19 .current_mark {
+	font-weight: bold;
+	color: #000 !important;
+	font-variant: small-caps;
+}
+.p7PMMv19 ul .current_mark {
+	color: #EEE !important;
+}
+.p7PMMv19 .current_mark:hover {
+	font-weight: bold;
+	color: #FFFFFF !important;
+}
+
+/*
+NO-SCRIPT RULES
+The following rules enable your menu to work even when javascript is disabled in the browser
+*/
+.p7PMMv19.p7PMMnoscript {
+	position: relative;
+}
+.p7PMMv19.p7PMMnoscript ul div {
+	position: absolute;
+	display: block;
+	left: -9999px;
+	top: -1em;
+}
+.p7PMMv19.p7PMMnoscript ul ul div {
+	left: -9999px;
+	top: 0px;
+}
+.p7PMMv19.p7PMMnoscript li:hover div {
+	display: block;
+	left: 190px;
+}
+.p7PMMv19.p7PMMnoscript li:hover ul div, .p7PMMv19.p7PMMnoscript li:hover ul ul div, 
+.p7PMMv19.p7PMMnoscript li:hover ul ul ul div, .p7PMMv19.p7PMMnoscript li:hover ul ul ul ul div, 
+.p7PMMv19.p7PMMnoscript li:hover ul ul ul ul ul div {
+	left: -9999px;
+}
+.p7PMMv19.p7PMMnoscript li:hover div, .p7PMMv19.p7PMMnoscript li li:hover div, .p7PMMv19.p7PMMnoscript li li li:hover div, 
+.p7PMMv19.p7PMMnoscript li li li li:hover div, .p7PMMv19.p7PMMnoscript li li li li li:hover div,
+.p7PMMv19.p7PMMnoscript li li li li li li:hover div {
+	left: 160px;
+	top: 1.5em;
+}

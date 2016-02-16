@@ -80,10 +80,50 @@ class M_Template extends M_Extension {
 
 		public function meta() {
 				if ( is_array( $this->page_meta ) && sizeof( $this->page_meta ) > 0 ) {
-						foreach ( $this->page_meta as $key => $value ) {
+						foreach ( $this->page_meta as $key => $value ) if ($key != 'description') {
 								echo '<meta name="' . MPut::html_attr( $key ) . '" content="' . MPut::html_attr( $value ) . '" />' . "\n\t";
 						}
 				}
+
+			if ((isset($_GET['object'])) && ($_GET['module'] == 'content')) {
+				$ContentDesc = MObject::get('content', $_GET['object']);
+
+				$pref = new M_Preference("website_title");
+				$SiteName = $pref->get_value();
+
+				$ExtID = $ContentDesc->get_id();
+				$image_url = ORM::for_table('content_media')->select_many('title', 'url')->where('external_id', $ExtID)->where('default_media', 1)->limit(1)->find_one();
+				$FullURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; //rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\');
+
+				$TemplateSQL = ORM::for_table('templates')->select('name')->where('manager', 0)->where('enabled', 1)->where('default_template', 1)->find_one();
+				$TemplateName = $TemplateSQL['name'];
+
+				echo '<meta name="description" content="'.mb_substr(str_replace('"', '', strip_tags($ContentDesc->get_text())), 0, 155, 'UTF-8') . '" />'."\n\t"; ?>
+				<meta property="og:title" content="<?PHP echo $ContentDesc->get_title(); ?>" />
+				<meta property="og:type" content="<?PHP echo $ContentDesc->get_type(); ?>" />
+				<meta property="og:url" content="<?PHP echo $FullURL; ?>" />
+				<?PHP if ($image_url) { ?>
+					<meta property="og:image" content="<?PHP echo $image_url['url']; ?>" />
+				<?PHP } else { ?>
+					<meta property="og:image" content="templates/<?PHP echo $TemplateName; ?>/images/logo.png" />
+				<?PHP } ?>
+				<meta property="og:site_name" content="<?PHP echo $SiteName; ?>" />
+				<meta property="og:description" content="<?PHP echo mb_substr(str_replace('"', '', strip_tags($ContentDesc->get_text())), 0, 155, 'UTF-8'); ?>" />
+				<meta property="og:locale" content="<?PHP echo strtolower($ContentDesc->get_language()).'_'.strtoupper($ContentDesc->get_language()); ?>" />
+
+				<meta name="twitter:card" content="summary" />
+				<meta name="twitter:site" content="<?PHP echo $FullURL; ?>" />
+				<meta name="twitter:title" content="<?PHP echo $ContentDesc->get_title(); ?>" />
+				<meta name="twitter:description" content="<?PHP echo mb_substr(str_replace('"', '', strip_tags($ContentDesc->get_text())), 0, 155, 'UTF-8'); ?>" />
+				<?PHP if ($image_url) { ?>
+					<meta name="twitter:image" content="<?PHP echo $image_url['url']; ?>" />
+				<?PHP } else { ?>
+					<meta property="og:image" content="templates/<?PHP echo $TemplateName; ?>/images/logo.png" />
+				<?PHP } ?>
+
+				<?PHP
+				//echo '<base href="' . rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\') . '/">';
+			}
 		}
 
 		public function js() {
@@ -165,7 +205,7 @@ class M_Template extends M_Extension {
 
 						ob_end_clean();
 				} else {
-						die( 'M_ERROR (00215): Cannot load template: Temaplate foot file is missing' );
+						die( 'M_ERROR (00215): Cannot load template: Template foot file is missing' );
 				}
 		}
 

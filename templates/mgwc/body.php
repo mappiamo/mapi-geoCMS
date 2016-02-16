@@ -6,7 +6,7 @@ defined( 'DACCESS' ) or die;
 ?>
 
 <body data-spy="scroll" data-target=".navbar">
-		
+
 <?php include( 'nav.php' ); ?>
 		
 <section class="hompage">
@@ -19,13 +19,21 @@ defined( 'DACCESS' ) or die;
 
 						</div>
 				</div>
+		</div>
 
+			<div class="container" id="banner" style="margin-top:15px;">
+				<div class="row">
+					<a href="http://www.mototurismo.it/offerta-esclusiva-tomtom-rider-400/"><img class="center-block" src="./media/images/banner_1080x180.jpg"></a>
+				</div>
+			</div>
+
+		<div class="container">
 				<div class="row" id="box-images">
 						<?php $this->widget( 'box', array( 'media/images/box_storia.jpg', 'TRADIZIONE', 'NOBLE DYNASTY FOR OVER 90 YEARS', 'http://www.motoguzzi.com/en/tradizione' ) ); ?>
 
-						<?php $this->widget( 'box', array( 'media/images/box_garage.jpg', 'GARAGE', 'BORN WITH STYLE TO LIVE ON PASSION', 'http://www.motoguzzi.com/en/garage' ) ); ?>
+						<?php $this->widget( 'box', array( 'media/images/box_garage.jpg', 'GARAGE', 'BORN WITH STYLE TO LIVE ON PASSION', 'http://www.garagemotoguzzi.com/en/' ) ); ?>
 
-						<?php $this->widget( 'box', array( 'media/images/box_v7.jpg', 'V7 SPECIAL', 'THE ESSENCE OF THE BIKE', 'http://www.motoguzzi.com/en/scuderia#v7special' ) ); ?>
+						<?php $this->widget( 'box', array( 'media/images/literaryCorner.jpg', 'LIBRARY', 'LITERARY CORNER OF GUZZISTA' , 'http://motoguzziworldclub.it/mapi/index.php?module=category&object=9' ) ); ?>
 				</div>
 
 		</div>

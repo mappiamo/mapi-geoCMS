@@ -24,7 +24,8 @@ defined( 'DACCESS' ) or die;
                 <?php if ( 'yes' == MObject::get( 'preference', 'registration' )->get_value() ): ?>
                         <br />
                         <p>
-                                No account? Please register <a href="index.php?module=register">here</a>.
+													No account? Please register <a href="index.php?module=register">here</a>.<br>
+													Forgot your password? Renew <a href="index.php?module=passrenew">here</a>.
                         </p>
                 <?php endif; ?>
         </form>

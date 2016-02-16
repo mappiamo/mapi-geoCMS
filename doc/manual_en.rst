@@ -6,7 +6,7 @@ This is the #mappiamo Ensglish documentation.
 Introduction
 ------------
 
-`#mappiamo <http://www.mappiamo.org/>`_ is a CMS that allows you to create and leverage content through the use of OpenData, the geo-location and microformats. It can be used for processing the data produced by public administrations, collecting content (crowdsourcing), civic hacking and providing a basis for the portal of a smart city. 
+`#mappiamo <http://www.mappiamo.org/>`_ is a CMS that allows you to create and leverage content through the use of OpenData, the geo-location and microformats. It can be used for processing the data produced by public administrations, collecting content (crowdsourcing), civic hacking and providing a basis for the portal of a smart city.
 
 Installation
 ------------
@@ -19,7 +19,7 @@ Using content manager
 Create new content as admin or editor
 -------------------------------------
 
-You can create several types of content. 
+You can create several types of content.
 
 1) Post: this is a simple text based blog content (with marker on the map if required)
 2) Place: content for the place selected on the map
@@ -270,7 +270,7 @@ Form contact
 
     <?PHP $this->widget('form_contact', array('[registered username]')); ?>
 
-This widget have one parameter, the parameter must be the username of registered Mappiamo user. This widget creating form with input fields for sending simple message with ajax validation. 
+This widget have one parameter, the parameter must be the username of registered Mappiamo user. This widget creating form with input fields for sending simple message with ajax validation.
 
 Gravatar
 --------
@@ -343,11 +343,11 @@ This widget have parameters. Creating custom menu system by Mappiamo "pages" and
 1) The category name
 2) Menu type: 'treemenu' or 'popmenu'
 3) Template number of menu only. Menus have 15 templates, the menu template number can be 1 to 15.
-4) How menu display the selected catorgory contents: 
+4) How menu display the selected catorgory contents:
 
-- 'link' - the category opens new page with content list 
+- 'link' - the category opens new page with content list
 - 'check' - the category displays as marker on the map
-    
+
 Owl image
 ---------
 

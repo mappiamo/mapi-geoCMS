@@ -20,11 +20,19 @@ defined( 'DACCESS' ) or die;
 	        	<input type="password" name="pass_repeat" class="form-control" placeholder="Repeat password">
 
 	        	<script>
-				 		var RecaptchaOptions = {
-				    			theme : 'white'
-				 		};
-				</script>
-	        	<?php echo recaptcha_get_html('6LeZNOUSAAAAALQAQuZXkMq-kI0ZOnaCb-YMP5z1'); ?>
+							var RecaptchaOptions = {
+										theme : 'white'
+							};
+						</script>
+
+	        	<?php
+							$CaptchaKey =	ORM::for_table('preferences')->select_many('value')
+																->where('name', 'Reacaptcha_key')
+																->find_one();
+
+							if (($CaptchaKey) && (strlen($CaptchaKey['value']) > 3)) {
+								echo recaptcha_get_html($CaptchaKey['value']);
+							}						?>
 	        	<br />
 	        	<label>All fields are required</label>
 	        	<input type="hidden" name="mapi_csrf" id="mapi_csrf" value="<?php MPut::_html_attr( mapi_csrf_value() ); ?>" />
@@ -32,7 +40,8 @@ defined( 'DACCESS' ) or die;
 
 	        	<br />
                 <p>
-                        Already have an account? Login <a href="index.php?module=login">here</a>.
+									Already have an account? Login <a href="index.php?module=login">here</a>.<br>
+									Forgot your password? Renew <a href="index.php?module=passrenew">here</a>.
                 </p>
 	    </form>
 

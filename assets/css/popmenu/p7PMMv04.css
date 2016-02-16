@@ -1,0 +1,159 @@
+/* 
+  -----------------------------------
+  Pop Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Menu Type: Vertical
+  Style Theme: 04 - Carbon
+  -----------------------------------
+*/
+
+/*Menu Outer Wrapper*/
+.p7PMMv04 {
+	width: auto;
+	margin: 0 auto;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: inherit;
+	padding: 0px;
+	text-align: left;
+	line-height: normal;
+}
+/*Hide Sub-Menu in Design View*/
+.p7PMMv04 ul div {
+	display: none;
+}
+/*
+TOP LEVEL MENU
+*/
+.p7PMMv04 ul {
+	margin: 0;
+	padding: 0;
+	border-bottom: 1px solid #000;
+	border-left: 1px solid #999;
+	background-image: url(img/pmm_carbon_vroot.jpg);
+	background-repeat: repeat-y;
+	border-top: 1px solid #999;
+	border-right: 1px solid #000;
+	background-color: #000;
+}
+.p7PMMv04 li {
+	list-style-type: none;
+}
+.p7PMMv04 a {
+	display: block;
+	text-decoration: none;
+	padding: 5px 16px;
+	color: #BBB !important;
+	text-align: left;
+}
+.p7PMMv04 a:hover {
+	color: #FFF !important;
+	background-color: #000 !important;
+}
+/*
+Syntax for special classes programatically assigned to first and last links and also LIs
+See user guide for more information
+*/
+.p7PMMv04 ul a.pmmfirst {
+}
+.p7PMMv04 ul a.pmmlast {
+}
+.p7PMMv04 ul li.pmmfirst {
+}
+.p7PMMv04 ul li.pmmlast {
+}
+
+/*First Sub Level*/
+.p7PMMv04 ul ul {
+	z-index: 10000;
+	width: 180px;
+	border-right: 1px solid #666;
+	border-bottom: 1px solid #666;
+	border-left: 1px solid #D2D2D2;
+	background-color: #999;
+	background-image: url(img/pmm_carbon_subs.jpg);
+	background-repeat: repeat-x;
+	border-top: 1px solid #D2D2D2;
+}
+.p7PMMv04 ul ul li {
+	background-image: none;
+}
+.p7PMMv04 ul ul a {
+	color: #000 !important;
+	text-align: left;
+	overflow: hidden;
+}
+
+/*
+SPECIAL IMAGE-BASED RULES
+*/
+.p7PMMv04 img {
+	border: 0;
+}
+.p7PMMv04 .p7PMM_img {
+	padding: 0;
+	border: 0;
+	background-image: none;
+	background-color: transparent;
+}
+
+/*
+TRIGGERS and CUURENT MARK RULES
+The Closed state relates to trigger items when their child menus are not showing
+The Open state relates to trigger items when their child menus are showing
+Selectors appended with _left Automatically change arrow position and orientation
+if sub levels are set to fly out to the left
+*/
+
+/*Root Level*/
+.p7PMMv04 li.trig_open {
+}
+.p7PMMv04 a.trig_closed {
+	background-image: url(img/pmm_east_medium.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMv04 a.trig_closed_left {
+	background-image: url(img/pmm_west_medium.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMv04 a.trig_closed_up {
+	background-image: url(img/pmm_north_medium.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMv04 a.trig_open, .p7PMMv04 a.trig_open_left {
+	color: #FFF !important;
+	background-color: #000 !important;
+}
+/*Sub Level*/
+.p7PMMv04 ul ul a.trig_closed {
+	background-image: url(img/pmm_east_dark.gif);
+	background-repeat: no-repeat;
+	background-position: right center;
+}
+.p7PMMv04 ul ul a.trig_closed_left {
+	background-image: url(img/pmm_west_dark.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7PMMv04 ul ul a.trig_open, .p7PMMv04 ul ul a.trig_open_left {
+	color: #FFF !important;
+	background-color: #000 !important;
+	background-image: none;
+}
+
+/*The Current Marker (You are here) links*/
+.p7PMMv04 .current_mark {
+	font-weight: bold;
+	color: #000 !important;
+	font-variant: small-caps;
+}
+.p7PMMv04 ul .current_mark {
+	color: #EEE !important;
+}
+.p7PMMv04 .current_mark:hover {
+	font-weight: bold;
+	color: #FFFFFF !important;
+}

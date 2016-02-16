@@ -1,0 +1,113 @@
+/* 
+  -----------------------------------
+  Tree Menu Magic 2
+  by Project Seven Development
+  www.projectseven.com
+  Style Theme: 06 - Chili
+  -----------------------------------
+*/
+
+.p7TMM06 {
+	font-size: inherit;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #000;
+	padding: 6px;
+	zoom: 1;
+}
+.p7TMM06 div {
+	zoom: 1;
+}
+.p7TMM06 ul {
+	margin: 0;
+	padding: 0;
+}
+.p7TMM06 ul li {
+	list-style-type: none;
+	margin: 0px 0px;
+	background-color: #AA3C44;
+	border-top: 1px solid #C55A63;
+	border-right: 1px solid #93333A;
+	border-bottom: 1px solid #93333A;
+	border-left: 1px solid #C55A63;
+	padding-left: 0px;
+}
+.p7TMM06 ul ul {
+	padding: 0 0 8px 10px;
+}
+.p7TMM06 ul ul li {
+	margin: 3px 10px 3px 0;
+	border-color: #4E4E4E #000 #000 #4E4E4E;
+	background-color: transparent;
+}
+.p7TMM06 ul a {
+	color: #000;
+	display: block;
+	padding: 5px 10px 5px 20px;
+	text-decoration: none;
+	zoom: 1;
+	outline: 0;
+}
+.p7TMM06 ul a:hover, .p7TMM06 ul a:focus, .p7TMM06 ul a:active {
+	color: #FFF;
+	text-decoration: underline;
+}
+.p7TMM06 ul ul a {
+	color: #DDD;
+	background-color: #333;
+	font-size: 95%;
+}
+.p7TMM06 ul ul a:hover, .p7TMM06 ul ul a:focus, .p7TMM06 ul ul a:active {
+	color: #EBEBEB;
+	background-color: #4E4E4E;
+}
+.p7TMM06 li.trig_open {
+	background-color: #333;
+	border-color: #666 #222 #222 #666;
+}
+.p7TMM06 a.trig_closed {
+	background-image: url(img/tmm_east_black.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7TMM06 a.trig_open {
+	color: #DDD;
+	font-weight: bold;
+	background-image: url(img/tmm_south_gray.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7TMM06 ul ul a.trig_closed {
+	background-image: url(img/tmm_east_gray.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+.p7TMM06 ul ul a.trig_open {
+	background-image: url(img/tmm_south_gray.gif);
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-color: #4E4E4E;
+}
+.p7TMM06 a.current_mark {
+	font-weight:bold;
+	color: #EDEDED;
+	text-decoration: underline;
+}
+.p7TMM06 ul ul a.current_mark {
+	color:#ECECEC;
+	text-decoration: none;
+}
+.p7TMMtoggle {
+	display:none;
+}
+.p7TMM06_toggle_all {
+	margin: 0 0 12px 0px;
+}
+.p7TMM06_toggle_all a {
+	color: #000;
+	text-decoration: none;
+	outline: 0;
+}
+.p7TMM06_toggle_all a:hover, .p7TMM06_toggle_all a:focus, .p7TMM06_toggle_all a:active {
+	color: #AA3C44;
+	text-decoration: underline;
+}

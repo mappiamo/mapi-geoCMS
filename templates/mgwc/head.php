@@ -10,7 +10,7 @@
 		
 
 		<?php $this->output_assets( 'css' ); ?>
-        <link href='http://fonts.googleapis.com/css?family=Courgette&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link href="http://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
         <link href="<?php MPut::_link( $this->get_dir() ); ?>/css/style.css" rel="stylesheet">
         <link href="<?php MPut::_link( $this->get_dir() ); ?>/css/responsive.css" rel="stylesheet">
 

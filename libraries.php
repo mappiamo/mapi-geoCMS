@@ -13,7 +13,8 @@ class MLIB {
                 'swift'         => 'swift:lib:swift_required',
                 'parsedown'     => 'parsedown:Parsedown',
                 'facebook'      => 'facebook:facebook',
-                'recaptcha'     => 'recaptcha:recaptchalib'
+                'recaptcha'     => 'recaptcha:recaptchalib',
+								'image_resizer' => 'image_resizer:PHPThumb;image_resizer:GD'
         );
 
         public function __construct() {
@@ -114,6 +115,12 @@ class MLIB {
 
                 return true;
         }
+
+				private function image_resizer( $path ) {
+					if ( ! mapi_include_abs_path( $path, 'lib' ) ) return false;
+
+					return true;
+				}
     
 }
 

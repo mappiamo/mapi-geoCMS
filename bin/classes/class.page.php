@@ -17,6 +17,7 @@ class M_Page {
 		private $types = array( 'content', 'category', 'module', 'url' );
 
 		public function __construct( $id = null ) {
+			//die('page');
 				if ( $id ) $this->read( $id );
 		}
 

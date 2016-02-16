@@ -58,7 +58,9 @@ defined( 'DACCESS' ) or die;
 														<?php $this->widget( 'breadcrumbs' ); ?>
 												</div>
 							
-												<?php echo $this->content; ?>
+												<div class="content-text">
+														<?php echo $this->content; ?>
+												</div>
 
 										</div>
 						
@@ -73,7 +75,7 @@ defined( 'DACCESS' ) or die;
 
 						<?php $this->widget( 'box', array( 'media/images/box_garage.jpg', 'GARAGE', 'BORN WITH STYLE TO LIVE ON PASSION', 'http://www.motoguzzi.com/en/garage' ) ); ?>
 
-						<?php $this->widget( 'box', array( 'media/images/box_v7.jpg', 'V7 SPECIAL', 'THE ESSENCE OF THE BIKE', 'http://www.motoguzzi.com/en/scuderia#v7special' ) ); ?>
+						<?php $this->widget( 'box', array( 'media/images/literaryCorner.jpg', 'LIBRARY', 'LITERARY CORNER OF GUZZISTA' , 'http://motoguzziworldclub.it/mapi/index.php?module=category&object=9' ) ); ?>
 				</div>
 
 		</div>

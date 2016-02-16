@@ -62,7 +62,7 @@ function mwidget_slider( $slider_id ) {
 
 								?>
 										<div class="item<?php if ( 0 == $i ) echo ' active'; ?>" style="cursor: pointer;" onclick="location.href='index.php?module=content&object=<?php echo intval( $content->get_id() ); ?>'">
-												<img class="carousel-image" src="<?php MPut::_link( $slide->url ); ?>" style="width: 100%;">
+												<img class="carousel-image" src="<?php MPut::_link( $slide->url ); ?>">
 												<div class="carousel-caption">
 									<h3 class="hidden-xs hidden-sm"><?php MPut::_html( $content->get_title() ); ?></h3>
 									<h4 class="hidden-md hidden-lg"><?php MPut::_html( $content->get_title() ); ?></h4>

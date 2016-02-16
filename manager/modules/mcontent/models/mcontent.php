@@ -14,6 +14,7 @@ class MModel_MContent {
 		}
 
 		static function add_content() {
+
 				if ( ! isset( $_POST['content_type'] ) ) return false;
 
 				switch ( MGet::string( 'content_type' ) ) {
@@ -26,6 +27,11 @@ class MModel_MContent {
 								$content = MObject::create( 'place' );
 								$content->set_title( MGet::string( 'place_title' ) );
 								$content->set_license( MGet::int( 'place_license' ) );
+						break;
+						case 'route':
+							$content = MObject::create( 'route' );
+							$content->set_title( MGet::string( 'route_title' ) );
+							$content->set_license( MGet::int( 'route_license' ) );
 						break;
 						case 'event':
 								$content = MObject::create( 'event' );
@@ -44,6 +50,14 @@ class MModel_MContent {
 						$content->set_address( MGet::string( 'content_address' ) );
 						$content->set_lat( MGet::double( 'content_lat' ) );
 						$content->set_lng( MGet::double( 'content_lng' ) );
+						$content->set_route( MGet::string( 'content_route' ) );
+
+						$userGID = MAuth::group_id();
+						if ($userGID <= 2) {
+							$content->set_enabled( 1 );
+						} else {
+							$content->set_enabled( 0 );
+						}
 				}
 
 				$content->add();
@@ -80,6 +94,12 @@ class MModel_MContent {
 				$translated_content->set_address( $content->get_address() );
 				$translated_content->set_lat( $content->get_lat() );
 				$translated_content->set_lng( $content->get_lng() );
+				$translated_content->set_route( $content->get_route() );
+
+				$translated_content->set_start( date("Y-m-d H:i", strtotime($content->get_start())) );
+				$translated_content->set_end( date("Y-m-d H:i", strtotime($content->get_end())) );
+				//		$translated_content->set_id( $content->get_id() );
+
 				$translated_content->set_text( $content->get_text() );
 				$content_metas = $content->get_meta();
 				if ( $content->get_parent() ) {
@@ -104,7 +124,7 @@ class MModel_MContent {
 				foreach( $content_metas as $meta ) {
 						$translated_content->add_meta( $meta->get("name"), $meta->get("value") );
 				}
-				
+
 				return $translated_content;
 				
 		}
@@ -121,6 +141,7 @@ class MModel_MContent {
 				$content->set_address( MGet::string( 'content_address' ) );
 				$content->set_lat( MGet::double( 'content_lat' ) );
 				$content->set_lng( MGet::double( 'content_lng' ) );
+				$content->set_route( MGet::string( 'content_route' ) );
 
 				if ( 'event' == MGet::string( 'content_type' ) ) {
 						$content->set_start( MGet::string( 'content_start' ) );
@@ -145,6 +166,7 @@ class MModel_MContent {
 						$content->set_address( MGet::string( 'content_address' ) );
 						$content->set_lat( MGet::double( 'content_lat' ) );
 						$content->set_lng( MGet::double( 'content_lng' ) );
+						$content->set_route( MGet::string( 'content_route' ) );
 						$content->set_license( MGet::int( 'content_license' ) );
 
 						if ( 'event' == $content->get_type() ) {
@@ -154,6 +176,7 @@ class MModel_MContent {
 
 						if ( 1 == MGet::int( 'content_enabled' ) ) $content->set_enabled( 1 );
 						else $content->set_enabled( 0 );
+
 						$content->update();
 				}
 		}
@@ -286,7 +309,8 @@ class MModel_MContent {
  						'end'		=> 'content_end',
  						'license'	=> 'content_license',
  						'enabled'   	=> 'content_enabled', 
- 						'text'		=> 'content_text'
+ 						'text'		=> 'content_text',
+						'route'		=> 'content_route'
  				);
 
  				if ( 'content_add' == $task && MGet::string( 'content_type' ) ) {
@@ -299,7 +323,12 @@ class MModel_MContent {
  								$inputs['title'] = 'place_title';
  								$inputs['license'] = 'place_license';
  						}
- 						
+
+						if ( 'route' == MGet::string( 'content_type' ) ) {
+								$inputs['title'] = 'route_title';
+								$inputs['license'] = 'route_license';
+						}
+
  						if ( 'event' == MGet::string( 'content_type' ) ) {
  								$inputs['title'] = 'event_title';
  								$inputs['start'] = 'event_start';
@@ -329,6 +358,10 @@ class MModel_MContent {
  				$data->lng = '';
  				if ( MGet::double( $inputs['lng'] ) ) $data->lng = MGet::double( $inputs['lng'] );
  				elseif ( $object && method_exists( $object, 'get_lng' ) ) $data->lng = $object->get_lng();
+
+				$data->route = '';
+				if ( MGet::string( $inputs['route'] ) ) $data->route = MGet::string( $inputs['route'] );
+				elseif ( $object && method_exists( $object, 'get_route' ) ) $data->route = $object->get_route();
 
  				$data->start = '';
  				if ( MGet::string( $inputs['start'] ) ) $data->start = MGet::string( $inputs['start'] );

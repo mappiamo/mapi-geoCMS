@@ -2,3 +2,6 @@
 settings.php
 .idea
 media
+
+#HTMLPurifier
+lib/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer/*/
