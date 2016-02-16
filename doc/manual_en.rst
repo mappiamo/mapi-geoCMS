@@ -13,11 +13,11 @@ Installation
 
 Download #mappiamo package from GIT, and copy all files to your web host by FTP. Copy files to subdirectory if required, or to public_html root. Login to your control panel or phpMyadmin to create database user with password and add database to user. Give all access rights to your database user. When you copied all files to your host, access to the #mappiamo root by your browser by http. Setup process will be started. Fill all required fields. If the process done without error, you can access to the content manager on the URL: http://[your_host]/manager/
 
-Using content manager as admin or editor
+Using content manager
 =====================
 
-Create new content
-------------------
+Create new content as admin or editor
+-------------------------------------
 
 You can create several types of content. 
 
