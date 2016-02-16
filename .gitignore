@@ -1,7 +1,18 @@
 # Created by .ignore support plugin (hsz.mobi)
 settings.php
 .idea
+.docs
+install
 media
 
 #HTMLPurifier
 lib/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer/*/
+
+# templates
+templates/avs
+templates/gal2
+templates/mgwc
+templates/soccorso
+templates/squares
+templates/vsangone
+widgets/routes
