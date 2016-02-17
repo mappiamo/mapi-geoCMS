@@ -55,8 +55,8 @@ class MModel_MWidget {
 		static function uninstall_widgets() {
 				$widgets = self::get_widgets();
 
-				print "Widgets:<br />";
-				print_r( $widgets );
+				//print "Widgets:<br />";
+				//print_r( $widgets );
 
 				if ( sizeof( $widgets ) > 0 ) {
 						foreach ( $widgets as $key => $value ) {
