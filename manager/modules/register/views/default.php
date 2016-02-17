@@ -3,6 +3,8 @@
 // no direct access to this file
 defined( 'DACCESS' ) or die;
 
+	$TitleName = ORM::for_table('preferences')->select_many('value')->where('name', 'website_title')->find_one();
+
 ?>
 
 <div class="container">
@@ -12,7 +14,7 @@ defined( 'DACCESS' ) or die;
 						<?php MMessaging::show(); ?>
 				</div>
 				
-	        	<h2 class="form-signin-heading">#mappiamo</h2>
+	        	<h2 class="form-signin-heading"><?PHP echo $TitleName['value']; ?></h2>
 	        	<input type="text" name="user" class="form-control" placeholder="Username" value="<?php MPut::_html_attr( MGet::string( 'user' ) ); ?>" autofocus>
 	        	<input type="text" name="name" class="form-control" placeholder="Name" value="<?php MPut::_html_attr( MGet::string( 'name' ) ); ?>">
 	        	<input type="text" name="email" class="form-control" placeholder="Email" value="<?php MPut::_html_attr( MGet::string( 'email' ) ); ?>" >
@@ -43,6 +45,7 @@ defined( 'DACCESS' ) or die;
 									Already have an account? Login <a href="index.php?module=login">here</a>.<br>
 									Forgot your password? Renew <a href="index.php?module=passrenew">here</a>.
                 </p>
+				<hr><p style="text-align: center"><img src="../media/images/mappiamo.png" style="width: 200px"><br>Powered by mappiamo</p>
 	    </form>
 
 </div>

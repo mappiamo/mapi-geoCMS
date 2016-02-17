@@ -13,7 +13,7 @@ defined( 'DACCESS' ) or die;
 				<div class="m-page-nav hidden-xs hidden-sm col-md-2 cold-lg-2">
 						<div class="m-nav">
 								<div class="m-logo">
-										<a href="index.php" title="#mappiamo Dashboard"><img src="../media/images/mappiamo-geocms.png" alt="#mappiamo" /></a>
+										<a href="index.php" title="#mappiamo Dashboard"><img src="../media/images/mappiamo.png" alt="#mappiamo" /></a>
 								</div>
 
 								<?php include( 'nav.php' ); ?>

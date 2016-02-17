@@ -3,10 +3,12 @@
 // no direct access to this file
 defined( 'DACCESS' ) or die;
 
+	$TitleName = ORM::for_table('preferences')->select_many('value')->where('name', 'website_title')->find_one();
+
 ?>
 
 <div class="jumbotron">
-		<h1>Welcome to #mappiamo</h1>
+		<h1>Welcome to <?PHP echo $TitleName['value']; ?></h1>
 		<p>For a quick start add some new content right now!</p>
 		<p><a href="index.php?module=mcontent&task=content_add" class="btn btn-primary btn-lg" role="button">Add content</a></p>
 </div>
