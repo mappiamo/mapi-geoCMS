@@ -418,3 +418,67 @@ Disqus
 This widget have parameter as array named $Types. Creating comment section on content page. Disqus account and disqus site name required. On the parameter '$Types' must be listed all content types (post, event, place, route) where the disqus comment service will be available. Insert this widget under the main content page.
 
 .. note:: You must register your installed #mappiamo on the Disqus service page as site administrator to get your unique Disqus site name. If you have this name, you must define it on the manager -> preferences.
+
+The API module
+==============
+
+By API module, you can get data for external application for example mobile app or another #mappiamo
+
+.. note:: If 'auth' parameter required to get data by API module, the auth key must be storen in the preferences table with name 'api_auth'.
+
+.. note:: The 'lang' parameter is always optional. Without this parameter API uses internal auto language.
+
+Get all places
+--------------
+
+http://[site_uri]/index.php?module=api&task=allpois&auth=[auth_key]&lang=[language]
+
+
+Get all routes
+--------------
+
+http://[site_uri]/index.php?module=api&task=allroutes&auth=[auth_key]&type=route&lang=[language]
+
+Get all polygons
+----------------
+
+http://[site_uri]/index.php?module=api&task=allroutes&auth=[auth_key]&type=polygon&lang=[language]
+
+Get all markers by 1 km distance from route
+-------------------------------------------
+
+http://[site_uri]/index.php?module=api&task=poisonroute&route=[route_name]&auth=[auth_key]&lang=[language]
+
+.. note:: The value of route parameter must be same as the value of column name on content table.
+
+Get all markers within polygon
+------------------------------
+
+http://[site_uri]/index.php?module=api&task=poisonroute&route=[polygon_name]&auth=[auth_key]&lang=[language]
+
+.. note:: The value of route parameter must be same as the value of column name on content table.
+
+Search by field content
+-----------------------
+
+http://[site_URI]/index.php?module=api&task=search&auth=[auth_key]&field=[col_name]&data=[col_value]
+
+Get category contents by category ID
+------------------------------------
+
+http://[site_URI]/index.php?module=api&task=category&object=[category_id]
+
+Get one content by content ID
+-----------------------------
+
+http://[site_URI]/index.php?module=api&task=content&object=[content_id]
+
+Get marker data by distance from coordinates
+--------------------------------------------
+
+http://[site_URI]/index.php?module=api&task=search&lat=[latitude]&lng=[longitude]&radius=[distance_by_km]
+
+Get marker data by distance from coordinates filter by category ID
+------------------------------------------------------------------
+
+http://[site_URI]/index.php?module=api&task=search&lat=[latitude]&lng=[longitude]&radius=[distance_by_km]
