@@ -15,6 +15,7 @@
 			}
 			$options = array();
 			switch ($task) {
+
 				case "search":
 
 					if (isset($_GET["field"])) {
@@ -45,6 +46,7 @@
 						} else {
 							return FALSE;
 						} //mandatory
+
 						if (isset($_GET["cat"])) {
 							if (is_numeric($_GET["cat"])) {
 								$options["cat"] = intval($_GET["cat"]);
@@ -55,6 +57,7 @@
 					}
 					$contents = $this->model('search', array($options));
 					break;
+
 				case "category":
 
 					if (is_numeric($_GET["object"])) {
@@ -65,6 +68,7 @@
 
 					$contents = $this->model('category', array($options));
 					break;
+
 				case "content":
 					if (!isset($_GET["object"])) {
 						return FALSE;
@@ -78,6 +82,27 @@
 
 					$contents = $this->model('content', array($options));
 					break;
+
+				case "allpois":
+					$options["auth"] = $_GET["auth"];
+					if (isset($_GET["lang"])) { $options["lang"] = $_GET["lang"]; }
+					$contents = $this->model('getallpois', array($options));
+					break;
+
+				case "allroutes":
+					$options["auth"] = $_GET["auth"];
+					if (isset($_GET["type"])) { $options["type"] = $_GET["type"]; }
+					if (isset($_GET["lang"])) { $options["lang"] = $_GET["lang"]; }
+					$contents = $this->model('getallroutes', array($options));
+					break;
+
+				case "poisonroute":
+					$options["route"] = $_GET["route"];
+					$options["auth"] = $_GET["auth"];
+					if (isset($_GET["lang"])) { $options["lang"] = $_GET["lang"]; }
+					$contents = $this->model('poisonroute', array($options));
+					break;
+
 				default:
 					return FALSE;
 					break;

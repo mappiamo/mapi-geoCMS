@@ -196,6 +196,157 @@
 
 		}
 
+		static function getallpois($options) {
+			if (isset($options['auth'])) {
+				$ApiauthKey = ORM::for_table('preferences')->select('value')->where('name', 'api_auth')->find_one();
+				if (!$ApiauthKey) {	die('Authentication failed.'); }
+				if ($ApiauthKey['value'] != $options['auth']) {	die('Authentication failed.'); }
+
+				if (isset($options['lang'])) {
+					$contentlang = $options['lang'];
+				} else {
+					$lang = new M_Language;
+					$contentlang = $lang->getLanguage();
+				}
+
+				$AllPois = ORM::for_table('contents')->select('*')->where('type', 'place')->where('language', $contentlang)->find_array();
+				if (!$AllPois) { return 'No result.'; }
+
+				return $AllPois;
+
+			} else {
+				die('Authentication required.');
+			}
+		}
+
+		static function getallroutes($options) {
+			if (isset($options['auth'])) {
+				$ApiauthKey = ORM::for_table('preferences')->select('value')->where('name', 'api_auth')->find_one();
+				if (!$ApiauthKey) {	die('Authentication failed.'); }
+				if ($ApiauthKey['value'] != $options['auth']) {	die('Authentication failed.'); }
+
+				if (isset($options['lang'])) {
+					$contentlang = $options['lang'];
+				} else {
+					$lang = new M_Language;
+					$contentlang = $lang->getLanguage();
+				}
+
+				$AllRoutes = ORM::for_table('contents')->select('*')->where('type', 'route')->where('language', $contentlang)->find_array();
+				if (!$AllRoutes) { return 'No result.'; }
+
+				foreach ($AllRoutes as $Key => $OneRoute) {
+					$TheGEOMData = $OneRoute['route'];
+					$Geomtype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$TheGEOMData')) AS GEOMType";
+					$Geomtype = ORM::for_table('contents')->raw_query($Geomtype_SQL)->where('enabled', 1)->find_array();
+
+					if (isset($options['type'])) {
+						if ($options['type'] == 'route') {
+							$GetType = 'MULTILINESTRING';
+						} elseif ($options['type'] == 'polygon') {
+							$GetType = 'MULTIPOLYGON';
+						} else {
+							$GetType = 'MULTILINESTRING';
+						}
+					} else {
+						$GetType = 'MULTILINESTRING';
+					}
+
+					if ($Geomtype[0]['GEOMType'] == $GetType) {
+						$Routes[$Key] = $OneRoute;
+					}
+				}
+
+				return $Routes;
+
+			} else {
+				die('Authentication required.');
+			}
+		}
+
+		static function poisonroute($options) {
+			if (sizeof($options) < 1) { return FALSE; }
+			if (!isset($options['route'])) { return FALSE; }
+			if (isset($options['auth'])) {
+
+				$ApiauthKey = ORM::for_table('preferences')->select('value')->where('name', 'api_auth')->find_one();
+				if (!$ApiauthKey) {	die('Authentication failed.'); }
+				if ($ApiauthKey['value'] != $options['auth']) {	die('Authentication failed.'); }
+
+				if (isset($options['lang'])) {
+					$contentlang = $options['lang'];
+				} else {
+					$lang = new M_Language;
+					$contentlang = $lang->getLanguage();
+				}
+
+				$RouteName = $options['route'];
+				$IsRoute = ORM::for_table('contents')->select('route')->where('name', $RouteName)->where('type', 'route')->where('language', $contentlang)->count();
+
+				if ($IsRoute == 1) {
+					$TheGEOMData = ORM::for_table('contents')->select('route')->where('name', $RouteName)->where('type', 'route')->where('language', $contentlang)->find_one();
+					$TheGEOMData = $TheGEOMData['route'];
+
+					$Geomtype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$TheGEOMData')) AS GEOMType";
+					$Geomtype = ORM::for_table('contents')->raw_query($Geomtype_SQL)->where('enabled', 1)->find_array();
+
+					$AllPois = ORM::for_table('contents')->select('*')->where('type', 'place')->where('language', $contentlang)
+												->find_array();
+
+					if (!$AllPois) { return 'No result.'; }
+
+					if ($Geomtype[0]['GEOMType'] == 'MULTILINESTRING') {
+						$MaxDistance = 150;
+						$theroutes = array();
+
+						foreach ($AllPois as $markerkey => $OnePioData) {
+							$PlaceString = $OnePioData['route'];
+							$Placetype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$PlaceString')) AS GEOMType";
+							$Pointtype = ORM::for_table('contents')->raw_query($Placetype_SQL)->where('enabled', 1)->find_array();
+
+							if ($Pointtype[0]['GEOMType'] == 'POINT') {
+								$Filter_SQL = "SELECT ST_Distance(ST_GeomFromText('$TheGEOMData', 4326), ST_GeomFromText('$PlaceString', 4326)) * 111195 AS FilterResult";
+								$Filter_DATA = ORM::for_table('contents')->raw_query($Filter_SQL)->find_array();
+								if ($Filter_DATA[0]['FilterResult'] <= $MaxDistance) {
+									$theroutes[$markerkey] = $OnePioData;
+								}
+							}
+
+						}
+
+						return $theroutes;
+
+					} elseif ($Geomtype[0]['GEOMType'] == 'MULTIPOLYGON') {
+						$theroutes = array();
+
+						foreach ($AllPois as $markerkey => $OnePioData) {
+							$PlaceString = $OnePioData['route'];
+							$Placetype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$PlaceString')) AS GEOMType";
+							$Pointtype = ORM::for_table('contents')->raw_query($Placetype_SQL)->where('enabled', 1)->find_array();
+
+							if ($Pointtype[0]['GEOMType'] == 'POINT') {
+								$Filter_SQL = "SELECT ST_Contains(ST_GeomFromText('$TheGEOMData', 4326), ST_GeomFromText('$PlaceString', 4326)) AS FilterResult";
+								$Filter_DATA = ORM::for_table('contents')->raw_query($Filter_SQL)->find_array();
+								if ($Filter_DATA[0]['FilterResult'] == TRUE) {
+									$theroutes[$markerkey] = $OnePioData;
+								}
+							}
+						}
+
+						return $theroutes;
+
+					} else {
+						return FALSE;
+					}
+				} else {
+					return FALSE;
+				}
+
+			} else {
+				die('Authentication required.');
+			}
+
+		}
 
 	}
 
