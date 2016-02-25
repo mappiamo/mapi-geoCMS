@@ -449,7 +449,7 @@ Get all markers by 1 km distance from route
 
 http://[site_uri]/index.php?module=api&task=poisonroute&route=[route_name]&auth=[auth_key]&lang=[language]
 
-.. note:: The value of route parameter must be same as the value of column name on content table.
+.. note:: The value of 'route' parameter must be same as the value of 'name' column on content table.
 
 Get all markers within polygon
 ------------------------------
