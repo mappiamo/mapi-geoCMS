@@ -26,7 +26,7 @@
 				<div id="mapi_youtube">
 
 					<a href="https://www.youtube.com/channel/<?PHP echo $CHId; ?>/videos" target="_blank"
-						 title="Aboutvalsangone on Youtube">
+						 title="<?PHP echo MSettings::$sitename ?> on Youtube">
 						<h3 class="color">You<span>Tube</span></h3>
 					</a>
 

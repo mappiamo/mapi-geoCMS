@@ -94,7 +94,7 @@ class MModel_Register {
 				$url = mapi_install_url() . 'manager/?module=register&activate=1&c=' . $user->get_activation();
 
 				$body = "";
-				$body .= "Welcome to " . MSettings::$domain . "\n\n";
+				$body .= "Welcome to " . MSettings::$sitename . "\n\n";
 				$body .= "To access the #mappiamo backend, please activate your account by clicking on the link below:\n";
 				$body .= $url . "\n\n";
 				$body .= "If the registration is not done by You, please send us an abuse letter by replying to this mail.\n\n";
@@ -121,7 +121,7 @@ class MModel_Register {
 
 		static private function send_notification( $user ) {
 				$body = "";
-				$body .= "New registration at " . MSettings::$domain . "\n\n";
+				$body .= "New registration at " . MSettings::$sitename . "\n\n";
 				$body .= "User details:\n";
 				$body .= "-username: " . $user->get_username() . "\n";
 				$body .= "-name: " . $user->get_name() . "\n";

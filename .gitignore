@@ -3,7 +3,7 @@ settings.php
 .idea
 .docs
 install
-media
+/media
 
 #HTMLPurifier
 lib/htmlpurifier/library/HTMLPurifier/DefinitionCache/Serializer/*/
@@ -15,4 +15,6 @@ templates/mgwc
 templates/soccorso
 templates/squares
 templates/vsangone
+templates/realimutament
 widgets/routes
+widgets/togglemenu

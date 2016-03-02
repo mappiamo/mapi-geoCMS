@@ -3,7 +3,7 @@
 	// no direct access to this file
 	defined('DACCESS') or die;
 
-	function mwidget_box_instagram($HashTag = 'tourism') {
+	function mwidget_box_instagram($HashTag = NULL) {
 
 		//$hashtag = NULL;
 		$id = $_GET["object"];
@@ -24,8 +24,8 @@
 
 		<div class="box">
 			<div id="mapi_insta">
-				<a href="http://instagram.com/aboutvalsangone" target="_blank" title="Aboutvalsangone on Instagram">
-					<h3 class="color">AboutValSangone e Insta<span>gram</span></h3>
+				<a href="http://instagram.com/realimutamenti" target="_blank" title="<?PHP echo MSettings::$sitename ?> on Instagram">
+					<h3 class="color"><?PHP echo MSettings::$sitename ?> e Insta<span>gram</span></h3>
 				</a>
 
 				<?php if ($response && $items = json_decode($response)->data): ?>
