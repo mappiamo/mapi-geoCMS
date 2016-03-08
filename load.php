@@ -45,6 +45,8 @@ $error_reporting = MObject::get( 'preference', 'force_php_errors_and_warnings' )
 if ( 'yes' == $error_reporting->get_value() ) {
 		error_reporting( E_ALL );
 		ini_set( 'display_errors', 1 );
+} else {
+	ini_set( 'display_errors', 0 );
 }
 
 include( 'mappiamo.php' );

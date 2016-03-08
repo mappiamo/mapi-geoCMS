@@ -4,15 +4,14 @@
 
 	include_once('model/layermodels.php');
 
-	function mwidget_leaflet_panel() {
+	function mwidget_leaflet_panel($Panel_names, $Panel_icons) {
 
 		$TemplateName = new layermodels();
 		$TemplateResult = $TemplateName->GetTemplateName();
 
-		include_once('templates/' . $TemplateResult . '/address_search.php');
-		include_once('templates/' . $TemplateResult . '/category_panel.php');
-		include_once('templates/' . $TemplateResult . '/classified_panel.php');
-		include_once('templates/' . $TemplateResult . '/pages_panel.php');
+		foreach ($Panel_names as $PanelName) {
+			include_once('templates/' . $TemplateResult . '/' . $PanelName . '.php');
+		}
 
 		?>
 
@@ -21,72 +20,39 @@
 
 		<script>
 			$(document).ready(function(){
-				$("#SearchBox").hide();
-				$("#CategoryBox").hide();
-				$("#ClassifiedBox").hide();
-				$("#PagesBox").hide();
 
-				L.easyButton('glyphicon glyphicon-search', function() {
-					MarkerSearch();
-				}).addTo(map);
+				<?PHP
+				foreach ($Panel_names as $Panel) {
+				  $PanelID = '#' . $Panel;
+					?>
+					$("<?PHP echo $PanelID; ?>").hide();
+				<?PHP } ?>
 
-				L.easyButton('glyphicon glyphicon-wrench', function() {
-					MarkerPages();
-				}).addTo(map);
+				<?PHP
+					foreach ($Panel_names as $key => $Panel) {
+					$FunctionName = 'Marker' . $Panel;
+					$PanelID = '#' . $Panel;
 
-				L.easyButton('glyphicon glyphicon-refresh', function() {
-					MarkerAds();
-				}).addTo(map);
+					?>
 
-				L.easyButton('glyphicon glyphicon-home', function() {
-					MarkerCats();
-				}).addTo(map);
+					L.easyButton('glyphicon glyphicon-<?PHP echo $Panel_icons[$key]; ?>', function() {
+						<?PHP echo $FunctionName; ?>();
+					}).addTo(map);
+
+					function <?PHP echo $FunctionName; ?>() {
+						//alert('<?PHP echo $PanelID; ?> function');
+
+						if($('<?PHP echo $PanelID; ?>').is(':visible')) {
+							$("<?PHP echo $PanelID; ?>").hide();
+						} else {
+							$(".PanelOnTheMAP").hide();
+							$("<?PHP echo $PanelID; ?>").show();
+						}
+					}
+
+				<?PHP } ?>
 			});
 
-			function MarkerSearch() {
-				//alert('search function');
-				if($('#SearchBox').is(':visible')) {
-					$("#SearchBox").hide();
-				} else {
-					$("#SearchBox").show();
-					$("#CategoryBox").hide();
-					$("#ClassifiedBox").hide();
-					$("#PagesBox").hide();
-				}
-			}
-
-			function MarkerPages() {
-				if($('#CategoryBox').is(':visible')) {
-					$("#CategoryBox").hide();
-				} else {
-					$("#CategoryBox").show();
-					$("#SearchBox").hide();
-					$("#ClassifiedBox").hide();
-					$("#PagesBox").hide();
-				}
-			}
-
-			function MarkerAds() {
-				if($('#ClassifiedBox').is(':visible')) {
-					$("#ClassifiedBox").hide();
-				} else {
-					$("#ClassifiedBox").show();
-					$("#SearchBox").hide();
-					$("#CategoryBox").hide();
-					$("#PagesBox").hide();
-				}
-			}
-
-			function MarkerCats() {
-				if($('#PagesBox').is(':visible')) {
-					$("#PagesBox").hide();
-				} else {
-					$("#PagesBox").show();
-					$("#SearchBox").hide();
-					$("#CategoryBox").hide();
-					$("#ClassifiedBox").hide();
-				}
-			}
 		</script>
 
 	<?PHP }
