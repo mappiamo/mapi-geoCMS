@@ -1,4 +1,4 @@
-#mappiamo - EN
+ #mappiamo - EN
 =============
 
 This is the #mappiamo Ensglish documentation.
@@ -19,7 +19,7 @@ Using content manager
 Create new content as admin or editor
 -------------------------------------
 
-You can create several types of content.
+You can create several type of content.
 
 1) Post: this is a simple text based blog content (with marker on the map if required)
 2) Place: content for the place selected on the map
@@ -290,6 +290,35 @@ The required meta name is 'audio' and the meta value must be the full url of aud
 
 .. note:: The meta data value is the full URL of audio file, but the correct encoding is very important. Plase refer to the officiel JPlayer page to inform about usable audio formats.
 
+Leaflet panel widget
+--------------------
+
+- Usage code example::
+
+    $Panel_names = array([panel_name_1], [panel_name_2], ....., [[panel_name_n]]);
+	$Panel_icons = array([icon_name_1], [icon_name_1], ....., [icon_name_n]);
+	$this->widget('leaflet_panel', array($Panel_names, $Panel_icons));
+
+This widget have two required parameteres, booth have to be arrays. The array of Panel_names listed the names of
+buttons on will be isplayed on the map. On the template directory must be created .php files with same name.
+For example, if the panel_name_1 is "SearchBox", SearchBox.php must be created to the template directory. This file can
+contains any required code, for example widgets.
+
+- Usage code example of SearchBox.php::
+
+    <div id="SearchBox" class="PanelOnTheMAP">
+	    <?php M_Template::widget('address'); ?>
+    </div>
+
+- Rules:
+    - The panel code must be included between <div>.
+    - The div ID must be same as the panel name.
+    - The class "PanelOnTheMAP" required.
+    - Between <div> can be inserted any widget or code.
+
+- The panel icon array contains the name of bootstrap icon. For exammple if the bootstrap icon name is
+glyphicon-search, the panel icon name is only "search".
+
 Map
 ---
 
@@ -329,6 +358,7 @@ Lastcontent
 This widget have parameters. The first is the maximum number of content, this is required.
 
 All other paramteres are optional (not required because default values are available): [content type], [ordering column name], and if the content type is 'event', the last parameter 'from_now' shows only current and future events.
+If the last parameter is "now" for event type, the list will be displayed event only if the event currently running.
 
 Full featured menu
 ------------------
@@ -482,3 +512,45 @@ Get marker data by distance from coordinates filter by category ID
 ------------------------------------------------------------------
 
 http://[site_URI]/index.php?module=api&task=search&lat=[latitude]&lng=[longitude]&radius=[distance_by_km]
+
+Importers
+=========
+
+SHP2GeoJson Importer
+--------------------
+
+The data importers created to save exteral data set to mappiamo at one step. The GeoJson importer can be used
+for import data created from .SHP source files by QGIS desktop software.
+
+For the import process you need .geojson file exported from QGIS, and you have to create .INI file.
+
+.ini file must be contains rules how to save .geojson data to mappiamo. The importer can use two labels:
+[{database_table_name}]  and [fixed_data].
+
+Under the optional label [fixed_data] must be listed the database table, clumn, and the value.
+For example, if you need to insert value "place" to all imported rows on table "contents" and column "type", the
+corrent row under this label: contents[type]="place".
+
+The [{database_table_name}] is required label. For example, if to the table "contents" column "address" have to be inserted something,
+you have to enter these rows to .ini::
+
+    [contents]
+    address[]="Residenza"
+
+The rules of this .ini label::
+
+    [{database_table_name}]
+    {table_column}[]="{geojson_prperty_name}"
+
+You can use more than one labels for table name, and if you want to store more than one geojson property
+to the column, you can duplicate the row with several values of geojson prperty names.
+
+Example of tested .ini file::
+
+    [contents]
+    address[]="Residenza"
+    title[]="Tipologia"
+    title[]="Residenza"
+
+    [fixed_data]
+    contents[type]="place"
