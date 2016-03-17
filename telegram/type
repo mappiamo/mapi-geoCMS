@@ -1,0 +1,16 @@
+You can set the default content type with this command if you insert type after this word:
+
+Examples:
+---------------
+<b>type:place
+type:event
+type:post
+type:route</b>
+
+Remove your personal type settings:
+<b>type:reset</b>
+
+Show all your current settings:
+<b>setting:show</b>
+
+Please use /help if you need more information.

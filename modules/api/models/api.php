@@ -348,6 +348,280 @@
 
 		}
 
+		static function telegram($options) {
+			if (sizeof($options) < 1) { return FALSE; }
+			if (!isset($options['ApiKey'])) { return FALSE; }
+			if (!isset($options['ReturnDataNum'])) { return FALSE; }
+			if (!isset($options['text'])) { return FALSE; }
+			if (!isset($options['id'])) { return FALSE; }
+
+			$ApiauthKey = ORM::for_table('preferences')->select('value')->where('name', 'api_auth')->find_one();
+			if (!$ApiauthKey) {	return FALSE; }
+			if ($ApiauthKey['value'] != $options['ApiKey']) {	return FALSE; }
+
+			$LimitValue = $options['ReturnDataNum'];
+			$ValidFilters = array('language', 'type', 'address');
+			$ValidModifiers = array('radius', 'returndata');
+			$TheServerRoot = rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\');
+
+			if ((isset($options["lat"])) && (isset($options["lng"])) && (isset($options["radius"]))) {
+
+				$TelegramContent = NULL;
+
+				if (file_exists('telegram/' . $options['id'])) {
+					$options['returndata'] = $LimitValue;
+
+					$lines = file('telegram/' . $options['id'], FILE_IGNORE_NEW_LINES);
+					$SavedWhere = NULL;
+					$FilteredSQL = NULL;
+
+					foreach ($lines as $OnefilerLine) {
+						$SavedSetting = explode(':', $OnefilerLine);
+						if (in_array($SavedSetting[0], $ValidFilters)) {
+							$SavedWhere .= $SavedSetting[0]." = '".$SavedSetting[1]."' AND ";
+						}
+
+						if (in_array($SavedSetting[0], $ValidModifiers)) {
+							$options[$SavedSetting[0]] = $SavedSetting[1];
+						}
+					}
+
+					if ($SavedWhere) { $FilteredSQL = 'WHERE ' . rtrim($SavedWhere,  ' AND '); }
+					$records = ORM::for_table('contents')
+												->raw_query('SELECT id, title, address, type, start, end, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) AS distance FROM contents ' . $FilteredSQL . ' HAVING distance < :radius ORDER BY distance LIMIT '.
+																		$options["returndata"], array("latitude" => $options["lat"], "longitude" => $options["lng"],
+																											 "radius" => $options["radius"]))->find_array();
+
+				} else {
+
+					$records = ORM::for_table('contents')
+												->raw_query('SELECT id, title, address, type, start, end, ( 3959 * acos( cos( radians( :latitude ) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians( :longitude ) ) + sin( radians( :latitude ) )  * sin( radians( lat ) ) ) )  AS distance FROM contents HAVING distance < :radius ORDER BY distance LIMIT '.
+																		$LimitValue, array("latitude" => $options["lat"], "longitude" => $options["lng"],
+																											 "radius" => $options["radius"]))->find_array();
+				}
+
+				if (!isset($records)) {
+					return 'Database error. Cannot read records.';
+				}
+
+				if (count($records) < 1) {
+					return 'No return data with this radius (' . $options["radius"] . ' kilometers) from you.';
+				}
+
+				//$RawRecords = print_r($records, 1);
+				$RecordNumber = 0;
+
+				foreach ($records as $RecVal) {
+
+					$CurrentID = '{' . $RecVal['id'] . '}';
+					$categories = $records = ORM::for_table('categories')->select_many('title', 'id')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
+
+					$TelegramContent .= ++$RecordNumber . '; <b>' . $RecVal['title'] . '</b> - [type:' . $RecVal['type'] . ']' . PHP_EOL;
+					$TelegramContent .= 'Address: <b>' . $RecVal['address'] . '</b>' . PHP_EOL;
+					$TelegramContent .= 'Distance from you: ' . round($RecVal['distance'], 2) . ' km.' . PHP_EOL;
+
+					if (count($categories) > 0) {
+						$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories)." category(s):</b>".PHP_EOL;
+						foreach ($categories as $onecategory) {
+							$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a>' . PHP_EOL;
+						}
+					}
+
+					if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
+						$TelegramContent .= PHP_EOL . '<b>Event date found:</b>' . PHP_EOL;
+						$TelegramContent .= 'Event started: ' . $RecVal['start'] . PHP_EOL;
+						$TelegramContent .= 'Event ended: ' . $RecVal['end'] . PHP_EOL;
+					}
+
+					$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=content&object=' . $RecVal['id']. '">Visit page from here...</a>' . PHP_EOL;
+					$TelegramContent .= '---------------------------------' . PHP_EOL  . PHP_EOL;
+				}
+
+				return count($records) . ' records detected within ' . $options["radius"] . ' km radius from you: ' .
+							 PHP_EOL . PHP_EOL . $TelegramContent;
+				//return 'location ok: ' . $options["lat"] . ' - ' . $options["lng"] . ' - ' . $options["radius"] . ' - ' . $LimitValue;
+
+			} else {
+
+				$Command = strtolower($options['text']);
+				$Command = ltrim($Command, '/');
+
+				$Setting = explode(':', $Command);
+
+				if (is_array($Setting)) {
+					if (count($Setting) == 1) {
+
+						if (file_exists('telegram/' . $Setting[0])) {
+							$ReturnContent = file_get_contents('telegram/' . $Setting[0]);
+							return $ReturnContent;
+						} else {
+							return "Invalid command. Please use /help";
+						}
+
+					} elseif (count($Setting) == 2) {
+						$ValidCommands = array('language', 'type', 'address', 'setting', 'radius', 'returndata', 'category');
+						$ValidActions = array('reset', 'show');
+						$NumericSettings = array('radius', 'returndata');
+
+						if (in_array($Setting[0], $ValidCommands)) {
+
+							if ((in_array($Setting[0], $NumericSettings)) && (!in_array($Setting[1], $ValidActions)) && (((!is_numeric($Setting[1]))) || intval($Setting[1]) <= 0)) {
+								return 'This setting need integer value, no other accepted.';
+							}
+
+							if ((in_array($Setting[1], $ValidActions)) || (((is_numeric($Setting[1]))) && intval($Setting[1]) > 0)) {
+
+								if ((in_array($Setting[0], $ValidFilters)) && (!in_array($Setting[1], $ValidActions))) {
+									$SQL_sent = "`".$Setting[0]."` = '".$Setting[1]."'";
+									$records =
+									ORM::for_table('contents')->select_many('id')->where_raw($SQL_sent)->where('enabled', 1)->count();
+
+									if ($records == 0) {
+										return 'No data in this database with this filter. Filter settings cancelled...';
+									}
+								}
+
+								if ((strtolower($Setting[0]) == 'category') && (strtolower($Setting[1]) == 'show')) {
+									$categories = $records = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->find_array();
+
+									if (count($categories) > 0) {
+										$CatList = '<b>' . count($categories) . ' categories found in this database:</b>' . PHP_EOL . PHP_EOL;
+
+										foreach ($categories as $OneCat) {
+											$CatContentList = $OneCat['contents'];
+											$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
+											$DataArray = explode(';', $CatContentList);
+
+											$CatList .= '- <a href="' . $TheServerRoot . '/index.php?module=category&object=' . $OneCat['id'] . '">' . $OneCat['title'] . '</a> - [' . count($DataArray) . ' content(s)]' . PHP_EOL;
+										}
+
+										return $CatList;
+									} else {
+										return 'No categories found in current database.' . PHP_EOL;
+									}
+								}
+
+								if (strtolower($Setting[1]) == 'show') {
+									if (file_exists('telegram/' . $options['id'])) {
+										$SavedFilters = file_get_contents('telegram/'.$options['id']);
+										return 'Your current saved settings:' . PHP_EOL .
+													 '----------------------------' . PHP_EOL .
+													 $SavedFilters;
+									} else {
+										return 'You have no saved settings yet.';
+									}
+								}
+
+								if ((strtolower($Setting[0]) == 'setting') && (strtolower($Setting[1]) == 'reset')) {
+									unlink('telegram/'.$options['id']);
+									return 'Your saved settings deleted. Result will use default values.';
+								}
+
+								if (file_exists('telegram/' . $options['id'])) {
+
+									$lines = file('telegram/' . $options['id'], FILE_IGNORE_NEW_LINES);
+									$SavedArray = array();
+									$StringtoSave = NULL;
+
+									foreach ($lines as $OnefilerLine) {
+										$SavedSetting = explode(':', $OnefilerLine);
+										$SavedArray[$SavedSetting[0]] = $SavedSetting[1];
+									}
+
+									$SavedArray[$Setting[0]] = $Setting[1];
+									foreach ($SavedArray as $SavedKey => $SavedVal) if (!in_array($SavedVal, $ValidActions)) {
+										$StringtoSave .= $SavedKey . ':' . $SavedVal . PHP_EOL;
+									}
+
+									$StringtoSave = trim($StringtoSave);
+
+									if ($StringtoSave) {
+										file_put_contents('telegram/'.$options['id'], $StringtoSave);
+
+										return 'New valid setting received and saved: '.$Command.PHP_EOL.
+													 'Send location data to apply new filters.'.PHP_EOL.'----------------------'.PHP_EOL.
+													 'Your current settings:'.PHP_EOL.'----------------------'.PHP_EOL.$StringtoSave;
+									} else {
+										unlink('telegram/'.$options['id']);
+										return 'You have no saved settings, result will use default values.';
+									}
+
+								} else {
+									if (!in_array($Setting[1], $ValidActions)) {
+										file_put_contents('telegram/'.$options['id'], $Command);
+										return 'Valid setting received and saved: '.$Command;
+									} else {
+										return 'This command: <b>' . $Command . '</b> currently not valid. Maybe you have no current settings';
+									}
+								}
+
+							} else {
+
+								$SQL_sent = "`" . $Setting[0] . "` = '" . $Setting[1] . "'";
+								$records = ORM::for_table('contents')->select_many('id')->where_raw($SQL_sent)->where('enabled', 1)->count();
+
+								if ($records > 0) {
+
+									if (file_exists('telegram/' . $options['id'])) {
+
+										$SavedFilters = file_get_contents('telegram/' . $options['id']);
+										$lines = file('telegram/' . $options['id'], FILE_IGNORE_NEW_LINES);
+										$SavedWhere = NULL;
+										$SavedArray = array();
+										$StringtoSave = NULL;
+
+
+										foreach ($lines as $OnefilerLine) {
+											$SavedSetting = explode(':', $OnefilerLine);
+											$SavedArray[$SavedSetting[0]] = $SavedSetting[1];
+											if ((in_array($SavedSetting[0], $ValidFilters)) && ($Setting[0] != $SavedSetting[0]) && ($Setting[1] != $SavedSetting[1])) {
+												$SavedWhere .= "`" . $SavedSetting[0] . "` = '" . $SavedSetting[1] . "' AND ";
+											}
+										}
+
+										$SavedArray[$Setting[0]] = $Setting[1];
+										$RealSQL = $SavedWhere . $SQL_sent;
+
+										foreach ($SavedArray as $SavedKey => $SavedVal) {
+											$StringtoSave .= $SavedKey . ':' . $SavedVal . PHP_EOL;
+										}
+
+										$StringtoSave = trim($StringtoSave);
+										file_put_contents('telegram/' . $options['id'], $StringtoSave);
+
+										$filtered = ORM::for_table('contents')->select_many('id')->where_raw($RealSQL)->where('enabled', 1)->count();
+
+										return 'Valid filter received and saved.' . PHP_EOL .
+													 $records . ' data found in the database with this one filter without location data.' . PHP_EOL .
+													 '-------------------------------' . PHP_EOL .
+													 'You have previously saved filters:' . PHP_EOL .
+													 $SavedFilters . PHP_EOL .
+													 '-------------------------------' . PHP_EOL .
+													 'With all your new filters we have ' . $filtered . ' records without location:' . PHP_EOL .
+													 $StringtoSave;
+
+									} else {
+										file_put_contents('telegram/' . $options['id'], $Command);
+										return 'Valid filter received and saved.' . PHP_EOL . $records . ' data found in the database with this one filter without location data.';
+									}
+
+								} else {
+									return 'No data in this database with this filter. Filter cancelled.';
+								}
+							}
+
+						} else {
+							return 'Invalid message.';
+						}
+
+					}
+				} else {
+					return FALSE;
+				}
+			}
+
+		}
+
 	}
 
 

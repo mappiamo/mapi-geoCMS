@@ -1,0 +1,16 @@
+You can set the default language with this command if you insert language sign after this word:
+
+Examples:
+---------------
+<b>language:it
+language:en
+language:de
+language:fr</b>
+
+Remove your personal language settings:
+<b>language:reset</b>
+
+Show all your current settings:
+<b>setting:show</b>
+
+Please use /help if you need more information.

@@ -1,0 +1,18 @@
+You can set the default radius with this command if you insert numeric value after this word:
+
+Examples:
+---------------
+<b>radius:3
+radius:5
+radius:10
+radius:50</b>
+
+The numeric value after the radius is the distance from you in kilimeters.
+
+Remove your personal radius settings:
+<b>radius:reset</b>
+
+Show all your current settings:
+<b>setting:show</b>
+
+Please use /help if you need more information.

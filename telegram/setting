@@ -1,0 +1,7 @@
+After the word 'setting' you have two valid values:
+
+---------------
+<b>setting:show</b> - show all your personal settigs
+<b>setting:reset</b> - delete all your personal settings
+
+Please use /help if you need more information.

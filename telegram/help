@@ -1,0 +1,35 @@
+<b>This is Mappiamo bot help for valid commands</b>
+========================================
+/help - How to use this service
+/about - Who created this service
+
+<b>Personal settings:</b>
+---------------------------
+User can personalize settings with these messages:
+
+/language:{language_code} example: <b>language:en</b>
+/type:{content_type}
+examples: <b>type:place, type:event, type:post</b>
+/radius:{distance in km} example: <b>radius:50</b>
+/address:{city} example: <b>address:paris</b>
+/returndata:{number of results} example: <b>returndata:25</b>
+
+<b>Delete or show setting, getting back the default value:</b>
+/{command}:reset example: <b>language:reset</b> delete one specified setting only
+/setting:reset - delete all your personal settings
+/setting:show - show all your current settings
+
+<b>Rules:</b>
+---------
+- The "/" character is not required for the beginning of the row
+- The commands are case insesnsitive
+- After words 'language', 'type', and 'address' required valid and available value for filtering which are already exist in the database.
+For example 'address:paris' is useful if 'paris' available on the 'address' column.
+- After 'radius' and 'returndata' numeric integer value accepted only.
+- The word 'setting' can be used for show and delete (reset) personalized setup only.
+- Use ??? sign to send your location data to the Mappiamo server to get list of places and events near you.
+
+<b>Note:</b>
+Location service available on mobile devices only on Telegram.
+Please don't send command and location service at one time to bot.
+Don't send more than one command line at one time.

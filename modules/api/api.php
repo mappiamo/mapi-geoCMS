@@ -103,6 +103,25 @@
 					$contents = $this->model('poisonroute', array($options));
 					break;
 
+				case "telegram":
+					$options["ApiKey"] = $_GET["ApiKey"];
+					$options["ReturnDataNum"] = $_GET["ReturnDataNum"];
+					$options["text"] = $_GET["text"];
+					$options["id"] = $_GET["id"];
+					if (isset($_GET["lat"])) { $options["lat"] = $_GET["lat"]; }
+					if (isset($_GET["lng"])) { $options["lng"] = $_GET["lng"]; }
+					if (isset($_GET["radius"])) { $options["radius"] = $_GET["radius"]; }
+
+					$contents = $this->model('telegram', array($options));
+
+					if ($contents) {
+						echo $contents;
+					} else {
+						echo 'Wrong configuration of telegram bot or authentication failed.';
+					}
+					die();
+					break;
+
 				default:
 					return FALSE;
 					break;

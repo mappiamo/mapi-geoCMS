@@ -1,0 +1,18 @@
+You can set the default number of return data with this command if you insert numeric value after this word:
+
+Examples:
+---------------
+<b>returndata:3
+returndata:5
+returndata:10
+returndata:50</b>
+
+The numeric value after the returndata is the maximum number of return from database if you sent the location data.
+
+Remove your personal return data settings:
+<b>returndata:reset</b>
+
+Show all your current settings:
+<b>setting:show</b>
+
+Please use /help if you need more information.

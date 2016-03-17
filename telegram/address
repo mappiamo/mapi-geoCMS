@@ -1,0 +1,18 @@
+You can set the default address with this command if you insert valid address after this word:
+
+Examples:
+---------------
+<b>address:Paris
+address:Roma
+address:London</b>
+
+The value after the address have to be available in the database.
+The value of this setting is case sensitive and must be same as the content of address filed in the database.
+
+Remove your personal address settings:
+<b>address:reset</b>
+
+Show all your current settings:
+<b>setting:show</b>
+
+Please use /help if you need more information.
