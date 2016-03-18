@@ -355,6 +355,9 @@
 			if (!isset($options['text'])) { return FALSE; }
 			if (!isset($options['id'])) { return FALSE; }
 
+			if (intval($options['ReturnDataNum']) > 20) { $options['ReturnDataNum'] = 20; }
+			if (intval($options['ReturnDataNum']) < 1) { $options['ReturnDataNum'] = 5; }
+
 			$ApiauthKey = ORM::for_table('preferences')->select('value')->where('name', 'api_auth')->find_one();
 			if (!$ApiauthKey) {	return FALSE; }
 			if ($ApiauthKey['value'] != $options['ApiKey']) {	return FALSE; }
@@ -365,6 +368,10 @@
 			$TheServerRoot = rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\');
 
 			if ((isset($options["lat"])) && (isset($options["lng"])) && (isset($options["radius"]))) {
+				if (intval($options["radius"]) > 10000) { $options["radius"] = 10000; }
+
+				$LocationString = $options["lat"] . PHP_EOL . $options["lng"];
+				file_put_contents('telegram/'.$options['id'].'.location', $LocationString);
 
 				$TelegramContent = NULL;
 
@@ -389,15 +396,15 @@
 					if ($SavedWhere) { $FilteredSQL = 'WHERE ' . rtrim($SavedWhere,  ' AND '); }
 					$records = ORM::for_table('contents')
 												->raw_query('SELECT id, title, address, type, start, end, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) AS distance FROM contents ' . $FilteredSQL . ' HAVING distance < :radius ORDER BY distance LIMIT '.
-																		$options["returndata"], array("latitude" => $options["lat"], "longitude" => $options["lng"],
-																											 "radius" => $options["radius"]))->find_array();
+												$options["returndata"], array("latitude" => $options["lat"], "longitude" => $options["lng"],
+												"radius" => $options["radius"]))->find_array();
 
 				} else {
 
 					$records = ORM::for_table('contents')
 												->raw_query('SELECT id, title, address, type, start, end, ( 3959 * acos( cos( radians( :latitude ) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians( :longitude ) ) + sin( radians( :latitude ) )  * sin( radians( lat ) ) ) )  AS distance FROM contents HAVING distance < :radius ORDER BY distance LIMIT '.
-																		$LimitValue, array("latitude" => $options["lat"], "longitude" => $options["lng"],
-																											 "radius" => $options["radius"]))->find_array();
+												$LimitValue, array("latitude" => $options["lat"], "longitude" => $options["lng"],
+												"radius" => $options["radius"]))->find_array();
 				}
 
 				if (!isset($records)) {
@@ -414,7 +421,7 @@
 				foreach ($records as $RecVal) {
 
 					$CurrentID = '{' . $RecVal['id'] . '}';
-					$categories = $records = ORM::for_table('categories')->select_many('title', 'id')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
+					$categories = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
 
 					$TelegramContent .= ++$RecordNumber . '; <b>' . $RecVal['title'] . '</b> - [type:' . $RecVal['type'] . ']' . PHP_EOL;
 					$TelegramContent .= 'Address: <b>' . $RecVal['address'] . '</b>' . PHP_EOL;
@@ -423,7 +430,11 @@
 					if (count($categories) > 0) {
 						$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories)." category(s):</b>".PHP_EOL;
 						foreach ($categories as $onecategory) {
-							$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a>' . PHP_EOL;
+							$CatContentList = $onecategory['contents'];
+							$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
+							$DataArray = explode(';', $CatContentList);
+
+							$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a> - [' . count($DataArray) . ' content(s)]' . PHP_EOL;
 						}
 					}
 
@@ -459,7 +470,7 @@
 						}
 
 					} elseif (count($Setting) == 2) {
-						$ValidCommands = array('language', 'type', 'address', 'setting', 'radius', 'returndata', 'category');
+						$ValidCommands = array('language', 'type', 'address', 'setting', 'radius', 'returndata', 'category', 'search', 'location');
 						$ValidActions = array('reset', 'show');
 						$NumericSettings = array('radius', 'returndata');
 
@@ -478,6 +489,15 @@
 
 									if ($records == 0) {
 										return 'No data in this database with this filter. Filter settings cancelled...';
+									}
+								}
+
+								if ((strtolower($Setting[0]) == 'location') && (strtolower($Setting[1]) == 'reset')) {
+									if (file_exists('telegram/'.$options['id'].'.location')) {
+										unlink('telegram/'.$options['id'].'.location');
+										return 'Your location setting deleted.';
+									} else {
+										return 'You have no saved location. Send it to the bot by Telegram first.';
 									}
 								}
 
@@ -557,6 +577,167 @@
 
 							} else {
 
+								if (strtolower($Setting[0]) == 'search') {
+									$Setting[1] = str_replace(array(',', '-', '"', '\'', '\\', '/'), '', $Setting[1]);
+									$Setting[1] = str_replace(array('+', ' '), '_', $Setting[1]);
+
+									if (strlen($Setting[1]) < 4) {
+										return 'Invalid search queue. Maybe contains invalid caharacter or too short.';
+									}
+
+									$SearchWords = explode('_', $Setting[1]);
+									$SearchWords = array_filter($SearchWords);
+									if (count($SearchWords) > 0) {
+
+										$SearchQuery = '((`text` LIKE \'%' . implode('%\' AND `text` LIKE \'%', $SearchWords) . '%\')';
+										$SearchQuery .= ' OR ';
+										$SearchQuery .= '(`title` LIKE \'%' . implode('%\' AND `title` LIKE \'%', $SearchWords) . '%\')';
+										$SearchQuery .= ' OR ';
+										$SearchQuery .= '(`address` LIKE \'%' . implode('%\' AND `address` LIKE \'%', $SearchWords) . '%\'))';
+
+										$SearchCount = ORM::for_table('contents')->select_many('type', 'title', 'id', 'start', 'end', 'address')->where_raw($SearchQuery)->where('enabled', 1)->count();
+										$SearchList = '<b>You started search process by keywords...</b>' . PHP_EOL;
+										$SearchList .= 'We have ' . $SearchCount . ' search result in the database without location filter.' . PHP_EOL;
+
+										if ($SearchCount == 0) {
+											$SearchList .= PHP_EOL . 'We have no result data with your current search query. Please use less keywords.';
+										} else {
+
+											$options['returndata'] = $LimitValue;
+											$SavedWhere = NULL;
+											if (file_exists('telegram/' . $options['id'])) {
+												$lines = file('telegram/' . $options['id'], FILE_IGNORE_NEW_LINES);
+												$SavedWhere = NULL;
+												$FilteredSQL = NULL;
+
+												foreach ($lines as $OnefilerLine) {
+													$SavedSetting = explode(':', $OnefilerLine);
+													if (in_array($SavedSetting[0], $ValidFilters)) {
+														$SavedWhere .= $SavedSetting[0]." = '".$SavedSetting[1]."' AND ";
+													}
+													if (in_array($SavedSetting[0], $ValidModifiers)) {
+														$options[$SavedSetting[0]] = $SavedSetting[1];
+													}
+												}
+												if ($SavedWhere) { $SearchQuery .= ' AND ' . rtrim($SavedWhere,  ' AND '); }
+												$LimitValue = $options['returndata'];
+
+												$SearchCount = ORM::for_table('contents')->select_many('type', 'title', 'id', 'start', 'end', 'address')->where_raw($SearchQuery)->where('enabled', 1)->count();
+												$SearchList .= 'With your current saved settings we have ' . $SearchCount . ' results.' . PHP_EOL;
+
+												if ($SearchCount == 0) {
+													$SearchList .= PHP_EOL . 'We have no result using your current search query and saved filters. Please use less keywords or reset settings.';
+													return $SearchList;
+												}
+											}
+
+											if (file_exists('telegram/'.$options['id'].'.location')) {
+												$SearchList .= PHP_EOL . '<b>You have saved location.</b>'.PHP_EOL;
+												$SearchList .= 'The search result will be filtered to your current location with radius and all saved settings:'.PHP_EOL.PHP_EOL;
+
+												$coords = file('telegram/'.$options['id'].'.location', FILE_IGNORE_NEW_LINES);
+												$FilteredSQL = 'WHERE ' . $SearchQuery;
+
+												$records = ORM::for_table('contents')
+																			->raw_query('SELECT id, title, address, type, start, end, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) AS distance FROM contents ' . $FilteredSQL . ' HAVING distance < :radius ORDER BY distance LIMIT '.
+																			$options["returndata"], array("latitude" => $coords[0], "longitude" => $coords[1],
+																			"radius" => $options["radius"]))->find_array();
+
+												$RecordNumber = NULL;
+												$TelegramContent = NULL;
+
+												if (count($records) == 0) {
+													$SearchList .= 'We cannot send result with these settings. Use another keyword or delete something from filters.';
+												} else {
+
+													foreach ($records as $RecVal) {
+
+														$CurrentID = '{'.$RecVal['id'].'}';
+														$categories = $records =
+														ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)
+															 ->where_like("contents", '%'.$CurrentID.'%')->find_array();
+
+														$TelegramContent .= ++$RecordNumber.'; <b>'.$RecVal['title'].'</b> - [type:'.
+																								$RecVal['type'].']'.PHP_EOL;
+														$TelegramContent .= 'Address: <b>'.$RecVal['address'].'</b>'.PHP_EOL;
+														$TelegramContent .= 'Distance from you: '.round($RecVal['distance'], 2).' km.'.PHP_EOL;
+
+														if (count($categories) > 0) {
+															$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories).
+																									" category(s):</b>".PHP_EOL;
+															foreach ($categories as $onecategory) {
+																$CatContentList = $onecategory['contents'];
+																$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
+																$DataArray = explode(';', $CatContentList);
+
+																$TelegramContent .= '<a href="'.$TheServerRoot.'/index.php?module=category&object='.
+																										$onecategory['id'].'">'.$onecategory['title'].'</a> - ['.
+																										count($DataArray).' content(s)]'.PHP_EOL;
+															}
+														}
+
+														if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
+															$TelegramContent .= PHP_EOL.'<b>Event date found:</b>'.PHP_EOL;
+															$TelegramContent .= 'Event started: '.$RecVal['start'].PHP_EOL;
+															$TelegramContent .= 'Event ended: '.$RecVal['end'].PHP_EOL;
+														}
+
+														$TelegramContent .= '<a href="'.$TheServerRoot.'/index.php?module=content&object='.
+																								$RecVal['id'].'">Visit page from here...</a>'.PHP_EOL;
+														$TelegramContent .= '---------------------------------'.PHP_EOL.PHP_EOL;
+													}
+												}
+
+												return $SearchList . $TelegramContent;
+
+											} else {
+
+												$SearchList .= PHP_EOL . '<b>You have no saved location yet. Please use location service first.</b>'.PHP_EOL;
+												$SearchList .= 'The search result not filtered to your current location:'.PHP_EOL.PHP_EOL;
+
+												$SearchResult = ORM::for_table('contents')->select_many('type', 'title', 'id', 'start', 'end', 'address')->where_raw($SearchQuery)->where('enabled', 1)->limit($LimitValue)->find_array();
+												$RecordNumber = NULL;
+												$TelegramContent = NULL;
+
+												foreach ($SearchResult as $RecVal) {
+
+													$CurrentID = '{' . $RecVal['id'] . '}';
+													$categories = $records = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
+
+													$TelegramContent .= ++$RecordNumber . '; <b>' . $RecVal['title'] . '</b> - [type:' . $RecVal['type'] . ']' . PHP_EOL;
+													$TelegramContent .= 'Address: <b>' . $RecVal['address'] . '</b>' . PHP_EOL;
+													//$TelegramContent .= 'Distance from you: ' . round($RecVal['distance'], 2) . ' km.' . PHP_EOL;
+
+													if (count($categories) > 0) {
+														$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories)." category(s):</b>".PHP_EOL;
+														foreach ($categories as $onecategory) {
+															$CatContentList = $onecategory['contents'];
+															$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
+															$DataArray = explode(';', $CatContentList);
+
+															$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a> - [' . count($DataArray) . ' content(s)]' . PHP_EOL;
+														}
+													}
+
+													if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
+														$TelegramContent .= PHP_EOL . '<b>Event date found:</b>' . PHP_EOL;
+														$TelegramContent .= 'Event started: ' . $RecVal['start'] . PHP_EOL;
+														$TelegramContent .= 'Event ended: ' . $RecVal['end'] . PHP_EOL;
+													}
+
+													$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=content&object=' . $RecVal['id']. '">Visit page from here...</a>' . PHP_EOL;
+													$TelegramContent .= '---------------------------------' . PHP_EOL  . PHP_EOL;
+												}
+
+											}
+										}
+
+										return $SearchList . $TelegramContent;
+									} else {
+										return 'Search query is invalid. Please use /help command.';
+									}
+								}
+
 								$SQL_sent = "`" . $Setting[0] . "` = '" . $Setting[1] . "'";
 								$records = ORM::for_table('contents')->select_many('id')->where_raw($SQL_sent)->where('enabled', 1)->count();
 
@@ -611,7 +792,7 @@
 							}
 
 						} else {
-							return 'Invalid message.';
+							return 'Invalid message. Please use /help';
 						}
 
 					}

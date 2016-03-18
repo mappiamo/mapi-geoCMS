@@ -12,12 +12,17 @@ User can personalize settings with these messages:
 examples: <b>type:place, type:event, type:post</b>
 /radius:{distance in km} example: <b>radius:50</b>
 /address:{city} example: <b>address:paris</b>
-/returndata:{number of results} example: <b>returndata:25</b>
+/returndata:{number of results} example: <b>returndata:8</b>
+
+You can search within the database:
+/search:{keyword_1} {keyword_2} {keyword_n}
+example: <b>search:paris statue</b>
 
 <b>Delete or show setting, getting back the default value:</b>
 /{command}:reset example: <b>language:reset</b> delete one specified setting only
 /setting:reset - delete all your personal settings
 /setting:show - show all your current settings
+/location:reset - delete your location data saved when you sent last time
 
 <b>Rules:</b>
 ---------

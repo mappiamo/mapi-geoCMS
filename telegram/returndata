@@ -5,9 +5,10 @@ Examples:
 <b>returndata:3
 returndata:5
 returndata:10
-returndata:50</b>
+returndata:15</b>
 
 The numeric value after the returndata is the maximum number of return from database if you sent the location data.
+The maximum value of returndata is limited to 20, but the offered maximum is 15.
 
 Remove your personal return data settings:
 <b>returndata:reset</b>

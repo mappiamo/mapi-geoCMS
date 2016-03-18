@@ -20,6 +20,8 @@
 	$chat_id = $telegram->ChatID();
 	$result = $telegram->getData();
 
+	$text = str_replace(' ', '_', $text);
+
 	if ((isset($result['message']['location']['longitude'])) && (isset($Radius)) && (isset($result['message']['location']['latitude']))) {
 		$Lat = $result['message']['location']['latitude'];
 		$Lon = $result['message']['location']['longitude'];
@@ -41,7 +43,7 @@
 	if (strlen($text) > 2) {
 
 		if ($text == "/start" || $text == "start") {
-			$option = array(array("Start", "Help", "About", "Rules"), array("Category:show", "Setting:show", "Setting:reset"), array("radius:reset", "language:reset"), array("type:reset", "returndata:reset"), array("radius:5", "radius:20", "radius:50"), array("type:place", "type:event", "type:post"), array("returndata:5", "returndata:20", "returndata:50"), array("language:en", "language:it", "language:de", "language:fr"));
+			$option = array(array("Start", "Help", "About", "Rules"), array("Category:show", "Setting:show", "Setting:reset"), array("Location:reset", "Search"), array("radius:reset", "language:reset"), array("type:reset", "returndata:reset"), array("radius:5", "radius:20", "radius:50", "radius:200"), array("type:place", "type:event", "type:post"), array("returndata:5", "returndata:10", "returndata:15"), array("language:en", "language:it", "language:de", "language:fr"));
 			$keyb = $telegram->buildKeyBoard($option, $onetime=false);
 			$content = array('chat_id' => $chat_id, 'reply_markup' => $keyb, 'text' => "Welcome to MapiBot \n\nThis Telegram bot reads content from $SiteURL \nPlease type command /help or click the button below!");
 			$telegram->sendMessage($content);

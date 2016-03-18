@@ -1,0 +1,24 @@
+<b>This Telegram bot have search feature.</b>
+
+If you want to search from database by keyword, use /search command with parameters.
+
+Rule:
+-------
+<b>search:{keyword_1} {keyword_2} {keyword_n}</b>
+
+Example:
+----------
+<b>search:roma statue</b>
+
+Rules:
+--------
+- Always use ONE space between keywords.
+- Don't use logical operators between keywords like 'AND', 'OR', '+' or '-' sign.
+- Don't use special characters like brackets, points, or quotation marks.
+- The search process by keywords will use your location data if you have saved location before.
+To save your location data, send it by Telegram to this bot before use search feature.
+- While you have no location data saved because never sent before, the search process will ignore your location and the radius, and will search using raw data.
+- If you have saved location you can delete with command <b>location:reset</b>
+- This search process using address, title, and the textual content of connected database.
+- The process using AND logic between search words, but using OR logic between database fields (address, title, and text content).
+- The search feature using all your saved filter settings like /language /type /address /returndata and if you have saved location data using /radius.
