@@ -369,11 +369,10 @@
 
 			if ((isset($options["lat"])) && (isset($options["lng"])) && (isset($options["radius"]))) {
 				if (intval($options["radius"]) > 10000) { $options["radius"] = 10000; }
+				if (intval($options["radius"]) < 1) { $options["radius"] = 1; }
 
 				$LocationString = $options["lat"] . PHP_EOL . $options["lng"];
 				file_put_contents('telegram/'.$options['id'].'.location', $LocationString);
-
-				$TelegramContent = NULL;
 
 				if (file_exists('telegram/' . $options['id'])) {
 					$options['returndata'] = $LimitValue;
@@ -416,41 +415,11 @@
 				}
 
 				//$RawRecords = print_r($records, 1);
-				$RecordNumber = 0;
+				$TelegramContent = self::telegram_content($records, $TheServerRoot);
 
-				foreach ($records as $RecVal) {
-
-					$CurrentID = '{' . $RecVal['id'] . '}';
-					$categories = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
-
-					$TelegramContent .= ++$RecordNumber . '; <b>' . $RecVal['title'] . '</b> - [type:' . $RecVal['type'] . ']' . PHP_EOL;
-					$TelegramContent .= 'Address: <b>' . $RecVal['address'] . '</b>' . PHP_EOL;
-					$TelegramContent .= 'Distance from you: ' . round($RecVal['distance'], 2) . ' km.' . PHP_EOL;
-
-					if (count($categories) > 0) {
-						$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories)." category(s):</b>".PHP_EOL;
-						foreach ($categories as $onecategory) {
-							$CatContentList = $onecategory['contents'];
-							$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
-							$DataArray = explode(';', $CatContentList);
-
-							$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a> - [' . count($DataArray) . ' content(s)]' . PHP_EOL;
-						}
-					}
-
-					if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
-						$TelegramContent .= PHP_EOL . '<b>Event date found:</b>' . PHP_EOL;
-						$TelegramContent .= 'Event started: ' . $RecVal['start'] . PHP_EOL;
-						$TelegramContent .= 'Event ended: ' . $RecVal['end'] . PHP_EOL;
-					}
-
-					$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=content&object=' . $RecVal['id']. '">Visit page from here...</a>' . PHP_EOL;
-					$TelegramContent .= '---------------------------------' . PHP_EOL  . PHP_EOL;
-				}
-
-				return count($records) . ' records detected within ' . $options["radius"] . ' km radius from you: ' .
-							 PHP_EOL . PHP_EOL . $TelegramContent;
-				//return 'location ok: ' . $options["lat"] . ' - ' . $options["lng"] . ' - ' . $options["radius"] . ' - ' . $LimitValue;
+				return count($records) . ' records detected within ' . $options["radius"] . ' km radius from you: ' . PHP_EOL . PHP_EOL .
+							 $TelegramContent;
+							//return 'location ok: ' . $options["lat"] . ' - ' . $options["lng"] . ' - ' . $options["radius"] . ' - ' . $LimitValue;
 
 			} else {
 
@@ -643,49 +612,12 @@
 																			$options["returndata"], array("latitude" => $coords[0], "longitude" => $coords[1],
 																			"radius" => $options["radius"]))->find_array();
 
-												$RecordNumber = NULL;
-												$TelegramContent = NULL;
-
 												if (count($records) == 0) {
 													$SearchList .= 'We cannot send result with these settings. Use another keyword or delete something from filters.';
 												} else {
 
-													foreach ($records as $RecVal) {
+													$TelegramContent = self::telegram_content($records, $TheServerRoot);
 
-														$CurrentID = '{'.$RecVal['id'].'}';
-														$categories = $records =
-														ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)
-															 ->where_like("contents", '%'.$CurrentID.'%')->find_array();
-
-														$TelegramContent .= ++$RecordNumber.'; <b>'.$RecVal['title'].'</b> - [type:'.
-																								$RecVal['type'].']'.PHP_EOL;
-														$TelegramContent .= 'Address: <b>'.$RecVal['address'].'</b>'.PHP_EOL;
-														$TelegramContent .= 'Distance from you: '.round($RecVal['distance'], 2).' km.'.PHP_EOL;
-
-														if (count($categories) > 0) {
-															$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories).
-																									" category(s):</b>".PHP_EOL;
-															foreach ($categories as $onecategory) {
-																$CatContentList = $onecategory['contents'];
-																$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
-																$DataArray = explode(';', $CatContentList);
-
-																$TelegramContent .= '<a href="'.$TheServerRoot.'/index.php?module=category&object='.
-																										$onecategory['id'].'">'.$onecategory['title'].'</a> - ['.
-																										count($DataArray).' content(s)]'.PHP_EOL;
-															}
-														}
-
-														if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
-															$TelegramContent .= PHP_EOL.'<b>Event date found:</b>'.PHP_EOL;
-															$TelegramContent .= 'Event started: '.$RecVal['start'].PHP_EOL;
-															$TelegramContent .= 'Event ended: '.$RecVal['end'].PHP_EOL;
-														}
-
-														$TelegramContent .= '<a href="'.$TheServerRoot.'/index.php?module=content&object='.
-																								$RecVal['id'].'">Visit page from here...</a>'.PHP_EOL;
-														$TelegramContent .= '---------------------------------'.PHP_EOL.PHP_EOL;
-													}
 												}
 
 												return $SearchList . $TelegramContent;
@@ -696,38 +628,8 @@
 												$SearchList .= 'The search result not filtered to your current location:'.PHP_EOL.PHP_EOL;
 
 												$SearchResult = ORM::for_table('contents')->select_many('type', 'title', 'id', 'start', 'end', 'address')->where_raw($SearchQuery)->where('enabled', 1)->limit($LimitValue)->find_array();
-												$RecordNumber = NULL;
-												$TelegramContent = NULL;
 
-												foreach ($SearchResult as $RecVal) {
-
-													$CurrentID = '{' . $RecVal['id'] . '}';
-													$categories = $records = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
-
-													$TelegramContent .= ++$RecordNumber . '; <b>' . $RecVal['title'] . '</b> - [type:' . $RecVal['type'] . ']' . PHP_EOL;
-													$TelegramContent .= 'Address: <b>' . $RecVal['address'] . '</b>' . PHP_EOL;
-													//$TelegramContent .= 'Distance from you: ' . round($RecVal['distance'], 2) . ' km.' . PHP_EOL;
-
-													if (count($categories) > 0) {
-														$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories)." category(s):</b>".PHP_EOL;
-														foreach ($categories as $onecategory) {
-															$CatContentList = $onecategory['contents'];
-															$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
-															$DataArray = explode(';', $CatContentList);
-
-															$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a> - [' . count($DataArray) . ' content(s)]' . PHP_EOL;
-														}
-													}
-
-													if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
-														$TelegramContent .= PHP_EOL . '<b>Event date found:</b>' . PHP_EOL;
-														$TelegramContent .= 'Event started: ' . $RecVal['start'] . PHP_EOL;
-														$TelegramContent .= 'Event ended: ' . $RecVal['end'] . PHP_EOL;
-													}
-
-													$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=content&object=' . $RecVal['id']. '">Visit page from here...</a>' . PHP_EOL;
-													$TelegramContent .= '---------------------------------' . PHP_EOL  . PHP_EOL;
-												}
+												$TelegramContent = self::telegram_content($SearchResult, $TheServerRoot);
 
 											}
 										}
@@ -802,6 +704,46 @@
 			}
 
 		}
+
+	private function telegram_content($data, $TheServerRoot) {
+		$RecordNumber = 0;
+		$TelegramContent = NULL;
+
+		foreach ($data as $RecVal) {
+
+			$CurrentID = '{' . $RecVal['id'] . '}';
+			$categories = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
+
+			$TelegramContent .= ++$RecordNumber . '; <b>' . $RecVal['title'] . '</b> - [type:' . $RecVal['type'] . ']' . PHP_EOL;
+			$TelegramContent .= 'Address: <b>' . $RecVal['address'] . '</b>' . PHP_EOL;
+
+			if (isset($RecVal['distance'])) {
+				$TelegramContent .= 'Distance from you: '.round($RecVal['distance'], 2).' km.'.PHP_EOL;
+			}
+
+			if (count($categories) > 0) {
+				$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories)." category(s):</b>".PHP_EOL;
+				foreach ($categories as $onecategory) {
+					$CatContentList = $onecategory['contents'];
+					$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
+					$DataArray = explode(';', $CatContentList);
+
+					$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a> - [' . count($DataArray) . ' content(s)]' . PHP_EOL;
+				}
+			}
+
+			if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
+				$TelegramContent .= PHP_EOL . '<b>Event date found:</b>' . PHP_EOL;
+				$TelegramContent .= 'Event started: ' . $RecVal['start'] . PHP_EOL;
+				$TelegramContent .= 'Event ended: ' . $RecVal['end'] . PHP_EOL;
+			}
+
+			$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=content&object=' . $RecVal['id']. '">Visit page from here...</a>' . PHP_EOL;
+			$TelegramContent .= '---------------------------------' . PHP_EOL  . PHP_EOL;
+		}
+
+		return $TelegramContent;
+	}
 
 	}
 
