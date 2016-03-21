@@ -1,8 +1,15 @@
 <?php
 
-	$bot_id = "11111111:xxxxxxxxxxxxxxxxxxxx";
-	$SiteURL = 'http://xxxxxxxxxxxx';
-	$ApiKey = 'xxxxxxxxxxxxxxx';
+	$bot_id = "188291843:AAE3EA-jZoyk4BgFMQNqdlAjzrjXso9MKDU";
+	$SiteURL = 'http://dev.mappiamo.org';
+
+	//$bot_id = "187657153:AAHgxivlcQQadFCPhsuMX2Fgv160KyMHDHg";
+	//$SiteURL = 'http://realimutamenti.it';
+
+	//$bot_id = "213118533:AAGG_dYy9_OBawTqghlQdRyLSpjAmmaCCGk";
+	//$SiteURL = 'http://geo.soccorsolegale.it/';
+
+	$ApiKey = 'dfasdqw435reg4e5ytbxfsdfh';
 	$ReturnDataNum = 10;
 	$Radius = 10;
 
@@ -45,14 +52,19 @@
 		if ($text == "/start" || $text == "start") {
 			$option = array(array("Start", "Help", "About", "Rules"), array("Category:show", "Setting:show", "Setting:reset"), array("Location:reset", "Search"), array("radius:reset", "language:reset"), array("type:reset", "returndata:reset"), array("radius:5", "radius:20", "radius:50", "radius:200"), array("type:place", "type:event", "type:post"), array("returndata:5", "returndata:10", "returndata:15"), array("language:en", "language:it", "language:de", "language:fr"));
 			$keyb = $telegram->buildKeyBoard($option, $onetime=false);
-			$content = array('chat_id' => $chat_id, 'reply_markup' => $keyb, 'text' => "Welcome to MapiBot \n\nThis Telegram bot reads content from $SiteURL \nPlease type command /help or click the button below!");
+			//$content = array('chat_id' => $chat_id, 'reply_markup' => $keyb, 'text' => "Welcome to MapiBot \n\nThis Telegram bot reads content from $SiteURL \nPlease type command /help or click the button below!");
+
+			$GetData = $SiteURL.'/index.php?module=api&task=telegram&ApiKey='.$ApiKey.
+								 '&ReturnDataNum='.$ReturnDataNum.'&text='.$text.'&id='.$chat_id;
+
+			$reply = file_get_contents($GetData);
+			$content = array('chat_id' => $chat_id, 'text' => $reply, 'parse_mode' => 'HTML', 'disable_web_page_preview' => TRUE);
 			$telegram->sendMessage($content);
 
 		} else {
 
-			$GetData =
-			$SiteURL.'/index.php?module=api&task=telegram&ApiKey='.$ApiKey.'&ReturnDataNum='.$ReturnDataNum.'&text='.$text.
-			'&id='.$chat_id;
+			$GetData = $SiteURL.'/index.php?module=api&task=telegram&ApiKey='.$ApiKey.
+								 '&ReturnDataNum='.$ReturnDataNum.'&text='.$text.'&id='.$chat_id;
 
 			$reply = file_get_contents($GetData);
 			$content = array('chat_id' => $chat_id, 'text' => $reply, 'parse_mode' => 'HTML', 'disable_web_page_preview' => TRUE);

@@ -1,0 +1,20 @@
+È possibile impostare un raggio (radius) in km per i quali richiedere i dati
+
+Esempio:
+---------------
+<b>radius:3
+radius:5
+radius:10
+radius:50</b>
+
+Il numero che segue il comando radius è il raggio di azione definito in chilometri intorno alla &#x1F4CE; -> Posizione inviata. 
+
+Il raggio massimo accettato è di 10000 km
+
+Per cancellare le impostazioni di radius:
+<b>radius:reset</b>
+
+Mostra tutte le impostazioni:
+<b>setting:show</b>
+
+Con /help troverai maggiori delucidazioni

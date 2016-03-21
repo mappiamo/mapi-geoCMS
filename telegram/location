@@ -1,9 +1,9 @@
 Telegram can send only your current location information to the database.
-When you send your location data, the bot always will reply using definied setting of radius from you to send result.
+When you send your location data, the bot always will reply using defined setting of radius from you to send result.
 
 You can send and save your location data from telegram using &#x1F4CE sign on the left of message input.
 
 <b>When you want to use /search feature, you have two choices:</b>
 - You already sent your location to Telegram bot, and the search process will using your previously sent location data.
 
-- If you never sent location data to the Telegram bot before, or you deleted with command <b>location:reset</b>, the search process will reply raw data from database not using your location and the definied radius as distance.
+- If you never sent location data to the Telegram bot before, or you deleted with command <b>location:reset</b>, the search process will reply raw data from database not using your location and the defined radius as distance.

@@ -1,0 +1,7 @@
+Il bot è in grado di limitare i risultati in base alla localizzazione. 
+Quando invii i dati della localizzazione &#x1F4CE; -> Posizione il bot risponde secondo al <b>radius:</b> impostato.
+
+<b>Quando desideri utilizzare il /search (cerca), hai due possibilità:</b>
+- Hai già inviato la &#x1F4CE; -> Posizione al bot Telegram e la ricerca viene effettuata in base a questo parametro.
+
+- Se non hai mai inviato la Posizione al bot Telegram, oppure l’hai azzerata col comando <b>location:reset</b>, la ricerca sarà libera e ignorerà anche il radius impostato.

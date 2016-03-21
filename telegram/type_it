@@ -1,0 +1,16 @@
+I type dei contenuti di #mappiamo sono i seguenti:
+
+Examples:
+---------------
+<b>type:place 
+type:event 
+type:post 
+type:route</b>
+
+Azzera le impostazioni
+<b>type:reset</b>
+
+Mostra le impostazioni
+<b>setting:show</b>
+
+Con /help troverai maggiori delucidazioni

@@ -7,7 +7,7 @@ radius:5
 radius:10
 radius:50</b>
 
-The numeric value after the radius is the distance from you in kilimeters.
+The numeric value after the radius is the distance from you in kilometers.
 The accepted maximum radius value is 10000 (kilometers)
 
 Remove your personal radius settings:

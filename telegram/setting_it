@@ -1,0 +1,7 @@
+Il comando ‘settings’ accetta due valori:
+
+---------------
+<b>setting:show</b> - mostra tutte le impostazioni
+<b>setting:reset</b> - azzera/cancella tutte le impostazioni
+
+Con /help troverai maggiori delucidazioni

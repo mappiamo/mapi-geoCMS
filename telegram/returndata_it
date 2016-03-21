@@ -1,0 +1,19 @@
+Per ottimizzare la visualizzazione sugli schermi è possibile impostare il numero di risposte (returndata):
+
+Examples:
+---------------
+<b>returndata:3
+returndata:5
+returndata:10
+returndata:15</b>
+
+Il numero massimo di risposte visualizzabili è  15.
+
+
+Per azzerare le impostazioni di returndata:
+<b> returndata:reset </b>
+
+Mostra tutte le impostazioni:
+<b>setting:show</b>
+
+Con /help troverai maggiori delucidazioni

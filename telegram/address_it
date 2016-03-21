@@ -1,0 +1,17 @@
+Per usare un'indirizzo di base scrivi il comando <b>address:</b> 
+
+Esempi:
+---------------
+<b>address:Paris
+address:Roma
+address:London</b>
+
+Il valore dopo address: deve esistere nel sito e devi rispettare le Maiuscole.
+
+Per cancellare le impostazioni di address:
+<b>address:reset</b>
+
+Mostra tutte le impostazioni:
+<b>setting:show</b>
+
+Con /help troverai maggiori delucidazioni

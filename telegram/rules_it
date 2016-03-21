@@ -1,0 +1,18 @@
+<b>Regole:</b>
+---------
+- Il carattere "/" non è richiesto nell’invio dei comandi
+- I comandi non tengono conto del Maiuscolo
+- Dopo le parole 'language', 'type' e 'address' è richiesto un valore esistente nel database. Per 'address:paris' è necessario che 'paris' sia presente nel campo 'address' del database, in caso contrario non sarà salvato.
+- Dopo 'radius' e 'returndata' sono accettati solo valori numerici interi.
+- La parola 'settings’ può essere usata solo con show (mostra) e reset (azzera).
+- &#x1F4CE; -> Posizione per inviare i dati di geolocalizzazione 
+- Ad ogni modifica di un filtro per ottenere i dati bisogna inviare la Posizione
+
+<b>Note:</b>
+Il servizio di localizzazione è disponibile solo sui dispositivi mobili.
+Si prega di non inviare alcun comando insieme a Posizione
+Non inviare più di un comando per volta.
+
+<b>Maggiori informazioni:</b>
+/help - come usare questo servizio
+/about - chi ha creato questo servizio

@@ -1,0 +1,41 @@
+<b>L’aiuto del bot #mappiamo: i comandi principali</b>
+========================================
+/help - per mostrare questo aiuto
+
+Usa l'icona &#x1F4CE; -> Posizione  invia la tua posizione geolocalizzata al server di #mappiamo per ottenere i dati nelle tue vicinanze.
+
+
+<b>Impostazioni settings:</b>
+---------------------------
+L'utente può personalizzare le impostazioni con:
+
+/language:{language_code} es: <b>language:it</b>
+/type:{content_type}
+es: <b>type:place, type:event, type:post</b>
+/radius:{distanza in km} es: <b>radius:50</b>
+/address:{città} es: <b>address:paris</b>
+/returndata:{numero di risultati} es: <b>returndata:8</b>
+
+Puoi cercare nel database:
+/search:{keyword_1} {keyword_2} {keyword_n}
+es: <b>search:paris statue</b>
+
+<b>Azzera o mostra le impostazioni:</b>
+/{command}:reset es: <b>language:reset</b> azzera una impostazione precisa
+/setting:reset - azzera tutte le impostazioni personalizzate
+/setting:show - mostra tutte le impostazioni correnti
+/location:reset - azzera la posizione inviata
+
+<b>Le regole:</b>
+---------
+- Il carattere "/" non è richiesto
+- I comandi 'language', 'type', e 'address' richiedono valori validi ed esistenti per filtrare ciò che è presente nel database.
+Ad es. 'address:paris' è possibile se 'paris' è presente nel campo 'address' del sito.
+- Dopo 'radius' e 'returndata' è richiesto un valore numerico (intero).
+- La parola 'settings' può essere usata per show (mostra) e reset (azzera-elimina) le impostazioni personalizzate.
+- Usa l'icona &#x1F4CE; ->Posizione  per inviare la tua posizione geolocalizzata al server di #mappiamo per ottenere i dati nelle tue vicinanze.
+
+<b>Note:</b>
+Il servizio di geolocalizzazione è disponibile solo su dispositivi mobili.
+Si prega di non inoltrare altri dati insieme al comando di Posizione, si otterrà un errore.
+Si prega di non inoltrare più comandi nella stessa riga di richiesta.

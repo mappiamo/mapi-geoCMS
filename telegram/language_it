@@ -1,0 +1,16 @@
+Per gestire una lingua di base usa il comando <b>language</b> 
+
+Esempi:
+---------------
+<b>language:it
+language:en
+language:de
+language:xx</b>
+
+Per cancellare le impostazioni di language:
+<b>language:reset</b>
+
+Mostra tutte le impostazioni:
+<b>setting:show</b>
+
+Con /help troverai maggiori delucidazioni

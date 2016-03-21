@@ -424,6 +424,17 @@
 
 				if (is_array($Setting)) {
 					if (count($Setting) == 1) {
+						$LanguageSet = NULL;
+
+						if (file_exists('telegram/' . $options['id'])) {
+							$LanguageSet = self::getlanguage($options['id']);
+						}
+
+						if ($LanguageSet) {
+							if (file_exists('telegram/' . $Setting[0] . '_' . $LanguageSet)) {
+								$Setting[0] = $Setting[0] . '_' . $LanguageSet;
+							}
+						}
 
 						if (file_exists('telegram/' . $Setting[0])) {
 							$ReturnContent = file_get_contents('telegram/' . $Setting[0]);
@@ -666,7 +677,22 @@
 
 		}
 
+		private function getlanguage($optID) {
+			$lines = file('telegram/' . $optID, FILE_IGNORE_NEW_LINES);
+			foreach ($lines as $OnefilerLine) {
+				$SavedSetting = explode(':', $OnefilerLine);
+				$SavedArray[$SavedSetting[0]] = $SavedSetting[1];
+			}
+
+			if (isset($SavedArray['language'])) {
+				return $SavedArray['language'];
+			} else {
+				return NULL;
+			}
+		}
+
 		private function stringtosave($optID, $ValidFilters, $CommandString, $SQL_sent, $ValidModifiers, $options, $ValidActions) {
+
 			$lines = file('telegram/' . $optID, FILE_IGNORE_NEW_LINES);
 			$SavedWhere = NULL;
 			$SavedArray = array();

@@ -1,0 +1,19 @@
+Se desideri cercare qualcosa nel database usa il commendo /search con i seguenti parametri:
+
+<b>search:{keyword_1} {keyword_2} {keyword_n}</b>
+
+Esempio:
+----------
+<b>search:roma statue</b>
+
+Regole:
+--------
+- Ovunque usa solo UNO spazio tra le chiavi di ricerca (keywords).
+- Non utilizzare gli operatori logici 'AND', 'OR', '+' o '-'.
+- Non utilizzare caratteri speciali come parentesi, punti o virgolette.
+- Invia  &#x1F4CE; -> Posizione al bot Telegram se desideri che la ricerca per parole chiave filtri i risultati in base alla posizione.
+- Se non hai mai inviato al Posizione la ricerca testuale sarà libera.
+- Se sono già stati comunicati i dati di Posizione con il comando <b>location:reset</b> è possibile azzerarli.
+- La ricerca avviene nell'indirizzo, nel titolo e nel contenuto testuale del database.
+- Il comando /search nella ricerca delle parole utilizza l’operatore logico AND e tra i campi (address, title, e text content) l’operatore logico OR.
+- La funzione di ricerca utilizza tutte le impostazioni di filtri salvati come /language /type /address /returndata e se è salvata la posizione anche /radius.
