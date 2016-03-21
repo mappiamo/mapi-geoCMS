@@ -6,7 +6,7 @@
 For example 'address:paris' is useful if 'paris' available on the 'address' column.
 - After 'radius' and 'returndata' numeric integer value accepted only.
 - The word 'setting' can be used for show and delete (reset) personalized setup only.
-- Use ??? sign to send your location data to the Mappiamo server to get list of places and events near you.
+- Use &#x1F4CE sign on the left of message input to send your location data to the Mappiamo server to get list of places and events near you.
 
 <b>Note:</b>
 Location service available on mobile devices only on Telegram.

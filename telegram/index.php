@@ -1,8 +1,8 @@
 <?php
 
-	$bot_id = "168043776:AAECiuRuj4lkai1LClUX5rySniZ_wR8e-qc";
-	$SiteURL = 'http://dev.mappiamo.org';
-	$ApiKey = 'dfasdqw435reg4e5ytbxfsdfh';
+	$bot_id = "11111111:xxxxxxxxxxxxxxxxxxxx";
+	$SiteURL = 'http://xxxxxxxxxxxx';
+	$ApiKey = 'xxxxxxxxxxxxxxx';
 	$ReturnDataNum = 10;
 	$Radius = 10;
 

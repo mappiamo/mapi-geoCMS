@@ -355,7 +355,7 @@
 			if (!isset($options['text'])) { return FALSE; }
 			if (!isset($options['id'])) { return FALSE; }
 
-			if (intval($options['ReturnDataNum']) > 20) { $options['ReturnDataNum'] = 20; }
+			if (intval($options['ReturnDataNum']) > 15) { $options['ReturnDataNum'] = 15; }
 			if (intval($options['ReturnDataNum']) < 1) { $options['ReturnDataNum'] = 5; }
 
 			$ApiauthKey = ORM::for_table('preferences')->select('value')->where('name', 'api_auth')->find_one();
@@ -363,8 +363,13 @@
 			if ($ApiauthKey['value'] != $options['ApiKey']) {	return FALSE; }
 
 			$LimitValue = $options['ReturnDataNum'];
+
 			$ValidFilters = array('language', 'type', 'address');
 			$ValidModifiers = array('radius', 'returndata');
+			$NumericSettings = array('radius', 'returndata');
+			$ValidCommands = array('language', 'type', 'address', 'setting', 'radius', 'returndata', 'category', 'search', 'location');
+			$ValidActions = array('reset', 'show');
+
 			$TheServerRoot = rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\');
 
 			if ((isset($options["lat"])) && (isset($options["lng"])) && (isset($options["radius"]))) {
@@ -377,31 +382,20 @@
 				if (file_exists('telegram/' . $options['id'])) {
 					$options['returndata'] = $LimitValue;
 
-					$lines = file('telegram/' . $options['id'], FILE_IGNORE_NEW_LINES);
-					$SavedWhere = NULL;
-					$FilteredSQL = NULL;
-
-					foreach ($lines as $OnefilerLine) {
-						$SavedSetting = explode(':', $OnefilerLine);
-						if (in_array($SavedSetting[0], $ValidFilters)) {
-							$SavedWhere .= $SavedSetting[0]." = '".$SavedSetting[1]."' AND ";
-						}
-
-						if (in_array($SavedSetting[0], $ValidModifiers)) {
-							$options[$SavedSetting[0]] = $SavedSetting[1];
-						}
-					}
+					$ReturnArray = self::stringtosave($options['id'], $ValidFilters, NULL, NULL, $ValidModifiers, $options, $ValidActions);
+					$SavedWhere = $ReturnArray['SQL'];
+					$options = $ReturnArray['FILTERS'];
 
 					if ($SavedWhere) { $FilteredSQL = 'WHERE ' . rtrim($SavedWhere,  ' AND '); }
 					$records = ORM::for_table('contents')
-												->raw_query('SELECT id, title, address, type, start, end, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) AS distance FROM contents ' . $FilteredSQL . ' HAVING distance < :radius ORDER BY distance LIMIT '.
+												->raw_query('SELECT id, title, address, type, start, end, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(lat)))) AS distance FROM contents ' . $FilteredSQL . ' HAVING distance < :radius ORDER BY distance LIMIT '.
 												$options["returndata"], array("latitude" => $options["lat"], "longitude" => $options["lng"],
 												"radius" => $options["radius"]))->find_array();
 
 				} else {
 
 					$records = ORM::for_table('contents')
-												->raw_query('SELECT id, title, address, type, start, end, ( 3959 * acos( cos( radians( :latitude ) ) * cos( radians( lat ) ) * cos( radians( lng ) - radians( :longitude ) ) + sin( radians( :latitude ) )  * sin( radians( lat ) ) ) )  AS distance FROM contents HAVING distance < :radius ORDER BY distance LIMIT '.
+												->raw_query('SELECT id, title, address, type, start, end, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(lat))))  AS distance FROM contents HAVING distance < :radius ORDER BY distance LIMIT '.
 												$LimitValue, array("latitude" => $options["lat"], "longitude" => $options["lng"],
 												"radius" => $options["radius"]))->find_array();
 				}
@@ -411,7 +405,7 @@
 				}
 
 				if (count($records) < 1) {
-					return 'No return data with this radius (' . $options["radius"] . ' kilometers) from you.';
+					return 'No return data with this radius (' . $options["radius"] . ' kilometers) from you. Delete some of filters or increase current radius.';
 				}
 
 				//$RawRecords = print_r($records, 1);
@@ -439,10 +433,6 @@
 						}
 
 					} elseif (count($Setting) == 2) {
-						$ValidCommands = array('language', 'type', 'address', 'setting', 'radius', 'returndata', 'category', 'search', 'location');
-						$ValidActions = array('reset', 'show');
-						$NumericSettings = array('radius', 'returndata');
-
 						if (in_array($Setting[0], $ValidCommands)) {
 
 							if ((in_array($Setting[0], $NumericSettings)) && (!in_array($Setting[1], $ValidActions)) && (((!is_numeric($Setting[1]))) || intval($Setting[1]) <= 0)) {
@@ -452,9 +442,12 @@
 							if ((in_array($Setting[1], $ValidActions)) || (((is_numeric($Setting[1]))) && intval($Setting[1]) > 0)) {
 
 								if ((in_array($Setting[0], $ValidFilters)) && (!in_array($Setting[1], $ValidActions))) {
-									$SQL_sent = "`".$Setting[0]."` = '".$Setting[1]."'";
-									$records =
-									ORM::for_table('contents')->select_many('id')->where_raw($SQL_sent)->where('enabled', 1)->count();
+									if (strtolower($Setting[0]) == 'address') {
+										$SQL_sent = "`".$Setting[0]."` like '%".$Setting[1]."%'";
+									} else {
+										$SQL_sent = "`".$Setting[0]."` = '".$Setting[1]."'";
+									}
+									$records = ORM::for_table('contents')->select_many('id')->where_raw($SQL_sent)->where('enabled', 1)->count();
 
 									if ($records == 0) {
 										return 'No data in this database with this filter. Filter settings cancelled...';
@@ -507,29 +500,16 @@
 								}
 
 								if (file_exists('telegram/' . $options['id'])) {
-
-									$lines = file('telegram/' . $options['id'], FILE_IGNORE_NEW_LINES);
-									$SavedArray = array();
-									$StringtoSave = NULL;
-
-									foreach ($lines as $OnefilerLine) {
-										$SavedSetting = explode(':', $OnefilerLine);
-										$SavedArray[$SavedSetting[0]] = $SavedSetting[1];
-									}
-
-									$SavedArray[$Setting[0]] = $Setting[1];
-									foreach ($SavedArray as $SavedKey => $SavedVal) if (!in_array($SavedVal, $ValidActions)) {
-										$StringtoSave .= $SavedKey . ':' . $SavedVal . PHP_EOL;
-									}
-
-									$StringtoSave = trim($StringtoSave);
+									$ReturnArray = self::stringtosave($options['id'], $ValidFilters, $Setting, $SQL_sent, $ValidModifiers, $options, $ValidActions);
+									$StringtoSave = $ReturnArray['STRING'];
 
 									if ($StringtoSave) {
 										file_put_contents('telegram/'.$options['id'], $StringtoSave);
 
 										return 'New valid setting received and saved: '.$Command.PHP_EOL.
 													 'Send location data to apply new filters.'.PHP_EOL.'----------------------'.PHP_EOL.
-													 'Your current settings:'.PHP_EOL.'----------------------'.PHP_EOL.$StringtoSave;
+													 'Your current settings:'.PHP_EOL.'----------------------'.PHP_EOL.$StringtoSave . PHP_EOL . PHP_EOL .
+													 '<b>Send your current location and check your current radius and all filters to get filtered data from database.</b>';
 									} else {
 										unlink('telegram/'.$options['id']);
 										return 'You have no saved settings, result will use default values.';
@@ -538,7 +518,8 @@
 								} else {
 									if (!in_array($Setting[1], $ValidActions)) {
 										file_put_contents('telegram/'.$options['id'], $Command);
-										return 'Valid setting received and saved: '.$Command;
+										return 'Valid setting received and saved: '.$Command . PHP_EOL . PHP_EOL .
+													 '<b>Send your current location and check your current radius and all filters to get filtered data from database.</b>';
 									} else {
 										return 'This command: <b>' . $Command . '</b> currently not valid. Maybe you have no current settings';
 									}
@@ -575,19 +556,11 @@
 											$options['returndata'] = $LimitValue;
 											$SavedWhere = NULL;
 											if (file_exists('telegram/' . $options['id'])) {
-												$lines = file('telegram/' . $options['id'], FILE_IGNORE_NEW_LINES);
-												$SavedWhere = NULL;
-												$FilteredSQL = NULL;
 
-												foreach ($lines as $OnefilerLine) {
-													$SavedSetting = explode(':', $OnefilerLine);
-													if (in_array($SavedSetting[0], $ValidFilters)) {
-														$SavedWhere .= $SavedSetting[0]." = '".$SavedSetting[1]."' AND ";
-													}
-													if (in_array($SavedSetting[0], $ValidModifiers)) {
-														$options[$SavedSetting[0]] = $SavedSetting[1];
-													}
-												}
+												$ReturnArray = self::stringtosave($options['id'], $ValidFilters, $Setting, NULL, $ValidModifiers, $options, $ValidActions);
+												$SavedWhere = $ReturnArray['SQL'];
+												$options = $ReturnArray['FILTERS'];
+
 												if ($SavedWhere) { $SearchQuery .= ' AND ' . rtrim($SavedWhere,  ' AND '); }
 												$LimitValue = $options['returndata'];
 
@@ -608,7 +581,7 @@
 												$FilteredSQL = 'WHERE ' . $SearchQuery;
 
 												$records = ORM::for_table('contents')
-																			->raw_query('SELECT id, title, address, type, start, end, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) AS distance FROM contents ' . $FilteredSQL . ' HAVING distance < :radius ORDER BY distance LIMIT '.
+																			->raw_query('SELECT id, title, address, type, start, end, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(lat)))) AS distance FROM contents ' . $FilteredSQL . ' HAVING distance < :radius ORDER BY distance LIMIT '.
 																			$options["returndata"], array("latitude" => $coords[0], "longitude" => $coords[1],
 																			"radius" => $options["radius"]))->find_array();
 
@@ -628,7 +601,6 @@
 												$SearchList .= 'The search result not filtered to your current location:'.PHP_EOL.PHP_EOL;
 
 												$SearchResult = ORM::for_table('contents')->select_many('type', 'title', 'id', 'start', 'end', 'address')->where_raw($SearchQuery)->where('enabled', 1)->limit($LimitValue)->find_array();
-
 												$TelegramContent = self::telegram_content($SearchResult, $TheServerRoot);
 
 											}
@@ -640,36 +612,23 @@
 									}
 								}
 
-								$SQL_sent = "`" . $Setting[0] . "` = '" . $Setting[1] . "'";
+								if (strtolower($Setting[0]) == 'address') {
+									$SQL_sent = "`".$Setting[0]."` like '%".$Setting[1]."%'";
+								} else {
+									$SQL_sent = "`".$Setting[0]."` = '".$Setting[1]."'";
+								}
+
 								$records = ORM::for_table('contents')->select_many('id')->where_raw($SQL_sent)->where('enabled', 1)->count();
 
 								if ($records > 0) {
 
 									if (file_exists('telegram/' . $options['id'])) {
-
 										$SavedFilters = file_get_contents('telegram/' . $options['id']);
-										$lines = file('telegram/' . $options['id'], FILE_IGNORE_NEW_LINES);
-										$SavedWhere = NULL;
-										$SavedArray = array();
-										$StringtoSave = NULL;
 
+										$ReturnArray = self::stringtosave($options['id'], $ValidFilters, $Setting, $SQL_sent, $ValidModifiers, $options, $ValidActions);
+										$StringtoSave = $ReturnArray['STRING'];
+										$RealSQL = $ReturnArray['SQL'];
 
-										foreach ($lines as $OnefilerLine) {
-											$SavedSetting = explode(':', $OnefilerLine);
-											$SavedArray[$SavedSetting[0]] = $SavedSetting[1];
-											if ((in_array($SavedSetting[0], $ValidFilters)) && ($Setting[0] != $SavedSetting[0]) && ($Setting[1] != $SavedSetting[1])) {
-												$SavedWhere .= "`" . $SavedSetting[0] . "` = '" . $SavedSetting[1] . "' AND ";
-											}
-										}
-
-										$SavedArray[$Setting[0]] = $Setting[1];
-										$RealSQL = $SavedWhere . $SQL_sent;
-
-										foreach ($SavedArray as $SavedKey => $SavedVal) {
-											$StringtoSave .= $SavedKey . ':' . $SavedVal . PHP_EOL;
-										}
-
-										$StringtoSave = trim($StringtoSave);
 										file_put_contents('telegram/' . $options['id'], $StringtoSave);
 
 										$filtered = ORM::for_table('contents')->select_many('id')->where_raw($RealSQL)->where('enabled', 1)->count();
@@ -681,11 +640,13 @@
 													 $SavedFilters . PHP_EOL .
 													 '-------------------------------' . PHP_EOL .
 													 'With all your new filters we have ' . $filtered . ' records without location:' . PHP_EOL .
-													 $StringtoSave;
+													 $StringtoSave . PHP_EOL . PHP_EOL .
+													 '<b>Send your current location and check your current radius and all filters to get filtered data from database.</b>' . PHP_EOL;
 
 									} else {
 										file_put_contents('telegram/' . $options['id'], $Command);
-										return 'Valid filter received and saved.' . PHP_EOL . $records . ' data found in the database with this one filter without location data.';
+										return 'Valid filter received and saved.' . PHP_EOL . $records . ' data found in the database with this one filter without location data.' . PHP_EOL . PHP_EOL .
+													 '<b>Send your current location and check your current radius and all filters to get filtered data from database.</b>';
 									}
 
 								} else {
@@ -705,45 +666,93 @@
 
 		}
 
-	private function telegram_content($data, $TheServerRoot) {
-		$RecordNumber = 0;
-		$TelegramContent = NULL;
+		private function stringtosave($optID, $ValidFilters, $CommandString, $SQL_sent, $ValidModifiers, $options, $ValidActions) {
+			$lines = file('telegram/' . $optID, FILE_IGNORE_NEW_LINES);
+			$SavedWhere = NULL;
+			$SavedArray = array();
+			$StringtoSave = NULL;
 
-		foreach ($data as $RecVal) {
+			foreach ($lines as $OnefilerLine) {
+				$SavedSetting = explode(':', $OnefilerLine);
+				$SavedArray[$SavedSetting[0]] = $SavedSetting[1];
 
-			$CurrentID = '{' . $RecVal['id'] . '}';
-			$categories = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
+				if (strtolower($SavedSetting[0]) == 'address') {
+					$operator = 'like'; $acceptGREP = '%';
+				} else {
+					$operator = '='; $acceptGREP = NULL;
+				}
 
-			$TelegramContent .= ++$RecordNumber . '; <b>' . $RecVal['title'] . '</b> - [type:' . $RecVal['type'] . ']' . PHP_EOL;
-			$TelegramContent .= 'Address: <b>' . $RecVal['address'] . '</b>' . PHP_EOL;
+				if ($CommandString) {
+					if ((in_array($SavedSetting[0], $ValidFilters)) && ($CommandString[0] != $SavedSetting[0]) && ($CommandString[1] != $SavedSetting[1])) {
+						$SavedWhere .= "`".$SavedSetting[0]."` " . $operator . " '" . $acceptGREP . $SavedSetting[1]. $acceptGREP . "' AND ";
+					}
+				} else {
+					if (in_array($SavedSetting[0], $ValidFilters)) {
+						$SavedWhere .= "`".$SavedSetting[0]."` " . $operator . " '". $acceptGREP . $SavedSetting[1]. $acceptGREP . "' AND ";
+					}
+				}
 
-			if (isset($RecVal['distance'])) {
-				$TelegramContent .= 'Distance from you: '.round($RecVal['distance'], 2).' km.'.PHP_EOL;
-			}
-
-			if (count($categories) > 0) {
-				$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories)." category(s):</b>".PHP_EOL;
-				foreach ($categories as $onecategory) {
-					$CatContentList = $onecategory['contents'];
-					$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
-					$DataArray = explode(';', $CatContentList);
-
-					$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a> - [' . count($DataArray) . ' content(s)]' . PHP_EOL;
+				if (in_array($SavedSetting[0], $ValidModifiers)) {
+					$options[$SavedSetting[0]] = $SavedSetting[1];
 				}
 			}
 
-			if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
-				$TelegramContent .= PHP_EOL . '<b>Event date found:</b>' . PHP_EOL;
-				$TelegramContent .= 'Event started: ' . $RecVal['start'] . PHP_EOL;
-				$TelegramContent .= 'Event ended: ' . $RecVal['end'] . PHP_EOL;
+			$SavedWhere .= "(`end` is NULL OR `end` >= now()) AND ";
+
+			$SavedArray[$CommandString[0]] = $CommandString[1];
+			$RealSQL = $SavedWhere . $SQL_sent;
+
+			foreach ($SavedArray as $SavedKey => $SavedVal) if (!in_array($SavedVal, $ValidActions)) {
+				$StringtoSave .= $SavedKey . ':' . $SavedVal . PHP_EOL;
 			}
 
-			$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=content&object=' . $RecVal['id']. '">Visit page from here...</a>' . PHP_EOL;
-			$TelegramContent .= '---------------------------------' . PHP_EOL  . PHP_EOL;
+			$StringtoSave = trim($StringtoSave);
+			$ReturnArray['STRING'] = $StringtoSave;
+			$ReturnArray['SQL'] = $RealSQL;
+			$ReturnArray['FILTERS'] = $options;
+
+			return $ReturnArray;
 		}
 
-		return $TelegramContent;
-	}
+		private function telegram_content($data, $TheServerRoot) {
+			$RecordNumber = 0;
+			$TelegramContent = NULL;
+
+			foreach ($data as $RecVal) {
+
+				$CurrentID = '{' . $RecVal['id'] . '}';
+				$categories = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->where_like("contents", '%' . $CurrentID . '%')->find_array();
+
+				$TelegramContent .= ++$RecordNumber . '; <b>' . $RecVal['title'] . '</b> - [type:' . $RecVal['type'] . ']' . PHP_EOL;
+				$TelegramContent .= 'Address: <b>' . $RecVal['address'] . '</b>' . PHP_EOL;
+
+				if (isset($RecVal['distance'])) {
+					$TelegramContent .= 'Distance from you: '.round($RecVal['distance'], 2).' km.'.PHP_EOL;
+				}
+
+				if (count($categories) > 0) {
+					$TelegramContent .= PHP_EOL.'<b>This content found on '.count($categories)." category(s):</b>".PHP_EOL;
+					foreach ($categories as $onecategory) {
+						$CatContentList = $onecategory['contents'];
+						$CatContentList = str_replace(array('{', '}'), '', $CatContentList);
+						$DataArray = explode(';', $CatContentList);
+
+						$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=category&object=' . $onecategory['id'] . '">' . $onecategory['title'] . '</a> - [' . count($DataArray) . ' content(s)]' . PHP_EOL;
+					}
+				}
+
+				if ((strlen($RecVal['start']) > 5) && (strlen($RecVal['end']) > 5)) {
+					$TelegramContent .= PHP_EOL . '<b>Event date found:</b>' . PHP_EOL;
+					$TelegramContent .= 'Event started: ' . $RecVal['start'] . PHP_EOL;
+					$TelegramContent .= 'Event ended: ' . $RecVal['end'] . PHP_EOL;
+				}
+
+				$TelegramContent .= '<a href="' . $TheServerRoot . '/index.php?module=content&object=' . $RecVal['id']. '">Visit page from here...</a>' . PHP_EOL;
+				$TelegramContent .= '---------------------------------' . PHP_EOL  . PHP_EOL;
+			}
+
+			return $TelegramContent;
+		}
 
 	}
 

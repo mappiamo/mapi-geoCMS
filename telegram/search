@@ -16,7 +16,7 @@ Rules:
 - Don't use logical operators between keywords like 'AND', 'OR', '+' or '-' sign.
 - Don't use special characters like brackets, points, or quotation marks.
 - The search process by keywords will use your location data if you have saved location before.
-To save your location data, send it by Telegram to this bot before use search feature.
+To save your location data, send it by Telegram using &#x1F4CE to this bot before use search feature.
 - While you have no location data saved because never sent before, the search process will ignore your location and the radius, and will search using raw data.
 - If you have saved location you can delete with command <b>location:reset</b>
 - This search process using address, title, and the textual content of connected database.
