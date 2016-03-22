@@ -58,7 +58,7 @@
 								 '&ReturnDataNum='.$ReturnDataNum.'&text='.$text.'&id='.$chat_id;
 
 			$reply = file_get_contents($GetData);
-			$content = array('chat_id' => $chat_id, 'text' => $reply, 'parse_mode' => 'HTML', 'disable_web_page_preview' => TRUE);
+			$content = array('chat_id' => $chat_id, 'reply_markup' => $keyb, 'text' => $reply, 'parse_mode' => 'HTML', 'disable_web_page_preview' => TRUE);
 			$telegram->sendMessage($content);
 
 		} else {

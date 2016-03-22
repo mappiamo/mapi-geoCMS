@@ -372,6 +372,11 @@
 
 			$TheServerRoot = rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\');
 
+			$LanguageSet = NULL;
+			if (file_exists('telegram/' . $options['id'])) {
+				$LanguageSet = self::getlanguage($options['id']);
+			}
+
 			if ((isset($options["lat"])) && (isset($options["lng"])) && (isset($options["radius"]))) {
 				if (intval($options["radius"]) > 10000) { $options["radius"] = 10000; }
 				if (intval($options["radius"]) < 1) { $options["radius"] = 1; }
@@ -401,34 +406,40 @@
 				}
 
 				if (!isset($records)) {
-					return 'Database error. Cannot read records.';
+
+					$SetContent = 'database_error';
+					$SetData = NULL;
+					$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+					return $Message;
+
 				}
 
 				if (count($records) < 1) {
-					return 'No return data with this radius (' . $options["radius"] . ' kilometers) from you. Delete some of filters or increase current radius.';
+
+					$SetContent = 'no_return';
+					$SetData['RADIUS'] = $options["radius"];
+					$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+					return $Message;
+
 				}
 
-				//$RawRecords = print_r($records, 1);
 				$TelegramContent = self::telegram_content($records, $TheServerRoot);
 
-				return count($records) . ' records detected within ' . $options["radius"] . ' km radius from you: ' . PHP_EOL . PHP_EOL .
-							 $TelegramContent;
-							//return 'location ok: ' . $options["lat"] . ' - ' . $options["lng"] . ' - ' . $options["radius"] . ' - ' . $LimitValue;
+				$SetContent = 'records_show';
+				$SetData['RADIUS'] = $options["radius"];
+				$SetData['REC_COUNT'] = count($records);
+				$SetData['REC_CONTENT'] = $TelegramContent;
+				$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+				return $Message;
 
 			} else {
 
 				$Command = strtolower($options['text']);
 				$Command = ltrim($Command, '/');
-
 				$Setting = explode(':', $Command);
 
 				if (is_array($Setting)) {
 					if (count($Setting) == 1) {
-						$LanguageSet = NULL;
-
-						if (file_exists('telegram/' . $options['id'])) {
-							$LanguageSet = self::getlanguage($options['id']);
-						}
 
 						if ($LanguageSet) {
 							if (file_exists('telegram/' . $Setting[0] . '_' . $LanguageSet)) {
@@ -437,17 +448,29 @@
 						}
 
 						if (file_exists('telegram/' . $Setting[0])) {
+
 							$ReturnContent = file_get_contents('telegram/' . $Setting[0]);
 							return $ReturnContent;
+
 						} else {
-							return "Invalid command. Please use /help";
+
+							$SetContent = 'invalid_command';
+							$SetData = NULL;
+							$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+							return $Message;
+
 						}
 
 					} elseif (count($Setting) == 2) {
 						if (in_array($Setting[0], $ValidCommands)) {
 
 							if ((in_array($Setting[0], $NumericSettings)) && (!in_array($Setting[1], $ValidActions)) && (((!is_numeric($Setting[1]))) || intval($Setting[1]) <= 0)) {
-								return 'This setting need integer value, no other accepted.';
+
+								$SetContent = 'accept_integer';
+								$SetData = NULL;
+								$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+								return $Message;
+
 							}
 
 							if ((in_array($Setting[1], $ValidActions)) || (((is_numeric($Setting[1]))) && intval($Setting[1]) > 0)) {
@@ -461,16 +484,31 @@
 									$records = ORM::for_table('contents')->select_many('id')->where_raw($SQL_sent)->where('enabled', 1)->count();
 
 									if ($records == 0) {
-										return 'No data in this database with this filter. Filter settings cancelled...';
+
+										$SetContent = 'filter_cancelled';
+										$SetData = NULL;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									}
 								}
 
 								if ((strtolower($Setting[0]) == 'location') && (strtolower($Setting[1]) == 'reset')) {
 									if (file_exists('telegram/'.$options['id'].'.location')) {
 										unlink('telegram/'.$options['id'].'.location');
-										return 'Your location setting deleted.';
+
+										$SetContent = 'location_deleted';
+										$SetData = NULL;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									} else {
-										return 'You have no saved location. Send it to the bot by Telegram first.';
+
+										$SetContent = 'location_notsaved';
+										$SetData = NULL;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									}
 								}
 
@@ -478,7 +516,10 @@
 									$categories = $records = ORM::for_table('categories')->select_many('title', 'id', 'contents')->where("enabled", 1)->find_array();
 
 									if (count($categories) > 0) {
-										$CatList = '<b>' . count($categories) . ' categories found in this database:</b>' . PHP_EOL . PHP_EOL;
+
+										$SetContent = 'category_count';
+										$SetData['CAT_COUNT'] = count($categories);
+										$CatList = self::InternalMessage($SetContent, $SetData, $LanguageSet);
 
 										foreach ($categories as $OneCat) {
 											$CatContentList = $OneCat['contents'];
@@ -490,24 +531,41 @@
 
 										return $CatList;
 									} else {
-										return 'No categories found in current database.' . PHP_EOL;
+
+										$SetContent = 'category_missing';
+										$SetData = NULL;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									}
 								}
 
 								if (strtolower($Setting[1]) == 'show') {
 									if (file_exists('telegram/' . $options['id'])) {
 										$SavedFilters = file_get_contents('telegram/'.$options['id']);
-										return 'Your current saved settings:' . PHP_EOL .
-													 '----------------------------' . PHP_EOL .
-													 $SavedFilters;
+
+										$SetContent = 'current_setting';
+										$SetData['FILTER_LIST'] = $SavedFilters;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									} else {
-										return 'You have no saved settings yet.';
+
+										$SetContent = 'no_saved_setting';
+										$SetData = NULL;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
 									}
 								}
 
 								if ((strtolower($Setting[0]) == 'setting') && (strtolower($Setting[1]) == 'reset')) {
 									unlink('telegram/'.$options['id']);
-									return 'Your saved settings deleted. Result will use default values.';
+
+									$SetContent = 'setting_deleted';
+									$SetData = NULL;
+									$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+									return $Message;
+
 								}
 
 								if (file_exists('telegram/' . $options['id'])) {
@@ -517,22 +575,38 @@
 									if ($StringtoSave) {
 										file_put_contents('telegram/'.$options['id'], $StringtoSave);
 
-										return 'New valid setting received and saved: '.$Command.PHP_EOL.
-													 'Send location data to apply new filters.'.PHP_EOL.'----------------------'.PHP_EOL.
-													 'Your current settings:'.PHP_EOL.'----------------------'.PHP_EOL.$StringtoSave . PHP_EOL . PHP_EOL .
-													 '<b>Send your current location and check your current radius and all filters to get filtered data from database.</b>';
+										$SetContent = 'setting_received';
+										$SetData['COMMAND'] = $Command;
+										$SetData['SETTINGS'] = $StringtoSave;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									} else {
 										unlink('telegram/'.$options['id']);
-										return 'You have no saved settings, result will use default values.';
+
+										$SetContent = 'setting_deleted';
+										$SetData = NULL;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									}
 
 								} else {
 									if (!in_array($Setting[1], $ValidActions)) {
 										file_put_contents('telegram/'.$options['id'], $Command);
-										return 'Valid setting received and saved: '.$Command . PHP_EOL . PHP_EOL .
-													 '<b>Send your current location and check your current radius and all filters to get filtered data from database.</b>';
+
+										$SetContent = 'setting_first';
+										$SetData['COMMAND'] = $Command;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									} else {
-										return 'This command: <b>' . $Command . '</b> currently not valid. Maybe you have no current settings';
+
+										$SetContent = 'setting_invalid';
+										$SetData['COMMAND'] = $Command;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									}
 								}
 
@@ -543,7 +617,12 @@
 									$Setting[1] = str_replace(array('+', ' '), '_', $Setting[1]);
 
 									if (strlen($Setting[1]) < 4) {
-										return 'Invalid search queue. Maybe contains invalid caharacter or too short.';
+
+										$SetContent = 'invalid_queue';
+										$SetData = NULL;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+										return $Message;
+
 									}
 
 									$SearchWords = explode('_', $Setting[1]);
@@ -557,11 +636,17 @@
 										$SearchQuery .= '(`address` LIKE \'%' . implode('%\' AND `address` LIKE \'%', $SearchWords) . '%\'))';
 
 										$SearchCount = ORM::for_table('contents')->select_many('type', 'title', 'id', 'start', 'end', 'address')->where_raw($SearchQuery)->where('enabled', 1)->count();
-										$SearchList = '<b>You started search process by keywords...</b>' . PHP_EOL;
-										$SearchList .= 'We have ' . $SearchCount . ' search result in the database without location filter.' . PHP_EOL;
+
+										$SetContent = 'search_count';
+										$SetData['SEARCH_COUNT'] = $SearchCount;
+										$SearchList = self::InternalMessage($SetContent, $SetData, $LanguageSet);
 
 										if ($SearchCount == 0) {
-											$SearchList .= PHP_EOL . 'We have no result data with your current search query. Please use less keywords.';
+
+											$SetContent = 'search_null';
+											$SetData['SEARCH_COUNT'] = $SearchCount;
+											$SearchList .= self::InternalMessage($SetContent, $SetData, $LanguageSet);
+
 										} else {
 
 											$options['returndata'] = $LimitValue;
@@ -576,17 +661,26 @@
 												$LimitValue = $options['returndata'];
 
 												$SearchCount = ORM::for_table('contents')->select_many('type', 'title', 'id', 'start', 'end', 'address')->where_raw($SearchQuery)->where('enabled', 1)->count();
-												$SearchList .= 'With your current saved settings we have ' . $SearchCount . ' results.' . PHP_EOL;
+
+												$SetContent = 'search_current';
+												$SetData['SEARCH_COUNT'] = $SearchCount;
+												$SearchList .= self::InternalMessage($SetContent, $SetData, $LanguageSet);
 
 												if ($SearchCount == 0) {
-													$SearchList .= PHP_EOL . 'We have no result using your current search query and saved filters. Please use less keywords or reset settings.';
+
+													$SetContent = 'search_current_null';
+													$SetData['SEARCH_COUNT'] = $SearchCount;
+													$SearchList .= self::InternalMessage($SetContent, $SetData, $LanguageSet);
+
 													return $SearchList;
 												}
 											}
 
 											if (file_exists('telegram/'.$options['id'].'.location')) {
-												$SearchList .= PHP_EOL . '<b>You have saved location.</b>'.PHP_EOL;
-												$SearchList .= 'The search result will be filtered to your current location with radius and all saved settings:'.PHP_EOL.PHP_EOL;
+
+												$SetContent = 'location_info';
+												$SetData['RADIUS'] = $SearchCount;
+												$SearchList .= self::InternalMessage($SetContent, $SetData, $LanguageSet);
 
 												$coords = file('telegram/'.$options['id'].'.location', FILE_IGNORE_NEW_LINES);
 												$FilteredSQL = 'WHERE ' . $SearchQuery;
@@ -597,7 +691,11 @@
 																			"radius" => $options["radius"]))->find_array();
 
 												if (count($records) == 0) {
-													$SearchList .= 'We cannot send result with these settings. Use another keyword or delete something from filters.';
+
+													$SetContent = 'no_result';
+													$SetData = NULL;
+													$SearchList .= self::InternalMessage($SetContent, $SetData, $LanguageSet);
+
 												} else {
 
 													$TelegramContent = self::telegram_content($records, $TheServerRoot);
@@ -608,8 +706,9 @@
 
 											} else {
 
-												$SearchList .= PHP_EOL . '<b>You have no saved location yet. Please use location service first.</b>'.PHP_EOL;
-												$SearchList .= 'The search result not filtered to your current location:'.PHP_EOL.PHP_EOL;
+												$SetContent = 'location_missing';
+												$SetData = NULL;
+												$SearchList .= self::InternalMessage($SetContent, $SetData, $LanguageSet);
 
 												$SearchResult = ORM::for_table('contents')->select_many('type', 'title', 'id', 'start', 'end', 'address')->where_raw($SearchQuery)->where('enabled', 1)->limit($LimitValue)->find_array();
 												$TelegramContent = self::telegram_content($SearchResult, $TheServerRoot);
@@ -619,7 +718,12 @@
 
 										return $SearchList . $TelegramContent;
 									} else {
-										return 'Search query is invalid. Please use /help command.';
+
+										$SetContent = 'search_invalid';
+										$SetData = NULL;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+
+										return $Message;
 									}
 								}
 
@@ -644,29 +748,38 @@
 
 										$filtered = ORM::for_table('contents')->select_many('id')->where_raw($RealSQL)->where('enabled', 1)->count();
 
-										return 'Valid filter received and saved.' . PHP_EOL .
-													 $records . ' data found in the database with this one filter without location data.' . PHP_EOL .
-													 '-------------------------------' . PHP_EOL .
-													 'You have previously saved filters:' . PHP_EOL .
-													 $SavedFilters . PHP_EOL .
-													 '-------------------------------' . PHP_EOL .
-													 'With all your new filters we have ' . $filtered . ' records without location:' . PHP_EOL .
-													 $StringtoSave . PHP_EOL . PHP_EOL .
-													 '<b>Send your current location and check your current radius and all filters to get filtered data from database.</b>' . PHP_EOL;
+										$SetContent = 'filter_saved_detailed';
+										$SetData['RECORDS'] = $records;
+										$SetData['SAVEDFILTERS'] = $SavedFilters;
+										$SetData['FILTERED'] = $filtered;
+										$SetData['STRINGTOSAVE'] = $StringtoSave;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+
+										return $Message;
 
 									} else {
 										file_put_contents('telegram/' . $options['id'], $Command);
-										return 'Valid filter received and saved.' . PHP_EOL . $records . ' data found in the database with this one filter without location data.' . PHP_EOL . PHP_EOL .
-													 '<b>Send your current location and check your current radius and all filters to get filtered data from database.</b>';
+
+										$SetContent = 'filter_saved';
+										$SetData['RECORDS'] = $records;
+										$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+
+										return $Message;
 									}
 
 								} else {
-									return 'No data in this database with this filter. Filter cancelled.';
+									$SetContent = 'filter_cancelled';
+									$SetData = NULL;
+									$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+									return $Message;
 								}
 							}
 
 						} else {
-							return 'Invalid message. Please use /help';
+							$SetContent = 'invalid_command';
+							$SetData = NULL;
+							$Message = self::InternalMessage($SetContent, $SetData, $LanguageSet);
+							return $Message;
 						}
 
 					}
@@ -675,6 +788,44 @@
 				}
 			}
 
+		}
+
+		private function InternalMessage($SetContent, $SetData, $LanguageSet) {
+			if (($LanguageSet) && (file_exists('telegram/system/' . $SetContent . '_' . $LanguageSet))) {
+				$LanguageSet = '_' . $LanguageSet;
+			} else {
+				$LanguageSet = NULL;
+			}
+			$MContentPath = 'telegram/system/' . $SetContent . $LanguageSet;
+
+			if (file_exists($MContentPath)) {
+				$SendContent = file_get_contents($MContentPath);
+
+				if (is_array($SetData)) {
+					foreach ($SetData as $DataKey => $DataVal) {
+						$SendContent = str_replace('['.strtoupper($DataKey).']', $DataVal, $SendContent);
+					}
+				}
+
+				$SendContent = str_replace(PHP_EOL, "\r\n", $SendContent);
+				return $SendContent;
+
+			} else {
+
+				if (($LanguageSet) && (file_exists('telegram/system/default_' . $LanguageSet))) {
+					$LanguageSet = '_' . $LanguageSet;
+				} else {
+					$LanguageSet = NULL;
+				}
+
+				$MContentPath = 'telegram/system/default' . $LanguageSet;
+				if (file_exists($MContentPath)) {
+					$SendContent = file_get_contents($MContentPath);
+					return $SendContent;
+				} else {
+					return 'No answer for this error.';
+				}
+			}
 		}
 
 		private function getlanguage($optID) {

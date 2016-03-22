@@ -23,18 +23,3 @@ example: <b>search:paris statue</b>
 /setting:reset - delete all your personal settings
 /setting:show - show all your current settings
 /location:reset - delete your location data saved when you sent last time
-
-<b>Rules:</b>
----------
-- The "/" character is not required for the beginning of the row
-- The commands are case insensitive
-- After words 'language', 'type', and 'address' required valid and available value for filtering which are already exist in the database.
-For example 'address:paris' is useful if 'paris' available on the 'address' column.
-- After 'radius' and 'returndata' numeric integer value accepted only.
-- The word 'setting' can be used for show and delete (reset) personalized setup only.
-- Use &#x1F4CE sign to send your location data to the Mappiamo server to get list of places and events near you.
-
-<b>Note:</b>
-Location service available on mobile devices only on Telegram.
-Please don't send command and location service at one time to bot.
-Don't send more than one command line at one time.
