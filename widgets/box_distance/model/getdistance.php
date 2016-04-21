@@ -93,6 +93,7 @@
 			//$meta_info = ORM::for_table('content_meta')->select_many('external_id', 'name', 'value')->where('external_id', $id)->find_array();
 
 			//if (($content_data['type'] == 'place') || ($content_data['type'] == 'event')) {
+			if (is_array($all_similar_markers)) {
 				foreach ($all_similar_markers as $Key => $OneMarker) {
 					$ContentID = $OneMarker['id'];
 					$MarkerIcon = ORM::for_table('content_meta')->select_many('value')->where('external_id', $ContentID)->where('name', 'icon-file')->find_one();
@@ -101,7 +102,7 @@
 					}
 					$all_similar_markers[$Key]['selected_title'] = $content_data['title'];
 				}
-			//}
+			}
 
 			//echo $SeekThis; die();
 			//print_r($all_similar_markers);

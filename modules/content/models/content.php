@@ -144,9 +144,13 @@ class MModel_Content {
 						<div class="content-data">
 
 								<?PHP if (!isset($created['by_email'])) { ?>
-									<img src="<?PHP M_Template::widget('gravatar', array(NULL)); ?>" style="height: 42px; border-radius: 21px; position: relative; top: -8px;" />
+									<img src="<?PHP
+										$NewWidget = new M_Template();
+										$NewWidget->widget('gravatar', array(NULL)); ?>" style="height: 42px; border-radius: 21px; position: relative; top: -8px;" />
 								<?PHP } else { $CreatorMail = $created['by_email']; ?>
-									<img src="<?PHP M_Template::widget('gravatar', array($CreatorMail)); ?>" style="height: 42px; border-radius: 21px; position: relative; top: -8px;" />
+									<img src="<?PHP
+										$NewWidget = new M_Template();
+										$NewWidget->widget('gravatar', array($CreatorMail)); ?>" style="height: 42px; border-radius: 21px; position: relative; top: -8px;" />
 								<?PHP } ?>
 
 								<div style="display: inline-block; font-size: 10pt;">
