@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Hoszt: 127.0.0.1
--- Létrehozás ideje: 2015. Sze 20. 19:00
+-- Létrehozás ideje: 2016. Máj 09. 17:56
 -- Szerver verzió: 5.6.16
 -- PHP verzió: 5.5.11
 
@@ -40,17 +40,26 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `import_id` char(40) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- A tábla adatainak kiíratása `categories`
 --
 
 INSERT INTO `categories` (`id`, `name`, `title`, `contents`, `flagship`, `created`, `createdby`, `modified`, `modifiedby`, `enabled`, `import_id`) VALUES
-(1, 'posts', 'Posts', '{1}', 0, '2015-09-20 16:01:36', 27, '2015-09-20 16:03:22', 27, 1, NULL),
-(2, 'places', 'Places', '{2};{5};{6};{7};{8}', 0, '2015-09-20 16:01:44', 27, '2015-09-20 18:49:51', 27, 1, NULL),
-(3, 'events', 'Events', '{4};{9}', 0, '2015-09-20 16:01:51', 27, '2015-09-20 18:53:55', 27, 1, NULL),
-(4, 'routes', 'Routes', '{3};{10}', 0, '2015-09-20 16:01:58', 27, '2015-09-20 18:53:37', 27, 1, NULL);
+(1, 'sample-category', 'Sample category', '{1};{3};{2};{4}', 0, '2016-02-04 13:58:28', 27, '2016-02-04 15:53:58', 27, 1, 'f996dd7b-cb40-11e5-8e2c-1c6f65ad55b6');
+
+--
+-- Eseményindítók `categories`
+--
+DROP TRIGGER IF EXISTS `InsertCategories`;
+DELIMITER //
+CREATE TRIGGER `InsertCategories` BEFORE INSERT ON `categories`
+ FOR EACH ROW BEGIN 
+		SET NEW.import_id = UUID();
+	END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -83,23 +92,29 @@ CREATE TABLE IF NOT EXISTS `contents` (
   `import_id` char(40) COLLATE utf8_unicode_ci DEFAULT NULL,
   `route` mediumtext COLLATE utf8_unicode_ci,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=5 ;
 
 --
 -- A tábla adatainak kiíratása `contents`
 --
 
 INSERT INTO `contents` (`id`, `type`, `title`, `name`, `address`, `lat`, `lng`, `license`, `text`, `url`, `start`, `end`, `created`, `createdby`, `modified`, `modifiedby`, `hits`, `translation`, `enabled`, `language`, `parent`, `import_id`, `route`) VALUES
-(1, 'post', 'Sample content 1', 'sample-content-1', 'Tricase', 39.93042, 18.355332, 1, 'This is post.', NULL, NULL, NULL, '2015-09-20 15:53:37', 27, '2015-09-20 16:03:27', 27, 3, 0, 1, 'it', NULL, NULL, NULL),
-(2, 'place', 'Sample content 2', 'sample-content-2', 'Specchia', 39.9411672, 18.2999958, 1, 'This is place.', NULL, NULL, NULL, '2015-09-20 15:54:59', 27, '2015-09-20 15:55:13', 27, 5, 0, 1, 'it', NULL, NULL, NULL),
-(3, 'route', 'Route test', 'route-test', 'Tricase', 39.93042, 18.355332, 1, 'This is route.', NULL, NULL, NULL, '2015-09-20 15:56:49', 27, '2015-09-20 16:03:55', 27, 6, 0, 1, 'it', NULL, NULL, 'GeometryCollection(POINT(18.355332 39.93042),POINT(18.3615327 39.9611275),POINT(18.311631 39.95972),POINT(18.297631 39.93712),POINT(18.3312082 39.8896785),POINT(18.364433 39.905819),POINT(18.355332 39.93042))'),
-(4, 'event', 'Event test', 'event-test', 'Tricase', 39.93042, 18.355332, 1, 'This is event.', NULL, '2015-09-21 15:57:00', '2015-09-30 15:57:00', '2015-09-20 15:57:36', 27, '2015-09-20 16:04:24', 27, 3, 0, 1, 'it', NULL, NULL, NULL),
-(5, 'place', 'Place 2', 'place-2', 'Tricase', 39.93042, 18.355332, 1, 'Place 2', NULL, NULL, NULL, '2015-09-20 16:31:11', 27, '2015-09-20 16:31:37', 27, 2, 0, 1, 'it', NULL, NULL, NULL),
-(6, 'place', 'Place - Budapest', 'place---budapest', 'Budapest', 47.497912, 19.040235, 1, NULL, NULL, NULL, NULL, '2015-09-20 18:46:21', 27, '2015-09-20 18:46:36', 27, 1, 0, 1, 'it', NULL, NULL, NULL),
-(7, 'place', 'Place - Miskolc', 'place---miskolc', 'Miskolc', 48.0963631, 20.762386, 1, 'Place test', NULL, NULL, NULL, '2015-09-20 18:47:01', 27, '2015-09-20 18:47:12', 27, 1, 0, 1, 'it', NULL, NULL, NULL),
-(8, 'place', 'Place with lines', 'place-with-lines', 'Tápióbicske', 47.3661203, 19.6863365, 1, 'Drawind samples', NULL, NULL, NULL, '2015-09-20 18:49:40', 27, '2015-09-20 18:50:02', 27, 1, 0, 1, 'it', NULL, NULL, 'GeometryCollection(POLYGON ((19.670087814156428 47.376214815315315, 19.671976089302913 47.37760974774237, 19.67884254438104 47.37586607644249, 19.684679031197447 47.37133226121006, 19.693262100045104 47.3814456216379, 19.70321845990838 47.37760974774237, 19.69755363446893 47.369937162719225, 19.701501846138854 47.36784444578889, 19.697381973091975 47.36179835267775, 19.702531814400572 47.35772847674406, 19.69909858686151 47.35400717258351, 19.696180343453307 47.35319310231545, 19.685194015328307 47.35749590292253, 19.683477401558775 47.35668188647431, 19.679529189888854 47.35830990681287, 19.679185867134947 47.35993787692001, 19.67781257611932 47.36086812299986, 19.673177718941588 47.36144951847065, 19.673521041695494 47.36365876282776, 19.662019729439635 47.36714685502695, 19.663049697701354 47.369123338224, 19.670087814156428 47.36714685502695, 19.671976089302913 47.369007076556734, 19.686738967720885 47.3627285659537, 19.687940597359557 47.36505402738543, 19.668714523140807 47.37551733526325, 19.670087814156428 47.376214815315315)),POINT (19.71660804731073 47.384002715860724),POINT (19.634553909127135 47.35144862373945),LINESTRING (19.662534713570494 47.368425764376255, 19.65910148603143 47.369123338224, 19.653779983345885 47.36819323771014, 19.648286819283385 47.36819323771014, 19.6409053800744 47.36923959963501, 19.639360427681822 47.36726312079464, 19.637815475289244 47.36156579679595, 19.634553909127135 47.3521464220896, 19.63421058637323 47.34993669566256, 19.627000808541197 47.34958778303236, 19.62494087201776 47.34877364459174),POLYGON ((19.63764381391229 47.36133323988905, 19.633523940865416 47.362612290191166, 19.630262374703307 47.35551898404987, 19.626314163033385 47.35249531780482, 19.624769210640807 47.35051821158713, 19.62494087201776 47.34842472427284, 19.626829147164244 47.34784318528222, 19.630090713326354 47.34819210944546, 19.629747390572447 47.34668008807918, 19.637987136666197 47.345400651554165, 19.637815475289244 47.349355173330764, 19.641592025582213 47.35249531780482, 19.64279365522088 47.35389087759979, 19.63987541181268 47.354704937103804, 19.641592025582213 47.35749590292253, 19.637300491158385 47.35830990681287, 19.63764381391229 47.36133323988905)))'),
-(9, 'event', 'Event with lines', 'event-with-lines', 'Tricase', 39.93042, 18.355332, 1, 'Event sample with lines', NULL, '2015-09-21 18:50:00', '2015-10-21 18:50:00', '2015-09-20 18:51:50', 27, '2015-09-20 18:53:59', 27, 3, 0, 1, 'it', NULL, NULL, 'GeometryCollection(POLYGON ((18.250202178605832 39.95726718215682, 18.250202178605832 39.97516006112189, 18.274921416887082 39.97516006112189, 18.274921416887082 39.95726718215682, 18.250202178605832 39.95726718215682)),POLYGON ((18.29483413661364 39.95726718215682, 18.29483413661364 39.97489696447749, 18.32092666591052 39.97489696447749, 18.32092666591052 39.95726718215682, 18.29483413661364 39.95726718215682)),POLYGON ((18.33843612635974 39.957530346657215, 18.33843612635974 39.97410766846727, 18.367961883195676 39.97410766846727, 18.367961883195676 39.957530346657215, 18.33843612635974 39.957530346657215)),POINT (18.262905120500363 39.963582850651996),POINT (18.307880401262082 39.964635405353945),POINT (18.35388565028552 39.963582850651996),LINESTRING (18.24505233729724 39.943844449806555, 18.367961883195676 39.94252835388208, 18.367961883195676 39.893551599982466, 18.240932464250363 39.889600335553695),POLYGON ((18.25500869716052 39.93673723106695, 18.24127578700427 39.913567839046095, 18.263935088762082 39.899609763055544, 18.29483413661364 39.9025069560857, 18.305820464738645 39.926733228225174, 18.26324844325427 39.93673723106695, 18.25500869716052 39.93673723106695)),POLYGON ((18.309597015031613 39.92515351517317, 18.299640655168332 39.90329707837962, 18.31543350184802 39.8969758449126, 18.35113906825427 39.8969758449126, 18.35525894130114 39.91962423244488, 18.314746856340207 39.93041908359209, 18.309597015031613 39.92515351517317)))'),
-(10, 'route', 'Route sample 2', 'route-sample-2', 'tápióbicske', 47.3661203, 19.6863365, 1, 'Another route', NULL, NULL, NULL, '2015-09-20 18:53:26', 27, '2015-09-20 18:53:46', 27, 2, 0, 1, 'it', NULL, NULL, 'GeometryCollection(POINT(19.6867411 47.3622153),POINT(19.7503736 47.4138187),POINT(19.6303259 47.3992437),POINT(19.6332241 47.3509828))');
+(1, 'post', 'Demo post', 'demo-post', 'Tricase', 39.93042, 18.355332, 1, '<h1>First demo post</h1>\r\n<p>Eror moditatiori solumqui consequam aut essum rate res aciduntem et pla quaestias aspelibusda sit, assi occus.<br />Et voluptate vel inum alictat et offic tet earum eum si dus.<br />Tempercia sit arum eum ide nit quiaerum landel moluption reiunt lam, tesequam, quas recatiaeris a volor aut ut eos dolupta ssitas cus.<br />Dit, saperuptate di doluptio iusam, incimodipit ma velicaes qui adis eum quatur alit dolendis mossed que officipsant, sit ma voluptia samenihilia pratiostrum que cor molupta sint hiciuntiatus dendiae volendem que debitas minim ullabo. Videnimetur reperfe riorumqui rem. Nequiderspel id quis rehenit, odis sequam fugiam, sitem aliquuntiur, abo. Ut rentus diatur magnamenis acerorr ovitiatio modi conet repel ipsum soluptatur sam sed magnatiam harum aut de as iunditat od que pelit, solectur? Ovid quam quam quam quis sum quidus ratumquia precturi omnisse quiam, omnimet et quis sunt.<br />Lat odistius aceaquisquid minus andusae cestrum quam, ut omnimi, tem volorep elliate imincil et quam vellume es sitinciis eatis sit quodis am delisciderum quam fuga. Rum restiorio te modis eate doluptiam aut a del il inisi cumendae ped eic torita adit quid eum unt laut etur, volorep elestio. Et la sitem. Agnis doles reprectur?<br />Bus. Veruntotati que estis poremod maximenis autae eles non cusdae. Lorae placcusania volore il inctem sinusam repel ipsapid eliquibusam, sinihicat qui aut as aut qui ipienia volorro bearcias susam que nobit poremquia pra volo mil es assitae. Nequis erionet esedita dolorep erchit vitatem ut aut dolestrum labores sintotae. Sum ut voluptatur, audam ea dendempe pedipitatem que odia quam, saersped mo ium quas secte voluptatum rem quatetum aut alicimos aut fugia corro et minus dus, omnimus apedit, optate ad et endiciis quat.<br />Ur? Vitaeperrum explatem quis asincid et reratur? Nonse pe pro minvele cepedipsum nessitatur ad quidusam, simustiam eosam aceaquam diae laborempera ese qui volupta dis volorerae nobitatio molores a doloreped quid et antur aut endignam qui ditem nullabo. Od es maximus ad quibus qui di doluptatur auditatur, quodis debit, sitaturendam ere, culpa explabor sa dolectis autempo ssitatq uosandi arum iusdam harcim voloreh enienis ius aut et volorem olupta venis nimolora pa as aut plandel ium nimilis quo velibus volorporepta poremporeped quatqui dessinv endipsu ntotati isitate verore volorit omnimus, ea que num in nusae maximet odipsap iendessunto berum alignisseque rectore puditionet volectia veleni omnis reperib uscipictios dolupta voluptam eum qui apit et ut ipiciuscit, sundandit occae reperumque consequia pra nonet est idellignihit aut aut odit optatquides a sam adi debis et pero inim venis mi, omniet rem volupta quodit lab inis entur solor autem explabo. Ut odicabor as mil inum quis sint utaerit in ped ute poribusanis inimus atur repe maximet lia consequ ianihic temodi blabor ad exeratus a prere nonse nos estrum volut quam, tempori busam, quameni hiligent hicia que paria pos magnam volorio enis</p>', NULL, NULL, NULL, '2016-02-04 14:17:46', 27, '2016-02-04 14:19:22', 27, 3, 0, 1, 'it', NULL, 'ae58d00a-cb41-11e5-8e2c-1c6f65ad55b6', NULL),
+(2, 'event', 'Demo event', 'demo-event', 'Tricase', 39.93042, 18.355332, 1, '<h1>Demo event</h1>\r\n<p>Od mo te nonsequ istione venditis idist alis eaquia voluptat.<br />Rum sintium quosam et facest, simolesto ist ut ex etur resciae licit pliquid endestinciis molorerro cori tenis autaturitia cusa vollian imporporias abori voluptatias eum quas ea ex eius.<br />Cullictatiis il iminci dissi nullam di consectate optatur ibusandam, totatur sequaecatur, que cusam vellique nos abo. Itatentorro blaboratur?<br />Bor sapid magnia consed eni oditiorro beatur, corum fuga. Agni iur alignate ressimo luptate vendebit, sant.<br />Ut dollorae alia atibus est fugit que sum et, sum aciet ent.<br />Rate volorum et eium eum harum quae doluptatatem que pore conestrum vellatem exceribus rem quis idi doles nimint, sunda voluptatem errumquae parcid molor alianisqui od ernamus perum cullam ut disi qui repeles cimint possitatat.<br />Ibus ab inullupit, arum fugit veror aut acesse et, to quo con re nis dolor audicim re nonserit es derovidunt vel molores eost, voluptatia iderit, quat optat volut quis ipsunti rehendis ped maximai orrovid etur, voluptas andit autatus quae nihitaquibus vollabo rerchite excesedi vendionet et vera sum fugia num que litas dolest, cus ut ad moluptam am voloreh enimpore ipsunti num eturiti volut adi invererror magni restium quae nus.<br />Tur? Les as nonseque prae ad quam explaborro essecatus dolupid unt evella quo velent et qui omnis qui natat facernatur anisti unt alicias ipsanda ent eveleniet ulla eos erro mos as ipsaescia vendus estius adiciumet et apiderferum consequos aspidelessit esti imil ea volupta pores dit quaepel lectas quo iur, volor molorup taturia menihictem acil enimodi cuptae. Etur min re dolestem fugiae nis rem quatusa ndelige nimaios ea volorendus aut velit volorem dem laut fugit, consect oruptasserit dipic totatur rero te volectia iniscia qui vit qui corporae eum nonseceptur, cus, sanis veleserspid quo consed quo destio. Agnatem. Rerovid et dolorro quatiasit aut faceptiore pliqui quiae maiorerum quatibus autatec atendaectate as evella nos sedis aut quae sin evelit odignis as que nienem voluptati omnimiliquod earcimo diaspediciur asitis deliqui ant utem facea cuptam illa nimostrum, ut min el ipsum aut ut abo. Sum dolo occum fugitatur?<br />Seditibus aut mo eati temporaeped qui sitaquisqui debit ab is dent eum rem aliquid quia volum volorepe estrum vit est, omniminum audae. Uga. Aliaepe rumquia que netur magnam, vene sundusam natiunt ut voles inus repudae ctusciis re ditiosandist listotatque rem adis inctota coratiatur sin ne dolorem illab intia et assimporpos mo eatiae ipsa velecto volupta tiuntium seque optatio quae commo et fugit exerum reperum voluptat etum vella nonetum asita nobis re sitatia cus eum non non et, solorest, oditisqui aut latur recusci liaepe nihicitati am earchil liquost volutaquunt aliquatur, conestor reptiam ius ant iumquatur ateceatem. Uciumquae plate con excerovitat.<br />Modiciam, sequatur? Pidignient lignim ad moluptae. Peres prectotat voluptasit, sum ipiendeliti dolorec aeptatusto vit faccatur sam asperunt denderatem hitae et arum voluptasi offici dolupta epediam facepudios expellabore sim commolor simporem velibus ex eos se dolorec epratum faccum ipieturem esequae praerumqui corrore dita ipit odigent quides magnimporio beaturiantia volorro mi, vidissitas et lacea earchil itatur, con ra cum quibus, que nem reria volene eumet quuntios eum nimint molor magnat omnihitin con eaquia volorporis sequae. Nam, iliquaspiet vendis restrumquo exerchictore quid molupta ius, quo conempe lendige nditias dolum exerit officit provitatur, iur, si ullabor endest ligendaepra voluptis evernatur?<br />Genimus ratem fugit odipsum restecto beribus is ereheni siti corpor re re nem fugia eossimi, ommolorerio. Parum verem reici doloris ut et quatque nusapit inulparunt quatemquo tore ped mo omnis vent hicae nit, sinihit veliquae nume deliti acea prerunt harchita perior sundandunt exceperrum sitametus quam aut restibusam illique velique vent exerupti nonseque officipicta con evero qui berro officit rem fuga. Ut qui tentota nis deribus quidici cum, aspis qui totaepudam quis dolesed igniscimus, consenim harcilis utatibus abo. Em as illaturiatio magnam sed unt, tet aspelec toressunt illes dipsandae mos adiost antibus sintiasperro velitat ectaturest, in</p>', NULL, '2016-02-02 15:49:00', '2016-03-16 15:49:00', '2016-02-04 15:49:20', 27, '2016-02-04 15:50:56', 27, 2, 0, 1, 'it', NULL, '790ff5d1-cb4e-11e5-8e2c-1c6f65ad55b6', NULL),
+(3, 'place', 'Demo place with draw', 'demo-place-with-draw', 'Tricase', 39.93042, 18.355332, 1, '<h1>Demo place with draw</h1>\r\n<p>Od mo te nonsequ istione venditis idist alis eaquia voluptat.<br />Rum sintium quosam et facest, simolesto ist ut ex etur resciae licit pliquid endestinciis molorerro cori tenis autaturitia cusa vollian imporporias abori voluptatias eum quas ea ex eius.<br />Cullictatiis il iminci dissi nullam di consectate optatur ibusandam, totatur sequaecatur, que cusam vellique nos abo. Itatentorro blaboratur?<br />Bor sapid magnia consed eni oditiorro beatur, corum fuga. Agni iur alignate ressimo luptate vendebit, sant.<br />Ut dollorae alia atibus est fugit que sum et, sum aciet ent.<br />Rate volorum et eium eum harum quae doluptatatem que pore conestrum vellatem exceribus rem quis idi doles nimint, sunda voluptatem errumquae parcid molor alianisqui od ernamus perum cullam ut disi qui repeles cimint possitatat.<br />Ibus ab inullupit, arum fugit veror aut acesse et, to quo con re nis dolor audicim re nonserit es derovidunt vel molores eost, voluptatia iderit, quat optat volut quis ipsunti rehendis ped maximai orrovid etur, voluptas andit autatus quae nihitaquibus vollabo rerchite excesedi vendionet et vera sum fugia num que litas dolest, cus ut ad moluptam am voloreh enimpore ipsunti num eturiti volut adi invererror magni restium quae nus.<br />Tur? Les as nonseque prae ad quam explaborro essecatus dolupid unt evella quo velent et qui omnis qui natat facernatur anisti unt alicias ipsanda ent eveleniet ulla eos erro mos as ipsaescia vendus estius adiciumet et apiderferum consequos aspidelessit esti imil ea volupta pores dit quaepel lectas quo iur, volor molorup taturia menihictem acil enimodi cuptae. Etur min re dolestem fugiae nis rem quatusa ndelige nimaios ea volorendus aut velit volorem dem laut fugit, consect oruptasserit dipic totatur rero te volectia iniscia qui vit qui corporae eum nonseceptur, cus, sanis veleserspid quo consed quo destio. Agnatem. Rerovid et dolorro quatiasit aut faceptiore pliqui quiae maiorerum quatibus autatec atendaectate as evella nos sedis aut quae sin evelit odignis as que nienem voluptati omnimiliquod earcimo diaspediciur asitis deliqui ant utem facea cuptam illa nimostrum, ut min el ipsum aut ut abo. Sum dolo occum fugitatur?<br />Seditibus aut mo eati temporaeped qui sitaquisqui debit ab is dent eum rem aliquid quia volum volorepe estrum vit est, omniminum audae. Uga. Aliaepe rumquia que netur magnam, vene sundusam natiunt ut voles inus repudae ctusciis re ditiosandist listotatque rem adis inctota coratiatur sin ne dolorem illab intia et assimporpos mo eatiae ipsa velecto volupta tiuntium seque optatio quae commo et fugit exerum reperum voluptat etum vella nonetum asita nobis re sitatia cus eum non non et, solorest, oditisqui aut latur recusci liaepe nihicitati am earchil liquost volutaquunt aliquatur, conestor reptiam ius ant iumquatur ateceatem. Uciumquae plate con excerovitat.<br />Modiciam, sequatur? Pidignient lignim ad moluptae. Peres prectotat voluptasit, sum ipiendeliti dolorec aeptatusto vit faccatur sam asperunt denderatem hitae et arum voluptasi offici dolupta epediam facepudios expellabore sim commolor simporem velibus ex eos se dolorec epratum faccum ipieturem esequae praerumqui corrore dita ipit odigent quides magnimporio beaturiantia volorro mi, vidissitas et lacea earchil itatur, con ra cum quibus, que nem reria volene eumet quuntios eum nimint molor magnat omnihitin con eaquia volorporis sequae. Nam, iliquaspiet vendis restrumquo exerchictore quid molupta ius, quo conempe lendige nditias dolum exerit officit provitatur, iur, si ullabor endest ligendaepra voluptis evernatur?<br />Genimus ratem fugit odipsum restecto beribus is ereheni siti corpor re re nem fugia eossimi, ommolorerio. Parum verem reici doloris ut et quatque nusapit inulparunt quatemquo tore ped mo omnis vent hicae nit, sinihit veliquae nume deliti acea prerunt harchita perior sundandunt exceperrum sitametus quam aut restibusam illique velique vent exerupti nonseque officipicta con evero qui berro officit rem fuga. Ut qui tentota nis deribus quidici cum, aspis qui totaepudam quis dolesed igniscimus, consenim harcilis utatibus abo. Em as illaturiatio magnam sed unt, tet aspelec toressunt illes dipsandae mos adiost antibus sintiasperro velitat ectaturest, in</p>', NULL, NULL, NULL, '2016-02-04 15:51:57', 27, '2016-02-04 15:52:35', 27, 2, 0, 1, 'it', NULL, 'd682be61-cb4e-11e5-8e2c-1c6f65ad55b6', 'GeometryCollection(POLYGON ((18.275608062394895 39.97016105168565, 18.256381988176145 39.95910931239242, 18.255695342668332 39.9356842469908, 18.277667998918332 39.91014442325539, 18.332256316789426 39.91093445747047, 18.333972930558957 39.952793230705204, 18.275608062394895 39.97016105168565)),POLYGON ((18.34667587245349 39.95463548145348, 18.34667587245349 39.978580225330965, 18.38512802089099 39.978580225330965, 18.38512802089099 39.95463548145348, 18.34667587245349 39.95463548145348)),POINT (18.27801132167224 39.909881076492184),POINT (18.364528655656613 39.96489854149751),LINESTRING (18.277324676164422 39.91014442325539, 18.275264739640985 39.8969758449126, 18.2869377132738 39.889073483087465, 18.337749480851922 39.89091744900417, 18.373455047258176 39.9025069560857, 18.370708465226926 39.92278387725036, 18.35560226405505 39.930945618158084))'),
+(4, 'route', 'Demo route', 'demo-route', 'Tricase', 39.93042, 18.355332, 1, '<h1>Demo route</h1>\r\n<p>Od mo te nonsequ istione venditis idist alis eaquia voluptat.<br />Rum sintium quosam et facest, simolesto ist ut ex etur resciae licit pliquid endestinciis molorerro cori tenis autaturitia cusa vollian imporporias abori voluptatias eum quas ea ex eius.<br />Cullictatiis il iminci dissi nullam di consectate optatur ibusandam, totatur sequaecatur, que cusam vellique nos abo. Itatentorro blaboratur?<br />Bor sapid magnia consed eni oditiorro beatur, corum fuga. Agni iur alignate ressimo luptate vendebit, sant.<br />Ut dollorae alia atibus est fugit que sum et, sum aciet ent.<br />Rate volorum et eium eum harum quae doluptatatem que pore conestrum vellatem exceribus rem quis idi doles nimint, sunda voluptatem errumquae parcid molor alianisqui od ernamus perum cullam ut disi qui repeles cimint possitatat.<br />Ibus ab inullupit, arum fugit veror aut acesse et, to quo con re nis dolor audicim re nonserit es derovidunt vel molores eost, voluptatia iderit, quat optat volut quis ipsunti rehendis ped maximai orrovid etur, voluptas andit autatus quae nihitaquibus vollabo rerchite excesedi vendionet et vera sum fugia num que litas dolest, cus ut ad moluptam am voloreh enimpore ipsunti num eturiti volut adi invererror magni restium quae nus.<br />Tur? Les as nonseque prae ad quam explaborro essecatus dolupid unt evella quo velent et qui omnis qui natat facernatur anisti unt alicias ipsanda ent eveleniet ulla eos erro mos as ipsaescia vendus estius adiciumet et apiderferum consequos aspidelessit esti imil ea volupta pores dit quaepel lectas quo iur, volor molorup taturia menihictem acil enimodi cuptae. Etur min re dolestem fugiae nis rem quatusa ndelige nimaios ea volorendus aut velit volorem dem laut fugit, consect oruptasserit dipic totatur rero te volectia iniscia qui vit qui corporae eum nonseceptur, cus, sanis veleserspid quo consed quo destio. Agnatem. Rerovid et dolorro quatiasit aut faceptiore pliqui quiae maiorerum quatibus autatec atendaectate as evella nos sedis aut quae sin evelit odignis as que nienem voluptati omnimiliquod earcimo diaspediciur asitis deliqui ant utem facea cuptam illa nimostrum, ut min el ipsum aut ut abo. Sum dolo occum fugitatur?<br />Seditibus aut mo eati temporaeped qui sitaquisqui debit ab is dent eum rem aliquid quia volum volorepe estrum vit est, omniminum audae. Uga. Aliaepe rumquia que netur magnam, vene sundusam natiunt ut voles inus repudae ctusciis re ditiosandist listotatque rem adis inctota coratiatur sin ne dolorem illab intia et assimporpos mo eatiae ipsa velecto volupta tiuntium seque optatio quae commo et fugit exerum reperum voluptat etum vella nonetum asita nobis re sitatia cus eum non non et, solorest, oditisqui aut latur recusci liaepe nihicitati am earchil liquost volutaquunt aliquatur, conestor reptiam ius ant iumquatur ateceatem. Uciumquae plate con excerovitat.<br />Modiciam, sequatur? Pidignient lignim ad moluptae. Peres prectotat voluptasit, sum ipiendeliti dolorec aeptatusto vit faccatur sam asperunt denderatem hitae et arum voluptasi offici dolupta epediam facepudios expellabore sim commolor simporem velibus ex eos se dolorec epratum faccum ipieturem esequae praerumqui corrore dita ipit odigent quides magnimporio beaturiantia volorro mi, vidissitas et lacea earchil itatur, con ra cum quibus, que nem reria volene eumet quuntios eum nimint molor magnat omnihitin con eaquia volorporis sequae. Nam, iliquaspiet vendis restrumquo exerchictore quid molupta ius, quo conempe lendige nditias dolum exerit officit provitatur, iur, si ullabor endest ligendaepra voluptis evernatur?<br />Genimus ratem fugit odipsum restecto beribus is ereheni siti corpor re re nem fugia eossimi, ommolorerio. Parum verem reici doloris ut et quatque nusapit inulparunt quatemquo tore ped mo omnis vent hicae nit, sinihit veliquae nume deliti acea prerunt harchita perior sundandunt exceperrum sitametus quam aut restibusam illique velique vent exerupti nonseque officipicta con evero qui berro officit rem fuga. Ut qui tentota nis deribus quidici cum, aspis qui totaepudam quis dolesed igniscimus, consenim harcilis utatibus abo. Em as illaturiatio magnam sed unt, tet aspelec toressunt illes dipsandae mos adiost antibus sintiasperro velitat ectaturest, in</p>', NULL, NULL, NULL, '2016-02-04 15:53:35', 27, '2016-02-04 15:53:54', 27, 3, 0, 1, 'it', NULL, '111ae2dd-cb4f-11e5-8e2c-1c6f65ad55b6', 'GeometryCollection(POINT(18.355332 39.93042),POINT(18.297631 39.93712),POINT(18.3822022 39.9830189))');
+
+--
+-- Eseményindítók `contents`
+--
+DROP TRIGGER IF EXISTS `InsertContents`;
+DELIMITER //
+CREATE TRIGGER `InsertContents` BEFORE INSERT ON `contents`
+ FOR EACH ROW BEGIN 
+		SET NEW.import_id = UUID();
+	END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -117,6 +132,18 @@ CREATE TABLE IF NOT EXISTS `content_media` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
+--
+-- Eseményindítók `content_media`
+--
+DROP TRIGGER IF EXISTS `InsertContent_media`;
+DELIMITER //
+CREATE TRIGGER `InsertContent_media` BEFORE INSERT ON `content_media`
+ FOR EACH ROW BEGIN 
+		SET NEW.import_id = UUID();
+	END
+//
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -132,6 +159,18 @@ CREATE TABLE IF NOT EXISTS `content_meta` (
   PRIMARY KEY (`id`),
   KEY `content_id` (`external_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+
+--
+-- Eseményindítók `content_meta`
+--
+DROP TRIGGER IF EXISTS `InsertContent_meta`;
+DELIMITER //
+CREATE TRIGGER `InsertContent_meta` BEFORE INSERT ON `content_meta`
+ FOR EACH ROW BEGIN 
+		SET NEW.import_id = UUID();
+	END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -175,19 +214,28 @@ CREATE TABLE IF NOT EXISTS `menus` (
   `modified` datetime NOT NULL,
   `modifiedby` int(11) NOT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `import_id` char(40) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- A tábla adatainak kiíratása `menus`
 --
 
-INSERT INTO `menus` (`id`, `name`, `title`, `pages`, `created`, `createdby`, `modified`, `modifiedby`, `enabled`) VALUES
-(1, 'places', 'Places', '{2};{9};{10};{11};{12}', '2015-09-20 15:58:19', 27, '2015-09-20 18:56:54', 27, 1),
-(2, 'posts', 'Posts', '{4}', '2015-09-20 15:58:26', 27, '2015-09-20 16:07:44', 27, 1),
-(3, 'events', 'Events', '{3};{13};{15}', '2015-09-20 15:58:37', 27, '2015-09-20 18:58:45', 27, 1),
-(4, 'routes', 'Routes', '{1};{14}', '2015-09-20 15:58:45', 27, '2015-09-20 18:57:51', 27, 1),
-(5, 'categories', 'Categories', '{5};{6};{7};{8}', '2015-09-20 17:25:18', 27, '2015-09-20 17:27:59', 27, 1);
+INSERT INTO `menus` (`id`, `name`, `title`, `pages`, `created`, `createdby`, `modified`, `modifiedby`, `enabled`, `import_id`) VALUES
+(1, 'demo-menu', 'Demo menu', '{1}', '2016-02-04 13:59:39', 27, '2016-02-04 14:20:04', 27, 1, 'f998383e-cb40-11e5-8e2c-1c6f65ad55b6');
+
+--
+-- Eseményindítók `menus`
+--
+DROP TRIGGER IF EXISTS `InsertMenus`;
+DELIMITER //
+CREATE TRIGGER `InsertMenus` BEFORE INSERT ON `menus`
+ FOR EACH ROW BEGIN 
+		SET NEW.import_id = UUID();
+	END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -206,7 +254,7 @@ CREATE TABLE IF NOT EXISTS `modules` (
   `enabled` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=220 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=223 ;
 
 --
 -- A tábla adatainak kiíratása `modules`
@@ -235,7 +283,10 @@ INSERT INTO `modules` (`id`, `name`, `title`, `version`, `description`, `default
 (216, 'category', 'Category', '0.0.6', 'Displaying category items in blog layout', 0, 0, 1),
 (217, 'api', 'Api', '0.0.6', 'API for data reading', 0, 0, 1),
 (218, 'ajax', 'Ajax module', '0.0.6', 'Frontend ajax run', 0, 0, 1),
-(219, 'event', 'event', '0.0.6', 'event', 0, 0, 1);
+(219, 'event', 'Event', '0.0.6', 'Event module', 0, 0, 1),
+(220, 'finder', 'Finder', '0.0.6', 'Finder module', 0, 0, 1),
+(221, 'passrenew', 'Password renew', '0.0.6', 'Password renew module', 0, 1, 1),
+(222, 'mxmlimport', 'mxmlimport', '0.0.6', 'mxmlimport', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -255,30 +306,30 @@ CREATE TABLE IF NOT EXISTS `pages` (
   `modified` datetime NOT NULL,
   `modifiedby` int(11) NOT NULL,
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
+  `import_id` char(40) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `parent_id` char(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=16 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 --
 -- A tábla adatainak kiíratása `pages`
 --
 
-INSERT INTO `pages` (`id`, `name`, `title`, `type`, `url`, `blank`, `created`, `createdby`, `modified`, `modifiedby`, `enabled`) VALUES
-(1, 'routes', 'Routes', 'content', 'http://projects/Mappiamo_DEV/index.php?module=content&object=3', 0, '2015-09-20 16:05:18', 27, '2015-09-20 18:32:46', 27, 1),
-(2, 'places', 'Places', 'content', 'http://projects/Mappiamo_DEV/index.php?module=content&object=5', 0, '2015-09-20 16:05:47', 27, '2015-09-20 18:32:26', 27, 1),
-(3, 'events', 'Events', 'content', 'http://projects/Mappiamo_DEV/index.php?module=content&object=4', 0, '2015-09-20 16:06:00', 27, '2015-09-20 18:32:11', 27, 1),
-(4, 'posts', 'Posts', 'content', 'http://projects/Mappiamo_DEV/index.php?module=content&object=1', 0, '2015-09-20 16:07:33', 27, '2015-09-20 18:31:48', 27, 1),
-(5, 'category---posts', 'Category - Posts', 'url', 'http://projects/Mappiamo_DEV/index.php?module=category&object=1', 0, '2015-09-20 17:26:10', 27, '2015-09-20 17:26:10', 27, 1),
-(6, 'category---places', 'Category - Places', 'url', 'http://projects/Mappiamo_DEV/index.php?module=category&object=2', 0, '2015-09-20 17:26:51', 27, '2015-09-20 17:28:14', 27, 1),
-(7, 'category---events', 'Category - Events', 'url', 'http://projects/Mappiamo_DEV/index.php?module=category&object=3', 0, '2015-09-20 17:27:20', 27, '2015-09-20 17:27:29', 27, 1),
-(8, 'category---routes', 'Category - Routes', 'url', 'http://projects/Mappiamo_DEV/index.php?module=category&object=4', 0, '2015-09-20 17:27:53', 27, '2015-09-20 17:28:01', 27, 1),
-(9, 'another-place', 'Another place', 'url', 'http://projects/Mappiamo_DEV/index.php?module=content&object=2', 0, '2015-09-20 18:33:13', 27, '2015-09-20 18:33:22', 27, 1),
-(10, 'budapest', 'Budapest', 'url', 'http://projects/Mappiamo_DEV/index.php?module=content&object=6', 0, '2015-09-20 18:55:51', 27, '2015-09-20 18:56:06', 27, 1),
-(11, 'miskolc', 'Miskolc', 'url', 'http://projects/Mappiamo_DEV/index.php?module=content&object=7', 0, '2015-09-20 18:56:21', 27, '2015-09-20 18:56:28', 27, 1),
-(12, 'drawind-sample', 'Drawind sample', 'url', 'http://projects/Mappiamo_DEV/index.php?module=content&object=8', 0, '2015-09-20 18:56:51', 27, '2015-09-20 18:56:56', 27, 1),
-(13, 'event-with-lines', 'Event with lines', 'content', 'http://projects/Mappiamo_DEV/index.php?module=content&object=9', 0, '2015-09-20 18:57:20', 27, '2015-09-20 18:57:20', 27, 1),
-(14, 'one-more-route', 'One more route', 'content', 'http://projects/Mappiamo_DEV/index.php?module=content&object=10', 0, '2015-09-20 18:57:45', 27, '2015-09-20 18:57:45', 27, 1),
-(15, 'filtered-events', 'Filtered events', 'url', 'http://projects/Mappiamo_DEV/index.php?module=event&object={All}&sort=start&filter=year&expired=all&filterby=start&user_filter=yes&pid=15', 0, '2015-09-20 18:58:41', 27, '2015-09-20 18:58:48', 27, 1);
+INSERT INTO `pages` (`id`, `name`, `title`, `type`, `url`, `blank`, `created`, `createdby`, `modified`, `modifiedby`, `enabled`, `import_id`, `parent_id`) VALUES
+(1, 'sample-category', 'Sample category', 'url', 'index.php?module=category&object=1', 0, '2016-02-04 13:59:18', 27, '2016-02-04 15:56:55', 27, 1, 'f997a76a-cb40-11e5-8e2c-1c6f65ad55b6', NULL);
+
+--
+-- Eseményindítók `pages`
+--
+DROP TRIGGER IF EXISTS `InsertPages`;
+DELIMITER //
+CREATE TRIGGER `InsertPages` BEFORE INSERT ON `pages`
+ FOR EACH ROW BEGIN 
+		SET NEW.import_id = UUID();
+	END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -292,31 +343,33 @@ CREATE TABLE IF NOT EXISTS `preferences` (
   `value` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=23 ;
 
 --
 -- A tábla adatainak kiíratása `preferences`
 --
 
 INSERT INTO `preferences` (`id`, `name`, `value`) VALUES
-(2, 'force_php_errors_and_warnings', 'yes'),
+(2, 'force_php_errors_and_warnings', 'no'),
 (3, 'routing', 'default'),
 (5, 'website_title', '#mappiamo'),
-(6, 'website_description', 'galcapodileuca.it'),
+(6, 'website_description', 'mappiamo.org'),
 (7, 'website_email', 'info@mappiamo.com'),
 (8, 'new_user_default_group', '3'),
 (9, 'facebook_app_id', '488785261198856'),
 (10, 'facebook_secret', '2f8e52496f1efdce948de72383814d4c'),
 (11, 'registration', 'yes'),
 (12, 'default_language', 'it'),
-(13, 'domain', 'galcapodileuca.it'),
-(14, 'website_name', '#mappiamo'),
+(13, 'domain', 'mappiamo.org'),
+(14, 'website_name', '#mappiamo demo'),
 (15, 'location', 'Tricase'),
 (16, 'DefaultLatitude', '39.93042'),
 (17, 'DefaultLongitude', '18.355332'),
 (18, 'flickr_apikey', 'a868bb5f7da2815b93ab063fa6f04c36'),
 (19, 'flickr_bbox', '17.832308, 39.743896,18.580752, 40.450872'),
-(20, 'flickr_numofpics', '250');
+(20, 'flickr_numofpics', '250'),
+(21, 'DisqusName', ''),
+(22, 'Reacaptcha_key', '');
 
 -- --------------------------------------------------------
 
@@ -335,17 +388,15 @@ CREATE TABLE IF NOT EXISTS `templates` (
   `enabled` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=211 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=212 ;
 
 --
 -- A tábla adatainak kiíratása `templates`
 --
 
 INSERT INTO `templates` (`id`, `name`, `title`, `version`, `description`, `default_template`, `manager`, `enabled`) VALUES
-(201, 'mappiamo', 'Mappiamo', '0.0.6', 'Mappiamo template', 0, 0, 1),
-(101, 'manager', 'Manager', '0.0.6', 'Manager template', 0, 1, 1),
-(209, 'gal2', 'Gal template', '0.0.1', 'Frontend template', 0, 0, 1),
-(210, 'squares', 'squares', '0.0.1', 'squares', 1, 0, 1);
+(201, 'mappiamo', 'Mappiamo', '0.0.6', 'Mappiamo template', 1, 0, 1),
+(101, 'manager', 'Manager', '0.0.6', 'Manager template', 0, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -367,6 +418,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `lastlogin` text COLLATE utf8_unicode_ci,
   `activation` text CHARACTER SET ucs2 COLLATE ucs2_unicode_ci,
   `enabled` tinyint(1) NOT NULL,
+  `import_id` char(40) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=28 ;
@@ -375,9 +427,21 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- A tábla adatainak kiíratása `users`
 --
 
-INSERT INTO `users` (`id`, `group_id`, `username`, `password`, `email`, `name`, `created`, `createdby`, `modified`, `modifiedby`, `lastlogin`, `activation`, `enabled`) VALUES
-(1, 100, 'mappiamo', '23a304827dd47c13ec8523bb58699fd5', '', '', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'bWFwcGlhbW8gc1FHVmVWMzUhUWhrXlAlc3huViNSQ2M3|MjAxNC0wMi0xNSAxNTozNjo0Ng==|TW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTBfOV8xKSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMzIuMC4xNzAwLjEwNyBTYWZhcmkvNTM3LjM2', NULL, 0),
-(27, 1, 'demo', 'c4aadc5a85db61399dbb70f187c2ceda', 'info@mappiamo.com', '#mappiamo', '2014-02-02 12:11:26', 1001, '2014-02-02 12:11:26', 1001, 'ZGVtbyBeT0NTVVEzdVhRSWwlSnZxNGszayZPRVQ=|MjAxNS0wOS0yMCAxODozMDo1OA==|TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgNi4zOyBXT1c2NDsgcnY6NDAuMCkgR2Vja28vMjAxMDAxMDEgRmlyZWZveC80MC4w', NULL, 1);
+INSERT INTO `users` (`id`, `group_id`, `username`, `password`, `email`, `name`, `created`, `createdby`, `modified`, `modifiedby`, `lastlogin`, `activation`, `enabled`, `import_id`) VALUES
+(1, 100, 'mappiamo', '23a304827dd47c13ec8523bb58699fd5', '', '', '0000-00-00 00:00:00', 0, '0000-00-00 00:00:00', 0, 'bWFwcGlhbW8gc1FHVmVWMzUhUWhrXlAlc3huViNSQ2M3|MjAxNC0wMi0xNSAxNTozNjo0Ng==|TW96aWxsYS81LjAgKE1hY2ludG9zaDsgSW50ZWwgTWFjIE9TIFggMTBfOV8xKSBBcHBsZVdlYktpdC81MzcuMzYgKEtIVE1MLCBsaWtlIEdlY2tvKSBDaHJvbWUvMzIuMC4xNzAwLjEwNyBTYWZhcmkvNTM3LjM2', NULL, 0, 'f9996909-cb40-11e5-8e2c-1c6f65ad55b6'),
+(27, 1, 'demo', 'c4aadc5a85db61399dbb70f187c2ceda', 'info@mappiamo.com', '#mappiamo', '2014-02-02 12:11:26', 1001, '2014-02-02 12:11:26', 1001, 'ZGVtbyB3SzA3d0trbFVhSFBoJWNrWEYyMSRSb1E=|MjAxNi0wNS0wOSAxNzo1MzoxOQ==|TW96aWxsYS81LjAgKFdpbmRvd3MgTlQgNi4zOyBXaW42NDsgeDY0OyBydjo0NC4wKSBHZWNrby8yMDEwMDEwMSBGaXJlZm94LzQ0LjA=', NULL, 1, 'f9998230-cb40-11e5-8e2c-1c6f65ad55b6');
+
+--
+-- Eseményindítók `users`
+--
+DROP TRIGGER IF EXISTS `InsertUsers`;
+DELIMITER //
+CREATE TRIGGER `InsertUsers` BEFORE INSERT ON `users`
+ FOR EACH ROW BEGIN 
+		SET NEW.import_id = UUID();
+	END
+//
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -419,7 +483,7 @@ CREATE TABLE IF NOT EXISTS `widgets` (
   `enabled` tinyint(1) DEFAULT '1',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=28 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=51 ;
 
 --
 -- A tábla adatainak kiíratása `widgets`
@@ -435,19 +499,42 @@ INSERT INTO `widgets` (`id`, `name`, `title`, `version`, `description`, `manager
 (11, 'intro', 'Intro widget', '0.0.6', 'Intro image widget for contents', 0, 1),
 (12, 'routes', 'Routes widget', '0.0.6', 'Routes widget', 0, 1),
 (13, 'weather', 'Weather widget', '0.0.6', 'Weather widget', 0, 1),
-(14, 'flickr', 'flickr plugin', '0.0.6', 'flickr plugin', 0, 1),
-(22, 'box_allmeta', 'box_allmeta', '0.0.6', 'box_allmeta', 0, 1),
-(16, 'breadcrumbs', 'breadcrumbs', '0.0.6', 'breadcrumbs', 0, 1),
-(17, 'share', 'share', '0.0.6', 'share', 0, 1),
-(18, 'videobox', 'videobox', '0.0.6', 'videobox', 0, 1),
-(19, 'panoramabox', 'panoramabox', '0.0.6', 'panoramabox', 0, 1),
-(20, 'content_slideshow', 'content_slideshow', '0.0.6', 'content_slideshow', 0, 1),
-(21, 'content_headline', 'content_headline', '0.0.6', 'content_headline', 0, 1),
-(23, 'box_onemeta', 'box_onemeta', '0.0.6', 'box_onemeta', 0, 1),
-(24, 'box_distance', 'box_distance', '0.0.6', 'box_distance', 0, 1),
-(25, 'box_events', 'box_events', '0.0.6', 'box_events', 0, 1),
-(26, 'togglemenu', 'togglemenu', '0.0.6', 'togglemenu', 0, 1),
-(27, 'jplayer', 'jplayer', '0.0.6', 'jplayer', 0, 1);
+(14, 'flickr', 'Flickr plugin', '0.0.6', 'Flickr widget', 0, 1),
+(22, 'box_allmeta', 'Box All Meta widget', '0.0.6', 'Display meta data', 0, 1),
+(16, 'breadcrumbs', 'Breadcrumbs', '0.0.6', 'Display breadcrumbs', 0, 1),
+(17, 'share', 'Share widget', '0.0.6', 'Displat content share options', 0, 1),
+(18, 'videobox', 'Videobox widget', '0.0.6', 'Display video content', 0, 1),
+(19, 'panoramabox', 'Panoramabox widget', '0.0.6', 'Display 3D panorama images', 0, 1),
+(20, 'content_slideshow', 'Slideshow widget', '0.0.6', 'display images as slideshow', 0, 1),
+(21, 'content_headline', 'Content headline widget', '0.0.6', 'Display content headline', 0, 1),
+(23, 'box_onemeta', 'Onemeta widget', '0.0.6', 'Display one meta data', 0, 1),
+(24, 'box_distance', 'Distance widget', '0.0.6', 'Display contents by distance', 0, 1),
+(25, 'box_events', 'Events widget', '0.0.6', 'Display events', 0, 1),
+(26, 'togglemenu', 'Togglemenu widget', '0.0.6', 'Display togglemenu', 0, 1),
+(27, 'slider', 'Slider widget', '0.0.6', 'Display slider', 0, 1),
+(28, 'lastcontent', 'Lastcontent widget', '0.0.6', 'Display latests contents', 0, 1),
+(29, 'box_youtube', 'Youtube widget', '0.0.6', 'Display youtube contents', 0, 1),
+(30, 'box_instagram', 'Instagram widget', '0.0.6', 'Display instagram content', 0, 1),
+(31, 'gravatar', 'Gravatar widget', '0.0.6', 'Display gravatar icons', 0, 1),
+(32, 'box_gpsbooking', 'Gpsbooking widget', '0.0.6', 'Display hotels', 0, 1),
+(33, 'disqus', 'Disqus widget', '0.0.6', 'Display comment box', 0, 1),
+(34, 'address', 'Address widget', '0.0.6', 'Jump to address on the map', 0, 1),
+(35, 'bottommenu', 'Bottom menu widget', '0.0.6', 'Display bottom menu', 0, 1),
+(36, 'box', 'Box widget', '0.0.6', 'Display box', 0, 1),
+(37, 'box_collabrators', 'Collabrators widget', '0.0.6', 'Display collaborators articles', 0, 1),
+(38, 'box_cookie', 'Cookie widget', '0.0.6', 'Display cookie accept box', 0, 1),
+(39, 'content_allmeta', 'Allmeta content widget', '0.0.6', 'Display all meta data on content', 0, 1),
+(40, 'dividedmenu', 'Divided menu widget', '0.0.6', 'Display divided menu', 0, 1),
+(41, 'dropdownmenu', 'Dropdown menu widget', '0.0.6', 'Display dropdown menu', 0, 1),
+(42, 'form_contact', 'Contact form widget', '0.0.6', 'Display contact form', 0, 1),
+(43, 'jplayer', 'Jplayer widget', '0.0.6', 'Audio player', 0, 1),
+(44, 'leaflet_panel', 'Leaflet panel widget', '0.0.6', 'Display leaflet panel', 0, 1),
+(45, 'menu_full', 'Menu full widget', '0.0.6', 'Configurable menu', 0, 1),
+(46, 'owl_image', 'Owl image widget', '0.0.6', 'Image carousel', 0, 1),
+(47, 'owl_video', 'Owl video widget', '0.0.6', 'Video carousel', 0, 1),
+(48, 'soccorso', 'Soccorso widget', '0.0.6', 'Display soccorso', 0, 1),
+(49, 'topmenu', 'Topmenu widget', '0.0.6', 'Display top menu', 0, 1),
+(50, 'website_title', 'Website title widget', '0.0.6', 'Display website title', 0, 1);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
