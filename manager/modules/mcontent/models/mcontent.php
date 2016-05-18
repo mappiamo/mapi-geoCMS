@@ -5,6 +5,10 @@ defined( 'DACCESS' ) or die;
 
 class MModel_MContent {
 
+		static function filtered_content() {
+			return mapi_list_filtered('contents');
+		}
+
 		static function get_contents() {
 				return mapi_list( 'contents' );
 		}

@@ -397,23 +397,52 @@ MMWizard.prototype = new MFrm();
 $(document).ready(function () {
     $(".leaflet-routing-container").hide();
 
-    /* var picker_start = new Pikaday({
-     field: document.getElementById('content_start'),
-     showWeekNumber: true,
-     firstDay: 1,
-     format: 'YYYY-MM-DD',
-     showMonthAfterYear: true,
-     yearRange: [1900,2030]
-     });
+    //$("#content_table_search").click(function (event) {
+    $("#contentlist_form").submit(function(event) {
 
-     var picker_end = new Pikaday({
-     field: document.getElementById('content_end'),
-     showWeekNumber: true,
-     firstDay: 1,
-     format: 'YYYY-MM-DD',
-     showMonthAfterYear: true,
-     yearRange: [1900,2030]
-     }); */
+        if (!$('#inputAddress').val()) return null;
+        var module = 'majax';
+
+        $.ajaxSetup({async: false});
+
+        var url = 'index.php?module=' + module + '&task=geocode';
+        url += '&address=' + $('#inputAddress').val();
+        url += '&mapi_csrf=' + encodeURIComponent($('#mapi_csrf').val());
+
+        if ('#content_table_search') $('#content_table_search').html('Searching address...');
+
+        $.ajax({
+            url: url,
+            dataType: "json"
+        }).done(function(result) {
+            if (result.status === 'OK') {
+                if ($('#content_listfilter_lat')) $('#content_listfilter_lat').val(result.lat);
+                if ($('#content_listfilter_lon')) $('#content_listfilter_lon').val(result.lng);
+                //map.panTo( [result.lat, result.lng] );
+                //marker.setLatLng( [result.lat, result.lng] );
+            } else {
+                alert('Address not found!');
+                if ($('#inputAddress')) $('#inputAddress').val('');
+                return false;
+            }
+        }).done( function() {
+            if ('#content_table_search') $('#content_table_search').html('Processing Query...');
+        });
+
+        //alert(url);
+        //return false;
+    });
+
+    $("#inputAddress").autocomplete("./../manager/modules/mcontent/ajax/GetAddressList.php", {
+        width: 300,
+        matchContains: true,
+        mustMatch: false,
+        //minChars: 3,
+        //multiple: true,
+        //highlight: false,
+        //multipleSeparator: ",",
+        selectFirst: false
+    });
 
     $("#address").autocomplete("./../modules/event/ajax/GetAddressList.php", {
         width: 300,

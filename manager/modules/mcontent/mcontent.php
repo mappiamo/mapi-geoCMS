@@ -17,9 +17,11 @@ class MModule_MContent extends M_Module {
 		}
 
 		public function content_list() {
-				$this->set_page_title( '#mappiamo - Contents list' );
-				$contents = $this->model( 'get_contents' );
-				$this->view( 'default', $contents );
+				$this->set_page_title('#mappiamo - Contents list');
+				//$contents = $this->model( 'get_contents' );
+				$contents = $this->model('filtered_content');
+				//print_r($contents); die();
+				$this->view('default', $contents);
 		}
 
 		public function content_add() {

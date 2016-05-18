@@ -7,8 +7,8 @@
 
 	define( 'APATH', dirname( __FILE__ ) );
 
-	$settings = APATH . '/../../../settings.php';
-	$idiorm_lib = APATH . '/../../../lib/idiorm/idiorm.php';
+	$settings = APATH . '/../../../../settings.php';
+	$idiorm_lib = APATH . '/../../../../lib/idiorm/idiorm.php';
 
 	if ( ! is_file( $settings ) || ! is_readable( $settings ) ) die( 'M_ERROR (00110): A required file: settings.php is missing or not readable!' );
 	else include( $settings );
@@ -25,7 +25,7 @@
 	$string = strtolower($_GET["q"]);
 	if (!$string) return;
 
-	$TheData = ORM::for_table('contents')->distinct()->select('address')->where('enabled', 1)->where_like('address', '%'.$string.'%')->limit(20)->order_by_expr('CHAR_LENGTH(`address`)')->where('type', 'event')->find_array();
+	$TheData = ORM::for_table('contents')->distinct()->select('address')->where_like('address', '%'.$string.'%')->limit(20)->order_by_expr('CHAR_LENGTH(`address`)')->find_array();
 
 	foreach ($TheData as $key => $value) {
 		$cname = $value['address'];

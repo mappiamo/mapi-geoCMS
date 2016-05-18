@@ -3,6 +3,142 @@
 // no direct access to this file
 defined( 'DACCESS' ) or die;
 
+function mapi_list_filtered($table) {
+	if (!in_array($table, mapi_list_availables())) return array();
+	$table = preg_replace('/installed_/', '', $table);
+
+	$count = ORM::for_table($table)->count();
+	$count_results = NULL;
+
+	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+		$SearchQuery = NULL;
+		$LimitOffset = 0;
+
+		if (isset($_POST['limit_start']) && (intval($_POST['limit_start']) > 0) && is_int(intval($_POST['limit_start']))) {
+			$LimitOffset = ((intval($_POST['limit_start'])) - 1);
+		}
+
+		if (isset($_POST['limit_value']) && (intval($_POST['limit_value']) > 0) && is_int(intval($_POST['limit_value']))) {
+			$LimitValue = (intval($_POST['limit_value']));
+		} else {
+			$LimitValue = 250;
+			$_POST['limit_value'] = 250;
+		}
+
+		if (isset($_POST['keyword']) && strlen(trim($_POST['keyword'])) > 2) {
+			$searchstring = $_POST['keyword'];
+			$searchstring = str_replace(array('\'', '`'), array('\\\'', '\\`'), $searchstring);
+
+			$SearchQueryArray = explode(' ', $searchstring);
+
+			$SearchQuery = '((`text` LIKE \'%' . implode('%\' AND `text` LIKE \'%', $SearchQueryArray) . '%\')';
+			$SearchQuery .= ' OR ';
+			$SearchQuery .= '(`title` LIKE \'%' . implode('%\' AND `title` LIKE \'%', $SearchQueryArray) . '%\')';
+			$SearchQuery .= ' OR ';
+			$SearchQuery .= '(`address` LIKE \'%' . implode('%\' AND `address` LIKE \'%', $SearchQueryArray) . '%\'))';
+			//$SearchQuery .= ' AND (`type` = \'place\' OR `type` = \'event\' OR `type` = \'route\')';
+		}
+
+		if (isset($_POST['language']) && strlen(trim($_POST['language'])) == 2) {
+			if ($SearchQuery) { $SearchQuery .= ' AND '; }
+			$SearchQuery .= '(`language` LIKE \'' . trim($_POST['language']) . '\')';
+		}
+
+		if (isset($_POST['type']) && strlen(trim($_POST['type'])) > 1) {
+			if ($SearchQuery) { $SearchQuery .= ' AND '; }
+			$SearchQuery .= '(`type` LIKE \'' . trim($_POST['type']) . '\')';
+		}
+
+		if ($SearchQuery) {
+
+			$SearchQuery = 'WHERE ' . $SearchQuery;
+
+			if ((isset($_POST['location'])) && (strlen(trim($_POST['location'])) > 0) && (isset($_POST['lon'])) && (isset($_POST['radius'])) && (isset($_POST['lat'])) && (is_numeric($_POST['lon'])) && (is_numeric($_POST['lat'])) && (is_numeric($_POST['radius']))) {
+
+				$count_results = count(ORM::for_table('contents')
+				->raw_query('SELECT id, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) * 1000 AS distance FROM contents ' . $SearchQuery . ' HAVING distance < :radius AND distance > 0',
+				array("latitude" => $_POST["lat"], "longitude" => $_POST["lon"], "radius" => $_POST["radius"]))->find_many());
+
+				if ($count_results > 10) {
+					if ($LimitOffset > ($count_results - 10)) {
+						$LimitOffset = ($count_results - 10);
+						$_POST['limit_start'] = ($LimitOffset + 1);
+					}
+				} else {
+					$LimitOffset = 0;
+					$_POST['limit_start'] = ($LimitOffset + 1);
+				}
+
+				$results = ORM::for_table('contents')
+				->raw_query('SELECT id, type, title, address, hits, enabled, language, modified, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) * 1000 AS distance FROM contents ' . $SearchQuery . ' HAVING distance < :radius AND distance > 0 LIMIT ' . $LimitValue . ' OFFSET '. $LimitOffset,
+				array("latitude" => $_POST["lat"], "longitude" => $_POST["lon"], "radius" => $_POST["radius"]))->order_by_desc('id');
+
+			} else {
+
+				$SearchQuery = "SELECT id, type, title, address, hits, enabled, language, modified FROM $table " . $SearchQuery;
+				$count_results = count(ORM::for_table($table)->raw_query($SearchQuery)->find_many());
+
+				if ($count_results > 10) {
+					if ($LimitOffset > ($count_results - 10)) {
+						$LimitOffset = ($count_results - 10);
+						$_POST['limit_start'] = ($LimitOffset + 1);
+					}
+				} else {
+					$LimitOffset = 0;
+					$_POST['limit_start'] = ($LimitOffset + 1);
+				}
+
+				$SearchQuery = $SearchQuery . ' LIMIT ' . $LimitValue . ' OFFSET ' . $LimitOffset;
+				$results = ORM::for_table($table)->raw_query($SearchQuery)->order_by_desc('id');
+			}
+
+		} else {
+
+			if ((isset($_POST['location'])) && (strlen(trim($_POST['location'])) > 0) && (isset($_POST['lon'])) && (isset($_POST['radius'])) && (isset($_POST['lat'])) && (is_numeric($_POST['lon'])) && (is_numeric($_POST['lat'])) && (is_numeric($_POST['radius']))) {
+
+				$count_results = count(ORM::for_table('contents')
+				->raw_query('SELECT id, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) * 1000 AS distance FROM contents HAVING distance < :radius AND distance > 0',
+				array("latitude" => $_POST["lat"], "longitude" => $_POST["lon"], "radius" => $_POST["radius"]))->find_many());
+
+				if ($count_results > 10) {
+					if ($LimitOffset > ($count_results - 10)) {
+						$LimitOffset = ($count_results - 10);
+						$_POST['limit_start'] = ($LimitOffset + 1);
+					}
+				} else {
+					$LimitOffset = 0;
+					$_POST['limit_start'] = ($LimitOffset + 1);
+				}
+
+				$results = ORM::for_table('contents')
+				->raw_query('SELECT id, type, title, address, hits, enabled, language, modified, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) * 1000 AS distance FROM contents HAVING distance < :radius AND distance > 0 LIMIT ' . $LimitValue . ' OFFSET ' . $LimitOffset,
+				array("latitude" => $_POST["lat"], "longitude" => $_POST["lon"], "radius" => $_POST["radius"]))->order_by_desc('id');
+
+			} else {
+				$results = ORM::for_table($table)->select_many('id', 'type', 'title', 'address', 'hits', 'enabled', 'language', 'modified')->limit($LimitValue)->offset($LimitOffset)->order_by_desc('id');
+			}
+		}
+
+	} else {
+		$results = ORM::for_table($table)->select_many('id', 'type', 'title', 'address', 'hits', 'enabled', 'language', 'modified')->limit(250)->offset(0)->order_by_desc('id');
+	}
+
+	$Return['filtered_count'] = count($results->find_many());
+	if ($count_results) {
+		$Return['search_count'] = $count_results;
+	} else {
+		$Return['search_count'] = $count;
+	}
+	$Return['table'] = $results->find_many();
+	$Return['count'] = $count;
+
+	$Return['LangList'] = ORM::for_table('contents')->distinct()->select('language')->find_array();
+	$Return['TypeList'] = ORM::for_table('contents')->distinct()->select('type')->find_array();
+
+	return $Return;
+}
+
 function mapi_list( $what, $props = array() ) {
 		if ( ! in_array( $what,  mapi_list_availables() ) ) return array();
 
