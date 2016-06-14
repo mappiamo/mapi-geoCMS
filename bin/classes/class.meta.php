@@ -129,8 +129,9 @@ class M_Meta {
 						if ( MValidate::meta_name( $this->name ) ) $meta->name  = $this->name;
 						else return mapi_report_message( 'Not a valid meta name: ' . $this->name);
 
-						if ( MValidate::meta_value( $this->value ) ) $meta->value = $this->value;
-						else return mapi_report_message( 'Not a valid meta value: ' . $this->value );
+						//if (MValidate::meta_value($this->value)) $meta->value = $this->value;
+						//else return mapi_report_message( 'Not a valid meta value: ' . $this->value );
+						$meta->value = $this->value;
 				}
 
 				return true;

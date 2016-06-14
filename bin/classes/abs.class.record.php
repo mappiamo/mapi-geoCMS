@@ -420,7 +420,8 @@
 				return NULL;
 			}
 
-			if ($this->title && MValidate::title($this->title)) {
+			//if ($this->title && MValidate::title($this->title)) {
+			if ($this->title) {
 				$record->title = $this->title;
 			} else {
 				return mapi_report_message('Not a valid content title: '.$this->title);
@@ -455,7 +456,8 @@
 			}
 
 			if (isset($this->meta_value)) {
-				if ($this->meta_value && MValidate::meta_value($this->meta_value)) {
+				//if ($this->meta_value && MValidate::meta_value($this->meta_value)) {
+				if ($this->meta_value) {
 					$record->meta_value = $this->meta_value;
 				} else {
 					return mapi_report_message('Not a valid meta value: '.$this->meta_value);

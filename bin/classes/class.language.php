@@ -2,7 +2,7 @@
 
 class M_Language {
 	
-		private $langs = array( "en", "it", "hu", "sr", "de", "ru", "fr", "nl", "gr", "da", "sv", "hr", "si" );
+		private $langs = array( "en", "it", "hu", "sr", "de", "ru", "fr", "nl", "gr", "da", "sv", "hr", "si", "ar", "zh", "es" );
 		
 		public function getLanguage() {
 				

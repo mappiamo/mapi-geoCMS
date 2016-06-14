@@ -88,10 +88,28 @@ class M_Template extends M_Extension {
 			if ((isset($_GET['object'])) && ($_GET['module'] == 'content')) {
 				$ContentDesc = MObject::get('content', $_GET['object']);
 
+				$lang = new M_Language;
+				$language = $lang->getLanguage();
+
 				$pref = new M_Preference("website_title");
 				$SiteName = $pref->get_value();
 
 				$ExtID = $ContentDesc->get_id();
+				$ContentLang = ORM::for_table('contents')->select_many('language', 'parent')->where('id', $ExtID)->find_one();
+
+				if ($ContentLang['language'] != $language) {
+					if ($ContentLang['parent']) {
+						$ExtID = $ContentLang['parent'];
+					} else {
+						$NewID = ORM::for_table('contents')->select_many('id')->where('parent', $ExtID)->find_one();
+						if ($NewID['id']) {
+							$ExtID = $NewID['id'];
+						}
+					}
+				}
+
+				$ContentDesc = MObject::get('content', $ExtID);
+
 				$image_url = ORM::for_table('content_media')->select_many('title', 'url')->where('external_id', $ExtID)->where('default_media', 1)->limit(1)->find_one();
 				$FullURL = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]"; //rtrim(((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].dirname($_SERVER['PHP_SELF']), '/\\');
 
