@@ -215,6 +215,16 @@
 						<option value="sv" <?php if ("sv" == $data->language) {
 							echo 'selected="selected"';
 						} ?>>Swedish
+						<option value="ar" <?php if ("ar" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Arabian
+						<option value="zh" <?php if ("zh" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Chinesse
+						</option>
+						<option value="es" <?php if ("es" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Spanish
 						</option>
 					</select>
 

@@ -19,8 +19,7 @@ defined( 'DACCESS' ) or die;
 
 <?php MMessaging::show(); ?>
 
-		<hr><h3>You have <u>&Sigma; <?PHP echo $data['count']; ?></u> rows on content table.<br>
-		With current search criteria you have <u>&Sigma; <?PHP echo $data['search_count']; ?></u> data.</h3>
+		<hr><h3>Your database count <?PHP echo $data['count']; ?> contents. Set the parameters to impove the search:</h3>
 
 		<form action="" method="POST" class="form-inline" id="contentlist_form">
 
@@ -94,24 +93,28 @@ defined( 'DACCESS' ) or die;
 				</select>
 			</div>
 
+			<h3>Your search criteria will return <?PHP echo $data['search_count']; ?>results.</h3>
+
 			<input type="hidden" id="content_listfilter_lat" name="lat" value="">
 			<input type="hidden" id="content_listfilter_lon" name="lon" value="">
 
-			<h3>Result limited to
+			<h3>Starting from row
+
+				<div class="input-group">
+					<span class="input-group-addon"><span class="glyphicon glyphicon-pushpin" title="Define the first row from the result list"></span></span>
+					<input type="number" min="1" step="1" max="<?PHP echo (($data['count']) - 10); ?>" required name="limit_start" id="limit_start" placeholder="Start" class="form-control" <?PHP if (isset($_POST['limit_start'])) { echo 'value=' . $_POST['limit_start'] . ''; } else { echo 'value=1'; } ?> style="width: 80px;">
+				</div>
+
+				will show
 
 				<div class="input-group">
 					<span class="input-group-addon"><span class="glyphicon glyphicon-list" title="Define the limit of list"></span></span>
 					<input type="number" min="10" step="10" max="2000" required name="limit_value" id="limit_value" placeholder="Limit" class="form-control" <?PHP if (isset($_POST['limit_value'])) { echo 'value=' . $_POST['limit_value'] . ''; } else { echo 'value=250'; } ?> style="width: 80px;">
 				</div>
 
-				rows, the list start from row:
+				results.</h3>
 
-			<div class="input-group">
-				<span class="input-group-addon"><span class="glyphicon glyphicon-pushpin" title="Define the first row from the result list"></span></span>
-				<input type="number" min="1" step="1" max="<?PHP echo (($data['count']) - 10); ?>" required name="limit_start" id="limit_start" placeholder="Start" class="form-control" <?PHP if (isset($_POST['limit_start'])) { echo 'value=' . $_POST['limit_start'] . ''; } else { echo 'value=1'; } ?> style="width: 80px;">
-			</div>
-
-			<button type="submit" id="content_table_search" class="btn btn-primary">Show data</button></h3>
+			<button type="submit" id="content_table_search" class="btn btn-primary">Show data</button>
 
 		</form><hr>
 

@@ -64,7 +64,7 @@
 				$body .= "This is password renew request from " . MSettings::$domain . "\n\n";
 				$body .= "To renew your old (forgotted) password click to this new password activation link:\n";
 				$body .= $url . "\n\n";
-				$body .= "Your oroginaly registered username on this system is:" . $name . "\n\n";
+				$body .= "Your originally registered username on this system is:" . $name . "\n\n";
 				$body .= "Sincerely\n";
 				$body .= MSettings::$domain;
 
