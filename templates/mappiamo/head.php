@@ -3,10 +3,13 @@
 // no direct access to this file
 defined( 'DACCESS' ) or die;
 
+        $lang = new M_Language;
+        $language = $lang->getLanguage();
+
 ?>
 
 <!DOCTYPE html>
-<html lang="it">
+<html lang="<?PHP echo $language; ?>">
 <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
