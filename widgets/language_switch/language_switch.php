@@ -24,6 +24,9 @@ function mwidget_language_switch( $id=null ) {
 				<option value="sr" <?php if ( "sr" == $language ) echo 'selected="selected"'; ?>>Serbian</option>
 				<option value="si" <?php if ( "si" == $language ) echo 'selected="selected"'; ?>>Slovenian</option>
 				<option value="sv" <?php if ( "sv" == $language ) echo 'selected="selected"'; ?>>Swedish</option>
+				<option value="es" <?php if ( "es" == $language ) echo 'selected="selected"'; ?>>Spanish</option>
+				<option value="ar" <?php if ( "ar" == $language ) echo 'selected="selected"'; ?>>Arabian</option>
+				<option value="zh" <?php if ( "zh" == $language ) echo 'selected="selected"'; ?>>Chinesse</option>
 		</select>
 		
 		<script>

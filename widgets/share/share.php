@@ -26,7 +26,7 @@ function mwidget_share( $site_id ) {
 						</script>
 
 						<div class="share">
-								<div class='shareaholic-canvas' data-app='share_buttons' data-app-id='593701'></div>
+								<div class='shareaholic-canvas' data-app='share_buttons' data-app-id='593701' style="clear: none"></div>
 						</div>
 				<?php
 		}

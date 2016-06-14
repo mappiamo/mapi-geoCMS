@@ -26,17 +26,35 @@
 	$sender_email = $_POST["email"];
 	$sender_message = $_POST["message"];
 
-	$UserData =	ORM::for_table('users')->select_many('email')->where_raw('(`enabled` = ? AND `username` = ?)', array(1, $username))
-		 ->find_one();
+	if ((!$username) || ($username == '')) {
+		echo 'Invalid recipient.';
+		return;
+	}
 
-	if ($UserData) {
+	$Recipient = NULL;
+
+	$username = filter_var($username, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH);
+	if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+
+		$Recipient = $username;
+
+	} else {
+
+		$UserData =
+		ORM::for_table('users')->select_many('email')->where_raw('(`enabled` = ? AND `username` = ?)', array(1, $username))
+			 ->find_one();
+
+		if ($UserData) {
+			$Recipient = $UserData['email'];
+		}
+	}
+
+	if ($Recipient) {
 		$sender_email = filter_var($sender_email, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH);
 		if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
 			list($username, $domain) = explode('@', $sender_email);
 			if (checkdnsrr($domain . '.', 'MX')) { // Ha valoban letezik az email cim
 				$subject = 'Form message from the site.';
-
-				$Recipient = $UserData['email'];
 
 				$headers = 'From: ' . $sender_email . PHP_EOL .
 									 'Reply-To: ' . $sender_email . PHP_EOL .

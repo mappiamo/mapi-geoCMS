@@ -15,7 +15,7 @@
 			if (($DisqusName) && (strlen($DisqusName['value']) > 2) && ($ContentType) && (in_array($ContentType['type'], $TypeArray))) {
 				$DisqusKey = $DisqusName['value']; ?>
 
-				<h1>Comments</h1>
+				<h3>Comments</h3>
 
 				<div id="disqus_thread"></div>
 				<script>

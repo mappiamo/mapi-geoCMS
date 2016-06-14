@@ -64,7 +64,7 @@
 
 										if (isset($outputID['object'])) {
 										?>
-											<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object']; ?>"> <?PHP echo $MenuData['title']; ?></label></a>
+											<li><a href="#/"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object']; ?>"> <?PHP echo $MenuData['title']; ?></label></a>
 										<?PHP } else { ?>
 											<li><a href="#"><?PHP echo $MenuData['title']; ?></a>
 										<?PHP } ?>
@@ -89,7 +89,7 @@
 														if (isset($outputID['object'])) {
 														?>
 
-															<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $Subval; ?></label></a></li>
+															<li><a href="#/"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $Subval; ?></label></a></li>
 														<?PHP } else { ?>
 															<li><a href="#"><?PHP echo $MenuData['title']; ?></a>
 														<?PHP } ?>
@@ -118,7 +118,7 @@
 										if (isset($outputID['object'])) {
 										?>
 
-											<li><a href="#"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $MenuData['title']; ?></label></a></li>
+											<li><a href="#/"><label class="checkbox-inline"><input type="checkbox" name="mmap_category[]" value="<?PHP echo $outputID['object'] ?>"> <?PHP echo $MenuData['title']; ?></label></a></li>
 										<?PHP } else { ?>
 											<li><a href="#"><?PHP echo $MenuData['title']; ?></a>
 										<?PHP } ?>

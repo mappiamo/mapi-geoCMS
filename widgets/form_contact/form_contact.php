@@ -6,9 +6,43 @@
 
 		if ($username) {
 
+			if ($username == 'META') {
+				$id = intval($_GET['object']);
+				$meta_address = ORM::for_table('content_meta')->select_many('value')->where('name', 'Email')->where('external_id', $id)
+					 ->find_one();
+				$title = ORM::for_table('contents')->select_many('title', 'address')->where('id', $id)->find_one();
+
+				if ($meta_address) {
+					$sender_email = $meta_address['value'];
+					$sender_email = filter_var($sender_email, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW|FILTER_FLAG_STRIP_HIGH);
+					if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
+						$username = $sender_email;
+					} else {
+						return;
+					}
+				} else {
+					return;
+				}
+
+			}
+
 			?>
 
 			<div id="mapi_mail_form">
+				<div class="c_title">Contact info</div>
+
+				<?PHP if ($title) { ?>
+
+					<div class="contact_title">
+						<?PHP echo $title['title'] ?>
+					</div>
+
+					<div class="contact_address">
+						<?PHP echo $title['address'] ?>
+					</div>
+
+				<?PHP } ?>
+
 				<div class="row">
 					<div class="col-lg-6">
 						<input type="text" placeholder="Name" id="form_name" name="name">

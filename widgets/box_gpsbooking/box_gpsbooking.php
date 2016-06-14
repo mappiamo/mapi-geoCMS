@@ -22,7 +22,21 @@
 				if ($bookingresult) { ?>
 
 				<div class="box_container">
-					<span class="box_title">Hotel reservation</span>
+
+					<?PHP
+						$id = intval($_GET['object']);
+
+						$meta_data_Ci =
+						ORM::for_table('content_meta')->select_many('value')->where('name', 'CityName')->where('external_id', $id)
+							 ->find_one();
+
+						if ($meta_data_Ci) {
+					?>
+							<span class="box_title">Hotels around <?PHP echo $meta_data_Ci['value']; ?></span>
+					<?PHP } else { ?>
+						<span class="box_title">Hotel reservation</span>
+					<?PHP } ?>
+
 					<div class="scrollable">
 						<div class="DataTable">
 

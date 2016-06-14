@@ -24,8 +24,8 @@
 
 		<div class="box">
 			<div id="mapi_insta">
-				<a href="http://instagram.com/realimutamenti" target="_blank" title="<?PHP echo MSettings::$sitename ?> on Instagram">
-					<h3 class="color"><?PHP echo MSettings::$sitename ?> e Insta<span>gram</span></h3>
+				<a href="http://instagram.com/" target="_blank" title="<?PHP echo MSettings::$sitename ?> on Instagram">
+					<h3 class="color"><?PHP echo MSettings::$sitename ?> on Insta<span>gram</span></h3>
 				</a>
 
 				<?php if ($response && $items = json_decode($response)->data): ?>

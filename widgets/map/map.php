@@ -87,12 +87,26 @@
 					$ContentID = $_GET['object'];
 					$content = MObject::get('content', $ContentID);
 					$GeomData = $content->get_route();
+
+					$Geomtype_SQL = "SELECT ST_GeometryType(ST_GeomFromText('$GeomData')) AS GEOMType";
+					$Geomtype = ORM::for_table('contents')->raw_query($Geomtype_SQL)->where('enabled', 1)->find_one();
+
 					?>
 					<div id="mmap"></div>
 
 						<script>
 							var mmap = new MMap();
 							mmap.set_zoom(<?php MPut::_numeric( $zoom ); ?>);
+
+							<?PHP if (strtoupper($Geomtype['GEOMType']) == 'POINT') {
+								preg_match('/^([^\(]*)([\(]*)([^A-Za-z]*[^\)$])([\)]*[^,])$/', $GeomData, $Match);
+								$LanLotCoords = explode(' ', $Match[3]);
+								?>
+
+								mmap.set_lat(<?php echo $LanLotCoords[1]; ?>);
+								mmap.set_lng(<?php echo $LanLotCoords[0]; ?>);
+
+							<?PHP } ?>
 							mmap.create_map('mmap');
 
 							mmap.address_search();
@@ -165,9 +179,11 @@
 
 							var Geoms = L.geoJson(geoj, { style: RouteStyle }).bindPopup(GeomPoupString);
 							Geoms.addTo(map);
-							map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
 
-						<?PHP } ?>
+							<?PHP if (strtoupper($Geomtype['GEOMType']) != 'POINT') { ?>
+								map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
+							<?PHP }
+						} ?>
 
 						<?php //if ( $cat_id ) {echo 'mmap_control.auto_on( ' . intval( $cat_id ) . ' );'; } ?>
 

@@ -5,6 +5,10 @@
 	
 	function mwidget_box_allmeta() {
 
+	if ($_GET['module'] != 'content') {
+		return;
+	}
+
 	$id = $_GET["object"];
 	$AllMeta = new getallmeta();
 	$MetaResult = $AllMeta->getmetadata($id);
@@ -14,12 +18,14 @@
 			?>
 
 			<div class="box_container">
-				<span class="box_title">Info</span>
-				<div class="scrollable">
+				<span class="box_title">OpenData Info</span>
+				<div class="scrollable scrollable_small">
 					<div class="DataTable">
 
 					<?PHP
 					foreach ($MetaResult as $OneMeta) if ((strlen($OneMeta['value']) > 0) && (!in_array($OneMeta['name'], $DisabledMeta))) {
+						$regex = '/((?<=[a-z])[A-Z]|[A-Z](?=[a-z]))/';
+						$OneMeta['name'] = preg_replace($regex, ' $1', $OneMeta['name']);
 						$TheName = str_replace('_', ' ', $OneMeta['name']);
 						$TheVal = trim(strip_tags($OneMeta['value']));
 
