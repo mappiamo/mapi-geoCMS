@@ -1,7 +1,11 @@
 $( document ).ready( function() {
 
         $('#AddressButton').click(function() {
-                $("html, body").animate({ scrollTop: 0 }, "slow");
+
+                var aTag = $("a[name='the_map']");
+                $('html, body').animate({scrollTop: ((aTag.offset().top) - 50)},'slow');
+
+                //$("html, body").animate({ scrollTop: 0 }, "slow");
         });
 
 });
@@ -242,6 +246,57 @@ function MMap() {
                                 }
                         } ).done( function() {
                                 if ( '#address_button' ) $( '#address_button' ).html( 'Go!' );
+                        } );
+                } );
+        }
+
+        this.address_loc = function() {
+                //map = this.map;
+                //marker = this.marker;
+                $('#search_address').on('input',function(e){
+                        if (!$('#search_address').val()) {
+                                $('#content_lat').val('');
+                                $('#content_lng').val('');
+                                $('#location_wrapper').html('');
+                                $('#DBWrite_button').prop('disabled', false);
+                                return null;
+                        } else {
+                                $('#location_wrapper').html('Getting location....');
+                                $('#DBWrite_button').prop('disabled', true);
+                                return null;
+                        }
+                });
+
+
+                $('#search_address').focusout( function() {
+                        $('#DBWrite_button').prop('disabled', false);
+
+                        if (!$('#search_address').val()) {
+                                $('#content_lat').val('');
+                                $('#content_lng').val('');
+                                $('#location_wrapper').html('');
+                                return null;
+                        }
+
+                        if( $( '#mapi_mode' ) && 'ajax' == $( '#mapi_mode' ).val() ) var module = 'ajax';
+                        else var module = 'majax';
+
+                        var url = 'index.php?module=' + module + '&task=geocode';
+                        url += '&address=' + $( '#search_address' ).val();
+                        url += '&mapi_csrf=' + encodeURIComponent( $( '#mapi_csrf' ).val() );
+
+                        $.ajax( { url: url, dataType: "json" } ).done( function( result ) {
+                                if ( result.status === 'OK' ) {
+                                        if ( $( '#content_lat' ) ) $( '#content_lat' ).val( result.lat );
+                                        if ( $( '#content_lat' ) ) $( '#content_lng' ).val( result.lng );
+                                        if ( $( '#location_wrapper' ) ) $( '#location_wrapper' ).html($('#search_address').val() + ': ' + result.lat + '; ' + result.lng);
+                                } else {
+                                        alert( 'Address not found!' );
+                                        $('#content_lat').val('');
+                                        $('#content_lng').val('');
+                                        $('#location_wrapper').html('');
+                                        $('#search_address').val('');
+                                }
                         } );
                 } );
         }

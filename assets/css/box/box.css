@@ -42,16 +42,18 @@
 	margin-right: 0px;
 	margin-bottom: 0px;
 	margin-left: 0px;
+	font-size: 12px;
 }
 
 .DataTable .DataRow .DataCell img {
-    max-width: 20px;
-    max-height: 22px;
-    height: auto;
+	max-width: 20px;
+	max-height: 22px;
+	height: auto;
+	font-size: medium;
 }
 
 .DataTable .DataRow .DataCell .cell_address {
-    font-size: 12px;
+
 }
 
 .DataTable .DataRow .nowrap {
@@ -77,10 +79,9 @@
 
 .DataTable .DataRow .value {
 	padding-left: 10px;
-    font-size: 15px;
 }
 .box_title {
-	background-color: rgb(0, 113, 188);
+	background-color: #336666;
 	color: rgba(255,255,255,1.00);
 	text-align: center;
 	display: block;
@@ -107,13 +108,19 @@
 	margin-top: 15px;
 }
 .scrollable {
-    max-height: 500px;
-    overflow-y: auto;
+	/* max-height: 200px; */
+	overflow-y: auto;
 }
+
+.scrollable_small {
+	max-height: 200px;
+}
+
 .addressrow {
 	font-size: 12px;
 	font-weight: normal;
 	text-align: left;
+	max-height: none;
 }
 
 .namerow {
