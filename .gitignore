@@ -16,5 +16,9 @@ templates/soccorso
 templates/squares
 templates/vsangone
 templates/reali
+templates/puglia
 widgets/routes
 widgets/togglemenu
+
+# lib
+lib/php-thumb/cache
