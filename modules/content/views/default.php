@@ -7,7 +7,7 @@ defined( 'DACCESS' ) or die;
 
 <article>
 	<?php if ($this->widget( 'content_image', $data->get_id() )) { ?>
-		<div class="content-image">
+		<div class="content-image" id="content-image">
 			<?php $this->widget( 'content_image', $data->get_id() ); ?>
 			<div class="data_wrapper">
 				<span class="title"><?PHP MPut::_html($data->get_title()); ?></span>

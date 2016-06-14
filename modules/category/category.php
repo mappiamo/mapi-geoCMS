@@ -58,6 +58,9 @@ class MModule_Category extends M_Module {
 
 									}
 									$this->view('default', array($filtered_contents, $this->category->get_title(), $PlaceCount, $DataLimit, $DataStart, $SchemaData));
+								} else {
+									$filtered_contents[1]['text'] = 'No content in this category with selected language. Try to select another language.';
+									$this->view('default', array($filtered_contents, $this->category->get_title(), $PlaceCount, $DataLimit, $DataStart, NULL));
 								}
 
 							} else {

@@ -21,7 +21,7 @@
 
         <?php 
         		
-				//var_dump($contents); die();
+				//print_r($contents); die();
         		if ( sizeof( $contents ) > 0 ) {
         				foreach ( $contents as $content_key => $content ) {
         						$text_wrap = wordwrap( strip_tags( $content['text'], '<br>' ), 800, "%|%" );
@@ -36,7 +36,11 @@
 												</div>
 								
 													<h3><a href="index.php?module=content&object=<?php echo intval( $content['id'] ); ?>"><?php echo $content['title']; ?></a></h3>
-													<span class="glyphicon glyphicon-map-marker"></span><b> <?PHP echo $content['address']; ?></b>
+
+													<?PHP if (isset($content['address'])) { ?>
+														<span class="glyphicon glyphicon-map-marker"></span><b> <?PHP echo $content['address']; ?></b>
+													<?PHP } ?>
+
 													<?PHP if ($content['type'] == 'event') { ?>
 														<br><span class="glyphicon glyphicon-circle-arrow-right"></span> <?PHP echo date('d-m-Y H:i', strtotime($content['start'])) ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-circle-arrow-left"></span> <?PHP echo date('d-m-Y H:i', strtotime($content['end'])) ?>
 													<?PHP } ?>
@@ -105,8 +109,7 @@
 								</div>
 
         		<?PHP }
-							}
-			else {
+							} else {
 				?>
 				<div class="row main-header">
 						<div class="row content-title">
