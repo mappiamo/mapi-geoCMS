@@ -38,14 +38,14 @@
 		if ($contents) {
 			if ((is_array($contents)) && (count($contents) > 0)) { ?>
 
-				<div class="latest-box">
+				<div class="box_container">
 
 					<?PHP if ($c_type == 'place') { ?>
-						<h3 class="color"><span class="glyphicon glyphicon-map-marker"></span> Luoghi</h3>
+						<span class="box_title"><span class="glyphicon glyphicon-map-marker"></span> Another on site</span>
 					<?PHP } elseif ($c_type == 'event') { ?>
-						<h3 class="color"><span class="glyphicon glyphicon-calendar"></span> Eventi</h3>
+						<span class="box_title"><span class="glyphicon glyphicon-calendar"></span> Eventi</span>
 					<?PHP } elseif ($c_type == 'post') { ?>
-						<h3 class="color"><span class="glyphicon glyphicon-pencil"></span> Blog</h3>
+						<span class="box_title"><span class="glyphicon glyphicon-pencil"></span> Blog</span>
 					<?PHP } ?>
 
 					<?PHP foreach ($contents as $One_Content) { ?>

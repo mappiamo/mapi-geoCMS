@@ -24,9 +24,16 @@ function mwidget_language_switch( $id=null ) {
 				<option value="sr" <?php if ( "sr" == $language ) echo 'selected="selected"'; ?>>Serbian</option>
 				<option value="si" <?php if ( "si" == $language ) echo 'selected="selected"'; ?>>Slovenian</option>
 				<option value="sv" <?php if ( "sv" == $language ) echo 'selected="selected"'; ?>>Swedish</option>
-				<option value="es" <?php if ( "es" == $language ) echo 'selected="selected"'; ?>>Spanish</option>
 				<option value="ar" <?php if ( "ar" == $language ) echo 'selected="selected"'; ?>>Arabian</option>
 				<option value="zh" <?php if ( "zh" == $language ) echo 'selected="selected"'; ?>>Chinesse</option>
+				<option value="es" <?php if ( "es" == $language ) echo 'selected="selected"'; ?>>Spanish</option>
+				<option value="pt" <?php if ( "pt" == $language ) echo 'selected="selected"'; ?>>Portugese</option>
+				<option value="ja" <?php if ( "ja" == $language ) echo 'selected="selected"'; ?>>Japanase</option>
+				<option value="pl" <?php if ( "pl" == $language ) echo 'selected="selected"'; ?>>Polish</option>
+				<option value="el" <?php if ( "el" == $language ) echo 'selected="selected"'; ?>>Greek</option>
+				<option value="no" <?php if ( "no" == $language ) echo 'selected="selected"'; ?>>Norvegian</option>
+				<option value="sk" <?php if ( "sk" == $language ) echo 'selected="selected"'; ?>>Slovak</option>
+				<option value="ro" <?php if ( "ro" == $language ) echo 'selected="selected"'; ?>>Romanian</option>
 		</select>
 		
 		<script>

@@ -47,12 +47,22 @@
 					<div class="DataTable">
 				<?PHP }
 
+				$DefIcon = 'assets/js/leaflet/images/marker-icon-2x.png';
+
 				foreach ($SameResult as $OneContent) if ((strlen($OneContent['title']) > 0) && ($OneContent['id'] != $id)) {
-					if (isset($OneContent['distance'])) { ?>
+					if (isset($OneContent['distance'])) {
+
+						$CatName = ORM::for_table('categories')->select_many('name')->where_like('contents', '%{' . $OneContent['id'] . '}%')->find_one();
+						$CustomIcon = 'media/mapicons/' . $CatName['name'] . '.png';
+						if (file_exists($CustomIcon)) {
+							$DefIcon = $CustomIcon;
+						}
+
+						?>
 
 						<div class="DataRow">
 							<div class="DataCell name nocap"><?PHP echo round($OneContent['distance'], 0); ?>&nbsp;m</div>
-							<div class="DataCell"><img src="templates/gal2/images/menuicons/<?PHP echo $OneContent['icondata']; ?>"></div>
+							<div class="DataCell"><img src="<?PHP echo $DefIcon; ?>"></div>
 							<div class="DataCell value"><a href="index.php?module=content&object=<?PHP echo $OneContent['id']; ?>" title="Distance from the selected marker: <?PHP echo round($OneContent['distance'], 0); ?> m."><?PHP echo $OneContent['title']; ?></a>
 							<div class="cell_address"><?PHP echo $OneContent['address']; ?></div></div>
 						</div>
@@ -60,7 +70,7 @@
 					<?PHP } else { ?>
 
 						<div class="DataRow">
-							<div class="DataCell"><img src="templates/gal2/images/menuicons/<?PHP echo $OneContent['icondata']; ?>"></div>
+							<div class="DataCell"><img src="<?PHP echo $DefIcon; ?>"></div>
 							<div class="DataCell value"><a href="index.php?module=content&object=<?PHP echo $OneContent['id']; ?>"><?PHP echo $OneContent['title']; ?></a>
 							<div class="cell_address"><?PHP echo $OneContent['address']; ?></div></div>
 						</div>

@@ -8,7 +8,11 @@ function mwidget_content_slideshow() {
 		$type = $_GET["module"];
 		
 		if ( (! empty( $id )) && ($type == "content") ) {
-			$images = ORM::for_table('content_media')->select_many('title', 'url')->where('external_id', $id)->find_array();
+
+			$ImageExtensions = array('.jpg', '.jpeg', '.png', '.gif');
+			$ExtensionFilterQuery_0 = 'external_id = ' . $id . ' AND (content_media.url LIKE \'%' . implode('\' OR content_media.url LIKE \'%', $ImageExtensions) . '\')';
+
+			$images = ORM::for_table('content_media')->select_many('title', 'url')->where_raw($ExtensionFilterQuery_0)->find_array();
 			if ((!empty($images)) && (count($images) > 1)) {
 			
 				?>

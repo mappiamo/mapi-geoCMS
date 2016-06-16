@@ -11,7 +11,7 @@
 			$AllContentID = array();
 			$AddressID = array();
 
-			if ((($content_data['type'] == 'place') || ($content_data['type'] == 'event')) && (($content_data['lat'] == 0) || ($content_data['lng'] == 0))) {
+			if ((($content_data['type'] == 'place') || ($content_data['type'] == 'post') || ($content_data['type'] == 'event')) && (($content_data['lat'] == 0) || ($content_data['lng'] == 0))) {
 				$PointGeom = $content_data['route'];
 				preg_match('/^([^\(]*)([\(]*)([^A-Za-z]*[^\)$])([\)]*[^,])$/', $PointGeom, $Match);
 				$LanLotCoords = explode(' ', $Match[3]);
@@ -30,7 +30,7 @@
 					$Geomtype = ORM::for_table('contents')->raw_query($Geomtype_SQL)->where('enabled', 1)->find_array();
 
 					if ($Geomtype[0]['GEOMType'] == 'MULTIPOLYGON') {
-						$PlacesArray = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address', 'lat', 'lng', 'route')->where('type', 'place')->where('enabled', 1)->where('language', $language)->find_array();
+						$PlacesArray = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address', 'lat', 'lng', 'route')->where('enabled', 1)->where('language', $language)->find_array();
 
 						foreach ($PlacesArray as $PlaceKey => $PlaceVal) {
 							if ($PlaceVal['route']) {
@@ -44,7 +44,7 @@
 							}
 						}
 					} else {
-						$get_similar_byaddress = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address')->where_like('address', '%' . $SeekTitle . '%')->where('type', 'place')->where('language', $language)->where('enabled', 1)->order_by_asc('title')->find_array();
+						$get_similar_byaddress = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address')->where_like('address', '%' . $SeekTitle . '%')->where('language', $language)->where('enabled', 1)->order_by_asc('title')->find_array();
 						$get_similar_byid = ORM::for_table('categories')->select_many('id', 'contents', 'title')->where_like('name', '%' . $SeekName . '%')->find_array();
 					}
 
@@ -57,8 +57,8 @@
 				} else {
 					//$get_similar_byid = ORM::for_table('categories')->select_many('id', 'contents', 'title')->where_like('contents', '%{' . $id . '}%')->find_array();
 					$get_similar_byaddress = ORM::for_table('contents')
-												->raw_query('SELECT id, title, type, address, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) * 1000 AS distance FROM contents WHERE type = \'place\' AND language = \'' . $language . '\' HAVING distance < :radius AND distance > 0 ORDER BY distance ASC LIMIT 6',
-													array("latitude" => $content_data["lat"], "longitude" => $content_data["lng"], "radius" => 2000))->find_array();
+												->raw_query('SELECT id, title, type, address, (3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) * 1000 AS distance FROM contents WHERE language = \'' . $language . '\' HAVING distance < :radius AND distance > 0 ORDER BY distance ASC LIMIT 6',
+													array("latitude" => $content_data["lat"], "longitude" => $content_data["lng"], "radius" => 10000))->find_array();
 				}
 
 				if (count($get_similar_byid) > 0) {
@@ -79,7 +79,7 @@
 						$Content_where = '(' . $Content_where . ') AND `type` = \'event\'';
 					}
 					$Content_where = '(' . $Content_where . ') AND `language` = \'' . $language . '\'';
-					$get_similar_markers = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address')->where_raw($Content_where)->where('type', 'place')->where('enabled', 1)->find_array();
+					$get_similar_markers = ORM::for_table('contents')->select_many('id', 'title', 'type', 'address')->where_raw($Content_where)->where('enabled', 1)->find_array();
 				} else {
 					$get_similar_markers = array();
 				}

@@ -5,6 +5,10 @@
 
 	function mwidget_photos($cat_id = NULL) {
 
+		$ImageExtensions = array('.jpg', '.jpeg', '.png', '.gif');
+		$ExtensionFilterQuery = 'content_media.url LIKE \'%' . implode('\' OR content_media.url LIKE \'%', $ImageExtensions) . '\'';
+		//echo $ExtensionFilterQuery; die();
+
 		if ($cat_id) {
 
 		} else {
@@ -38,24 +42,25 @@
 												AND content_media.default_media = 1
 												AND content_media.external_id != ' . $id . '
 												AND contents.language = \'' . $language . '\'
+												AND (' . $ExtensionFilterQuery .')
 												HAVING distance < :radius AND distance > 0
 												ORDER BY distance ASC LIMIT 15',
 												array("latitude" => $content_data["lat"], "longitude" => $content_data["lng"], "radius" => 20000))->find_array();
 
 							if (count($images) == 0) {
-								$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where('default_media', 1)->group_by('url')->limit(15)->find_array();
+								$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->find_array();
 							}
 
 						} else {
-							$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where('default_media', 1)->group_by('url')->limit(15)->find_array();
+							$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->find_array();
 						}
 					}
 
 				} else {
-					$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where('default_media', 1)->group_by('url')->limit(15)->find_array();
+					$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->find_array();
 				}
 			} else {
-				$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where('default_media', 1)->group_by('url')->limit(15)->find_array();
+				$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->find_array();
 			}
 		}
 

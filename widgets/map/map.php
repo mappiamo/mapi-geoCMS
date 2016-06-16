@@ -17,6 +17,27 @@
 				$content = MObject::get('content', $ContentID);
 				$GeomData = $content->get_route();
 				$ContentType = $content->get_type();
+
+				$ContentText = $content->get_text();
+				$ContentTitle = $content->get_title();
+				$ContentAddress = $content->get_address();
+
+				$Image = ORM::for_table('content_media')->select_many('url')->where('external_id', $ContentID)->where('default_media', 1)->find_one();
+
+				if ($Image) {
+					$IMGCont = '<img src=" ' . trim($Image['url']) . '" class="popup_img">';
+				} else {
+					$IMGCont = '';
+				}
+
+				$PopupContent = '';
+				$PopupContent .= '<a href="index.php?module=content&object=' . $ContentID . '">' . $ContentTitle . '</a>';
+				$PopupContent .= '<br />';
+				$PopupContent .= '<small>(' . $ContentAddress . ')</small><br><br>';
+				$PopupContent .= $IMGCont . substr( strip_tags($ContentText, '<br>' ), 0, 100) .' ... <br /><br /><a href="index.php?module=content&object=' . $ContentID . '"><small>read more &gt;&gt;</small></a>';
+
+				$PopupContent = str_replace(array('\'', PHP_EOL), array('\\\'', ' '), $PopupContent);
+
 			}
 
 			if ((($coords['lat'] != 0) && ($coords['lng'] != 0)) && ($GeomData == NULL)) {
@@ -41,17 +62,11 @@
 						var GeomData = '<?PHP echo $GeomData; ?>';
 						var geoj = $.geo.WKT.parse(GeomData);
 
-						<?PHP if ($language == 'en') { ?>
-							var ReadAll = 'Read full content';
-						<?PHP } else { ?>
-							var ReadAll = 'Leggi tutto';
-						<?PHP } ?>
 
-						var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);"><a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">' + ReadAll + '</a></div>';
-
+						var GeomPoupString = '<?PHP echo $PopupContent; ?>';
 						var Geoms = L.geoJson(geoj).bindPopup(GeomPoupString);
 						Geoms.addTo(map);
-                        console.log(Geoms);
+                        //console.log(Geoms);
                         //map.panTo([<?php //echo $coords['lat'].",".$coords['lng'];?>]);
 						//map.fitBounds(Geoms.getBounds(), { padding: [5,5], maxZoom: 11 });
 
@@ -169,14 +184,8 @@
 								"opacity": 1
 							};
 
-							<?PHP if ($language == 'en') { ?>
-								var ReadAll = 'Read full content';
-							<?PHP } else { ?>
-								var ReadAll = 'Leggi tutto';
-							<?PHP } ?>
 
-							var GeomPoupString = '<div class="Scroller" onClick="ScrollTo(650);"><a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">' + ReadAll + '</a></div>';
-
+							var GeomPoupString = '<?PHP echo $PopupContent; ?>';
 							var Geoms = L.geoJson(geoj, { style: RouteStyle }).bindPopup(GeomPoupString);
 							Geoms.addTo(map);
 
