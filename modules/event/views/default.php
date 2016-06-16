@@ -1,3 +1,4 @@
+<link href="modules/event/views/events.css" rel="stylesheet">
 <?php
 
 	// no direct access to this file
