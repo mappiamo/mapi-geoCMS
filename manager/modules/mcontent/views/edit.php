@@ -226,6 +226,34 @@
 							echo 'selected="selected"';
 						} ?>>Spanish
 						</option>
+						<option value="pt" <?php if ("pt" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Portugese
+						</option>
+						<option value="ja" <?php if ("ja" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Japanase
+						</option>
+						<option value="pl" <?php if ("pl" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Polish
+						</option>
+						<option value="el" <?php if ("el" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Greek
+						</option>
+						<option value="no" <?php if ("no" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Norvegian
+						</option>
+						<option value="sk" <?php if ("sk" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Slovak
+						</option>
+						<option value="ro" <?php if ("ro" == $data->language) {
+							echo 'selected="selected"';
+						} ?>>Romanian
+						</option>
 					</select>
 
 					<br/>
