@@ -143,3 +143,11 @@
 	font-size: 12px;
 	margin-right: 15px;
 }
+
+.latest-image {
+	max-width: 100%;
+}
+.latest-image img {
+	width: 100%;
+	height: auto;
+}
