@@ -48,19 +48,19 @@
 												array("latitude" => $content_data["lat"], "longitude" => $content_data["lng"], "radius" => 20000))->find_array();
 
 							if (count($images) == 0) {
-								$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->find_array();
+								$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->order_by_desc('external_id')->find_array();
 							}
 
 						} else {
-							$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->find_array();
+							$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->order_by_desc('external_id')->find_array();
 						}
 					}
 
 				} else {
-					$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->find_array();
+					$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->order_by_desc('external_id')->find_array();
 				}
 			} else {
-				$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->find_array();
+				$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->order_by_desc('external_id')->find_array();
 			}
 		}
 

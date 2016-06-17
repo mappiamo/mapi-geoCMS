@@ -10,6 +10,7 @@
 				$id = intval($_GET['object']);
 				$meta_address = ORM::for_table('content_meta')->select_many('value')->where('name', 'Email')->where('external_id', $id)
 					 ->find_one();
+
 				$title = ORM::for_table('contents')->select_many('title', 'address')->where('id', $id)->find_one();
 
 				if ($meta_address) {
@@ -42,6 +43,50 @@
 					</div>
 
 				<?PHP } ?>
+
+				<?PHP
+					$MetaSearch = array('telefono', 'localita', 'servizio', 'orario', 'chiusura_settimanale', 'biglietteria_costo', 'prenotazioni_tipo');
+					$MetaFilterQuery = 'external_id = ' . $id . ' AND (content_meta.name LIKE \'' . implode('\' OR content_meta.name LIKE \'', $MetaSearch) . '\')';
+
+					$meta_data = ORM::for_table('content_meta')->select_many('value', 'name')->where_raw($MetaFilterQuery)->order_by_asc('name')->find_array();
+
+					if (isset($meta_data) && count($meta_data) > 0) { ?>
+						<div class="contact_address">
+
+							<?PHP
+								$TheValue = NULL;
+								$TheValue_collection = NULL;
+								foreach ($meta_data as $MKey => $OneMeta) {
+									$regex = '/((?<=[a-z])[A-Z]|[A-Z](?=[a-z]))/';
+									$OneMeta['name'] = preg_replace($regex, ' $1', ucfirst($OneMeta['name']));
+									$TheName = str_replace('_', ' ', $OneMeta['name']);
+									//echo '<strong>' . $TheName . ':</strong> ' . $OneMeta['value'] . '<br>';
+									if (isset($meta_data[($MKey + 1)])) {
+										$NextName = $meta_data[($MKey + 1)]['name'];
+										$NextName = preg_replace($regex, ' $1', ucfirst($NextName));
+										$NextName = str_replace('_', ' ', $NextName);
+										if ($NextName == $TheName) {
+											$TheValue_collection .= $OneMeta['value'] . ', ';
+										} else {
+											if ($TheValue_collection) {
+												$TheValue = $TheValue_collection . $OneMeta['value'];
+											} else {
+												$TheValue = $OneMeta['value'];
+											}
+											echo '<strong>' . $TheName . ':</strong> ' . $TheValue . '<br>';
+											$TheValue_collection = NULL;
+										}
+									} else {
+										$TheValue = $OneMeta['value'];
+										echo '<strong>' . $TheName . ':</strong> ' . $TheValue . '<br>';
+										$TheValue_collection = NULL;
+									}
+								}
+							?>
+
+						</div>
+					<?PHP }
+				?>
 
 				<div class="row">
 					<div class="col-lg-6">

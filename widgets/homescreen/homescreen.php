@@ -25,12 +25,12 @@
 				$ExtensionFilterQuery = $ExtensionFilterQuery_0 . ' AND external_id = ' .$OneID;
 
 				$Contents = ORM::for_table('contents')->select_many('id', 'title')->where('id', $OneID)->where('enabled', 1)->find_one();
-				$Image = ORM::for_table('content_media')->select_many('external_id', 'url')->where_raw($ExtensionFilterQuery)->find_one();
+				$Image = ORM::for_table('content_media')->select_many('external_id', 'url')->where_raw($ExtensionFilterQuery)->order_by_desc('external_id')->find_one();
 			}
 
 			if (!$Image) {
 
-				$Image_20 = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery_0)->where('default_media', 1)->group_by('url')->limit(20)->find_array();
+				$Image_20 = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery_0)->where('default_media', 1)->group_by('url')->order_by_desc('external_id')->limit(10)->find_array();
 				$rand_key = array_rand($Image_20);
 
 				$Image['url'] = $Image_20[$rand_key]['url'];
