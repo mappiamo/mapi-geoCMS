@@ -13,7 +13,66 @@
 		if ($cat_id) {
 
 		} else {
-			$events = ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)->order_by_asc('end')->limit(3)->find_array();
+			if ((isset($_GET['module'])) && (isset($_GET['object']))) {
+
+				if ($_GET['module'] == 'content') {
+
+					$id = intval($_GET['object']);
+					$content_data = ORM::for_table('contents')->select_many('address', 'name', 'type', 'title', 'lat', 'lng', 'route')->where('id', $id)->find_one();
+
+					if (($content_data['lat'] == 0) || ($content_data['lng'] == 0)) {
+						$PointGeom = $content_data['route'];
+						preg_match('/^([^\(]*)([\(]*)([^A-Za-z]*[^\)$])([\)]*[^,])$/', $PointGeom, $Match);
+						$LanLotCoords = explode(' ', $Match[3]);
+						$content_data['lat'] = $LanLotCoords[1];
+						$content_data['lng'] = $LanLotCoords[0];
+					}
+
+					if ($content_data) {
+						if ($content_data['type'] != 'route') {
+
+							$events = ORM::for_table('contents')
+												->raw_query('SELECT id, title, start, end,  address,(3959 * acos(cos(radians(:latitude)) * cos(radians(lat)) * cos(radians(lng) - radians(:longitude)) + sin(radians(:latitude))  * sin(radians(lat)))) * 1000 AS distance FROM contents
+												WHERE type = \'event\' AND end >= now() AND language = \'' . $language . '\' HAVING distance < :radius AND  distance > 0 ORDER BY end ASC LIMIT 3',
+												array("latitude" => $content_data["lat"], "longitude" => $content_data["lng"], "radius" => 100000))->find_array();
+
+
+							if (count($events) == 0) {
+								$events =
+								ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
+									 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+									 ->order_by_asc('start')->limit(3)->find_array();
+
+							}
+						} else {
+							$events =
+							ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
+								 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+								 ->order_by_asc('start')->limit(3)->find_array();
+
+						}
+					} else {
+						$events =
+						ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
+							 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+							 ->order_by_asc('start')->limit(3)->find_array();
+
+					}
+
+
+						} else {
+					$events =
+					ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
+						 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+						 ->order_by_asc('start')->limit(3)->find_array();
+				}
+
+			} else {
+				$events =
+				ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
+					 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+					 ->order_by_asc('start')->limit(3)->find_array();
+			}
 		}
 
 		/* if ($cat_id) {
@@ -43,7 +102,7 @@
 			<div class="col-md-4">
 				<div class="tabs-block">
 					<div class="tabs-block-head">
-						<span class="glyphicon glyphicon-time"></span> <span class="title">Eventi in zona</span>
+						<span class="glyphicon glyphicon-time"></span> <span class="title">Events</span>
 					</div>
 					<div class="tabs-block-body">
 						<?php
@@ -101,9 +160,9 @@
 							foreach ($events as $key => $value) { ?>
 
 								<a href="index.php?module=content&object=<?php echo intval($value['id']); ?>"
-									 title="<?php echo strip_tags($value['title']); ?>">
+									 title="<?php echo strip_tags($value['title']); ?><?PHP if (isset($value['distance'])) { echo ' ~' . round($value['distance'], 0) . 'm. from content'; }?>">
 									<div>
-										<span class="date"><?php echo date('d-m-Y', strtotime($value['end'])); ?></span> - <span class="address"><?php echo strip_tags($value['address']); ?></span><br>
+										<span class="date"><?php echo date('d-m-Y', strtotime($value['end'])); ?></span> - <span class="address"><?php echo strip_tags($value['address']); ?><?PHP if (isset($value['distance'])) { echo ' ~' . round($value['distance'], 0) . 'm'; }?></span><br>
 										<span class="title"><?php echo strip_tags($value['title']); ?></span>
 									</div>
 								</a>

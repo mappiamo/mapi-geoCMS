@@ -45,7 +45,7 @@
 												AND (' . $ExtensionFilterQuery .')
 												HAVING distance < :radius AND distance > 0
 												ORDER BY distance ASC LIMIT 15',
-												array("latitude" => $content_data["lat"], "longitude" => $content_data["lng"], "radius" => 20000))->find_array();
+												array("latitude" => $content_data["lat"], "longitude" => $content_data["lng"], "radius" => 100000))->find_array();
 
 							if (count($images) == 0) {
 								$images = ORM::for_table('content_media')->select_many('url', 'external_id')->where_raw($ExtensionFilterQuery)->where('default_media', 1)->group_by('url')->limit(15)->order_by_desc('external_id')->find_array();
@@ -69,7 +69,7 @@
 			<div class="col-md-4">
 				<div class="tabs-block">
 					<div class="tabs-block-head">
-						<span class="glyphicon glyphicon-camera"></span> <span class="title">Foto d’intorni</span>
+						<span class="glyphicon glyphicon-camera"></span> <span class="title">Locations</span>
 					</div>
 					<div class="thumbnail-list">
 

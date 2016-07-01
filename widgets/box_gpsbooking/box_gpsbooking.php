@@ -4,7 +4,7 @@
 
 	include_once('model/getdata.php');
 
-	function mwidget_box_gpsbooking($CID = 2002, $BOOKING_ID = 345678, $INITALIA_ID = 1459, $Limit = 10) {
+	function mwidget_box_gpsbooking($CID = 2002, $BOOKING_ID = 1145912, $INITALIA_ID = 1459, $Limit = 10) {
 		global $coords;
 
 		if (!isset($_GET["object"])) { return; }
