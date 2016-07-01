@@ -35,7 +35,7 @@ $feed->setDescription( '' );
 $feed->setChannelElement( 'language', 'en-us' );
 $feed->setChannelElement( 'pubDate', date( DATE_RSS, time() ) );
 
-$contents = ORM::for_table( 'contents' )->where( 'enabled', 1 )->order_by_desc('modified')->limit(100)->find_many();
+$contents = ORM::for_table( 'contents' )->where( 'enabled', 1 )->find_many();
 
 if ( sizeof( $contents ) > 0 ) {
 		foreach ( $contents as $content ) {
