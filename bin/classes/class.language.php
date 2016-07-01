@@ -5,8 +5,7 @@ class M_Language {
 		private $langs = array( "en", "it", "hu", "sr", "de", "ru", "fr", "nl", "gr", "da", "sv", "hr", "si", "ar", "zh", "es" );
 		
 		public function getLanguage() {
-				
-				
+
 				if ( empty( $_GET["lang"] ) ) {
 						if ( !isset( $_SESSION["lang"] ) ) {
 								$language = $this->getDefaultLanguage();
@@ -59,13 +58,66 @@ class M_Language {
 		}
 		
 		private function getDefaultLanguage() {
-				
-				$pref = new M_Preference("default_language");
-				$language = $pref->get_value();
-				
-				return $language;
+
+		if ((isset($_GET['module'])) && (isset($_GET['object']))) {
+				if ($_GET['module'] == 'content') {
+
+					$id = intval($_GET['object']);
+					$content_lang = ORM::for_table('contents')->select_many('language', 'parent')->where('id', $id)->find_one();
+
+					if ($content_lang['parent'] == NULL) {
+						$language = $content_lang['language'];
+					} else {
+
+						$id = intval($content_lang['parent']);
+						$content_lang = ORM::for_table('contents')->select_many('language')->where('id', $id)->find_one();
+
+						if ($content_lang) {
+							$language = $content_lang['language'];
+						} else {
+							$pref = new M_Preference("default_language");
+							$language = $pref->get_value();
+						}
+
+					}
+
+				} else {
+					$pref = new M_Preference("default_language");
+					$language = $pref->get_value();
+				}
+			} else {
+					$pref = new M_Preference("default_language");
+					$language = $pref->get_value();
+			}
+
+			return $language;
 		}
 
+		public function getValidLangList() {
+			if ((isset($_GET['module'])) && (isset($_GET['object']))) {
+				if ($_GET['module'] == 'content') {
+
+					$id = intval($_GET['object']);
+					$content_lang = ORM::for_table('contents')->select_many('id', 'language', 'parent')->where('id', $id)->find_one();
+
+					if ($content_lang['parent'] == NULL) {
+						$all_lang = ORM::for_table('contents')->select_many('language')->where('parent', $id)->find_array();
+						$all_lang[]['language'] = $content_lang['language'];
+					} else {
+						$id = intval($content_lang['parent']);
+						$content_lang = ORM::for_table('contents')->select_many('id', 'language', 'parent')->where('id', $id)->find_one();
+						$all_lang = ORM::for_table('contents')->select_many('language')->where('parent', $id)->find_array();
+						$all_lang[]['language'] = $content_lang['language'];
+					}
+
+					return $all_lang;
+				} else {
+					return NULL;
+				}
+			} else {
+				return NULL;
+			}
+		}
 }
 
 ?>
