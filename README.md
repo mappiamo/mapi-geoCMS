@@ -29,6 +29,7 @@ Download #mappiamo package from GIT, and copy all files to your web host by FTP.
 If something changed later (for example database password) edit settings.php from the root of installed #mappiamo.
 
 1) Row 7: Fill or modify your sitename
+
 2) Row 8: Fill or modify your domain
 
 The database access storef from row 14 to 19:
