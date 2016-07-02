@@ -13,6 +13,27 @@ Installation
 
 Download #mappiamo package from GIT, and copy all files to your web host by FTP. Copy files to subdirectory if required, or to public_html root. Login to your control panel or phpMyadmin to create database user with password and add database to user. Give all access rights to your database user. When you copied all files to your host, access to the #mappiamo root by your browser by http. Setup process will be started. Fill all required fields. If the process done without error, you can access to the content manager on the URL: http://[your_host]/manager/
 
+If something changed later (for example database password) edit settings.php from the root of installed #mappiamo.
+
+1) Row 7: Fill or modify your sitename
+2) Row 8: Fill or modify your domain
+
+The database access storef from row 14 to 19:
+
+1) Row 14: Database name
+2) Row 15: Database type
+3) Row 16: Database hostname
+4) Row 17: Database prefix
+5) Row 18: Database username
+6) Row 19: Database password
+
+If you need e-mail service, setup your SMTP provider:
+
+1) Row 21: Your e-mail
+2) Row 22: Username for SMTP service
+3) Row 23: Password for SMTP service
+4) Row 24: Hostname for SMTP service
+
 Using content manager
 =====================
 
