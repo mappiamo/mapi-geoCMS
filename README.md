@@ -35,17 +35,25 @@ If something changed later (for example database password) edit settings.php fro
 The database access storef from row 14 to 19:
 
 1) Row 14: Database name
+
 2) Row 15: Database type
+
 3) Row 16: Database hostname
+
 4) Row 17: Database prefix
+
 5) Row 18: Database username
+
 6) Row 19: Database password
 
 If you need e-mail service, setup your SMTP provider:
 
 1) Row 21: Your e-mail
+
 2) Row 22: Username for SMTP service
+
 3) Row 23: Password for SMTP service
+
 4) Row 24: Hostname for SMTP service
 
 ### Manual
