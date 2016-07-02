@@ -18,6 +18,7 @@ defined( 'DACCESS' ) or die;
                   <li><a href="index.php?module=mxmlimport&task=mxml_preview">Import content from XML<span class="glyphicon glyphicon-import"></span></a></li>
                   <li><a href="index.php?module=mgeojsonimport&task=mgeo_preview">SHP->GeoJson Importer<span class="glyphicon glyphicon-import"></span></a></li>
                   <li><a href="index.php?module=mdataimport&task=data_preview">Data importer<span class="glyphicon glyphicon-import"></span></a></li>
+                  <li><a href="index.php?module=mphrcimport&task=mphrc_preview">PHRC importer<span class="glyphicon glyphicon-import"></span></a></li>
                   <li><a href="index.php?module=mcategory&task=category_add">Add new category <span class="glyphicon glyphicon-plus"></span></a></li>
             </ul>
         </li>
