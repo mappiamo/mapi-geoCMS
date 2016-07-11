@@ -54,7 +54,9 @@
 		if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
 			list($username, $domain) = explode('@', $sender_email);
 			if (checkdnsrr($domain . '.', 'MX')) { // Ha valoban letezik az email cim
-				$subject = 'Form message from the site.';
+				$subject = 'Message from ' . MSettings::$domain;
+
+				$SiteDesc = ORM::for_table('preferences')->select_many('value')->where('name', 'website_description')->find_one();
 
 				$headers = 'From: ' . $sender_email . PHP_EOL .
 									 'Reply-To: ' . $sender_email . PHP_EOL .
@@ -62,6 +64,13 @@
 									 'Content-Type: text/plain; charset=utf-8' . PHP_EOL .
 									 'Content-Transfer-Encoding: quoted-printable' . PHP_EOL .
 									 'X-Mailer: PHP/' . phpversion();
+
+				$Recipient .= ', ' . $sender_email;
+				$sender_message .= PHP_EOL . PHP_EOL . $sender_name;
+				$sender_message .= PHP_EOL . '=================================';
+				$sender_message .= PHP_EOL . MSettings::$sitename;
+				$sender_message .= $SiteDesc['value'];
+				$sender_message .= MSettings::$domain . '/index.php';
 
 				mail($Recipient, '=?UTF-8?B?'.base64_encode($subject).'?=', $sender_message, $headers);
 
