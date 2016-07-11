@@ -14,6 +14,7 @@
 			'en' => 'English',
 
 			'fr' => 'French',
+			'de' => 'German',
 			'el' => 'Greek',
 			'hu' => 'Hungarian',
 			'it' => 'Italian',
