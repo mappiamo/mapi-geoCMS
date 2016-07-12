@@ -8,6 +8,7 @@
 
 	$settings = APATH . '/../../../settings.php';
 	$idiorm_lib = APATH . '/../../../lib/idiorm/idiorm.php';
+	$IPLists = APATH . '/../../../widgets/form_contact/ip_list';
 
 	if ( ! is_file( $settings ) || ! is_readable( $settings ) ) die( 'M_ERROR (00110): A required file: settings.php is missing or not readable!' );
 	else include( $settings );
@@ -54,6 +55,22 @@
 		if (filter_var($sender_email, FILTER_VALIDATE_EMAIL)) {
 			list($username, $domain) = explode('@', $sender_email);
 			if (checkdnsrr($domain . '.', 'MX')) { // Ha valoban letezik az email cim
+
+				$ClientIP = $_SERVER['REMOTE_ADDR'];
+				if (file_exists($IPLists)) {
+					$Addresses = file($IPLists, FILE_IGNORE_NEW_LINES);
+
+					if (in_array($ClientIP, $Addresses)) {
+						echo 'From this IP address cannot send new message again.';
+						return;
+					} else {
+						$IPLimit = array_slice($Addresses, 0, 9);
+						file_put_contents($IPLists, $ClientIP . PHP_EOL . implode(PHP_EOL, $IPLimit));
+					}
+				} else {
+					file_put_contents($IPLists, $ClientIP);
+				}
+
 				$subject = 'Message from ' . MSettings::$domain;
 
 				$SiteDesc = ORM::for_table('preferences')->select_many('value')->where('name', 'website_description')->find_one();

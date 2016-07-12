@@ -2,9 +2,40 @@
 
 	defined('DACCESS') or die;
 
+	function DisableForm() { ?>
+
+		<div id="mapi_mail_form">
+			<div class="c_title">Contact info</div>Your message sent to the address. Plase wait for the answer.
+		</div>
+
+		<?PHP
+	}
+
 	function mwidget_form_contact($username) {
 
 		if ($username) {
+
+			if (isset($_SERVER['REMOTE_ADDR'])) {
+				$ClientIP = $_SERVER['REMOTE_ADDR'];
+				$validIP = filter_var($ClientIP, FILTER_VALIDATE_IP);
+				if ($validIP !== false) {
+
+					if (file_exists('widgets/form_contact/ip_list')) {
+						$Addresses = file('widgets/form_contact/ip_list', FILE_IGNORE_NEW_LINES);
+						if (in_array($ClientIP, $Addresses)) {
+							DisableForm();
+							return;
+						}
+					}
+
+				} else {
+					DisableForm();
+					return;
+				}
+			} else {
+				DisableForm();
+				return;
+			}
 
 			if ($username == 'META') {
 				$id = intval($_GET['object']);
@@ -147,7 +178,7 @@
 							},
 							success: function (data) {
 								if (data == 'sent') {
-									$('#mapi_mail_form').html('Your message successfully sent, thank you.');
+									$('#mapi_mail_form').html('<div class="c_title">Contact info</div>Your message sent to the address. Plase wait for the answer.');
 								} else {
 									alert(data);
 								}
