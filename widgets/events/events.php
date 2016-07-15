@@ -40,21 +40,21 @@
 							if (count($events) == 0) {
 								$events =
 								ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
-									 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+									 ->where('enabled', 1)->where('type', 'event')->where_raw($DateFilter)
 									 ->order_by_asc('start')->limit(3)->find_array();
 
 							}
 						} else {
 							$events =
 							ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
-								 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+								 ->where('enabled', 1)->where('type', 'event')->where_raw($DateFilter)
 								 ->order_by_asc('start')->limit(3)->find_array();
 
 						}
 					} else {
 						$events =
 						ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
-							 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+							 ->where('enabled', 1)->where('type', 'event')->where_raw($DateFilter)
 							 ->order_by_asc('start')->limit(3)->find_array();
 
 					}
@@ -63,14 +63,14 @@
 						} else {
 					$events =
 					ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
-						 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+						 ->where('enabled', 1)->where('type', 'event')->where_raw($DateFilter)
 						 ->order_by_asc('start')->limit(3)->find_array();
 				}
 
 			} else {
 				$events =
 				ORM::for_table('contents')->select_many('id', 'title', 'start', 'end', 'address')->where('language', $language)
-					 ->where('enabled', 1)->where_null('parent')->where('type', 'event')->where_raw($DateFilter)
+					 ->where('enabled', 1)->where('type', 'event')->where_raw($DateFilter)
 					 ->order_by_asc('start')->limit(3)->find_array();
 			}
 		}
