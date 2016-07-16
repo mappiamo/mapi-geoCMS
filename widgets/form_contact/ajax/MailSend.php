@@ -26,6 +26,7 @@
 	$sender_name = $_POST["name"];
 	$sender_email = $_POST["email"];
 	$sender_message = $_POST["message"];
+	$sent_from = $_POST["sentfrom"];
 
 	if ((!$username) || ($username == '')) {
 		echo 'Invalid recipient.';
@@ -64,7 +65,7 @@
 						echo 'From this IP address cannot send new message again.';
 						return;
 					} else {
-						$IPLimit = array_slice($Addresses, 0, 9);
+						$IPLimit = array_slice($Addresses, 0, 4);
 						file_put_contents($IPLists, $ClientIP . PHP_EOL . implode(PHP_EOL, $IPLimit));
 					}
 				} else {
@@ -79,15 +80,14 @@
 									 'Reply-To: ' . $sender_email . PHP_EOL .
 									 'MIME-Version: 1.0' . PHP_EOL .
 									 'Content-Type: text/plain; charset=utf-8' . PHP_EOL .
-									 'Content-Transfer-Encoding: quoted-printable' . PHP_EOL .
+									 'Content-Transfer-Encoding: 8bit' . PHP_EOL .
 									 'X-Mailer: PHP/' . phpversion();
 
 				$Recipient .= ', ' . $sender_email;
 				$sender_message .= PHP_EOL . PHP_EOL . $sender_name;
-				$sender_message .= PHP_EOL . '=================================';
-				$sender_message .= PHP_EOL . MSettings::$sitename;
-				$sender_message .= $SiteDesc['value'];
-				$sender_message .= MSettings::$domain . '/index.php';
+				$sender_message .= PHP_EOL . PHP_EOL . '==== Message from ====';
+				$sender_message .= PHP_EOL . MSettings::$sitename . ' - ' . $SiteDesc['value'];
+				$sender_message .= PHP_EOL . $sent_from;
 
 				mail($Recipient, '=?UTF-8?B?'.base64_encode($subject).'?=', $sender_message, $headers);
 

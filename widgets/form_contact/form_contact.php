@@ -147,6 +147,8 @@
 
 					$("#formmail_submit").click(function() {
 
+						$.ajaxSetup({async: false});
+
 						if (!$('#form_name').val()) {
 							alert('Name field required');
 							return null;
@@ -167,6 +169,8 @@
 						var form_email = $('#form_email').val();
 						var form_message = $('#form_message').val();
 
+						$('#mapi_mail_form').html('<div class="c_title">Contact info</div>Sending your mail to the recipient, please wait...');
+
 						$.ajax({
 							type: 'POST',
 							url: pathname + 'MailSend.php',
@@ -174,7 +178,8 @@
 								recipient: '<?PHP echo $username; ?>',
 								name: form_name,
 								email: form_email,
-								message: form_message
+								message: form_message,
+								sentfrom: '<?PHP echo ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == 'on')) ? 'https://' : 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?>'
 							},
 							success: function (data) {
 								if (data == 'sent') {
