@@ -1,0 +1,7 @@
+{
+    "require": {
+        "google/recaptcha": "^1.1",
+        "j4mie/idiorm": "^1.5",
+        "filp/whoops": "^2.1"
+    }
+}
