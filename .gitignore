@@ -22,3 +22,7 @@ widgets/togglemenu
 
 # lib
 lib/php-thumb/cache
+
+
+/vendor
+
