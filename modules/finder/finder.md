@@ -1,5 +1,8 @@
-#Finder
+#Finder Module Core
 
-##0.0.6
+##1.0.0
 
-Search module
+Search module.
+It researches in contents (title and text) and in categories (name and title). 
+It supports all standard content types: route, event, place and post.
+If you need custom content type you have to create a new module.
