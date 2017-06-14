@@ -20,12 +20,12 @@
 				$SearchQuery = '((`text` LIKE \'%' . implode('%\' AND `text` LIKE \'%', $SearchQueryArray) . '%\')';
 				$SearchQuery .= ' OR ';
 				$SearchQuery .= '(`title` LIKE \'%' . implode('%\' AND `title` LIKE \'%', $SearchQueryArray) . '%\'))';
-				$SearchQuery .= ' AND (`type` = \'place\' OR `type` = \'event\' OR `type` = \'route\')';
+				$SearchQuery .= ' AND (`type` = \'place\' OR `type` = \'event\' OR `type` = \'route\' OR `type` = \'post\')';
 
 				$CatSearchQuery = '((`name` LIKE \'%' . implode('%\' AND `name` LIKE \'%', $SearchQueryArray) . '%\')';
 				$CatSearchQuery .= ' OR ';
 				$CatSearchQuery .= '(`title` LIKE \'%' . implode('%\' AND `title` LIKE \'%', $SearchQueryArray) . '%\'))';
-
+                                
 				$PlaceSearch_content = ORM::for_table('contents')->select('title')->select('route', 'point')->select('id')->select('lat')->select('lng')->select('start')->select('end')->select('address')->select('text')->where_raw($SearchQuery)->where('enabled', 1)->where('language', $contentlang)->find_array();
 				$CatSearch = ORM::for_table('categories')->select_many('contents', 'title', 'id')->where_raw($CatSearchQuery)->where('enabled', 1)->find_array();
 
