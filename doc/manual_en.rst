@@ -575,3 +575,12 @@ Example of tested .ini file::
 
     [fixed_data]
     contents[type]="place"
+
+New Updates
+===========
+
+M_Module better templates
+-------------------------
+
+The class M_Module generate the html page and implements the pattern MVC. Now you can use the same view file all time you want.
+You can use view files as section of a more complex template.
