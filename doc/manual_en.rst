@@ -576,11 +576,78 @@ Example of tested .ini file::
     [fixed_data]
     contents[type]="place"
 
+
 New Updates
 ===========
 
-M_Module better templates
--------------------------
+M_Module better templates generation
+------------------------------------
 
 The class M_Module generate the html page and implements the pattern MVC. Now you can use the same view file all time you want.
 You can use view files as section of a more complex template.
+
+
+Admin Panel Widget_List error
+-----------------------------
+
+If Admin Panel "Widget_list" crash the problem is in the naming of the widget or in the naming of the widget funciont. Check and fix it.
+
+
+Mappiamo custom content type managment
+-----------------------------------
+
+In Mappiamo you can have only 4 content type by default: post, place, route, event. 
+If you want insert custom type you have to follow these steps:
+1.  Create the display function for new type in modules/content/models/content.php
+2.  Add the new type Manager in modules/content/view/default.php
+3.  Insert new type in Types array in bin/mbin.object.php
+4.  Create a new class with this name: class.<newtype>.php in bin/classes  (name are case sensitivie)
+5.  Register the new class in binaries.php
+
+example of class.<newtype>.php:
+<?php
+    class M_Newtype extends M_Post {
+
+            protected $type = ‘newtype’;
+            protected $kind;
+            protected $start = NULL;
+            protected $end = NULL;
+
+            public function __construct($id = NULL) {if ($id) {$this->read($id);}	}
+
+            public function get_start() {return $this->start;}
+
+            public function get_end() {return $this->end;	}
+
+            public function set_start($value) {$this->start = strval($value);}
+
+            public function set_end($value) {$this->end = strval($value);}
+    }
+?>
+
+
+Call a model from controller
+-----------------------------------
+
+use this function inside a controller:
+$this-> model("name_model", $parameters)
+
+$parameters should be an array. When you pass the array $parameters, Mappiamo split it in a list of parameters for the "name_model" function.
+For example if i have $parameters[a,b,c] when i pass throught $this-> model("name_model", $parameters) the function "name_model" will be like this:
+function name_model (a, b, c){
+    //some stuff
+}
+The order of data in $parameters array corresponds to the order of function parameters.
+
+
+Call a view from controller
+-----------------------------------
+
+use this function inside a controller:
+$this-> view("name_view", $data)
+
+$data should be an array otherwise data are not passed
+It's important that you use the variable name as "$data" otherwise it doesn't work.
+
+
+
