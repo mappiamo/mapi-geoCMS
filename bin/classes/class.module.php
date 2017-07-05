@@ -59,7 +59,7 @@ class M_Module extends M_Extension {
 				$init = 'views:' . $view;
 				$viewfile = mapi_abs_path( $init, $this->get_wdir() );
 
-				if ( is_file( $viewfile ) && is_readable( $viewfile ) ) include_once( $viewfile );
+				if ( is_file( $viewfile ) && is_readable( $viewfile ) ) include( $viewfile );
 		}
 
 		public function get_task() {
