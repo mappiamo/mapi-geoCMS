@@ -604,7 +604,7 @@ If you want insert custom type you have to follow these steps:
 4.  Create a new class with this name: class.<newtype>.php in bin/classes  (name are case sensitivie)
 5.  Register the new class in binaries.php
 
-example of class.<newtype>.php:
+example of class.<newtype>.php::
 
 <?php
     class M_Newtype extends M_Post {
@@ -630,12 +630,12 @@ example of class.<newtype>.php:
 Call a model from controller
 -----------------------------------
 
-use this function inside a controller:
+use this function inside a controller::
 
 $this-> model("name_model", $parameters)
 
 $parameters should be an array. When you pass the array $parameters, Mappiamo split it in a list of parameters for the "name_model" function.
-For example if i have $parameters[a,b,c] when i pass throught $this-> model("name_model", $parameters) the function "name_model" will be like this:
+For example if i have $parameters[a,b,c] when i pass throught $this-> model("name_model", $parameters) the function "name_model" will be like this::
 
 function name_model (a, b, c){
     //some stuff
@@ -647,7 +647,7 @@ The order of data in $parameters array corresponds to the order of function para
 Call a view from controller
 -----------------------------------
 
-use this function inside a controller:
+use this function inside a controller::
 
 $this-> view("name_view", $data)
 
