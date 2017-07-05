@@ -631,9 +631,9 @@ $this-> model("name_model", $parameters)
 $parameters should be an array. When you pass the array $parameters, Mappiamo split it in a list of parameters for the "name_model" function.
 For example if i have $parameters[a,b,c] when i pass throught $this-> model("name_model", $parameters) the function "name_model" will be like this::
 
-function name_model (a, b, c){
+    function name_model (a, b, c){
     //some stuff
-}
+    }
 
 The order of data in $parameters array corresponds to the order of function parameters.
 
