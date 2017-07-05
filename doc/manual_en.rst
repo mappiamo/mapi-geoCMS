@@ -605,6 +605,7 @@ If you want insert custom type you have to follow these steps:
 5.  Register the new class in binaries.php
 
 example of class.<newtype>.php:
+
 <?php
     class M_Newtype extends M_Post {
 
