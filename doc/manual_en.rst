@@ -590,7 +590,11 @@ You can use view files as section of a more complex template.
 Admin Panel Widget_List error
 -----------------------------
 
-If Admin Panel "Widget_list" crash the problem is in the naming of the widget or in the naming of the widget funciont. Check and fix it.
+If Admin Panel "Widget_list" crash the problem is in the naming of the widget or in the naming of the main widget functions.
+The main function name should be like: mwidget_<widgetName>(){}.
+
+Admin Panel could crash also if the name of other functions of your widget are a duplicate of other widgets function name. 
+So keep attention to the naming of your functions.
 
 
 Mappiamo custom content type managment
