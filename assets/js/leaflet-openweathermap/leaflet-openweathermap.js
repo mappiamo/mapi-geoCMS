@@ -2,10 +2,15 @@
  * A JavaScript library for using OpenWeatherMap's layers and OWM's city/station data for leaflet based maps without hassle.
  * License: CC0 (Creative Commons Zero), see http://creativecommons.org/publicdomain/zero/1.0/
  * Project page: https://github.com/buche/leaflet-openweathermap/
+ *
+ * !!!!!!!!! ATTENTION !!!!!!!!!
+ * Get your free Application ID at www.openweathermap.org/appid 
+ * and change all occurrences of OWM_YOUR_APPID in this file.
  */
 
 L.OWM = L.TileLayer.extend({
 	options: {
+		appId: 'OWM_YOUR_APPID', /* pass your own AppId as parameter when creating the layer. Get your own AppId at http://www.openweathermap.org/appid */
 		baseUrl: "http://{s}.tile.openweathermap.org/map/{layername}/{z}/{x}/{y}.png",
 		maxZoom: 18,
 		showLegend: true,
@@ -17,6 +22,7 @@ L.OWM = L.TileLayer.extend({
 	initialize: function (options) {
 		L.Util.setOptions(this, options);
 		var tileurl = this.options.baseUrl.replace('{layername}', this._owmLayerName);
+		tileurl = tileurl + '?appid=' + this.options.appId;
 
 		this._map = null;
 		this._legendControl = null;
@@ -225,7 +231,7 @@ L.OWM.Current = L.Class.extend({
 	includes: L.Mixin.Events,
 
 	options: {
-		appId: null, // get your free Application ID at www.openweathermap.org
+		appId: 'OWM_YOUR_APPID', // get your free Application ID at www.openweathermap.org/appid
 		type: 'city', // available types: 'city', 'station'
 		lang: 'en', // available: 'en', 'de', 'ru', 'fr', 'nl', 'es', 'ca' (not every language is finished yet)
 		minZoom: 7,
@@ -242,7 +248,7 @@ L.OWM.Current = L.Class.extend({
 		showOwmStationLink: true, // available: true, false
 		showWindSpeed: 'both', // available: 'speed', 'beaufort', 'both'
 		showWindDirection: 'both', // available: 'deg', 'desc', 'both'
-		showTimestamp: false, // available: true, false
+		showTimestamp: true, // available: true, false
 		showTempMinMax: true, // available: true, false
 		useLocalTime: true, // available: true, false
 		clusterSize: 150,
@@ -404,7 +410,7 @@ L.OWM.Current = L.Class.extend({
 				return;
 			}
 			// only use stations/cities having a minimum distance of some pixels on the map
-			var pt = _this._map.latLngToLayerPoint(new L.LatLng(stat.coord.lat, stat.coord.lon));
+			var pt = _this._map.latLngToLayerPoint(new L.LatLng(stat.coord.Lat, stat.coord.Lon));
 			var key = '' + (Math.round(pt.x/_this.options.clusterSize)) + "_" + (Math.round(pt.y/_this.options.clusterSize));
 			if (!stations[key] || parseInt(stations[key].rang) < parseInt(stat.rang)) {
 				stations[key] = stat;
@@ -522,7 +528,7 @@ L.OWM.Current = L.Class.extend({
 				}
 			}
 		}
-		if (typeof station.rain != 'undefined' && typeof station.rain['1h'] != 'undefined') {
+		if (station.rain != null && typeof station.rain != 'undefined' && typeof station.rain['1h'] != 'undefined') {
 			txt += '<div class="owm-popup-detail">'
 				+ this.i18n('rain_1h', 'Rain (1h)')
 				+ ': ' + station.rain['1h'] + '&nbsp;ml</div>';
@@ -610,7 +616,7 @@ L.OWM.Current = L.Class.extend({
 						, popupAnchor: new L.Point(0, -10)
 						, html: this._icondivtext(station, imageData.url, imageData.width, imageData.height)
 					});
-		var marker = L.marker([station.coord.lat, station.coord.lon], {icon: icon});
+		var marker = L.marker([station.coord.Lat, station.coord.Lon], {icon: icon});
 		return marker;
 	},
 
@@ -796,8 +802,8 @@ L.OWM.CurrentCache = L.Class.extend({
 		var cnt = 0;
 		for (var k in this._cachedData.list) {
 			var station = this._cachedData.list[k];
-			if (station.coord.lon >= minLon && station.coord.lon <= maxLon
-					&& station.coord.lat >= minLat && station.coord.lat <= maxLat) {
+			if (station.coord.Lon >= minLon && station.coord.Lon <= maxLon
+					&& station.coord.Lat >= minLat && station.coord.Lat <= maxLat) {
 				clippedStations[k] = station;
 				cnt++;
 			}
